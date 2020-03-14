@@ -22,10 +22,10 @@ h1 span { clear: both;display: block;font-size: 12px; }
 body { max-width: 1200px; margin: 0 auto; font-family: Helvetica, Verdana;}
 .green { background: green;  }
 .green label { font-size: 2.0rem; }
-.green input { margin-top: 14px; }
+.green input { margin-top: 16px; }
 .yellow { background: yellow; }
 .yellow label { font-size: 1.6rem }
-.yellow input { margin-top: 10px; }
+.yellow input { margin-top: 11px; }
 .orange { background: orange; }
 .orange label { font-size: 1.2rem }
 .orange input { margin-top: 6px; }
@@ -480,6 +480,30 @@ var calculate = function() {
 	clearClasses();
 	setMaxes(j2, j3, j4, j5, j6, j7, j8, j9, j10, j11, j12, j13, 0, 0, colors);
 	
+	var p5 = 7500 * Math.pow(1.03, (critDamage / 2 - 42.5));
+	var p6 = Math.pow(1.03, (prismalShield - 50)) *7500;
+	var p7 = Math.pow(1.03, (trimpAttack - 46)) *7500;
+	var p8 = Math.pow(1.03, (trimpHealth - 46)) *7500;
+	var p9 = Math.pow(1.03, (gammaBurst / 10 - 20)) *7500;
+	
+	var q5 = (102 + critDamage + criticality * 10) / (100 + critDamage + criticality * 10);
+	var q6 = (226 + prismalShield + prismal) / (225 + prismalShield + prismal);
+	var q7 = (trimpAttack+101)/(trimpAttack+100);
+	var q8 = (trimpHealth+101)/(trimpHealth+100);
+	var q9 = (gammaBurst+10+100*hitsPerGamma)/(gammaBurst+100*hitsPerGamma);
+	
+	var r5 = Math.Log(Math.Pow(q5, attackWeight));
+	var r6 = Math.Log(Math.Pow(q6, healthWeight));
+	var r7 = Math.Log(Math.Pow(q7, attackWeight));
+	var r8 = Math.Log(Math.Pow(q8, healthWeight));
+	var r9 = Math.Log(Math.Pow(q9, attackWeight));
+	
+	var s5 = (critDamage == 0) ? 0 : r5/p5;
+	var s6 = (prismalShield == 0 || prismalShield == 250) ? 0 : r6/p6;
+	var s7 = (trimpAttack == 0) ? 0 : r7/p7;
+	var s8 = (trimpHealth == 0) ? 0 : r8/p8;
+	var s9 = (gammaBurst == 0) ? 0 : r9/p9;
+	
 	if (typeof (vars["debug"]) !== "undefined") {
 		console.log("C13: " + c13);
 		console.log("\n");
@@ -565,6 +589,30 @@ var calculate = function() {
 		console.log("J11: " + j11);
 		console.log("J12: " + j12);
 		console.log("J13: " + j13);
+		console.log("\n");
+		console.log("P5: " + p5);
+		console.log("P6: " + p6);
+		console.log("P7: " + p7);
+		console.log("P8: " + p8);
+		console.log("P9: " + p9);
+		console.log("\n");
+		console.log("Q5: " + q5);
+		console.log("Q6: " + q6);
+		console.log("Q7: " + q7);
+		console.log("Q8: " + q8);
+		console.log("Q9: " + q9);
+		console.log("\n");
+		console.log("R5: " + r5);
+		console.log("R6: " + r6);
+		console.log("R7: " + r7);
+		console.log("R8: " + r8);
+		console.log("R9: " + r9);
+		console.log("\n");
+		console.log("S5: " + s5);
+		console.log("S6: " + s6);
+		console.log("S7: " + s7);
+		console.log("S8: " + s8);
+		console.log("S9: " + s9);
 		console.log("\n");
 	}
 }
