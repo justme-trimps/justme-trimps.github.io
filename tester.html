@@ -265,6 +265,24 @@ var setMaxes = function(j2, j3, j4, j5, j6, j7, j8, j9, j10, j11, j12, j13, loop
 		setMaxes(j2, j3, j4, j5, j6, j7, j8, j9, j10, j11, j12, j13, loop + 1, index + 1, colors);
 }
 
+var setMaxes2 = function(s5, s6, s7, s8, s9, loop, index, colors) {
+	if (index > 3) index = 3;
+
+	var max = Math.max(s5, s6, s7, s8, s9);
+	
+	     if (s5  == max)  { setMax("crit-damage", index, colors);    s5 = -1e+100; }
+	else if (s6  == max)  { setMax("prismal-shield", index, colors); s6 = -1e+100; }
+	else if (s7  == max)  { setMax("trimp-attack", index, colors);   s7 = -1e+100; }
+	else if (s8  == max)  { setMax("trimp-health", index, colors);   s8 = -1e+100; }
+	else if (s9  == max)  { setMax("gamma-burst", index, colors);    s9 = -1e+100; }
+	
+	if (max == Math.max(s5, s6, s7, s8, s9))
+		index--;
+	
+	if (loop < 11)
+		setMaxes(s5, s6, s7, s8, s9, loop + 1, index + 1, colors);
+}
+
 var calculate = function() {
 	//if (parseInt(inputs["health-weight"].value) || 0 < 1) inputs["health-weight"].value = 1;
 	//if (parseInt(inputs["attack-weight"].value) || 0 < 1) inputs["attack-weight"].value = 1;
@@ -503,6 +521,8 @@ var calculate = function() {
 	var s7 = (trimpAttack == 0) ? 0 : r7/p7;
 	var s8 = (trimpHealth == 0) ? 0 : r8/p8;
 	var s9 = (gammaBurst == 0) ? 0 : r9/p9;
+	
+	setMaxes2(s5, s6, s7, s8, s9, 0, 0, colors);
 	
 	if (typeof (vars["debug"]) !== "undefined") {
 		console.log("C13: " + c13);
