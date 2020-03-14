@@ -20,10 +20,18 @@ height: 93px;
 }
 h1 span { clear: both;display: block;font-size: 12px; }
 body { max-width: 1200px; margin: 0 auto; font-family: Helvetica, Verdana;}
-.green { background: green; }
+.green { background: green;  }
+.green label { font-size: 2.0rem; }
+.green input { margin-top: 16px; }
 .yellow { background: yellow; }
+.yellow label { font-size: 1.6rem }
+.yellow input { margin-top: 11px; }
 .orange { background: orange; }
-.red { background: red; }
+.orange label { font-size: 1.2rem }
+.orange input { margin-top: 6px; }
+.red { background: darkgray; }
+.red label { color: #666; }
+.red input { margin-top: 4px; }
 </style>
 </head>
 <body>
@@ -97,11 +105,11 @@ Trimps U2 perks and heirlooms calculator
     <div class="col-sm">
 		<div class="row">
 			<label class="col-sm-6 col-form-label" id="label-weapon-levels" for="input-weapon-levels">Weapon levels </label>
-			<div class="col-sm-6"><input value="1" id="input-weapon-levels" /></div>
+			<div class="col-sm-6"><input value="1" title="Number of daggers you're aiming for" id="input-weapon-levels" /></div>
 		</div>
 		<div class="row">
 			<label class="col-sm-6 col-form-label" id="label-armor-levels" for="input-armor-levels">Armor levels </label>
-			<div class="col-sm-6"><input value="1" id="input-armor-levels" /></div>
+			<div class="col-sm-6"><input value="1" title="Number of boots you're aiming for" id="input-armor-levels" /></div>
 		</div>
 		<div class="row mt-2">
 			<label class="col-sm-6 col-form-label" id="label-health-weight" for="input-health-weight">Health weight </label>
@@ -117,11 +125,11 @@ Trimps U2 perks and heirlooms calculator
 		</div>
 		<div class="row mt-2">
 			<label class="col-sm-6 col-form-label" id="label-tenacity-multiplier" for="input-tenacity-multiplier">Tenacity multiplier </label>
-			<div class="col-sm-6"><input value="1" id="input-tenacity-multiplier" /></div>
+			<div class="col-sm-6"><input value="1.1" id="input-tenacity-multiplier" /></div>
 		</div>
 		<div class="row">
 			<label class="col-sm-6 col-form-label" id="label-carp-coord-multiplier" for="input-carp-coord-multiplier">Carp/Coord multiplier </label>
-			<div class="col-sm-6"><input value="1" readonly id="input-carp-coord-multiplier" /></div>
+			<div class="col-sm-6"><input value="1" title="Use '1' if you're not coord limited or '1.1' if you are coord limited" id="input-carp-coord-multiplier" /></div>
 		</div>
 		<div class="row">
 			<label class="col-sm-6 col-form-label" id="label-tribute-count" for="input-tribute-count">Tribute count (for Greed) </label>
@@ -282,7 +290,7 @@ var calculate = function() {
 	var attackWeight = parseFloat(inputs["attack-weight"].value) || 1;
 	var radonWeight = parseFloat(inputs["radon-weight"].value) || 1;
 	
-	var tenacityMultiplier = parseFloat(inputs["tenacity-multiplier"].value) || 0;
+	var tenacityMultiplier = parseFloat(inputs["tenacity-multiplier"].value) || 1.1;
 	var carpCoordMultiplier = parseFloat(inputs["carp-coord-multiplier"].value) || 0;
 	var tributeCount = parseInt(inputs["tribute-count"].value) || 0;
 
