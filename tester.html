@@ -203,7 +203,7 @@ var loadSave = function() {
 			var trimpHealthMod = shield.mods.find(function (el) { return el[0] == "trimpHealth"; });
 			
 			if (critDamageMod)  { inputs["crit-damage"].value    = Math.round(critDamageMod[1] / 10); }  else { inputs["crit-damage"].value    = 0; }
-			if (prismalMod)     { inputs["prismal-shield"].value = Math.round(prismalMod[1] / 10); }     else { inputs["prismal-shield"].value = 0; }
+			if (prismalMod)     { inputs["prismal-shield"].value = Math.round(prismalMod[1]); }     else { inputs["prismal-shield"].value = 0; }
 			if (gammaBurstMod)  { inputs["gamma-burst"].value    = Math.round(gammaBurstMod[1] / 10); }  else { inputs["gamma-burst"].value    = 0; }
 			if (trimpAttackMod) { inputs["trimp-attack"].value   = Math.round(trimpAttackMod[1] / 10); } else { inputs["trimp-attack"].value   = 0; }
 			if (trimpHealthMod) { inputs["trimp-health"].value   = Math.round(trimpHealthMod[1] / 10); } else { inputs["trimp-health"].value   = 0; }
@@ -492,11 +492,11 @@ var calculate = function() {
 	var q8 = (trimpHealth+101)/(trimpHealth+100);
 	var q9 = (gammaBurst+10+100*hitsPerGamma)/(gammaBurst+100*hitsPerGamma);
 	
-	var r5 = Math.log(Math.pow(q5, attackWeight));
-	var r6 = Math.log(Math.pow(q6, healthWeight));
-	var r7 = Math.log(Math.pow(q7, attackWeight));
-	var r8 = Math.log(Math.pow(q8, healthWeight));
-	var r9 = Math.log(Math.pow(q9, attackWeight));
+	var r5 = Math.baseLog(Math.pow(q5, attackWeight), 10);
+	var r6 = Math.baseLog(Math.pow(q6, healthWeight), 10);
+	var r7 = Math.baseLog(Math.pow(q7, attackWeight), 10);
+	var r8 = Math.baseLog(Math.pow(q8, healthWeight), 10);
+	var r9 = Math.baseLog(Math.pow(q9, attackWeight), 10);
 	
 	var s5 = (critDamage == 0) ? 0 : r5/p5;
 	var s6 = (prismalShield == 0 || prismalShield == 250) ? 0 : r6/p6;
