@@ -279,8 +279,8 @@ var setMaxes2 = function(s5, s6, s7, s8, s9, loop, index, colors) {
 	if (max == Math.max(s5, s6, s7, s8, s9))
 		index--;
 	
-	if (loop < 11)
-		setMaxes(s5, s6, s7, s8, s9, loop + 1, index + 1, colors);
+	if (loop < 4)
+		setMaxes2(s5, s6, s7, s8, s9, loop + 1, index + 1, colors);
 }
 
 var calculate = function() {
