@@ -52,7 +52,7 @@ Trimps U2 perks and heirlooms calculator
 		<h2>Perks</h2>
 	</div>
   <div class="row mt-3">
-    <div class="col-sm">
+    <div class="col-sm mr-3">
 		<div class="row">
 			<label class="col-sm-6 col-form-label" id="label-tenacity" for="input-tenacity">Tenacity </label>
 			<div class="col-sm-6"><input value="0" id="input-tenacity" /></div>
@@ -203,7 +203,7 @@ var loadSave = function() {
 			var trimpHealthMod = shield.mods.find(function (el) { return el[0] == "trimpHealth"; });
 			
 			if (critDamageMod)  { inputs["crit-damage"].value    = Math.round(critDamageMod[1] / 10); }  else { inputs["crit-damage"].value    = 0; }
-			if (prismalMod)     { inputs["prismal-shield"].value = Math.round(prismalMod[1] / 10); }     else { inputs["prismal-shield"].value = 0; }
+			if (prismalMod)     { inputs["prismal-shield"].value = Math.round(prismalMod[1]); }     else { inputs["prismal-shield"].value = 0; }
 			if (gammaBurstMod)  { inputs["gamma-burst"].value    = Math.round(gammaBurstMod[1] / 10); }  else { inputs["gamma-burst"].value    = 0; }
 			if (trimpAttackMod) { inputs["trimp-attack"].value   = Math.round(trimpAttackMod[1] / 10); } else { inputs["trimp-attack"].value   = 0; }
 			if (trimpHealthMod) { inputs["trimp-health"].value   = Math.round(trimpHealthMod[1] / 10); } else { inputs["trimp-health"].value   = 0; }
@@ -263,6 +263,24 @@ var setMaxes = function(j2, j3, j4, j5, j6, j7, j8, j9, j10, j11, j12, j13, loop
 	
 	if (loop < 11)
 		setMaxes(j2, j3, j4, j5, j6, j7, j8, j9, j10, j11, j12, j13, loop + 1, index + 1, colors);
+}
+
+var setMaxes2 = function(s5, s6, s7, s8, s9, loop, index, colors) {
+	if (index > 3) index = 3;
+
+	var max = Math.max(s5, s6, s7, s8, s9);
+	
+	     if (s5  == max)  { setMax("crit-damage", index, colors);    s5 = -1e+100; }
+	else if (s6  == max)  { setMax("prismal-shield", index, colors); s6 = -1e+100; }
+	else if (s7  == max)  { setMax("trimp-attack", index, colors);   s7 = -1e+100; }
+	else if (s8  == max)  { setMax("trimp-health", index, colors);   s8 = -1e+100; }
+	else if (s9  == max)  { setMax("gamma-burst", index, colors);    s9 = -1e+100; }
+	
+	if (max == Math.max(s5, s6, s7, s8, s9))
+		index--;
+	
+	if (loop < 4)
+		setMaxes2(s5, s6, s7, s8, s9, loop + 1, index + 1, colors);
 }
 
 var calculate = function() {
@@ -480,6 +498,32 @@ var calculate = function() {
 	clearClasses();
 	setMaxes(j2, j3, j4, j5, j6, j7, j8, j9, j10, j11, j12, j13, 0, 0, colors);
 	
+	var p5 = 7500 * Math.pow(1.03, (critDamage / 2 - 42.5));
+	var p6 = Math.pow(1.03, (prismalShield - 50)) *7500;
+	var p7 = Math.pow(1.03, (trimpAttack - 46)) *7500;
+	var p8 = Math.pow(1.03, (trimpHealth - 46)) *7500;
+	var p9 = Math.pow(1.03, (gammaBurst / 10 - 20)) *7500;
+	
+	var q5 = (102 + critDamage + criticality * 10) / (100 + critDamage + criticality * 10);
+	var q6 = (226 + prismalShield + prismal) / (225 + prismalShield + prismal);
+	var q7 = (trimpAttack+101)/(trimpAttack+100);
+	var q8 = (trimpHealth+101)/(trimpHealth+100);
+	var q9 = (gammaBurst+10+100*hitsPerGamma)/(gammaBurst+100*hitsPerGamma);
+	
+	var r5 = Math.baseLog(Math.pow(q5, attackWeight), 10);
+	var r6 = Math.baseLog(Math.pow(q6, healthWeight), 10);
+	var r7 = Math.baseLog(Math.pow(q7, attackWeight), 10);
+	var r8 = Math.baseLog(Math.pow(q8, healthWeight), 10);
+	var r9 = Math.baseLog(Math.pow(q9, attackWeight), 10);
+	
+	var s5 = (critDamage == 0) ? 0 : r5/p5;
+	var s6 = (prismalShield == 0 || prismalShield == 250) ? 0 : r6/p6;
+	var s7 = (trimpAttack == 0) ? 0 : r7/p7;
+	var s8 = (trimpHealth == 0) ? 0 : r8/p8;
+	var s9 = (gammaBurst == 0) ? 0 : r9/p9;
+	
+	setMaxes2(s5, s6, s7, s8, s9, 0, 0, colors);
+	
 	if (typeof (vars["debug"]) !== "undefined") {
 		console.log("C13: " + c13);
 		console.log("\n");
@@ -565,6 +609,30 @@ var calculate = function() {
 		console.log("J11: " + j11);
 		console.log("J12: " + j12);
 		console.log("J13: " + j13);
+		console.log("\n");
+		console.log("P5: " + p5);
+		console.log("P6: " + p6);
+		console.log("P7: " + p7);
+		console.log("P8: " + p8);
+		console.log("P9: " + p9);
+		console.log("\n");
+		console.log("Q5: " + q5);
+		console.log("Q6: " + q6);
+		console.log("Q7: " + q7);
+		console.log("Q8: " + q8);
+		console.log("Q9: " + q9);
+		console.log("\n");
+		console.log("R5: " + r5);
+		console.log("R6: " + r6);
+		console.log("R7: " + r7);
+		console.log("R8: " + r8);
+		console.log("R9: " + r9);
+		console.log("\n");
+		console.log("S5: " + s5);
+		console.log("S6: " + s6);
+		console.log("S7: " + s7);
+		console.log("S8: " + s8);
+		console.log("S9: " + s9);
 		console.log("\n");
 	}
 }
