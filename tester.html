@@ -708,7 +708,6 @@ for (var i = inputElements.length - 1; i >=0; i--) {
 
 function exportPerks() {
 	var exportedPerks = {};
-	var levelName = (portalUniverse == 2) ? "radLevel" : "level";
 
 	if (document.getElementById('input-tenacity-enabled').checked) exportedPerks["Tenacity"] =     parseInt(inputs["tenacity"].value || 0);
 	if (document.getElementById('input-resilience-enabled').checked) exportedPerks["Resilience"] =   parseInt(inputs["resilience"].value || 0);
