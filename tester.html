@@ -710,19 +710,20 @@ function exportPerks() {
 	var exportedPerks = {};
 	var levelName = (portalUniverse == 2) ? "radLevel" : "level";
 
-	exportedPerks["Tenacity"] = parseInt(inputs["tenacity"].value || 0);
-	exportedPerks["Resilience"] = parseInt(inputs["resilience"].value || 0);
-	exportedPerks["Criticality"] = parseInt(inputs["criticality"].value || 0);
-	exportedPerks["Equality"] = parseInt(inputs["equality"].value || 0);
-	exportedPerks["Carpentry"] = parseInt(inputs["carpentry"].value || 0);
-	exportedPerks["Artisanistry"] = parseInt(inputs["artisanistry"].value || 0);
-	exportedPerks["Motivation"] = parseInt(inputs["motivation"].value || 0);
-	exportedPerks["Power"] = parseInt(inputs["power"].value || 0);
-	exportedPerks["Toughness"] = parseInt(inputs["toughness"].value || 0);
-	exportedPerks["Looting"] = parseInt(inputs["looting"].value || 0);
-	exportedPerks["Prismal"] = parseInt(inputs["prismal"].value || 0);
-	exportedPerks["Greed"] = parseInt(inputs["greed"].value || 0);
+	if (document.getElementById('input-tenacity-enabled').checked) exportedPerks["Tenacity"] =     parseInt(inputs["tenacity"].value || 0);
+	if (document.getElementById('input-resilience-enabled').checked) exportedPerks["Resilience"] =   parseInt(inputs["resilience"].value || 0);
+	if (document.getElementById('input-criticality-enabled').checked) exportedPerks["Criticality"] =  parseInt(inputs["criticality"].value || 0);
+	if (document.getElementById('input-equality-enabled').checked) exportedPerks["Equality"] =     parseInt(inputs["equality"].value || 0);
+	if (document.getElementById('input-carpentry-enabled').checked) exportedPerks["Carpentry"] =    parseInt(inputs["carpentry"].value || 0);
+	if (document.getElementById('input-artisanistry-enabled').checked) exportedPerks["Artisanistry"] = parseInt(inputs["artisanistry"].value || 0);
+	if (document.getElementById('input-motivation-enabled').checked) exportedPerks["Motivation"] =   parseInt(inputs["motivation"].value || 0);
+	if (document.getElementById('input-power-enabled').checked) exportedPerks["Power"] =        parseInt(inputs["power"].value || 0);
+	if (document.getElementById('input-toughness-enabled').checked) exportedPerks["Toughness"] =    parseInt(inputs["toughness"].value || 0);
+	if (document.getElementById('input-looting-enabled').checked) exportedPerks["Looting"] =      parseInt(inputs["looting"].value || 0);
+	if (document.getElementById('input-prismal-enabled').checked) exportedPerks["Prismal"] =      parseInt(inputs["prismal"].value || 0);
+	if (document.getElementById('input-greed-enabled').checked) exportedPerks["Greed"] =        parseInt(inputs["greed"].value || 0);
 
+	console.lot(exportedPerks);
 	exportedPerks = JSON.stringify(exportedPerks);
 	return LZString.compressToBase64(exportedPerks);
 }
@@ -731,7 +732,6 @@ function exportPerks() {
 // export perks
 // auto buy perks
 // don't export if not allowed yet
-// 1250 tributes cap not working
 
 
 //console.log('c');
