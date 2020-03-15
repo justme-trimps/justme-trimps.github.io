@@ -288,7 +288,17 @@ var loadSave = function() {
 	setTimeout(function() {
 
 		var saveTextArea = document.getElementById('save-text-area');
-		var game = JSON.parse(LZString.decompressFromBase64(saveTextArea.value));
+		var game = null;
+		
+		try {
+			tmp = JSON.parse(LZString.decompressFromBase64(saveTextArea.value));
+			game = tmp;
+		} catch {}
+		
+		if (game == null) {
+			saveTextArea.value = "That wasn't a valid save. Try again.";
+			return;
+		}
 		
 		if (game.global.universe == 1) {
 			saveTextArea.value = "Sorry but I can't handle Universe 1 saves";
@@ -347,7 +357,7 @@ var loadSave = function() {
 
 		totalRadonSpentOnOtherPerks = game.portal["Range"].radSpent
 			+ game.portal["Overkill"].radSpent
-			+ game.portal["Range"].radSpent
+			+ game.portal["Prismal"].radSpent
 			+ game.portal["Agility"].radSpent
 			+ game.portal["Bait"].radSpent
 			+ game.portal["Trumps"].radSpent
