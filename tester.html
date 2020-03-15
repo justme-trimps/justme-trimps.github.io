@@ -222,7 +222,8 @@ var clearClasses = function() {
 var setMax = function(whichOne, index) {
 	var id = "label-" + whichOne;
 	var element = document.getElementById(id).parentElement;
-	element.setAttribute("style", "background-color: #0b6623; filter: brightness(" + (index * 25) + "%);");
+	var opacity = Math.max(1.0 - index * 0.2, 0.2);
+	element.setAttribute("style", "background: rgba(11, 102, 35, " + opacity + ");");
 }
 
 var setMaxes = function(j2, j3, j4, j5, j6, j7, j8, j9, j10, j11, j12, j13, loop, index) {
