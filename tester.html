@@ -665,7 +665,7 @@ for (var i = inputElements.length - 1; i >=0; i--) {
 	if (typeof(input.getAttribute('type')) != "undefined" && input.getAttribute('type') == "checkbox") {
 		input.addEventListener('change', (event) => {
 		  if (event.target.checked) {
-			var row = event.target.parentNode.parentNode;
+			var row = event.target.parentElement.parentElement;
 			row.setAttribute('class', row.getAttribute('class').replace('grey', ''));
 		  } else {
 			row.setAttribute('class', row.getAttribute('class').replace('grey', '') + ' grey');
