@@ -276,6 +276,7 @@ var loadSave = function() {
 			document.getElementById('clear-autobuy-button').disabled = false;
 			document.getElementById('autobuy-button').disabled = false;
 			document.getElementById('input-export').disabled = false;
+			document.getElementById('input-export').value = "";
 		}
 	}, 1);
   //} catch(err) {}
@@ -619,7 +620,7 @@ var calculate = function() {
 	var s9 = (gammaBurst == 0) ? 0 : r9/p9;
 	
 	setMaxes2(s5, s6, s7, s8, s9, 0, 0);
-	
+	document.getElementById('input-export').value = exportPerks();
 	if (typeof (vars["debug"]) !== "undefined") {
 		console.log("C13: " + c13);
 		console.log("\n");
@@ -820,7 +821,6 @@ function autobuyPerks() {
 		}
 		if (maxed) break;
 	}
-	document.getElementById('input-export').value = exportPerks();
 }
 
 if (window.localStorage.getItem("trimpWeights")) {
@@ -836,7 +836,7 @@ if (window.localStorage.getItem("trimpWeights")) {
 // don't export if not allowed yet
 
 
-console.log('h');
+console.log('a');
 </script>
 
 </body>
