@@ -14,7 +14,7 @@ var forcedPortalWorld = 109;
 
 var plusZeroZones = [20, 24, 75, 77, 85, 86, 87, 88, 89, 94, 104, 105, 106, 107, 108];
 var plusOneZones = [30, 34, 40, 44, 50, 54, 60, 61, 62, 63, 64, 70, 71, 72, 73, 74, 80, 81, 82, 83, 84];
-var plusTwoZones = [48, 79, 80, 83, ,89, 90, 91, 92, 93, 100, 101, 102, 103];//[89, 90, 91, 92, 93];//61, 63/*69, 70*/];
+var plusTwoZones = [48, 79, 80, 83, ,89, 90, 91, 92, 93, 101, 102, 103];//[89, 90, 91, 92, 93];//61, 63/*69, 70*/];
 var plusThreeZones = [55];
 var plusFourZones = [];
 var plusFiveZones = [];
@@ -142,8 +142,9 @@ var changeAutobuyingNumbersInterval = setInterval(function() {
 		//if (game.global.world >= 85) { autobuyingEquipmentNumber = 55; autobuyingArmNumber = 40; }
 		//if (game.global.world >= 89) { autobuyingEquipmentNumber = 32; autobuyingArmNumber = 32; }
 		if (game.global.world >= 93) { autobuyingEquipmentNumber = 55; autobuyingArmNumber = 55; }
-		if (game.global.world >= 98) { autobuyingEquipmentNumber = 33; autobuyingArmNumber = 33; buyShields = true; }
-		if (game.global.world >= 104) { autobuyingEquipmentNumber = 40; autobuyingArmNumber = 40; buyShields = true; }
+		if (game.global.world >= 94) { autobuyingEquipmentNumber = 35; autobuyingArmNumber = 35; }
+		if (game.global.world >= 96) { buyShields = true; }
+		if (game.global.world >= 104) { autobuyingEquipmentNumber = 43; autobuyingArmNumber = 43; }
 	}
 }, 1000 * 1);
 
@@ -654,7 +655,7 @@ var shouldFightSomeMap = function() {
 
 	if (extraZones.indexOf(game.global.world) > -1
 		&& !game.global.mapsActive
-		&& game.global.mapBonus < 1
+		&& game.global.mapBonus < 3
 	) {
 		return true;
 	}
@@ -803,6 +804,15 @@ var repeatMaps = setInterval(function() {
 			if (game.resources.fragments.owned < 55000000000000.0) {
 				document.getElementById("advSpecialSelect").value = 0;
 			}
+			buyMap();
+		}
+
+		if (game.global.world == 95 && game.global.mapBonus == 2) {
+			document.getElementById("advExtraLevelSelect").value = "7";
+			document.getElementById("biomeAdvMapsSelect").value = "Random";
+			document.getElementById("advSpecialSelect").value = "p";
+			document.getElementById("lootAdvMapsRange").value = 0;
+			document.getElementById("advSpecialSelect").value = 0;
 			buyMap();
 		}
 
