@@ -922,6 +922,7 @@ function clearAndAutobuyPerks() {
 				input.value = 0;
 			}
 		}
+		totalCost = totalRadonSpentOnOtherPerks;
 		autobuyPerks(true);
 	}
 }
@@ -954,7 +955,6 @@ function autobuyPerks(spendEverything) {
 				input.value = parseInt(input.value) + 1;
 				calculate();
 				if (totalCost > totalRadonEarned) {
-					maxed = true;
 					input.value = parseInt(input.value) - 1;
 					calculate();
 					if (spendEverything) {
