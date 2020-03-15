@@ -22,7 +22,13 @@ h1 span { clear: both;display: block;font-size: 12px; }
 h2 span { clear: both;display: block;font-size: 12px; }
 body { max-width: 1200px; margin: 0 auto; font-family: Helvetica, Verdana;}
 .green { background: green;  }
+.grey { background: #ddd; color: #888  }
 input { margin-top: 4px; }
+
+input[type=checkbox], input[type=radio] {
+    margin-left: 1rem;
+    margin-top: 0.7rem;
+}
 
 </style>
 </head>
@@ -47,111 +53,123 @@ Trimps U2 perks and heirlooms calculator
   <div class="row mt-3">
     <div class="col-sm mr-3">
 		<div class="row">
+			<div class="col-sm-1"><input type="checkbox" checked="checked" class="form-check-input" id="input-tenacity-enabled" /></div>
 			<label class="col-sm-6 col-form-label" id="label-tenacity" for="input-tenacity">Tenacity </label>
-			<div class="col-sm-6"><input value="0" id="input-tenacity" /></div>
+			<div class="col-sm-5"><input class="form-control" value="0" id="input-tenacity" /></div>
 		</div>
 		<div class="row">
+			<div class="col-sm-1"><input type="checkbox" checked="checked" class="form-check-input" id="input-resilience-enabled" /></div>
 			<label class="col-sm-6 col-form-label" id="label-resilience" for="input-resilience">Resilience </label>
-			<div class="col-sm-6"><input value="0" id="input-resilience" /></div>
+			<div class="col-sm-5"><input class="form-control" value="0" id="input-resilience" /></div>
 		</div>
 		<div class="row">
+			<div class="col-sm-1"><input type="checkbox" checked="checked" class="form-check-input" id="input-criticality-enabled" /></div>
 			<label class="col-sm-6 col-form-label" id="label-criticality" for="input-criticality">Criticality </label>
-			<div class="col-sm-6"><input value="0" id="input-criticality" /></div>
+			<div class="col-sm-5"><input class="form-control" value="0" id="input-criticality" /></div>
 		</div>
 		<div class="row">
+			<div class="col-sm-1"><input type="checkbox" checked="checked" class="form-check-input" id="input-equality-enabled" /></div>
 			<label class="col-sm-6 col-form-label" id="label-equality" for="input-equality">Equality </label>
-			<div class="col-sm-6"><input value="0" id="input-equality" /></div>
+			<div class="col-sm-5"><input class="form-control" value="0" id="input-equality" /></div>
 		</div>
 		<div class="row">
+			<div class="col-sm-1"><input type="checkbox" checked="checked" class="form-check-input" id="input-carpentry-enabled" /></div>
 			<label class="col-sm-6 col-form-label" id="label-carpentry" for="input-carpentry">Carpentry </label>
-			<div class="col-sm-6"><input value="0" id="input-carpentry" /></div>
+			<div class="col-sm-5"><input class="form-control" value="0" id="input-carpentry" /></div>
 		</div>
 		<div class="row">
+			<div class="col-sm-1"><input type="checkbox" checked="checked" class="form-check-input" id="input-artisanistry-enabled" /></div>
 			<label class="col-sm-6 col-form-label" id="label-artisanistry" for="input-artisanistry">Artisanistry </label>
-			<div class="col-sm-6"><input value="0" id="input-artisanistry" /></div>
+			<div class="col-sm-5"><input class="form-control" value="0" id="input-artisanistry" /></div>
 		</div>
 		<div class="row">
+			<div class="col-sm-1"><input type="checkbox" checked="checked" class="form-check-input" id="input-motivation-enabled" /></div>
 			<label class="col-sm-6 col-form-label" id="label-motivation" for="input-motivation">Motivation </label>
-			<div class="col-sm-6"><input value="0" id="input-motivation" /></div>
+			<div class="col-sm-5"><input class="form-control" value="0" id="input-motivation" /></div>
 		</div>
 		<div class="row">
+			<div class="col-sm-1"><input type="checkbox" checked="checked" class="form-check-input" id="input-power-enabled" /></div>
 			<label class="col-sm-6 col-form-label" id="label-power" for="input-power">Power </label>
-			<div class="col-sm-6"><input value="0" id="input-power" /></div>
+			<div class="col-sm-5"><input class="form-control" value="0" id="input-power" /></div>
 		</div>
 		<div class="row">
+			<div class="col-sm-1"><input type="checkbox" checked="checked" class="form-check-input" id="input-toughness-enabled" /></div>
 			<label class="col-sm-6 col-form-label" id="label-toughness" for="input-toughness">Toughness </label>
-			<div class="col-sm-6"><input value="0" id="input-toughness" /></div>
+			<div class="col-sm-5"><input class="form-control" value="0" id="input-toughness" /></div>
 		</div>
 		<div class="row">
+			<div class="col-sm-1"><input type="checkbox" checked="checked" class="form-check-input" id="input-looting-enabled" /></div>
 			<label class="col-sm-6 col-form-label" id="label-looting" for="input-looting">Looting </label>
-			<div class="col-sm-6"><input value="0" id="input-looting" /></div>
+			<div class="col-sm-5"><input class="form-control" value="0" id="input-looting" /></div>
 		</div>
 		<div class="row">
+			<div class="col-sm-1"><input type="checkbox" checked="checked" class="form-check-input" id="input-prismal-enabled" /></div>
 			<label class="col-sm-6 col-form-label" id="label-prismal" for="input-prismal">Prismal </label>
-			<div class="col-sm-6"><input value="0" id="input-prismal" /></div>
+			<div class="col-sm-5"><input class="form-control" value="0" id="input-prismal" /></div>
 		</div>
 		<div class="row">
+			<div class="col-sm-1"><input type="checkbox" checked="checked" class="form-check-input" id="input-greed-enabled" /></div>
 			<label class="col-sm-6 col-form-label" id="label-greed" for="input-greed">Greed </label>
-			<div class="col-sm-6"><input value="0" id="input-greed" /></div>
+			<div class="col-sm-5"><input class="form-control" value="0" id="input-greed" /></div>
 		</div>
     </div>
     <div class="col-sm">
 		<div class="row">
 			<label class="col-sm-6 col-form-label" id="label-weapon-levels" for="input-weapon-levels">Weapon levels </label>
-			<div class="col-sm-6"><input value="1" title="Number of daggers you're aiming for" id="input-weapon-levels" /></div>
+			<div class="col-sm-5"><input class="form-control" value="1" title="Number of daggers you're aiming for" id="input-weapon-levels" /></div>
 		</div>
 		<div class="row">
 			<label class="col-sm-6 col-form-label" id="label-armor-levels" for="input-armor-levels">Armor levels </label>
-			<div class="col-sm-6"><input value="1" title="Number of boots you're aiming for" id="input-armor-levels" /></div>
+			<div class="col-sm-5"><input class="form-control" value="1" title="Number of boots you're aiming for" id="input-armor-levels" /></div>
 		</div>
 		<div class="row mt-2">
 			<label class="col-sm-6 col-form-label" id="label-health-weight" for="input-health-weight">Health weight </label>
-			<div class="col-sm-6"><input value="1" id="input-health-weight" maxlength="4" /></div>
+			<div class="col-sm-5"><input class="form-control" value="1" id="input-health-weight" maxlength="4" /></div>
 		</div>
 		<div class="row">
 			<label class="col-sm-6 col-form-label" id="label-attack-weight" for="input-attack-weight">Attack weight </label>
-			<div class="col-sm-6"><input value="5" id="input-attack-weight" maxlength="4" /></div>
+			<div class="col-sm-5"><input class="form-control" value="5" id="input-attack-weight" maxlength="4" /></div>
 		</div>
 		<div class="row">
 			<label class="col-sm-6 col-form-label" id="label-radon-weight" for="input-radon-weight">Radon weight </label>
-			<div class="col-sm-6"><input value="10" id="input-radon-weight" maxlength="4" /></div>
+			<div class="col-sm-5"><input class="form-control" value="10" id="input-radon-weight" maxlength="4" /></div>
 		</div>
 		<div class="row mt-2">
 			<label class="col-sm-6 col-form-label" id="label-tenacity-multiplier" for="input-tenacity-multiplier">Tenacity multiplier </label>
-			<div class="col-sm-6"><input value="1.1" id="input-tenacity-multiplier" /></div>
+			<div class="col-sm-5"><input class="form-control" value="1.1" id="input-tenacity-multiplier" /></div>
 		</div>
 		<div class="row">
 			<label class="col-sm-6 col-form-label" id="label-carp-coord-multiplier" for="input-carp-coord-multiplier">Carp/Coord multiplier </label>
-			<div class="col-sm-6"><input value="1" title="Use '1' if you're not coord limited or '1.1' if you are coord limited" id="input-carp-coord-multiplier" /></div>
+			<div class="col-sm-5"><input class="form-control" value="1" title="Use '1' if you're not coord limited or '1.1' if you are coord limited" id="input-carp-coord-multiplier" /></div>
 		</div>
 		<div class="row">
 			<label class="col-sm-6 col-form-label" id="label-tribute-count" for="input-tribute-count">Tribute count (for Greed) </label>
-			<div class="col-sm-6"><input value="0" id="input-tribute-count" /></div>
+			<div class="col-sm-5"><input class="form-control" value="0" id="input-tribute-count" /></div>
 		</div>
 		
 		<div class="row mt-2">
 			<label class="col-sm-6 col-form-label" id="label-crit-damage" for="input-crit-damage">Crit damage </label>
-			<div class="col-sm-6"><input value="0" id="input-crit-damage" /></div>
+			<div class="col-sm-5"><input class="form-control" value="0" id="input-crit-damage" /></div>
 		</div>
 		<div class="row">
 			<label class="col-sm-6 col-form-label" id="label-prismal-shield" for="input-prismal-shield">Prismal shield </label>
-			<div class="col-sm-6"><input value="0" id="input-prismal-shield" /></div>
+			<div class="col-sm-5"><input class="form-control" value="0" id="input-prismal-shield" /></div>
 		</div>
 		<div class="row">
 			<label class="col-sm-6 col-form-label" id="label-trimp-attack" for="input-trimp-attack">Trimp attack </label>
-			<div class="col-sm-6"><input value="0" id="input-trimp-attack" /></div>
+			<div class="col-sm-5"><input class="form-control" value="0" id="input-trimp-attack" /></div>
 		</div>
 		<div class="row">
 			<label class="col-sm-6 col-form-label" id="label-trimp-health" for="input-trimp-health">Trimp health </label>
-			<div class="col-sm-6"><input value="0" id="input-trimp-health" /></div>
+			<div class="col-sm-5"><input class="form-control" value="0" id="input-trimp-health" /></div>
 		</div>
 		<div class="row">
 			<label class="col-sm-6 col-form-label" id="label-gamma-burst" for="input-gamma-burst">Gamma burst </label>
-			<div class="col-sm-6"><input value="0" id="input-gamma-burst" /></div>
+			<div class="col-sm-5"><input class="form-control" value="0" id="input-gamma-burst" /></div>
 		</div>
 		<div class="row">
 			<label class="col-sm-6 col-form-label" id="label-hits-per-gamma" for="input-hits-per-gamma">Hits per gamma </label>
-			<div class="col-sm-6"><input value="5" id="input-hits-per-gamma" /></div>
+			<div class="col-sm-5"><input class="form-control" value="5" id="input-hits-per-gamma" /></div>
 		</div>
 
     </div>
@@ -164,6 +182,22 @@ var LZString=function(){function o(o,r){if(!t[o]){t[o]={};for(var n=0;n<o.length
 
 Math.baseLog = function(x, y) {
   return Math.log(x) / Math.log(y);
+}
+
+var colorCheckboxRows = function() {
+	var inputElements = document.getElementsByTagName("INPUT");
+	for (var i = inputElements.length - 1; i >=0; i--) {
+		var input = inputElements[i];
+		
+		if (typeof(input.getAttribute('type')) != "undefined" && input.getAttribute('type') == "checkbox") {
+			var row = input.parentElement.parentElement;
+			if (input.checked) {
+			  row.setAttribute('class', row.getAttribute('class').replace('grey', ''));
+			} else {
+			  row.setAttribute('class', row.getAttribute('class').replace('grey', '') + ' grey');
+			}
+		}
+	}
 }
 
 var loadSave = function() {
@@ -186,6 +220,19 @@ var loadSave = function() {
 		if (portal.Prismal && portal.Prismal.radLevel)           { inputs["prismal"].value = game.portal.Prismal.radLevel; }           else { inputs["prismal"].value = 0; }
 		if (portal.Greed && portal.Greed.radLevel)               { inputs["greed"].value = game.portal.Greed.radLevel; }               else { inputs["greed"].value = 0; }
 		
+		if (portal.Tenacity && !portal.Tenacity.radLocked)         { inputs["tenacity-enabled"].checked = true; }    else { inputs["tenacity-enabled"].checked = false; }      
+		if (portal.Resilience && !portal.Resilience.radLocked)     { inputs["resilience-enabled"].checked = true; }    else { inputs["resilience-enabled"].checked = false; }      
+		if (portal.Criticality && !portal.Criticality.radLocked)   { inputs["criticality-enabled"].checked = true; }    else { inputs["criticality-enabled"].checked = false; }      
+		if (portal.Equality && !portal.Equality.radLocked)         { inputs["equality-enabled"].checked = true; }    else { inputs["equality-enabled"].checked = false; }      
+		if (portal.Carpentry && !portal.Carpentry.radLocked)       { inputs["carpentry-enabled"].checked = true; }    else { inputs["carpentry-enabled"].checked = false; }      
+		if (portal.Artisanistry && !portal.Artisanistry.radLocked) { inputs["artisanistry-enabled"].checked = true; }    else { inputs["artisanistry-enabled"].checked = false; }      
+		if (portal.Motivation && portal.Motivation.radLocked)     { inputs["motivation-enabled"].checked = true; }    else { inputs["motivation-enabled"].checked = false; }      
+		if (portal.Power && !portal.Power.radLocked)               { inputs["power-enabled"].checked = true; }    else { inputs["power-enabled"].checked = false; }      
+		if (portal.Toughness && !portal.Toughness.radLocked)       { inputs["toughness-enabled"].checked = true; }    else { inputs["toughness-enabled"].checked = false; }      
+		if (portal.Looting && !portal.Looting.radLocked)           { inputs["looting-enabled"].checked = true; }    else { inputs["looting-enabled"].checked = false; }      
+		if (portal.Prismal && !portal.Prismal.radLocked)           { inputs["prismal-enabled"].checked = true; }    else { inputs["prismal-enabled"].checked = false; }      
+		if (portal.Greed && !portal.Greed.radLocked)               { inputs["greed-enabled"].checked = true; }    else { inputs["greed-enabled"].checked = false; }      
+		
 		var shield = game.global.ShieldEquipped;
 		
 		if (shield) {
@@ -207,7 +254,7 @@ var loadSave = function() {
 			inputs["armor-levels"].value = game.equipment.Boots.level;
 			inputs["tribute-count"].value = game.buildings.Tribute.owned;
 		}
-		
+		colorCheckboxRows();
 		calculate();
 	}, 1);
   //} catch(err) {}
@@ -225,7 +272,8 @@ var setMax = function(whichOne, index) {
 	var id = "label-" + whichOne;
 	var element = document.getElementById(id).parentElement;
 	var opacity = Math.max(1.0 - index * 0.20, 0.15);
-	element.setAttribute("style", "background: rgba(11, 150, 35, " + opacity + ");");
+	if (element.getAttribute('class').indexOf('grey') == -1)
+		element.setAttribute("style", "background: rgba(11, 150, 35, " + opacity + ");");
 }
 
 var setMaxes = function(j2, j3, j4, j5, j6, j7, j8, j9, j10, j11, j12, j13, loop, index) {
@@ -284,6 +332,19 @@ var calculate = function() {
 	var looting = parseInt(inputs["looting"].value) || 0;
 	var prismal = parseInt(inputs["prismal"].value) || 0;
 	var greed = parseInt(inputs["greed"].value) || 0;
+	
+	var enabledTenacity = inputs["tenacity-enabled"].checked;
+	var enabledResilience = inputs["resilience-enabled"].checked;
+	var enabledCriticality = inputs["criticality-enabled"].checked;
+	var enabledEquality = inputs["equality-enabled"].checked;
+	var enabledCarpentry = inputs["carpentry-enabled"].checked;
+	var enabledArtisanistry = inputs["artisanistry-enabled"].checked;
+	var enabledMotivation = inputs["motivation-enabled"].checked;
+	var enabledPower = inputs["power-enabled"].checked;
+	var enabledToughness = inputs["toughness-enabled"].checked;
+	var enabledLooting = inputs["looting-enabled"].checked;
+	var enabledPrismal = inputs["prismal-enabled"].checked;
+	var enabledGreed = inputs["greed-enabled"].checked;
 	
 	var weaponLevels = parseInt(inputs["weapon-levels"].value) || 1;
 	var armorLevels = parseInt(inputs["armor-levels"].value) || 1;
@@ -453,29 +514,29 @@ var calculate = function() {
 	
 	var i13 = Math.log(g13) / h13;
 	
-	var j2 = tenacity > 39 ? 0 : i2 / Math.max(i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13);
+	var j2 = !enabledTenacity || tenacity > 39 ? 0 : i2 / Math.max(i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13);
 	
-	var j3 = i3 / Math.max(i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13);
+	var j3 = !enabledResilience  ? 0 :  i3 / Math.max(i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13);
 	
-	var j4 = i4 / Math.max(i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13);
+	var j4 = !enabledCriticality  ? 0 :  i4 / Math.max(i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13);
 	
-	var j5 = i5 / Math.max(i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13);
+	var j5 = !enabledEquality  ? 0 :  i5 / Math.max(i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13);
 	
-	var j6 = i6 / Math.max(i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13);
+	var j6 = !enabledCarpentry  ? 0 :  i6 / Math.max(i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13);
 	
-	var j7 = i7 / Math.max(i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13);
+	var j7 = !enabledArtisanistry  ? 0 :  i7 / Math.max(i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13);
 	
-	var j8 = i8 / Math.max(i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13);
+	var j8 = !enabledMotivation  ? 0 :  i8 / Math.max(i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13);
 	
-	var j9 = i9 / Math.max(i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13);
+	var j9 = !enabledPower  ? 0 :  i9 / Math.max(i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13);
 	
-	var j10 = i10 / Math.max(i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13);
+	var j10 = !enabledToughness  ? 0 :  i10 / Math.max(i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13);
 	
-	var j11 = i11 / Math.max(i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13);
+	var j11 = !enabledLooting  ? 0 :  i11 / Math.max(i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13);
 	
-	var j12 = prismal > 99 ? 0 : i12 / Math.max(i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13);
+	var j12 = !enabledPrismal || prismal > 99 ? 0 : i12 / Math.max(i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13);
 	
-	var j13 = greed > 39 ? 0 : i13 / Math.max(i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13);
+	var j13 = !enabledGreed || greed > 39 ? 0 : i13 / Math.max(i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13);
 	
 	clearClasses();
 	setMaxes(j2, j3, j4, j5, j6, j7, j8, j9, j10, j11, j12, j13, 0, 0);
@@ -631,10 +692,22 @@ for (var i = inputElements.length - 1; i >=0; i--) {
 	var inputId = input.getAttribute('id').replace("input-", "");
 	inputs[inputId] = input;
 	input.onkeyup = calculate;
+	
+	if (typeof(input.getAttribute('type')) != "undefined" && input.getAttribute('type') == "checkbox") {
+		input.addEventListener('change', (event) => {
+		  var row = event.target.parentElement.parentElement;
+		  if (event.target.checked) {
+			row.setAttribute('class', row.getAttribute('class').replace('grey', ''));
+		  } else {
+			row.setAttribute('class', row.getAttribute('class').replace('grey', '') + ' grey');
+		  }
+		  calculate();
+		})
+	}
 }
 
 
-
+console.log('a');
 </script>
 
 </body>
