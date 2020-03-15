@@ -415,7 +415,7 @@ var setMax = function(whichOne, index, gain) {
 	}
 }
 
-var setMaxes = function(j2, j3, j4, j5, j6, j7, j8, j9, j10, j11, j12, j13, loop, index) {
+var setMaxes = function(j2, j3, j4, j5, j6, j7, j8, j9, j10, j11, j12, j13, loop, index, tenacity, prismal, greed) {
 	var max = Math.max(j2, j3, j4, j5, j6, j7, j8, j9, j10, j11, j12, j13);
 	
 	     if (j2  == max)       { setMax("tenacity", index, tenacity < maxTenacity ? j2 : 0); j2 = -1e+100; }
@@ -435,7 +435,7 @@ var setMaxes = function(j2, j3, j4, j5, j6, j7, j8, j9, j10, j11, j12, j13, loop
 		index--;
 	
 	if (loop < 11)
-		setMaxes(j2, j3, j4, j5, j6, j7, j8, j9, j10, j11, j12, j13, loop + 1, index + 1);
+		setMaxes(j2, j3, j4, j5, j6, j7, j8, j9, j10, j11, j12, j13, loop + 1, index + 1, tenacity, prismal, greed);
 }
 
 var setMaxes2 = function(s5, s6, s7, s8, s9, loop, index) {
@@ -703,7 +703,7 @@ var calculate = function() {
 	var j13 = !enabledGreed || greed >= maxGreed ? 0 : i13 / Math.max(i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13);
 	
 	clearClasses();
-	setMaxes(j2, j3, j4, j5, j6, j7, j8, j9, j10, j11, j12, j13, 0, 0);
+	setMaxes(j2, j3, j4, j5, j6, j7, j8, j9, j10, j11, j12, j13, 0, 0, tenacity, prismal, greed);
 	
 	totalCost = getTotalCost(tenacity, resilience, criticality, equality, carpentry, artisanistry, motivation, power, toughness, looting, prismal, greed);
 		
