@@ -112,6 +112,11 @@ Trimps U2 perks and heirlooms calculator
 			<label class="col-sm-6 col-form-label" id="label-greed" for="input-greed">Greed </label>
 			<div class="col-sm-5"><input class="form-control" value="0" id="input-greed" /></div>
 		</div>
+		<div class="row mt-2">
+			<div class="col-sm-1"></div>
+			<label class="col-sm-6 col-form-label">Total radon cost </label>
+			<div class="col-sm-5" id="total-radon-cost"></div>
+		</div>
     </div>
     <div class="col-sm">
 		<div class="row">
@@ -541,6 +546,23 @@ var calculate = function() {
 	clearClasses();
 	setMaxes(j2, j3, j4, j5, j6, j7, j8, j9, j10, j11, j12, j13, 0, 0);
 	
+	var totalCost = 
+		0.0
+		+ 50000000*(1-Math.pow(1.3, tenacity))/(1-1.3)
+		+100*(1-Math.pow(1.3, resilience))/(1-1.3)
+		+100*(1-Math.pow(1.3, criticality))/(1-1.3)
+		+1*(1-Math.pow(1.3, equality))/(1-1.5)
+		+25*(1-Math.pow(1.3, carpentry))/(1-1.3)
+		+15*(1-Math.pow(1.3, artisanistry))/(1-1.3)
+		+2*(1-Math.pow(1.3, motivation))/(1-1.3)
+		+1*(1-Math.pow(1.3, power))/(1-1.3)
+		+1*(1-Math.pow(1.3, toughness))/(1-1.3)
+		+1*(1-Math.pow(1.3, looting))/(1-1.3)
+		+1*(1-Math.pow(1.3, prismal))/(1-1.3)
+		+10000000000*(1-Math.pow(1.3, greed))/(1-1.3);
+		
+	document.getElementById('total-radon-cost').innerText = totalCost.toExponential(3);
+	
 	var p5 = 7500 * Math.pow(1.03, (critDamage / 2 - 42.5));
 	var p6 = Math.pow(1.03, (prismalShield - 50)) *7500;
 	var p7 = Math.pow(1.03, (trimpAttack - 46)) *7500;
@@ -733,7 +755,7 @@ function exportPerks() {
 // don't export if not allowed yet
 
 
-console.log('c');
+console.log('d');
 </script>
 
 </body>
