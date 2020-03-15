@@ -183,6 +183,22 @@ Math.baseLog = function(x, y) {
   return Math.log(x) / Math.log(y);
 }
 
+var colorCheckboxRows = function() {
+	var inputElements = document.getElementsByTagName("INPUT");
+	for (var i = inputElements.length - 1; i >=0; i--) {
+		var input = inputElements[i];
+		
+		if (typeof(input.getAttribute('type')) != "undefined" && input.getAttribute('type') == "checkbox") {
+			var input.parentElement.parentElement;
+			if (input.checked) {
+			  row.setAttribute('class', row.getAttribute('class').replace('grey', ''));
+			} else {
+			  row.setAttribute('class', row.getAttribute('class').replace('grey', '') + ' grey');
+			}
+		}
+	}
+}
+
 var loadSave = function() {
 	
 	setTimeout(function() {
@@ -237,7 +253,7 @@ var loadSave = function() {
 			inputs["armor-levels"].value = game.equipment.Boots.level;
 			inputs["tribute-count"].value = game.buildings.Tribute.owned;
 		}
-		
+		colorCheckboxRows();
 		calculate();
 	}, 1);
   //} catch(err) {}
@@ -670,13 +686,8 @@ for (var i = inputElements.length - 1; i >=0; i--) {
 		  } else {
 			row.setAttribute('class', row.getAttribute('class').replace('grey', '') + ' grey');
 		  }
+		  calculate();
 		})
-		//var input.parentElement.parentElement;
-		//if (input.checked) {
-		//  row.setAttribute('class', row.getAttribute('class').replace('grey', ''));
-		//} else {
-		//  row.setAttribute('class', row.getAttribute('class').replace('grey', '') + ' grey');
-		//}
 	}
 }
 
