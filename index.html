@@ -139,15 +139,15 @@ Trimps U2 perks and heirlooms calculator
 		</div>
 		<div class="row mt-2">
 			<label class="col-sm-6 col-form-label" id="label-health-weight" for="input-health-weight">Health weight </label>
-			<div class="col-sm-5"><input class="form-control" value="1" id="input-health-weight" maxlength="4" /></div>
+			<div class="col-sm-5"><input class="form-control" value="1" id="input-health-weight" maxlength="3" /></div>
 		</div>
 		<div class="row">
 			<label class="col-sm-6 col-form-label" id="label-attack-weight" for="input-attack-weight">Attack weight </label>
-			<div class="col-sm-5"><input class="form-control" value="5" id="input-attack-weight" maxlength="4" /></div>
+			<div class="col-sm-5"><input class="form-control" value="5" id="input-attack-weight" maxlength="3" /></div>
 		</div>
 		<div class="row">
 			<label class="col-sm-6 col-form-label" id="label-radon-weight" for="input-radon-weight">Radon weight </label>
-			<div class="col-sm-5"><input class="form-control" value="10" id="input-radon-weight" maxlength="4" /></div>
+			<div class="col-sm-5"><input class="form-control" value="10" id="input-radon-weight" maxlength="3" /></div>
 		</div>
 		<div class="row mt-2">
 			<label class="col-sm-6 col-form-label" id="label-tenacity-multiplier" for="input-tenacity-multiplier">Tenacity multiplier </label>
@@ -393,9 +393,9 @@ var calculate = function() {
 	var weaponLevels = parseInt(inputs["weapon-levels"].value) || 1;
 	var armorLevels = parseInt(inputs["armor-levels"].value) || 1;
 	
-	var healthWeight = parseFloat(inputs["health-weight"].value) || 1;
-	var attackWeight = parseFloat(inputs["attack-weight"].value) || 1;
-	var radonWeight = parseFloat(inputs["radon-weight"].value) || 1;
+	var healthWeight = parseFloat(inputs["health-weight"].value) || 0.0001;
+	var attackWeight = parseFloat(inputs["attack-weight"].value) || 0.0001;
+	var radonWeight = parseFloat(inputs["radon-weight"].value) || 0;
 	
 	var trimpWeights = {
 		healthWeight: healthWeight,
@@ -837,9 +837,9 @@ function autobuyPerks() {
 
 if (window.localStorage.getItem("trimpWeights")) {
 	var trimpWeights = JSON.parse(window.localStorage.getItem("trimpWeights"));
-	if (trimpWeights.attackWeight) inputs["attack-weight"].value = trimpWeights.attackWeight;
-	if (trimpWeights.healthWeight) inputs["health-weight"].value = trimpWeights.healthWeight;
-	if (trimpWeights.radonWeight) inputs["radon-weight"].value = trimpWeights.radonWeight;
+	if (trimpWeights.attackWeight != null) inputs["attack-weight"].value = trimpWeights.attackWeight;
+	if (trimpWeights.healthWeight != null) inputs["health-weight"].value = trimpWeights.healthWeight;
+	if (trimpWeights.radonWeight != null) inputs["radon-weight"].value = trimpWeights.radonWeight;
 }
 // order of perks
 // maxed perks
