@@ -780,9 +780,11 @@ function exportPerks() {
 function clearAndAutobuyPerks() {
 	if (totalRadonEarned > 0) {
 		var elements = document.getElementById('perks-col').getElementsByClassName('row');
-		var input = elements[i].getElementsByTagName('input')[1];
-		if (typeof(input) !== "undefined") {
-			input.value = 0;
+		for (var i = elements.length - 1; i >= 0; i--) {
+			var input = elements[i].getElementsByTagName('input')[1];
+			if (typeof(input) !== "undefined") {
+				input.value = 0;
+			}
 		}
 		autobuyPerks();
 	}
@@ -823,7 +825,7 @@ if (window.localStorage.getItem("trimpWeights")) {
 // don't export if not allowed yet
 
 
-console.log('b');
+console.log('c');
 </script>
 
 </body>
