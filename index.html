@@ -226,7 +226,7 @@ var loadSave = function() {
 		if (portal.Equality && !portal.Equality.radLocked)         { inputs["equality-enabled"].checked = true; }    else { inputs["equality-enabled"].checked = false; }      
 		if (portal.Carpentry && !portal.Carpentry.radLocked)       { inputs["carpentry-enabled"].checked = true; }    else { inputs["carpentry-enabled"].checked = false; }      
 		if (portal.Artisanistry && !portal.Artisanistry.radLocked) { inputs["artisanistry-enabled"].checked = true; }    else { inputs["artisanistry-enabled"].checked = false; }      
-		if (portal.Motivation && portal.Motivation.radLocked)     { inputs["motivation-enabled"].checked = true; }    else { inputs["motivation-enabled"].checked = false; }      
+		if (portal.Motivation && !portal.Motivation.radLocked)     { inputs["motivation-enabled"].checked = true; }    else { inputs["motivation-enabled"].checked = false; }      
 		if (portal.Power && !portal.Power.radLocked)               { inputs["power-enabled"].checked = true; }    else { inputs["power-enabled"].checked = false; }      
 		if (portal.Toughness && !portal.Toughness.radLocked)       { inputs["toughness-enabled"].checked = true; }    else { inputs["toughness-enabled"].checked = false; }      
 		if (portal.Looting && !portal.Looting.radLocked)           { inputs["looting-enabled"].checked = true; }    else { inputs["looting-enabled"].checked = false; }      
