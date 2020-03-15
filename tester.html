@@ -798,6 +798,7 @@ function exportPerks() {
 	input.value = LZString.compressToBase64(exportedPerks);
 	input.focus();
 	input.select();
+	input.execCommand('copy');
 }
 
 function clearAndAutobuyPerks() {
@@ -840,7 +841,7 @@ if (window.localStorage.getItem("trimpWeights")) {
 	if (trimpWeights.healthWeight) inputs["health-weight"].value = trimpWeights.healthWeight;
 	if (trimpWeights.radonWeight) inputs["radon-weight"].value = trimpWeights.radonWeight;
 }
-console.log('a');
+console.log('b');
 
 </script>
 
