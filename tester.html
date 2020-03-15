@@ -722,7 +722,7 @@ function exportPerks() {
 	if (document.getElementById('input-prismal-enabled').checked) exportedPerks["Prismal"] =      parseInt(inputs["prismal"].value || 0);
 	if (document.getElementById('input-greed-enabled').checked) exportedPerks["Greed"] =        parseInt(inputs["greed"].value || 0);
 
-	console.lot(exportedPerks);
+	console.log(exportedPerks);
 	exportedPerks = JSON.stringify(exportedPerks);
 	return LZString.compressToBase64(exportedPerks);
 }
@@ -733,7 +733,7 @@ function exportPerks() {
 // don't export if not allowed yet
 
 
-//console.log('c');
+console.log('c');
 </script>
 
 </body>
