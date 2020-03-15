@@ -748,8 +748,12 @@ var inputElements = document.getElementsByTagName("INPUT");
 for (var i = inputElements.length - 1; i >=0; i--) {
 	var input = inputElements[i];
 	var inputId = input.getAttribute('id').replace("input-", "");
+	
 	inputs[inputId] = input;
-	input.onkeyup = calculate;
+	
+	if (inputId != 'export') {
+		input.onkeyup = calculate;
+	}
 	
 	if (typeof(input.getAttribute('type')) != "undefined" && input.getAttribute('type') == "checkbox") {
 		input.addEventListener('change', (event) => {
