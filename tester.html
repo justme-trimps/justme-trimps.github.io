@@ -837,13 +837,14 @@ function autobuyPerks() {
 
 if (window.localStorage.getItem("trimpWeights")) {
 	var trimpWeights = JSON.parse(window.localStorage.getItem("trimpWeights"));
-	if (trimpWeights.attackWeight) inputs["attack-weight"].value = trimpWeights.attackWeight;
-	if (trimpWeights.healthWeight) inputs["health-weight"].value = trimpWeights.healthWeight;
-	if (trimpWeights.radonWeight) inputs["radon-weight"].value = trimpWeights.radonWeight;
+	if (trimpWeights.attackWeight != null) inputs["attack-weight"].value = trimpWeights.attackWeight;
+	if (trimpWeights.healthWeight != null) inputs["health-weight"].value = trimpWeights.healthWeight;
+	if (trimpWeights.radonWeight != null) inputs["radon-weight"].value = trimpWeights.radonWeight;
 }
 // order of perks
 // maxed perks
 
+console.log('aa');
 </script>
 
 </body>
