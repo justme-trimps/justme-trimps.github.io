@@ -118,8 +118,9 @@ Trimps U2 perks and heirlooms calculator
 			<div class="col-sm-5" id="total-radon-cost"></div>
 		</div>
 		<div class="row mt-2">
+			<div class="col-sm-3"><button class="btn btn-success" id="clear-autobuy-button" disabled onclick="clearAndAutobuyPerks()">Clear and autobuy</button></div>
 			<div class="col-sm-3"><button class="btn btn-info" id="autobuy-button" disabled onclick="autobuyPerks()">Autobuy</button></div>
-			<div class="col-sm-9"><input class="form-control" value="Import save to use autobuy" id="input-export" disabled /></div>
+			<div class="col-sm-6"><input class="form-control" value="Import save to use autobuy" id="input-export" disabled /></div>
 		</div>
     </div>
     <div class="col-sm">
@@ -268,6 +269,7 @@ var loadSave = function() {
 		calculate();
 		totalRadonEarned = game.global.totalRadonEarned;
 		if (totalRadonEarned > 0) {
+			document.getElementById('clear-autobuy-button').disabled = false;
 			document.getElementById('autobuy-button').disabled = false;
 			document.getElementById('input-export').disabled = false;
 		}
@@ -774,6 +776,17 @@ function exportPerks() {
 	return LZString.compressToBase64(exportedPerks);
 }
 
+function clearAndAutobuyPerks() {
+	if (totalRadonEarned > 0) {
+		var elements = document.getElementById('perks-col').getElementsByClassName('row');
+		var input = elements[i].getElementsByTagName('input')[1];
+		if (typeof(input) !== "undefined") {
+			input.value = 0;
+		}
+		autobuyPerks();
+	}
+}
+
 function autobuyPerks() {
 	var maxed = false;
 	while (totalRadonEarned > totalCost) {
@@ -809,7 +822,7 @@ if (window.localStorage.getItem("trimpWeights")) {
 // don't export if not allowed yet
 
 
-console.log('b');
+console.log('a');
 </script>
 
 </body>
