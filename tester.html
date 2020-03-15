@@ -51,7 +51,7 @@ Trimps U2 perks and heirlooms calculator
 		
 	</div>
   <div class="row mt-3">
-    <div class="col-sm mr-3">
+    <div class="col-sm mr-3" id="perks-col">
 		<div class="row">
 			<div class="col-sm-1"><input type="checkbox" checked="checked" class="form-check-input" id="input-tenacity-enabled" /></div>
 			<label class="col-sm-6 col-form-label" id="label-tenacity" for="input-tenacity">Tenacity </label>
@@ -768,7 +768,7 @@ function exportPerks() {
 function autobuyPerks() {
 	var maxed = false;
 	while (totalRadonEarned > totalCost) {
-		var elements = document.getElementsByClassName('row');
+		var elements = document.getElementById('perks-col').getElementsByClassName('row');
 		for (var i = elements.length - 1; i >= 0; i--) {
 			if (typeof(elements[i].getAttribute('data-max')) !== "undefined") {
 				var input = elements[i].getElementsByTagName('input')[1];
@@ -794,7 +794,7 @@ function autobuyPerks() {
 // don't export if not allowed yet
 
 
-console.log('b');
+console.log('c');
 </script>
 
 </body>
