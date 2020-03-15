@@ -930,13 +930,13 @@ function autobuyPerks(spendEverything) {
 	var maxed = false;
 	while (totalRadonEarned > totalCost) {
 		if (spendEverything) {
-			if (tenacity >= maxTenacity) {
+			if (parseInt(inputs["tenacity"].value) >= maxTenacity) {
 				h2 = Infinity;
 			}
-			if (prismal >= maxPrismal) {
+			if (parseInt(inputs["prismal"].value) >= maxPrismal) {
 				h12 = Infinity;
 			}
-			if (greed >= maxGreed) {
+			if (parseInt(inputs["greed"].value) >= maxGreed) {
 				h13 = Infinity;
 			}
 			
