@@ -771,7 +771,7 @@ function autobuyPerks() {
 		var elements = document.getElementsByClassName('row');
 		for (var i = elements.length - 1; i >= 0; i--) {
 			if (typeof(elements[i].getAttribute('data-max')) !== "undefined") {
-				var input = elements[i].getElementsByTag('input')[1];
+				var input = elements[i].getElementsByTagName('input')[1];
 				input.value = parseInt(input.value) + 1;
 				calculate();
 				if (totalCost > totalRadonEarned) {
@@ -794,7 +794,7 @@ function autobuyPerks() {
 // don't export if not allowed yet
 
 
-console.log('a');
+console.log('b');
 </script>
 
 </body>
