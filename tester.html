@@ -666,6 +666,9 @@ for (var i = inputElements.length - 1; i >=0; i--) {
 		input.addEventListener('change', (event) => {
 		  if (event.target.checked) {
 			var row = event.target.parentElement.parentElement;
+			console.log(event.target);
+			console.log(event.target.parentElement);
+			console.log(event.target.parentElement.parentElement);
 			row.setAttribute('class', row.getAttribute('class').replace('grey', ''));
 		  } else {
 			row.setAttribute('class', row.getAttribute('class').replace('grey', '') + ' grey');
