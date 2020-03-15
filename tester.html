@@ -289,6 +289,12 @@ var loadSave = function() {
 
 		var saveTextArea = document.getElementById('save-text-area');
 		var game = JSON.parse(LZString.decompressFromBase64(saveTextArea.value));
+		
+		if (game.global.universe == 1) {
+			saveTextArea.value = "Sorry but I can't handle Universe 1 saves";
+			return;
+		}
+		
 		var portal = game.portal;
 		if (portal.Tenacity && portal.Tenacity.radLevel)         { inputs["tenacity"].value = game.portal.Tenacity.radLevel; }         else { inputs["tenacity"].value = 0; }
 		if (portal.Resilience && portal.Resilience.radLevel)     { inputs["resilience"].value = game.portal.Resilience.radLevel; }     else { inputs["resilience"].value = 0; }
@@ -933,6 +939,8 @@ if (window.localStorage.getItem("trimpWeights")) {
 }
 // order of perks
 // maxed perks
+// don't load U1 save
+// buy 2nd, 3rd...
 
 </script>
 
