@@ -761,7 +761,16 @@ for (var i = inputElements.length - 1; i >=0; i--) {
 
 function exportPerks() {
 	var exportedPerks = {};
-
+	var saveTextArea = document.getElementById('save-text-area');
+	var game = JSON.parse(LZString.decompressFromBase64(saveTextArea.value));
+	
+	for (var item in game.portal){
+		//For smaller strings and backwards compatibility, perks not added to the object will be treated as if the perk is supposed to be level 0.
+		if (game.portal[item].radLocked !== false || game.portal[item][levelName] <= 0) continue;
+		//Add the perk to the object with the desired level
+		exportedPerks[item] = game.portal[item][levelName];
+	}
+	
 	if (document.getElementById('input-tenacity-enabled').checked) exportedPerks["Tenacity"] =     parseInt(inputs["tenacity"].value || 0);
 	if (document.getElementById('input-resilience-enabled').checked) exportedPerks["Resilience"] =   parseInt(inputs["resilience"].value || 0);
 	if (document.getElementById('input-criticality-enabled').checked) exportedPerks["Criticality"] =  parseInt(inputs["criticality"].value || 0);
@@ -827,7 +836,7 @@ if (window.localStorage.getItem("trimpWeights")) {
 // don't export if not allowed yet
 
 
-console.log('f');
+console.log('g');
 </script>
 
 </body>
