@@ -24,6 +24,11 @@ body { max-width: 1200px; margin: 0 auto; font-family: Helvetica, Verdana;}
 .green { background: green;  }
 input { margin-top: 4px; }
 
+input[type=checkbox], input[type=radio] {
+    margin-left: 1rem;
+    margin-top: 0.7rem;
+}
+
 </style>
 </head>
 <body>
@@ -656,6 +661,17 @@ for (var i = inputElements.length - 1; i >=0; i--) {
 	var inputId = input.getAttribute('id').replace("input-", "");
 	inputs[inputId] = input;
 	input.onkeyup = calculate;
+	
+	if (typeof(input.getAttribute('type')) != "undefined" && input.getAttribute('type') == "checkbox") {
+		checkbox.addEventListener('change', (event) => {
+		  if (event.target.checked) {
+			var row = event.target.parentNode.parentNode;
+			row.setAttribute('class', row.getAttribute('class').replace('grey', ''));
+		  } else {
+			row.setAttribute('class', row.getAttribute('class').replace('grey', '') + ' grey');
+		  }
+		})
+	}
 }
 
 
