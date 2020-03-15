@@ -47,62 +47,62 @@ Trimps U2 perks and heirlooms calculator
   <div class="row mt-3">
     <div class="col-sm mr-3">
 		<div class="row">
-			<div class="col-sm-3"><input type="checkbox" id="input-tenacity-locked" /></div>
+			<div class="col-sm-3"><input type="checkbox" id="input-tenacity-enabled" /></div>
 			<label class="col-sm-6 col-form-label" id="label-tenacity" for="input-tenacity">Tenacity </label>
 			<div class="col-sm-3"><input value="0" id="input-tenacity" /></div>
 		</div>
 		<div class="row">
-			<div class="col-sm-3"><input type="checkbox" id="input-resilience-locked" /></div>
+			<div class="col-sm-3"><input type="checkbox" id="input-resilience-enabled" /></div>
 			<label class="col-sm-6 col-form-label" id="label-resilience" for="input-resilience">Resilience </label>
 			<div class="col-sm-3"><input value="0" id="input-resilience" /></div>
 		</div>
 		<div class="row">
-			<div class="col-sm-3"><input type="checkbox" id="input-criticality-locked" /></div>
+			<div class="col-sm-3"><input type="checkbox" id="input-criticality-enabled" /></div>
 			<label class="col-sm-6 col-form-label" id="label-criticality" for="input-criticality">Criticality </label>
 			<div class="col-sm-3"><input value="0" id="input-criticality" /></div>
 		</div>
 		<div class="row">
-			<div class="col-sm-3"><input type="checkbox" id="input-equality-locked" /></div>
+			<div class="col-sm-3"><input type="checkbox" id="input-equality-enabled" /></div>
 			<label class="col-sm-6 col-form-label" id="label-equality" for="input-equality">Equality </label>
 			<div class="col-sm-3"><input value="0" id="input-equality" /></div>
 		</div>
 		<div class="row">
-			<div class="col-sm-3"><input type="checkbox" id="input-carpentry-locked" /></div>
+			<div class="col-sm-3"><input type="checkbox" id="input-carpentry-enabled" /></div>
 			<label class="col-sm-6 col-form-label" id="label-carpentry" for="input-carpentry">Carpentry </label>
 			<div class="col-sm-3"><input value="0" id="input-carpentry" /></div>
 		</div>
 		<div class="row">
-			<div class="col-sm-3"><input type="checkbox" id="input-artisanistry-locked" /></div>
+			<div class="col-sm-3"><input type="checkbox" id="input-artisanistry-enabled" /></div>
 			<label class="col-sm-6 col-form-label" id="label-artisanistry" for="input-artisanistry">Artisanistry </label>
 			<div class="col-sm-3"><input value="0" id="input-artisanistry" /></div>
 		</div>
 		<div class="row">
-			<div class="col-sm-3"><input type="checkbox" id="input-motivation-locked" /></div>
+			<div class="col-sm-3"><input type="checkbox" id="input-motivation-enabled" /></div>
 			<label class="col-sm-6 col-form-label" id="label-motivation" for="input-motivation">Motivation </label>
 			<div class="col-sm-3"><input value="0" id="input-motivation" /></div>
 		</div>
 		<div class="row">
-			<div class="col-sm-3"><input type="checkbox" id="input-power-locked" /></div>
+			<div class="col-sm-3"><input type="checkbox" id="input-power-enabled" /></div>
 			<label class="col-sm-6 col-form-label" id="label-power" for="input-power">Power </label>
 			<div class="col-sm-3"><input value="0" id="input-power" /></div>
 		</div>
 		<div class="row">
-			<div class="col-sm-3"><input type="checkbox" id="input-tenacity-multiplier-locked" /></div>
+			<div class="col-sm-3"><input type="checkbox" id="input-tenacity-multiplier-enabled" /></div>
 			<label class="col-sm-6 col-form-label" id="label-toughness" for="input-toughness">Toughness </label>
 			<div class="col-sm-3"><input value="0" id="input-toughness" /></div>
 		</div>
 		<div class="row">
-			<div class="col-sm-3"><input type="checkbox" id="input-tenacity-multiplier-locked" /></div>
+			<div class="col-sm-3"><input type="checkbox" id="input-tenacity-multiplier-enabled" /></div>
 			<label class="col-sm-6 col-form-label" id="label-looting" for="input-looting">Looting </label>
 			<div class="col-sm-3"><input value="0" id="input-looting" /></div>
 		</div>
 		<div class="row">
-			<div class="col-sm-3"><input type="checkbox" id="input-tenacity-multiplier-locked" /></div>
+			<div class="col-sm-3"><input type="checkbox" id="input-tenacity-multiplier-enabled" /></div>
 			<label class="col-sm-6 col-form-label" id="label-prismal" for="input-prismal">Prismal </label>
 			<div class="col-sm-3"><input value="0" id="input-prismal" /></div>
 		</div>
 		<div class="row">
-			<div class="col-sm-3"><input type="checkbox" id="input-tenacity-multiplier-locked" /></div>
+			<div class="col-sm-3"><input type="checkbox" id="input-tenacity-multiplier-enabled" /></div>
 			<label class="col-sm-6 col-form-label" id="label-greed" for="input-greed">Greed </label>
 			<div class="col-sm-3"><input value="0" id="input-greed" /></div>
 		</div>
@@ -197,6 +197,19 @@ var loadSave = function() {
 		if (portal.Looting && portal.Looting.radLevel)           { inputs["looting"].value = game.portal.Looting.radLevel; }           else { inputs["looting"].value = 0; }
 		if (portal.Prismal && portal.Prismal.radLevel)           { inputs["prismal"].value = game.portal.Prismal.radLevel; }           else { inputs["prismal"].value = 0; }
 		if (portal.Greed && portal.Greed.radLevel)               { inputs["greed"].value = game.portal.Greed.radLevel; }               else { inputs["greed"].value = 0; }
+		
+		if (portal.Tenacity && portal.Tenacity.radLocked)         { inputs["tenacity-enabled"].setAttribute('checked', 'checked'); }    else { inputs["tenacity-enabled"].removeAttribute('checked'); }      
+		if (portal.Resilience && portal.Resilience.radLocked)     { inputs["resilience-enabled"].setAttribute('checked', 'checked'); }    else { inputs["resilience-enabled"].removeAttribute('checked'); }      
+		if (portal.Criticality && portal.Criticality.radLocked)   { inputs["criticality-enabled"].setAttribute('checked', 'checked'); }    else { inputs["criticality-enabled"].removeAttribute('checked'); }      
+		if (portal.Equality && portal.Equality.radLocked)         { inputs["equality-enabled"].setAttribute('checked', 'checked'); }    else { inputs["equality-enabled"].removeAttribute('checked'); }      
+		if (portal.Carpentry && portal.Carpentry.radLocked)       { inputs["carpentry-enabled"].setAttribute('checked', 'checked'); }    else { inputs["carpentry-enabled"].removeAttribute('checked'); }      
+		if (portal.Artisanistry && portal.Artisanistry.radLocked) { inputs["artisanistry-enabled"].setAttribute('checked', 'checked'); }    else { inputs["artisanistry-enabled"].removeAttribute('checked'); }      
+		if (portal.Motivation && portal.Motivation.radLocked)     { inputs["motivation-enabled"].setAttribute('checked', 'checked'); }    else { inputs["motivation-enabled"].removeAttribute('checked'); }      
+		if (portal.Power && portal.Power.radLocked)               { inputs["power-enabled"].setAttribute('checked', 'checked'); }    else { inputs["power-enabled"].removeAttribute('checked'); }      
+		if (portal.Toughness && portal.Toughness.radLocked)       { inputs["toughness-enabled"].setAttribute('checked', 'checked'); }    else { inputs["toughness-enabled"].removeAttribute('checked'); }      
+		if (portal.Looting && portal.Looting.radLocked)           { inputs["looting-enabled"].setAttribute('checked', 'checked'); }    else { inputs["looting-enabled"].removeAttribute('checked'); }      
+		if (portal.Prismal && portal.Prismal.radLocked)           { inputs["prismal-enabled"].setAttribute('checked', 'checked'); }    else { inputs["prismal-enabled"].removeAttribute('checked'); }      
+		if (portal.Greed && portal.Greed.radLocked)               { inputs["greed-enabled"].setAttribute('checked', 'checked'); }    else { inputs["greed-enabled"].removeAttribute('checked'); }      
 		
 		var shield = game.global.ShieldEquipped;
 		
