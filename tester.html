@@ -766,9 +766,9 @@ function exportPerks() {
 	
 	for (var item in game.portal){
 		//For smaller strings and backwards compatibility, perks not added to the object will be treated as if the perk is supposed to be level 0.
-		if (game.portal[item].radLocked !== false || game.portal[item][levelName] <= 0) continue;
+		if (game.portal[item].radLocked !== false || game.portal[item]["radLevel"] <= 0) continue;
 		//Add the perk to the object with the desired level
-		exportedPerks[item] = game.portal[item][levelName];
+		exportedPerks[item] = game.portal[item]["radLevel"];
 	}
 	
 	if (document.getElementById('input-tenacity-enabled').checked) exportedPerks["Tenacity"] =     parseInt(inputs["tenacity"].value || 0);
@@ -836,7 +836,7 @@ if (window.localStorage.getItem("trimpWeights")) {
 // don't export if not allowed yet
 
 
-console.log('g');
+console.log('h');
 </script>
 
 </body>
