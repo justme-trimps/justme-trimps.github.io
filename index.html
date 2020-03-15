@@ -272,7 +272,7 @@ var loadSave = function() {
 		}
 		colorCheckboxRows();
 		calculate();
-		totalRadonEarned = game.global.totalRadonEarned;
+		totalRadonEarned = game.global.totalRadonEarned - game.resources.radon.owned;
 		if (totalRadonEarned > 0) {
 			document.getElementById('clear-autobuy-button').disabled = false;
 			document.getElementById('autobuy-button').disabled = false;
@@ -794,7 +794,11 @@ function exportPerks() {
 	if (document.getElementById('input-greed-enabled').checked) exportedPerks["Greed"] =        parseInt(inputs["greed"].value || 0);
 
 	exportedPerks = JSON.stringify(exportedPerks);
-	document.getElementById('input-export').value = LZString.compressToBase64(exportedPerks);
+	var input = document.getElementById('input-export');
+	input.value = LZString.compressToBase64(exportedPerks);
+	input.focus();
+	input.select();
+	document.execCommand('copy');
 }
 
 function clearAndAutobuyPerks() {
@@ -837,6 +841,8 @@ if (window.localStorage.getItem("trimpWeights")) {
 	if (trimpWeights.healthWeight) inputs["health-weight"].value = trimpWeights.healthWeight;
 	if (trimpWeights.radonWeight) inputs["radon-weight"].value = trimpWeights.radonWeight;
 }
+// order of perks
+// maxed perks
 
 </script>
 
