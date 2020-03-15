@@ -393,9 +393,9 @@ var calculate = function() {
 	var weaponLevels = parseInt(inputs["weapon-levels"].value) || 1;
 	var armorLevels = parseInt(inputs["armor-levels"].value) || 1;
 	
-	var healthWeight = parseFloat(inputs["health-weight"].value) || 1;
-	var attackWeight = parseFloat(inputs["attack-weight"].value) || 1;
-	var radonWeight = parseFloat(inputs["radon-weight"].value) || 1;
+	var healthWeight = parseFloat(inputs["health-weight"].value) || 0.0001;
+	var attackWeight = parseFloat(inputs["attack-weight"].value) || 0.0001;
+	var radonWeight = parseFloat(inputs["radon-weight"].value) || 0;
 	
 	var trimpWeights = {
 		healthWeight: healthWeight,
