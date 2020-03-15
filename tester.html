@@ -367,15 +367,15 @@ var calculate = function() {
 	var d13 = (tributeCount < 601) 
 				?  1.025 
 				: ( 1.025 + (tributeCount - 600) * 0.00029 );
-	var d11 = (tributeCount < 601) 
+	var d11 = (tributeCount < 601 || tributeCount > 1249) 
 				? 1 
 				: Math.pow((1.025 + ((1.0 * tributeCount + Math.baseLog((1.0 * looting+21)/(1.0 * looting+20),1.05))-600)*0.00029) / d13, greed)
 	
-	var d8 = (tributeCount < 601)
+	var d8 = (tributeCount < 601 || tributeCount > 1249)
 				? 1
 				: Math.pow(((1.025+((tributeCount+ Math.baseLog((motivation+21)/(motivation+20),1.05))-600)*0.00029)/d13), greed);
 				
-	var d6 = (tributeCount < 601)
+	var d6 = (tributeCount < 601 || tributeCount > 1249)
 				? 1
 				: Math.pow(((1.025+((tributeCount+Math.baseLog(1.1,1.05))-600)*0.00029)/d13), greed)
 				
@@ -706,8 +706,35 @@ for (var i = inputElements.length - 1; i >=0; i--) {
 	}
 }
 
+function exportPerks() {
+	var exportedPerks = {};
+	var levelName = (portalUniverse == 2) ? "radLevel" : "level";
 
-console.log('a');
+	exportedPerks["Tenacity"] = parseInt(inputs["tenacity"].value || 0);
+	exportedPerks["Resilience"] = parseInt(inputs["resilience"].value || 0);
+	exportedPerks["Criticality"] = parseInt(inputs["criticality"].value || 0);
+	exportedPerks["Equality"] = parseInt(inputs["equality"].value || 0);
+	exportedPerks["Carpentry"] = parseInt(inputs["carpentry"].value || 0);
+	exportedPerks["Artisanistry"] = parseInt(inputs["artisanistry"].value || 0);
+	exportedPerks["Motivation"] = parseInt(inputs["motivation"].value || 0);
+	exportedPerks["Power"] = parseInt(inputs["power"].value || 0);
+	exportedPerks["Toughness"] = parseInt(inputs["toughness"].value || 0);
+	exportedPerks["Looting"] = parseInt(inputs["looting"].value || 0);
+	exportedPerks["Prismal"] = parseInt(inputs["prismal"].value || 0);
+	exportedPerks["Greed"] = parseInt(inputs["greed"].value || 0);
+
+	exportedPerks = JSON.stringify(exportedPerks);
+	return LZString.compressToBase64(exportedPerks);
+}
+
+// todo
+// export perks
+// auto buy perks
+// don't export if not allowed yet
+// 1250 tributes cap not working
+
+
+console.log('b');
 </script>
 
 </body>
