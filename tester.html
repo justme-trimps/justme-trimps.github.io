@@ -515,23 +515,23 @@ var calculate = function() {
 	
 	var j2 = !enabledTenacity || tenacity > 39 ? 0 : i2 / Math.max(i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13);
 	
-	var j3 = !enabledResilience || i3 / Math.max(i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13);
+	var j3 = !enabledResilience  ? 0 :  i3 / Math.max(i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13);
 	
-	var j4 = !enabledCriticality || i4 / Math.max(i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13);
+	var j4 = !enabledCriticality  ? 0 :  i4 / Math.max(i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13);
 	
-	var j5 = !enabledEquality || i5 / Math.max(i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13);
+	var j5 = !enabledEquality  ? 0 :  i5 / Math.max(i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13);
 	
-	var j6 = !enabledCarpentry || i6 / Math.max(i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13);
+	var j6 = !enabledCarpentry  ? 0 :  i6 / Math.max(i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13);
 	
-	var j7 = !enabledArtisanistry || i7 / Math.max(i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13);
+	var j7 = !enabledArtisanistry  ? 0 :  i7 / Math.max(i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13);
 	
-	var j8 = !enabledMotivation || i8 / Math.max(i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13);
+	var j8 = !enabledMotivation  ? 0 :  i8 / Math.max(i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13);
 	
-	var j9 = !enabledPower || i9 / Math.max(i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13);
+	var j9 = !enabledPower  ? 0 :  i9 / Math.max(i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13);
 	
-	var j10 = !enabledToughness || i10 / Math.max(i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13);
+	var j10 = !enabledToughness  ? 0 :  i10 / Math.max(i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13);
 	
-	var j11 = !enabledLooting || i11 / Math.max(i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13);
+	var j11 = !enabledLooting  ? 0 :  i11 / Math.max(i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13);
 	
 	var j12 = !enabledPrismal || prismal > 99 ? 0 : i12 / Math.max(i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13);
 	
