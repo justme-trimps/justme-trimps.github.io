@@ -22,6 +22,7 @@ h1 span { clear: both;display: block;font-size: 12px; }
 h2 span { clear: both;display: block;font-size: 12px; }
 body { max-width: 1200px; margin: 0 auto; font-family: Helvetica, Verdana;}
 .green { background: green;  }
+.grey { background: #ddd; color: #666  }
 input { margin-top: 4px; }
 
 input[type=checkbox], input[type=radio] {
@@ -331,6 +332,19 @@ var calculate = function() {
 	var prismal = parseInt(inputs["prismal"].value) || 0;
 	var greed = parseInt(inputs["greed"].value) || 0;
 	
+	var enabledTenacity = inputs["tenacity-enabled"].checked;
+	var enabledResilience = inputs["resilience-enabled"].checked;
+	var enabledCriticality = inputs["criticality-enabled"].checked;
+	var enabledEquality = inputs["equality-enabled"].checked;
+	var enabledCarpentry = inputs["carpentry-enabled"].checked;
+	var enabledArtisanistry = inputs["artisanistry-enabled"].checked;
+	var enabledMotivation = inputs["motivation-enabled"].checked;
+	var enabledPower = inputs["power-enabled"].checked;
+	var enabledToughness = inputs["toughness-enabled"].checked;
+	var enabledLooting = inputs["looting-enabled"].checked;
+	var enabledPrismal = inputs["prismal-enabled"].checked;
+	var enabledGreed = inputs["greed-enabled"].checked;
+	
 	var weaponLevels = parseInt(inputs["weapon-levels"].value) || 1;
 	var armorLevels = parseInt(inputs["armor-levels"].value) || 1;
 	
@@ -499,29 +513,29 @@ var calculate = function() {
 	
 	var i13 = Math.log(g13) / h13;
 	
-	var j2 = tenacity > 39 ? 0 : i2 / Math.max(i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13);
+	var j2 = !enabledTenacity || tenacity > 39 ? 0 : i2 / Math.max(i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13);
 	
-	var j3 = i3 / Math.max(i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13);
+	var j3 = !enabledResilience || i3 / Math.max(i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13);
 	
-	var j4 = i4 / Math.max(i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13);
+	var j4 = !enabledCriticality || i4 / Math.max(i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13);
 	
-	var j5 = i5 / Math.max(i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13);
+	var j5 = !enabledEquality || i5 / Math.max(i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13);
 	
-	var j6 = i6 / Math.max(i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13);
+	var j6 = !enabledCarpentry || i6 / Math.max(i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13);
 	
-	var j7 = i7 / Math.max(i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13);
+	var j7 = !enabledArtisanistry || i7 / Math.max(i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13);
 	
-	var j8 = i8 / Math.max(i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13);
+	var j8 = !enabledMotivation || i8 / Math.max(i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13);
 	
-	var j9 = i9 / Math.max(i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13);
+	var j9 = !enabledPower || i9 / Math.max(i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13);
 	
-	var j10 = i10 / Math.max(i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13);
+	var j10 = !enabledToughness || i10 / Math.max(i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13);
 	
-	var j11 = i11 / Math.max(i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13);
+	var j11 = !enabledLooting || i11 / Math.max(i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13);
 	
-	var j12 = prismal > 99 ? 0 : i12 / Math.max(i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13);
+	var j12 = !enabledPrismal || prismal > 99 ? 0 : i12 / Math.max(i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13);
 	
-	var j13 = greed > 39 ? 0 : i13 / Math.max(i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13);
+	var j13 = !enabledGreed || greed > 39 ? 0 : i13 / Math.max(i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13);
 	
 	clearClasses();
 	setMaxes(j2, j3, j4, j5, j6, j7, j8, j9, j10, j11, j12, j13, 0, 0);
