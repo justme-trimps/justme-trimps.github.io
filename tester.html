@@ -119,7 +119,7 @@ Trimps U2 perks and heirlooms calculator
 		</div>
 		<div class="row mt-2">
 			<div class="col-sm-3"><button class="btn btn-info" id="autobuy-button" disabled onclick="autobuyPerks()">Autobuy</button></div>
-			<div class="col-sm-9"><input class="form-control" value="" id="input-export" disabled /></div>
+			<div class="col-sm-9"><input class="form-control" value="Import save to use autobuy" id="input-export" disabled /></div>
 		</div>
     </div>
     <div class="col-sm">
@@ -387,6 +387,14 @@ var calculate = function() {
 	var healthWeight = parseFloat(inputs["health-weight"].value) || 1;
 	var attackWeight = parseFloat(inputs["attack-weight"].value) || 1;
 	var radonWeight = parseFloat(inputs["radon-weight"].value) || 1;
+	
+	var trimpWeights = {
+		healthWeight: healthWeight,
+		attackWeight: attackWeight,
+		radonWeight: radonWeight
+	};
+	
+	window.localStorage.setItem("trimpWeights", JSON.stringify(trimpWeights));
 	
 	var tenacityMultiplier = parseFloat(inputs["tenacity-multiplier"].value) || 1.1;
 	var carpCoordMultiplier = parseFloat(inputs["carp-coord-multiplier"].value) || 0;
@@ -788,13 +796,20 @@ function autobuyPerks() {
 	document.getElementById('input-export').value = exportPerks();
 }
 
+if (window.localStorage.getItem("trimpWeights")) {
+	var trimpWeights = JSON.parse(window.localStorage.getItem("trimpWeights"));
+	if (trimpWeights.attackWeight) inputs["attack-weight"].value = trimpWeights.attackWeight;
+	if (trimpWeights.healthWeight) inputs["health-weight"].value = trimpWeights.healthWeight;
+	if (trimpWeights.radonWeight) inputs["radon-weight"].value = trimpWeights.radonWeight;
+}
+
 // todo
 // export perks
 // auto buy perks
 // don't export if not allowed yet
 
 
-console.log('c');
+console.log('b');
 </script>
 
 </body>
