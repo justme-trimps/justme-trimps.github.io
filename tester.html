@@ -118,8 +118,10 @@ Trimps U2 perks and heirlooms calculator
 			<div class="col-sm-5" id="total-radon-cost"></div>
 		</div>
 		<div class="row mt-2">
-			<div class="col-sm-6"><button class="btn btn-success" id="clear-autobuy-button" disabled onclick="clearAndAutobuyPerks()">Clear and autobuy</button></div>
-			<div class="col-sm-6"><button class="btn btn-info" id="autobuy-button" disabled onclick="autobuyPerks()">Autobuy</button></div>
+			<div class="col-sm-6">
+				<button class="btn btn-success" id="clear-autobuy-button" disabled onclick="clearAndAutobuyPerks()">Clear and autobuy</button>
+				<button class="btn btn-info" id="autobuy-button" disabled onclick="autobuyPerks()">Autobuy</button>
+			</div>
 		</div>
 		<div class="row">
 			<div class="col-sm-12"><input class="form-control" value="Import save to use autobuy" id="input-export" disabled /></div>
@@ -825,7 +827,7 @@ if (window.localStorage.getItem("trimpWeights")) {
 // don't export if not allowed yet
 
 
-console.log('c');
+console.log('d');
 </script>
 
 </body>
