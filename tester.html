@@ -21,17 +21,7 @@ height: 93px;
 h1 span { clear: both;display: block;font-size: 12px; }
 body { max-width: 1200px; margin: 0 auto; font-family: Helvetica, Verdana;}
 .green { background: green;  }
-.green label { font-size: 2.0rem; }
-.green input { margin-top: 16px; }
-.yellow { background: yellow; }
-.yellow label { font-size: 1.6rem }
-.yellow input { margin-top: 11px; }
-.orange { background: orange; }
-.orange label { font-size: 1.2rem }
-.orange input { margin-top: 6px; }
-.red { background: darkgray; }
-.red label { color: #666; }
-.red input { margin-top: 4px; }
+
 </style>
 </head>
 <body>
@@ -50,6 +40,7 @@ Trimps U2 perks and heirlooms calculator
 	</div>
 	<div class="row">
 		<h2>Perks</h2>
+		<span>The greener, the better</span>
 	</div>
   <div class="row mt-3">
     <div class="col-sm mr-3">
@@ -220,67 +211,57 @@ var loadSave = function() {
   //} catch(err) {}
 }
 
-var clearClass = function(color) {
-	var elements = document.getElementsByClassName(color);
+var clearClasses = function() {
+	var elements = document.getElementsByClassName('row');
 	for (var i = elements.length - 1; i >= 0; i--) {
 		var element = elements[i];
-		element.setAttribute('class', element.getAttribute('class').replace(' ' + color + ' ', ''));
+		element.setAttribute("style", '');
 	}
 }
-var clearClasses = function() {
-	clearClass('green');
-	clearClass('yellow');
-	clearClass('orange');
-	clearClass('red');
-}
 
-var setMax = function(whichOne, index, colors) {
+var setMax = function(whichOne, index) {
 	var id = "label-" + whichOne;
 	var element = document.getElementById(id).parentElement;
-	element.setAttribute('class', element.getAttribute('class') + ' ' + colors[index] + ' ');
+	element.setAttribute("style", "background-color: #0b6623; filter: brightness(" + (index * 25) + "%);");
 }
 
-var setMaxes = function(j2, j3, j4, j5, j6, j7, j8, j9, j10, j11, j12, j13, loop, index, colors) {
-	if (index > 3) index = 3;
-
+var setMaxes = function(j2, j3, j4, j5, j6, j7, j8, j9, j10, j11, j12, j13, loop, index) {
 	var max = Math.max(j2, j3, j4, j5, j6, j7, j8, j9, j10, j11, j12, j13);
 	
-	     if (j2  == max)       { setMax("tenacity", index, colors); j2 = -1e+100; }
-	else if (j3  == max)  { setMax("resilience", index, colors); j3 = -1e+100; }
-	else if (j4  == max)  { setMax("criticality", index, colors); j4 = -1e+100; }
-	else if (j5  == max)  { setMax("equality", index, colors); j5 = -1e+100; }
-	else if (j6  == max)  { setMax("carpentry", index, colors); j6 = -1e+100; }
-	else if (j7  == max)  { setMax("artisanistry", index, colors); j7 = -1e+100; }
-	else if (j8  == max)  { setMax("motivation", index, colors); j8 = -1e+100; }
-	else if (j9  == max)  { setMax("power", index, colors); j9 = -1e+100; }
-	else if (j10 == max) { setMax("toughness", index, colors); j10 = -1e+100; }
-	else if (j11 == max) { setMax("looting", index, colors); j11 = -1e+100; }
-	else if (j12 == max) { setMax("prismal", index, colors); j12 = -1e+100; }
-	else if (j13 == max) { setMax("greed", index, colors); j13 = -1e+100; }
+	     if (j2  == max)       { setMax("tenacity", index); j2 = -1e+100; }
+	else if (j3  == max)  { setMax("resilience", index); j3 = -1e+100; }
+	else if (j4  == max)  { setMax("criticality", index); j4 = -1e+100; }
+	else if (j5  == max)  { setMax("equality", index); j5 = -1e+100; }
+	else if (j6  == max)  { setMax("carpentry", index); j6 = -1e+100; }
+	else if (j7  == max)  { setMax("artisanistry", index); j7 = -1e+100; }
+	else if (j8  == max)  { setMax("motivation", index); j8 = -1e+100; }
+	else if (j9  == max)  { setMax("power", index); j9 = -1e+100; }
+	else if (j10 == max) { setMax("toughness", index); j10 = -1e+100; }
+	else if (j11 == max) { setMax("looting", index); j11 = -1e+100; }
+	else if (j12 == max) { setMax("prismal", index); j12 = -1e+100; }
+	else if (j13 == max) { setMax("greed", index); j13 = -1e+100; }
 	
 	if (max == Math.max(j2, j3, j4, j5, j6, j7, j8, j9, j10, j11, j12, j13))
 		index--;
 	
 	if (loop < 11)
-		setMaxes(j2, j3, j4, j5, j6, j7, j8, j9, j10, j11, j12, j13, loop + 1, index + 1, colors);
+		setMaxes(j2, j3, j4, j5, j6, j7, j8, j9, j10, j11, j12, j13, loop + 1, index + 1);
 }
 
-var setMaxes2 = function(s5, s6, s7, s8, s9, loop, index, colors) {
-	if (index > 3) index = 3;
-
+var setMaxes2 = function(s5, s6, s7, s8, s9, loop, index) {
 	var max = Math.max(s5, s6, s7, s8, s9);
 	
-	     if (s5  == max)  { setMax("crit-damage", index, colors);    s5 = -1e+100; }
-	else if (s6  == max)  { setMax("prismal-shield", index, colors); s6 = -1e+100; }
-	else if (s7  == max)  { setMax("trimp-attack", index, colors);   s7 = -1e+100; }
-	else if (s8  == max)  { setMax("trimp-health", index, colors);   s8 = -1e+100; }
-	else if (s9  == max)  { setMax("gamma-burst", index, colors);    s9 = -1e+100; }
+	     if (s5  == max)  { setMax("crit-damage", index);    s5 = -1e+100; }
+	else if (s6  == max)  { setMax("prismal-shield", index); s6 = -1e+100; }
+	else if (s7  == max)  { setMax("trimp-attack", index);   s7 = -1e+100; }
+	else if (s8  == max)  { setMax("trimp-health", index);   s8 = -1e+100; }
+	else if (s9  == max)  { setMax("gamma-burst", index);    s9 = -1e+100; }
 	
 	if (max == Math.max(s5, s6, s7, s8, s9))
 		index--;
 	
 	if (loop < 4)
-		setMaxes2(s5, s6, s7, s8, s9, loop + 1, index + 1, colors);
+		setMaxes2(s5, s6, s7, s8, s9, loop + 1, index + 1);
 }
 
 var calculate = function() {
@@ -493,10 +474,8 @@ var calculate = function() {
 	
 	var j13 = greed > 39 ? 0 : i13 / Math.max(i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13);
 	
-	var colors = ["green", "yellow", "orange", "red"];
-	
 	clearClasses();
-	setMaxes(j2, j3, j4, j5, j6, j7, j8, j9, j10, j11, j12, j13, 0, 0, colors);
+	setMaxes(j2, j3, j4, j5, j6, j7, j8, j9, j10, j11, j12, j13, 0, 0);
 	
 	var p5 = 7500 * Math.pow(1.03, (critDamage / 2 - 42.5));
 	var p6 = Math.pow(1.03, (prismalShield - 50)) *7500;
@@ -522,7 +501,7 @@ var calculate = function() {
 	var s8 = (trimpHealth == 0) ? 0 : r8/p8;
 	var s9 = (gammaBurst == 0) ? 0 : r9/p9;
 	
-	setMaxes2(s5, s6, s7, s8, s9, 0, 0, colors);
+	setMaxes2(s5, s6, s7, s8, s9, 0, 0);
 	
 	if (typeof (vars["debug"]) !== "undefined") {
 		console.log("C13: " + c13);
