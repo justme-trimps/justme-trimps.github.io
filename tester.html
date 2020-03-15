@@ -279,7 +279,8 @@ var clearClasses = function() {
 	var elements = document.getElementsByClassName('row');
 	for (var i = elements.length - 1; i >= 0; i--) {
 		var element = elements[i];
-		element.setAttribute("style", '');
+		element.setAttribute("style", "");
+		element.removeAttribute("data-max");
 	}
 }
 
@@ -289,6 +290,8 @@ var setMax = function(whichOne, index) {
 	var opacity = Math.max(1.0 - index * 0.20, 0.15);
 	if (element.getAttribute('class').indexOf('grey') == -1)
 		element.setAttribute("style", "background: rgba(11, 150, 35, " + opacity + ");");
+		if (opacity = 1.0)
+			element.setAttribute("data-max", "true");
 }
 
 var setMaxes = function(j2, j3, j4, j5, j6, j7, j8, j9, j10, j11, j12, j13, loop, index) {
@@ -763,9 +766,23 @@ function exportPerks() {
 }
 
 function autobuyPerks() {
-	calculate();
+	var maxed = false;
 	while (totalRadonEarned > totalCost) {
-		
+		var elements = document.getElementsByClassName('row');
+		for (var i = elements.length - 1; i >= 0; i--) {
+			if (typeof(elements[i].getAttribute('data-max')) !== "undefined") {
+				var input = elements[i].getElementsByClassName('input')[1];
+				input.value = parseInt(input.value) + 1;
+				calculate();
+				if (totalCost > totalRadonEarned) {
+					maxed = true;
+					input.value = parseInt(input.value) - 1;
+					calculate();
+				}
+			}
+			break;
+		}
+		if (maxed) break;
 		break;
 	}
 	document.getElementById('input-export').value = exportPerks();
@@ -777,7 +794,7 @@ function autobuyPerks() {
 // don't export if not allowed yet
 
 
-console.log('j');
+console.log('l');
 </script>
 
 </body>
