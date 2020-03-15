@@ -272,7 +272,8 @@ var setMax = function(whichOne, index) {
 	var id = "label-" + whichOne;
 	var element = document.getElementById(id).parentElement;
 	var opacity = Math.max(1.0 - index * 0.20, 0.15);
-	element.setAttribute("style", "background: rgba(11, 150, 35, " + opacity + ");");
+	if (element.getAttribute('class').indexOf('grey') == -1)
+		element.setAttribute("style", "background: rgba(11, 150, 35, " + opacity + ");");
 }
 
 var setMaxes = function(j2, j3, j4, j5, j6, j7, j8, j9, j10, j11, j12, j13, loop, index) {
