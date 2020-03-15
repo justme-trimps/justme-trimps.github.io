@@ -947,6 +947,7 @@ function autobuyPerks(spendEverything) {
 		}
 	
 		var elements = document.getElementById('perks-col').getElementsByClassName('row');
+		
 		for (var i = elements.length - 1; i >= 0; i--) {
 			if (elements[i].getAttribute('data-max') !== null) {
 				var input = elements[i].getElementsByTagName('input')[1];
@@ -956,6 +957,32 @@ function autobuyPerks(spendEverything) {
 					maxed = true;
 					input.value = parseInt(input.value) - 1;
 					calculate();
+					if (spendEverything) {
+						elements[i].setAttribute('data-gain', 0);
+						elements[i].removeAttribute('data-max');
+						var maxGain = 0;
+						var theElement = null;
+						
+						for (var j = elements.length - 1; j >= 0; j--) {
+							if (elements[j].getAttribute('data-gain')) {
+								var gain = parseFloat(elements[j].getAttribute('data-gain'));
+								if (gain > maxGain) {
+									maxGain = gain;
+									theElement = elements[j];
+								}
+							}
+						}
+						
+						if (theElement != null) {
+							theElement.setAttribute('data-max', 'true');
+						} else {
+							console.log("Should never be here");
+							maxed = true;
+						}
+						
+					} else {
+						maxed = true;
+					}
 				}
 				break;
 			}
