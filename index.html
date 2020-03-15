@@ -94,13 +94,17 @@ input[type=checkbox], input[type=radio] {
 </style>
 </head>
 <body>
-<div class="container-fluid m-3">
-<h1 class="mr-3">
-Trimps U2 perks and heirlooms calculator
-<span>original idea by Andrew</span>
-</h1>
+<div class="container-fluid mt-3 mb-3">
+	<div class="row">
+		<div class="col-sm-12">
+			<h1 class="mr-3">
+			Trimps U2 perks and heirlooms calculator
+			<span>original idea by Andrew</span>
+			</h1>
+		</div>
+	</div>
 </div>
-<div class="container-fluid m-3">
+<div class="container-fluid mt-3 mb-3">
 	<div class="row">
 		<div class="col-sm-12 form-group">
 			<label for="save-text-area">Paste your save here</label>
@@ -108,8 +112,9 @@ Trimps U2 perks and heirlooms calculator
 		</div>
 	</div>
 	<div class="row">
+		<div class="col-sm-12">
 		<h2>Perks <span>The greener, the better</span></h2>
-		
+		</div>
 	</div>
   <div class="row mt-3">
     <div class="col-sm mr-3" id="perks-col">
@@ -284,6 +289,12 @@ var loadSave = function() {
 
 		var saveTextArea = document.getElementById('save-text-area');
 		var game = JSON.parse(LZString.decompressFromBase64(saveTextArea.value));
+		
+		if (game.global.universe == 1) {
+			saveTextArea.value = "Sorry but I can't handle Universe 1 saves";
+			return;
+		}
+		
 		var portal = game.portal;
 		if (portal.Tenacity && portal.Tenacity.radLevel)         { inputs["tenacity"].value = game.portal.Tenacity.radLevel; }         else { inputs["tenacity"].value = 0; }
 		if (portal.Resilience && portal.Resilience.radLevel)     { inputs["resilience"].value = game.portal.Resilience.radLevel; }     else { inputs["resilience"].value = 0; }
@@ -928,6 +939,7 @@ if (window.localStorage.getItem("trimpWeights")) {
 }
 // order of perks
 // maxed perks
+// buy 2nd, 3rd...
 
 </script>
 
