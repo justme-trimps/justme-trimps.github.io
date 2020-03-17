@@ -85,7 +85,6 @@ body { max-width: 1200px; margin: 0 auto; font-family: Helvetica, Verdana;}
 .green { background: green;  }
 .grey { background: #ddd; color: #888  }
 input { margin-top: 4px; }
-.maxed { background: #666; }
 
 input[type=checkbox], input[type=radio] {
     margin-left: 1rem;
@@ -122,62 +121,62 @@ input[type=checkbox], input[type=radio] {
 		<div class="row">
 			<div class="col-sm-1"><input type="checkbox" checked="checked" class="form-check-input" id="input-tenacity-enabled" /></div>
 			<label class="col-sm-6 col-form-label" id="label-tenacity" for="input-tenacity">Tenacity </label>
-			<div class="col-sm-5"><input class="form-control" value="0" id="input-tenacity" /></div>
+			<div class="col-sm-5"><input class="form-control" value="0" type="number" min="0" max="40" id="input-tenacity" /></div>
 		</div>
 		<div class="row">
 			<div class="col-sm-1"><input type="checkbox" checked="checked" class="form-check-input" id="input-resilience-enabled" /></div>
 			<label class="col-sm-6 col-form-label" id="label-resilience" for="input-resilience">Resilience </label>
-			<div class="col-sm-5"><input class="form-control" value="0" id="input-resilience" /></div>
+			<div class="col-sm-5"><input class="form-control" value="0" type="number" min="0" id="input-resilience" /></div>
 		</div>
 		<div class="row">
 			<div class="col-sm-1"><input type="checkbox" checked="checked" class="form-check-input" id="input-criticality-enabled" /></div>
 			<label class="col-sm-6 col-form-label" id="label-criticality" for="input-criticality">Criticality </label>
-			<div class="col-sm-5"><input class="form-control" value="0" id="input-criticality" /></div>
+			<div class="col-sm-5"><input class="form-control" value="0" type="number" min="0" id="input-criticality" /></div>
 		</div>
 		<div class="row">
 			<div class="col-sm-1"><input type="checkbox" checked="checked" class="form-check-input" id="input-equality-enabled" /></div>
 			<label class="col-sm-6 col-form-label" id="label-equality" for="input-equality">Equality </label>
-			<div class="col-sm-5"><input class="form-control" value="0" id="input-equality" /></div>
+			<div class="col-sm-5"><input class="form-control" value="0" type="number" min="0" id="input-equality" /></div>
 		</div>
 		<div class="row">
 			<div class="col-sm-1"><input type="checkbox" checked="checked" class="form-check-input" id="input-carpentry-enabled" /></div>
 			<label class="col-sm-6 col-form-label" id="label-carpentry" for="input-carpentry">Carpentry </label>
-			<div class="col-sm-5"><input class="form-control" value="0" id="input-carpentry" /></div>
+			<div class="col-sm-5"><input class="form-control" value="0" type="number" min="0" id="input-carpentry" /></div>
 		</div>
 		<div class="row">
 			<div class="col-sm-1"><input type="checkbox" checked="checked" class="form-check-input" id="input-artisanistry-enabled" /></div>
 			<label class="col-sm-6 col-form-label" id="label-artisanistry" for="input-artisanistry">Artisanistry </label>
-			<div class="col-sm-5"><input class="form-control" value="0" id="input-artisanistry" /></div>
+			<div class="col-sm-5"><input class="form-control" value="0" type="number" min="0" id="input-artisanistry" /></div>
 		</div>
 		<div class="row">
 			<div class="col-sm-1"><input type="checkbox" checked="checked" class="form-check-input" id="input-motivation-enabled" /></div>
 			<label class="col-sm-6 col-form-label" id="label-motivation" for="input-motivation">Motivation </label>
-			<div class="col-sm-5"><input class="form-control" value="0" id="input-motivation" /></div>
+			<div class="col-sm-5"><input class="form-control" value="0" type="number" min="0" id="input-motivation" /></div>
 		</div>
 		<div class="row">
 			<div class="col-sm-1"><input type="checkbox" checked="checked" class="form-check-input" id="input-power-enabled" /></div>
 			<label class="col-sm-6 col-form-label" id="label-power" for="input-power">Power </label>
-			<div class="col-sm-5"><input class="form-control" value="0" id="input-power" /></div>
+			<div class="col-sm-5"><input class="form-control" value="0" type="number" min="0" id="input-power" /></div>
 		</div>
 		<div class="row">
 			<div class="col-sm-1"><input type="checkbox" checked="checked" class="form-check-input" id="input-toughness-enabled" /></div>
 			<label class="col-sm-6 col-form-label" id="label-toughness" for="input-toughness">Toughness </label>
-			<div class="col-sm-5"><input class="form-control" value="0" id="input-toughness" /></div>
+			<div class="col-sm-5"><input class="form-control" value="0" type="number" min="0" id="input-toughness" /></div>
 		</div>
 		<div class="row">
 			<div class="col-sm-1"><input type="checkbox" checked="checked" class="form-check-input" id="input-looting-enabled" /></div>
 			<label class="col-sm-6 col-form-label" id="label-looting" for="input-looting">Looting </label>
-			<div class="col-sm-5"><input class="form-control" value="0" id="input-looting" /></div>
+			<div class="col-sm-5"><input class="form-control" value="0" type="number" min="0" id="input-looting" /></div>
 		</div>
 		<div class="row">
 			<div class="col-sm-1"><input type="checkbox" checked="checked" class="form-check-input" id="input-prismal-enabled" /></div>
 			<label class="col-sm-6 col-form-label" id="label-prismal" for="input-prismal">Prismal </label>
-			<div class="col-sm-5"><input class="form-control" value="0" id="input-prismal" /></div>
+			<div class="col-sm-5"><input class="form-control" value="0" type="number" min="0" max="100" id="input-prismal" /></div>
 		</div>
 		<div class="row">
 			<div class="col-sm-1"><input type="checkbox" checked="checked" class="form-check-input" id="input-greed-enabled" /></div>
 			<label class="col-sm-6 col-form-label" id="label-greed" for="input-greed">Greed </label>
-			<div class="col-sm-5"><input class="form-control" value="0" id="input-greed" /></div>
+			<div class="col-sm-5"><input class="form-control" value="0" type="number" min="0" max="40" id="input-greed" /></div>
 		</div>
 		<div class="row mt-2">
 			<div class="col-sm-1"></div>
@@ -198,23 +197,23 @@ input[type=checkbox], input[type=radio] {
     <div class="col-sm">
 		<div class="row">
 			<label class="col-sm-6 col-form-label" id="label-weapon-levels" for="input-weapon-levels">Weapon levels </label>
-			<div class="col-sm-5"><input class="form-control" value="1" title="Number of daggers you're aiming for" id="input-weapon-levels" /></div>
+			<div class="col-sm-5"><input class="form-control" value="1" type="number" min="1" title="Number of daggers you're aiming for" id="input-weapon-levels" /></div>
 		</div>
 		<div class="row">
 			<label class="col-sm-6 col-form-label" id="label-armor-levels" for="input-armor-levels">Armor levels </label>
-			<div class="col-sm-5"><input class="form-control" value="1" title="Number of boots you're aiming for" id="input-armor-levels" /></div>
+			<div class="col-sm-5"><input class="form-control" value="1" type="number" min="1" title="Number of boots you're aiming for" id="input-armor-levels" /></div>
 		</div>
 		<div class="row mt-2">
 			<label class="col-sm-6 col-form-label" id="label-health-weight" for="input-health-weight">Health weight </label>
-			<div class="col-sm-5"><input class="form-control" value="1" id="input-health-weight" maxlength="3" /></div>
+			<div class="col-sm-5"><input class="form-control" value="1" type="number" min="0" id="input-health-weight" maxlength="3" /></div>
 		</div>
 		<div class="row">
 			<label class="col-sm-6 col-form-label" id="label-attack-weight" for="input-attack-weight">Attack weight </label>
-			<div class="col-sm-5"><input class="form-control" value="5" id="input-attack-weight" maxlength="3" /></div>
+			<div class="col-sm-5"><input class="form-control" value="5" type="number" min="0" id="input-attack-weight" maxlength="3" /></div>
 		</div>
 		<div class="row">
 			<label class="col-sm-6 col-form-label" id="label-radon-weight" for="input-radon-weight">Radon weight </label>
-			<div class="col-sm-5"><input class="form-control" value="10" id="input-radon-weight" maxlength="3" /></div>
+			<div class="col-sm-5"><input class="form-control" value="10" type="number" min="0" id="input-radon-weight" maxlength="3" /></div>
 		</div>
 		<div class="row mt-2">
 			<label class="col-sm-6 col-form-label" id="label-tenacity-multiplier" for="input-tenacity-multiplier">Tenacity multiplier </label>
@@ -226,32 +225,32 @@ input[type=checkbox], input[type=radio] {
 		</div>
 		<div class="row">
 			<label class="col-sm-6 col-form-label" id="label-tribute-count" for="input-tribute-count">Tribute count (for Greed) </label>
-			<div class="col-sm-5"><input class="form-control" value="0" id="input-tribute-count" /></div>
+			<div class="col-sm-5"><input class="form-control" value="0" type="number" min="0" id="input-tribute-count" /></div>
 		</div>
 		
 		<div class="row mt-2">
 			<label class="col-sm-6 col-form-label" id="label-crit-damage" for="input-crit-damage">Crit damage </label>
-			<div class="col-sm-5"><input class="form-control" value="0" id="input-crit-damage" /></div>
+			<div class="col-sm-5"><input class="form-control" value="0" type="number" min="0" id="input-crit-damage" /></div>
 		</div>
 		<div class="row">
 			<label class="col-sm-6 col-form-label" id="label-prismal-shield" for="input-prismal-shield">Prismal shield </label>
-			<div class="col-sm-5"><input class="form-control" value="0" id="input-prismal-shield" /></div>
+			<div class="col-sm-5"><input class="form-control" value="0" type="number" min="0" id="input-prismal-shield" /></div>
 		</div>
 		<div class="row">
 			<label class="col-sm-6 col-form-label" id="label-trimp-attack" for="input-trimp-attack">Trimp attack </label>
-			<div class="col-sm-5"><input class="form-control" value="0" id="input-trimp-attack" /></div>
+			<div class="col-sm-5"><input class="form-control" value="0" type="number" min="0" id="input-trimp-attack" /></div>
 		</div>
 		<div class="row">
 			<label class="col-sm-6 col-form-label" id="label-trimp-health" for="input-trimp-health">Trimp health </label>
-			<div class="col-sm-5"><input class="form-control" value="0" id="input-trimp-health" /></div>
+			<div class="col-sm-5"><input class="form-control" value="0" type="number" min="0" id="input-trimp-health" /></div>
 		</div>
 		<div class="row">
 			<label class="col-sm-6 col-form-label" id="label-gamma-burst" for="input-gamma-burst">Gamma burst </label>
-			<div class="col-sm-5"><input class="form-control" value="0" id="input-gamma-burst" /></div>
+			<div class="col-sm-5"><input class="form-control" value="0" type="number" min="0" id="input-gamma-burst" /></div>
 		</div>
 		<div class="row">
 			<label class="col-sm-6 col-form-label" id="label-hits-per-gamma" for="input-hits-per-gamma">Hits per gamma </label>
-			<div class="col-sm-5"><input class="form-control" value="5" id="input-hits-per-gamma" /></div>
+			<div class="col-sm-5"><input class="form-control" value="5" type="number" min="1" id="input-hits-per-gamma" /></div>
 		</div>
 
     </div>
@@ -400,7 +399,6 @@ var clearClasses = function() {
 		element.setAttribute("style", "");
 		element.removeAttribute("data-max");
 		element.removeAttribute("data-gain");
-		element.setAttribute("class", element.getAttribute("class").replace(" maxed ", ""));
 	}
 }
 
@@ -409,14 +407,15 @@ var setMax = function(whichOne, index, gain, maxed) {
 	var element = document.getElementById(id).parentElement;
 	var opacity = Math.max(1.0 - index * 0.20, 0.15);
 	if (element.getAttribute('class').indexOf('grey') == -1) {
-		element.setAttribute("style", "background: rgba(11, 200, 35, " + opacity + ");");
+		if (maxed) {
+			element.setAttribute("style", "background: #666;");
+		} else {
+			element.setAttribute("style", "background: rgba(11, 200, 35, " + opacity + ");");
+		}
 		if (index == 0) {
 			element.setAttribute("data-max", "true");
 		}
 		element.setAttribute("data-gain", gain);
-		if (maxed) {
-			element.setAttribute("class", element.getAttribute("class") + " maxed ");
-		}
 	}
 }
 
@@ -870,6 +869,7 @@ for (var i = inputElements.length - 1; i >=0; i--) {
 	
 	if (inputId != 'export') {
 		input.onkeyup = calculate;
+		input.mouseup = calculate;
 	}
 	
 	if (typeof(input.getAttribute('type')) != "undefined" && input.getAttribute('type') == "checkbox") {
