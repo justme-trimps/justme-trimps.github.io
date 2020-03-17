@@ -304,11 +304,6 @@ var loadSave = function() {
 			return;
 		}
 		
-		if (game.global.universe == 1) {
-			saveTextArea.value = "Sorry but I can't handle Universe 1 saves";
-			return;
-		}
-		
 		var portal = game.portal;
 		if (portal.Tenacity && portal.Tenacity.radLevel)         { inputs["tenacity"].value = game.portal.Tenacity.radLevel; }         else { inputs["tenacity"].value = 0; }
 		if (portal.Resilience && portal.Resilience.radLevel)     { inputs["resilience"].value = game.portal.Resilience.radLevel; }     else { inputs["resilience"].value = 0; }
