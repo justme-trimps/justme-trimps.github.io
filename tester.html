@@ -85,6 +85,7 @@ body { max-width: 1200px; margin: 0 auto; font-family: Helvetica, Verdana;}
 .green { background: green;  }
 .grey { background: #ddd; color: #888  }
 input { margin-top: 4px; }
+.maxed { background: #666; }
 
 input[type=checkbox], input[type=radio] {
     margin-left: 1rem;
@@ -399,10 +400,11 @@ var clearClasses = function() {
 		element.setAttribute("style", "");
 		element.removeAttribute("data-max");
 		element.removeAttribute("data-gain");
+		element.setAttribute("class", element.getAttribute("class").replace(" maxed ", ""));
 	}
 }
 
-var setMax = function(whichOne, index, gain) {
+var setMax = function(whichOne, index, gain, maxed) {
 	var id = "label-" + whichOne;
 	var element = document.getElementById(id).parentElement;
 	var opacity = Math.max(1.0 - index * 0.20, 0.15);
@@ -411,14 +413,17 @@ var setMax = function(whichOne, index, gain) {
 		if (index == 0) {
 			element.setAttribute("data-max", "true");
 		}
-		element.setAttribute("data-gain", gain)
+		element.setAttribute("data-gain", gain);
+		if (maxed) {
+			element.setAttribute("class", element.getAttribute("class") + " maxed ");
+		}
 	}
 }
 
 var setMaxes = function(j2, j3, j4, j5, j6, j7, j8, j9, j10, j11, j12, j13, loop, index, tenacity, prismal, greed) {
 	var max = Math.max(j2, j3, j4, j5, j6, j7, j8, j9, j10, j11, j12, j13);
 	
-	     if (j2  == max)       { setMax("tenacity", index, tenacity < maxTenacity ? j2 : 0); j2 = -1e+100; }
+	     if (j2  == max)       { setMax("tenacity", index, tenacity < maxTenacity ? j2 : 0, tenacity == maxTenacity); j2 = -1e+100; }
 	else if (j3  == max)  { setMax("resilience", index, j3); j3 = -1e+100; }
 	else if (j4  == max)  { setMax("criticality", index, j4); j4 = -1e+100; }
 	else if (j5  == max)  { setMax("equality", index, 0); j5 = -1e+100; }
@@ -428,8 +433,8 @@ var setMaxes = function(j2, j3, j4, j5, j6, j7, j8, j9, j10, j11, j12, j13, loop
 	else if (j9  == max)  { setMax("power", index, j9); j9 = -1e+100; }
 	else if (j10 == max) { setMax("toughness", index, j10); j10 = -1e+100; }
 	else if (j11 == max) { setMax("looting", index, j11); j11 = -1e+100; }
-	else if (j12 == max) { setMax("prismal", index, prismal < maxPrismal ? j12 : 0); j12 = -1e+100; }
-	else if (j13 == max) { setMax("greed", index, greed < maxGreed ? j13 : 0); j13 = -1e+100; }
+	else if (j12 == max) { setMax("prismal", index, prismal < maxPrismal ? j12 : 0, prismal == maxPrismal); j12 = -1e+100; }
+	else if (j13 == max) { setMax("greed", index, greed < maxGreed ? j13 : 0, greed == maxGreed); j13 = -1e+100; }
 	
 	if (max == Math.max(j2, j3, j4, j5, j6, j7, j8, j9, j10, j11, j12, j13))
 		index--;
