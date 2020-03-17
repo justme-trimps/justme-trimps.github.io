@@ -493,6 +493,15 @@ var calculate = function() {
 	var prismal = parseInt(inputs["prismal"].value) || 0;
 	var greed = parseInt(inputs["greed"].value) || 0;
 	
+	if (tenacity > maxTenacity)
+		inputs["tenacity"].value = tenacity = maxTenacity;
+
+	if (prismal > maxPrismal)
+		inputs["prismal"].value = prismal = maxPrismal;
+
+	if (greed > maxGreed)
+		inputs["greed"].value = greed = maxGreed;
+
 	var enabledTenacity = inputs["tenacity-enabled"].checked;
 	var enabledResilience = inputs["resilience-enabled"].checked;
 	var enabledCriticality = inputs["criticality-enabled"].checked;
