@@ -304,11 +304,6 @@ var loadSave = function() {
 			return;
 		}
 		
-		if (game.global.universe == 1) {
-			saveTextArea.value = "Sorry but I can't handle Universe 1 saves";
-			return;
-		}
-		
 		var portal = game.portal;
 		if (portal.Tenacity && portal.Tenacity.radLevel)         { inputs["tenacity"].value = game.portal.Tenacity.radLevel; }         else { inputs["tenacity"].value = 0; }
 		if (portal.Resilience && portal.Resilience.radLevel)     { inputs["resilience"].value = game.portal.Resilience.radLevel; }     else { inputs["resilience"].value = 0; }
@@ -336,7 +331,14 @@ var loadSave = function() {
 		if (portal.Prismal && !portal.Prismal.radLocked)           { inputs["prismal-enabled"].checked = true; }    else { inputs["prismal-enabled"].checked = false; }      
 		if (portal.Greed && !portal.Greed.radLocked)               { inputs["greed-enabled"].checked = true; }    else { inputs["greed-enabled"].checked = false; }      
 		
-		var shield = game.global.ShieldEquipped;
+		var shield = null
+
+		if (game.global.universe == 2)
+			shield = game.global.ShieldEquipped;
+		
+		if (game.global.universe == 1 && game.global.lastHeirlooms.u2 && game.global.lastHeirlooms.u2.Shield) {
+			shield = game.global.heirloomsCarried.find(function (s) { return s.id == game.global.lastHeirlooms.u2.Shield; });
+		}
 		
 		if (shield) {
 			var critDamageMod = shield.mods.find(function (el) { return el[0] == "critDamage"; });
@@ -355,7 +357,7 @@ var loadSave = function() {
 			
 			inputs["weapon-levels"].value = game.equipment.Dagger.level;
 			inputs["armor-levels"].value = game.equipment.Boots.level;
-			inputs["tribute-count"].value = game.buildings.Tribute.owned;
+			inputs["tribute-count"].value = (game.global.universe == 2) ? game.buildings.Tribute.owned : 0;
 		}
 		colorCheckboxRows();
 
