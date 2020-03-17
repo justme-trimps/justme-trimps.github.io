@@ -869,7 +869,7 @@ for (var i = inputElements.length - 1; i >=0; i--) {
 	
 	if (inputId != 'export') {
 		input.onkeyup = calculate;
-		input.mouseup = calculate;
+		input.change = calculate;
 	}
 	
 	if (typeof(input.getAttribute('type')) != "undefined" && input.getAttribute('type') == "checkbox") {
