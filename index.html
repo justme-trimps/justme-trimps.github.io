@@ -238,7 +238,7 @@ input[type=checkbox], input[type=radio] {
 		</div>
 		<div class="row">
 			<label class="col-sm-6 col-form-label" id="label-prismal-shield" for="input-prismal-shield">Prismal shield </label>
-			<div class="col-sm-5"><input class="form-control" value="0" type="number" min="0" id="input-prismal-shield" /></div>
+			<div class="col-sm-5"><input class="form-control" value="0" type="number" min="0" max="250" id="input-prismal-shield" /></div>
 		</div>
 		<div class="row">
 			<label class="col-sm-6 col-form-label" id="label-trimp-attack" for="input-trimp-attack">Trimp attack </label>
@@ -260,6 +260,7 @@ input[type=checkbox], input[type=radio] {
 const maxTenacity = 40;
 const maxPrismal = 100;
 const maxGreed = 40;
+const maxPrismalShield = 250;
 
 var totalRadonEarned = 0;
 var totalRadonSpentOnOtherPerks = 0;
@@ -441,20 +442,20 @@ var setMaxes = function(j2, j3, j4, j5, j6, j7, j8, j9, j10, j11, j12, j13, loop
 		setMaxes(j2, j3, j4, j5, j6, j7, j8, j9, j10, j11, j12, j13, loop + 1, index + 1, tenacity, prismal, greed);
 }
 
-var setMaxes2 = function(s5, s6, s7, s8, s9, loop, index) {
+var setMaxes2 = function(s5, s6, s7, s8, s9, loop, index, prismalShield) {
 	var max = Math.max(s5, s6, s7, s8, s9);
 	
-	     if (s5  == max)  { setMax("crit-damage", index);    s5 = -1e+100; }
-	else if (s6  == max)  { setMax("prismal-shield", index); s6 = -1e+100; }
-	else if (s7  == max)  { setMax("trimp-attack", index);   s7 = -1e+100; }
-	else if (s8  == max)  { setMax("trimp-health", index);   s8 = -1e+100; }
-	else if (s9  == max)  { setMax("gamma-burst", index);    s9 = -1e+100; }
+	     if (s5  == max)  { setMax("crit-damage", index, s5);    s5 = -1e+100; }
+	else if (s6  == max)  { setMax("prismal-shield", index, s6, prismalShield == maxPrismalShield); s6 = -1e+100; }
+	else if (s7  == max)  { setMax("trimp-attack", index, s7);   s7 = -1e+100; }
+	else if (s8  == max)  { setMax("trimp-health", index, s8);   s8 = -1e+100; }
+	else if (s9  == max)  { setMax("gamma-burst", index, s9);    s9 = -1e+100; }
 	
 	if (max == Math.max(s5, s6, s7, s8, s9))
 		index--;
 	
 	if (loop < 4)
-		setMaxes2(s5, s6, s7, s8, s9, loop + 1, index + 1);
+		setMaxes2(s5, s6, s7, s8, s9, loop + 1, index + 1, prismalShield);
 }
 
 var getTotalCost = function(tenacity, resilience, criticality, equality, carpentry, artisanistry, motivation, power, toughness, looting, prismal, greed) {
@@ -540,6 +541,9 @@ var calculate = function() {
 	var gammaBurst = parseInt(inputs["gamma-burst"].value) || 0;
 	var hitsPerGamma = parseInt(inputs["hits-per-gamma"].value) || 0;
 	
+	if (prismalShield > maxPrismalShield)
+		inputs["prismal-shield"].value = prismalShield = maxPrismalShield;
+
 	var d13 = (tributeCount < 601) 
 				?  1.025 
 				: ( 1.025 + (tributeCount - 600) * 0.00029 );
@@ -745,7 +749,7 @@ var calculate = function() {
 	var s8 = (trimpHealth == 0) ? 0 : r8/p8;
 	var s9 = (gammaBurst == 0) ? 0 : r9/p9;
 	
-	setMaxes2(s5, s6, s7, s8, s9, 0, 0);
+	setMaxes2(s5, s6, s7, s8, s9, 0, 0, prismalShield);
 	
 	document.getElementById('input-export').value = "";
 	
@@ -1013,7 +1017,6 @@ if (window.localStorage.getItem("trimpWeights")) {
 	if (trimpWeights.radonWeight != null) inputs["radon-weight"].value = trimpWeights.radonWeight;
 }
 // order of perks
-// maxed perks
 // buy 2nd, 3rd...
 
 </script>
