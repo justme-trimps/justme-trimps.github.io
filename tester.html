@@ -238,7 +238,7 @@ input[type=checkbox], input[type=radio] {
 		</div>
 		<div class="row">
 			<label class="col-sm-6 col-form-label" id="label-prismal-shield" for="input-prismal-shield">Prismal shield </label>
-			<div class="col-sm-5"><input class="form-control" value="0" type="number" min="0" id="input-prismal-shield" /></div>
+			<div class="col-sm-5"><input class="form-control" value="0" type="number" min="0" max="250" id="input-prismal-shield" /></div>
 		</div>
 		<div class="row">
 			<label class="col-sm-6 col-form-label" id="label-trimp-attack" for="input-trimp-attack">Trimp attack </label>
@@ -541,6 +541,9 @@ var calculate = function() {
 	var gammaBurst = parseInt(inputs["gamma-burst"].value) || 0;
 	var hitsPerGamma = parseInt(inputs["hits-per-gamma"].value) || 0;
 	
+	if (prismalShield > maxPrismalShield)
+		inputs["prismal-shield"].value = prismalShield = maxPrismalShield;
+
 	var d13 = (tributeCount < 601) 
 				?  1.025 
 				: ( 1.025 + (tributeCount - 600) * 0.00029 );
