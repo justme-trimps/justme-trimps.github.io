@@ -12,7 +12,7 @@ var autoSaveInterval = setInterval(function() {
 }, 1000 * 60 * autoExportSaveFrequencyInMinutes);
 
 var dontMap = false;
-var minStacks = 900;
+var minStacks = 0;
 
 var getStacksNumber = function() {
 	if (document.getElementById('gammaStack')) {
@@ -22,10 +22,10 @@ var getStacksNumber = function() {
 }
 
 var shouldFightSomeMap = function() {
-	if (game.global.lastClearedCell < 58)
+	if (game.global.lastClearedCell < 86)
 		return false;
 
-	if (game.global.world < 72)
+	if (game.global.world < 60)
 		return false;
 	
 	if (dontMap || game.global.mapsActive)
@@ -76,6 +76,7 @@ var restartMapInterval = setInterval(function() {
 	}
 }, 4999);
 
+
 function calculateDamageForMayhemImprobability() {
     var fluctuation = 0.5;
 	var number = game.global.gridArray[99].attack;
@@ -114,8 +115,8 @@ if (buyEqInterval) { clearInterval(buyEqInterval); buyEqInterval = null; }
 var buyEqInterval = setInterval(function() { 
 	if (document.getElementById('badGuyName') && document.getElementById('badGuyName').innerText.indexOf("Improbability") > -1) {
 		var maxHealth = game.global.soldierEnergyShieldMax + game.global.soldierHealthMax;
-		var maxEnemyDamage = calculateDamageForMayhemImprobability()[1];
-		if (maxEnemyDamage > maxHealth) {
+		var avgEnemyDamage = (calculateDamageForMayhemImprobability()[0] + calculateDamageForMayhemImprobability()[1]) / 2;
+		if (avgEnemyDamage > maxHealth) {
 			buySingleEq();
 		}
 	}

@@ -14,7 +14,7 @@ var forcedPortalWorld = 109;
 
 var plusZeroZones = [20, 24, 75, 77, 85, 86, 87, 88, 89, 94, 104, 105, 106, 107, 108];
 var plusOneZones = [30, 34, 40, 44, 50, 54, 60, 61, 62, 63, 64, 70, 71, 72, 73, 74, 80, 81, 82, 83, 84];
-var plusTwoZones = [48, 79, 80, 83, ,89, 90, 91, 92, 93, 101, 102, 103];//[89, 90, 91, 92, 93];//61, 63/*69, 70*/];
+var plusTwoZones = [48, 79, 80, 83, ,89, 90, 91, 92, 93, 103];//[89, 90, 91, 92, 93];//61, 63/*69, 70*/];
 var plusThreeZones = [55];
 var plusFourZones = [];
 var plusFiveZones = [];
@@ -702,6 +702,36 @@ var shouldFightSomeMap = function() {
 		return true;
 	}
 	
+	if (
+		typeof(game.global.mapsOwnedArray.find(function(map) { return map.location == "Void"; })) == "undefined"
+		&& !game.global.mapsActive
+		&& game.global.world == 95
+		&& typeof(game.global.mapsOwnedArray.find(function(map) { return map.level == 103; })) == "undefined"
+		&& game.resources.fragments.owned > 55000000000000.0 * 4
+	) {
+		return true;
+	}
+	
+	if (
+		typeof(game.global.mapsOwnedArray.find(function(map) { return map.location == "Void"; })) == "undefined"
+		&& !game.global.mapsActive
+		&& game.global.world == 95
+		&& typeof(game.global.mapsOwnedArray.find(function(map) { return map.level == 104; })) == "undefined"
+		&& game.resources.fragments.owned > 55000000000000.0 * 4 * 4
+	) {
+		return true;
+	}
+	
+	if (
+		typeof(game.global.mapsOwnedArray.find(function(map) { return map.location == "Void"; })) == "undefined"
+		&& !game.global.mapsActive
+		&& game.global.world == 95
+		&& typeof(game.global.mapsOwnedArray.find(function(map) { return map.level == 105; })) == "undefined"
+		&& game.resources.fragments.owned > 3280000000000000
+	) {
+		return true;
+	}
+	
 	return false;
 }
 
@@ -816,6 +846,47 @@ var repeatMaps = setInterval(function() {
 			buyMap();
 		}
 
+		if (
+			typeof(game.global.mapsOwnedArray.find(function(map) { return map.location == "Void"; })) == "undefined"
+			&& !game.global.mapsActive
+			&& game.global.world == 95
+			&& typeof(game.global.mapsOwnedArray.find(function(map) { return map.level == 103; })) == "undefined"
+			&& game.resources.fragments.owned > 55000000000000.0 * 4
+			) {
+			document.getElementById("advExtraLevelSelect").value = "8";
+			document.getElementById("biomeAdvMapsSelect").value = "Random";
+			document.getElementById("advSpecialSelect").value = "p";
+			document.getElementById("lootAdvMapsRange").value = 0;
+			document.getElementById("advSpecialSelect").value = 0;
+			buyMap();
+		} else if (
+			typeof(game.global.mapsOwnedArray.find(function(map) { return map.location == "Void"; })) == "undefined"
+			&& !game.global.mapsActive
+			&& game.global.world == 95
+			&& typeof(game.global.mapsOwnedArray.find(function(map) { return map.level == 104; })) == "undefined"
+			&& game.resources.fragments.owned > 55000000000000.0 * 4 * 4
+			) {
+			document.getElementById("advExtraLevelSelect").value = "9";
+			document.getElementById("biomeAdvMapsSelect").value = "Random";
+			document.getElementById("advSpecialSelect").value = "p";
+			document.getElementById("lootAdvMapsRange").value = 0;
+			document.getElementById("advSpecialSelect").value = 0;
+			buyMap();
+		} else if (
+			typeof(game.global.mapsOwnedArray.find(function(map) { return map.location == "Void"; })) == "undefined"
+			&& !game.global.mapsActive
+			&& game.global.world == 95
+			&& typeof(game.global.mapsOwnedArray.find(function(map) { return map.level == 105; })) == "undefined"
+			&& game.resources.fragments.owned > 3280000000000000
+			) {
+			document.getElementById("advExtraLevelSelect").value = "10";
+			document.getElementById("biomeAdvMapsSelect").value = "Random";
+			document.getElementById("advSpecialSelect").value = "p";
+			document.getElementById("lootAdvMapsRange").value = 0;
+			document.getElementById("advSpecialSelect").value = 0;
+			buyMap();
+		}
+
 		var specialZoneRun = false;
 
 		if (game.buildings.Smithy.owned == smithiesWanted && game.global.lastClearedCell < 10 && game.global.world > minMeltingZone) {
@@ -868,7 +939,7 @@ var repeatMaps = setInterval(function() {
 			toggleSetting('exitTo')
 		}
 	}
-}, 1500);
+}, 500);
 
 var getNumberText = function(number) {
 	if (number && number < 1000) {
@@ -1185,7 +1256,7 @@ var isItTimeForMorePowerfulHeirloom = function() {
 	if (game.global.world >= forcedPortalWorld)
 		return false;
 	
-	if (game.global.mapsActive)
+	if (game.global.mapsActive && game.global.world > 80)
 		return true;
 	
 	if (game.global.world < switchHeirloomZone)
@@ -1324,7 +1395,7 @@ var cookieOptimizerInterval = setInterval(function() {
 	
 	if ((game.global.challengeActive + "") !== challengeToTry
 		|| game.global.world < 82
-		|| game.global.world > 92
+		|| game.global.world > 94
 		)
 	return;
 
