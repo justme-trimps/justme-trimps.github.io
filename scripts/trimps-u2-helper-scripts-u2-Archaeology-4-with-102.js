@@ -12,7 +12,7 @@ var collectBoots = {};
 
 var forcedPortalWorld = 109;
 
-var plusZeroZones = [20, 24, 75, 77, 85, 86, 87, 88, 89, 94, 104, 105, 106, 107, 108];
+var plusZeroZones = [20, 24, 75, 77, 85, 87, 89, 94, 104, 105, 106, 107, 108];
 var plusOneZones = [30, 34, 40, 44, 50, 54, 60, 61, 62, 63, 64, 70, 71, 72, 73, 74, 80, 81, 82, 83, 84];
 var plusTwoZones = [48, 79, 80, 83, ,89, 90, 91, 92, 93, 103];//[89, 90, 91, 92, 93];//61, 63/*69, 70*/];
 var plusThreeZones = [55];
@@ -145,6 +145,8 @@ var changeAutobuyingNumbersInterval = setInterval(function() {
 		if (game.global.world >= 94) { autobuyingEquipmentNumber = 35; autobuyingArmNumber = 35; }
 		if (game.global.world >= 96) { buyShields = true; }
 		if (game.global.world >= 104) { autobuyingEquipmentNumber = 43; autobuyingArmNumber = 43; }
+		if (game.global.world >= 105) { autobuyingEquipmentNumber = 47; autobuyingArmNumber = 47; }
+		if (game.global.world >= 107) { autobuyingEquipmentNumber = 49; autobuyingArmNumber = 49; }
 	}
 }, 1000 * 1);
 
@@ -547,7 +549,7 @@ if (hireFarmersInterval) { clearInterval(hireFarmersInterval); hireFarmersInterv
 var hireFarmersInterval = setInterval(function() {
 	if (!autoHireFarmers || parseFloat(document.getElementById('jobsTitleUnemployed').innerText) == 0)
 		return;
-	if (game.global.world < 86) {
+	if (game.global.world < tributesPushMap) {
 		setMax(0.25, false);
 		numTab(6);
 		cancelTooltip();
@@ -556,7 +558,7 @@ var hireFarmersInterval = setInterval(function() {
 		numTab(1);
 		setGather('food');
 	} else {
-		if (game.global.world == 86 && game.global.lastClearedCell <= 88) {
+		if (game.global.world == tributesPushMap && game.global.lastClearedCell <= 88) {
 			setMax(0.25, false);
 			numTab(6);
 			cancelTooltip();
@@ -737,7 +739,7 @@ var shouldFightSomeMap = function() {
 
 
 var tributesWanted = 1250;
-var tributesPushMap = 86;
+var tributesPushMap = 83;
 
 if (quitMapInterval) { clearInterval(quitMapInterval); quitMapInterval = null; }
 var quitMapInterval = setInterval(function() { 
@@ -1079,7 +1081,7 @@ var buyPortalUpgrades = function() {
 }
 
 var isOkToPortal = function() {
-	if (game.global.lastClearedCell < 0)
+	if (game.global.lastClearedCell < -1)
 		return false;
 
 	if (dontPortal)

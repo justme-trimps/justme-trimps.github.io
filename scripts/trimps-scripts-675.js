@@ -1814,10 +1814,11 @@ if (goForWind) {
 	autoExportSave = true
 	autoPortal = false
 	restartOnZone = 690
-	forceVoidMapsZone = 690
+	forceVoidMapsZone = 799
 	abandons.push(675)
+	abandons.push(690)
 	nurseryZones = - 10000
-	minDmgZoneForWind = 745
+	minDmgZoneForWind = 760
 	buyArmStartZone = buyEquipmentStartZone = 736
 	buyArmStartZone = 780
 	naturePurchase('uberEmpower', 'Wind')

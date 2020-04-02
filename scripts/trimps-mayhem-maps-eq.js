@@ -113,7 +113,7 @@ var buySingleEq = function() {
 
 if (buyEqInterval) { clearInterval(buyEqInterval); buyEqInterval = null; }
 var buyEqInterval = setInterval(function() { 
-	if (document.getElementById('badGuyName') && document.getElementById('badGuyName').innerText.indexOf("Improbability") > -1) {
+	if (document.getElementById('badGuyName')/* && document.getElementById('badGuyName').innerText.indexOf("Improbability") > -1*/) {
 		var maxHealth = game.global.soldierEnergyShieldMax + game.global.soldierHealthMax;
 		var avgEnemyDamage = (calculateDamageForMayhemImprobability()[0] + calculateDamageForMayhemImprobability()[1]) / 2;
 		if (avgEnemyDamage > maxHealth) {
@@ -191,9 +191,11 @@ var shouldSwitchToShield = function(heirloom, pattern) {
 	return true;
 }
 
-
+var switchHeirlooms = false;
 if (switchHeirloomInterval) { clearInterval(switchHeirloomInterval); switchHeirloomInterval = null; }
 var switchHeirloomInterval = setInterval(function() { 
+	if (!switchHeirlooms) return;
+
 	var newHeirloom = shieldInMap;
 	
 	if (document.getElementById('badGuyName') && document.getElementById('badGuyName').innerText.indexOf("Improbability") > -1) {
