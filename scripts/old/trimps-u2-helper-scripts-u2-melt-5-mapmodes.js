@@ -103,7 +103,7 @@ var changeAutobuyingNumbersInterval = setInterval(function() {
 }, 1000 * 1);
 
 
-if (jestimpInterval) { clearInterval(jestimpInterval); jestimpInterval = null; }
+//if (jestimpInterval) { clearInterval(jestimpInterval); jestimpInterval = null; }
 //var jestimpInterval = setInterval(function() { 
 //	if (document.getElementById('worldName') && document.getElementById('worldName').innerText == "Prismatic Palace")
 //		return;
@@ -980,8 +980,7 @@ var getEnergyShieldState = function() {
 	return 0;
 }
 
-if (autoCancelInterval) { clearInterval(autoCancelInterval); autoCancelInterval = null; }
-if (abandonChallengeInterval) { clearInterval(abandonChallengeInterval); abandonChallengeInterval = null; }
+
 
 var shieldBeforeVoidMap = {
 	mods: [

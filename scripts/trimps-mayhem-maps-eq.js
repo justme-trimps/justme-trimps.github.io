@@ -113,10 +113,11 @@ var buySingleEq = function() {
 
 if (buyEqInterval) { clearInterval(buyEqInterval); buyEqInterval = null; }
 var buyEqInterval = setInterval(function() { 
-	if (document.getElementById('badGuyName')/* && document.getElementById('badGuyName').innerText.indexOf("Improbability") > -1*/) {
+	if (document.getElementById('badGuyName') && document.getElementById('badGuyName').innerText.indexOf("Improbability") > -1) {
 		var maxHealth = game.global.soldierEnergyShieldMax + game.global.soldierHealthMax;
 		var avgEnemyDamage = (calculateDamageForMayhemImprobability()[0] + calculateDamageForMayhemImprobability()[1]) / 2;
-		if (avgEnemyDamage > maxHealth) {
+		var maxEnemyDamage = (calculateDamageForMayhemImprobability()[1] + calculateDamageForMayhemImprobability()[1]) / 2;
+		if (maxEnemyDamage > maxHealth) {
 			buySingleEq();
 		}
 	}
@@ -156,58 +157,3 @@ var jestimpInterval = setInterval(function() {
 	}
 }, 100);
 
-var shieldInWorld = {
-	mods: [
-		["critChance", 125],
-		["critDamage", 6650],
-		["plaguebringer", 99],
-		["prismatic", 250],
-		["trimpAttack", 2380],
-		["trimpHealth", 2490]
-	]
-};
-var shieldInMap = {
-	mods: [
-		["critChance", 125],
-		["critDamage", 4870],
-		["gammaBurst", 22900],
-		["prismatic", 250],
-		["trimpAttack", 2580],
-		["trimpHealth", 2430]
-	]
-};
-
-var shouldSwitchToShield = function(heirloom, pattern) {
-	if (heirloom.mods.length != pattern.mods.length)
-		return false;
-		
-	for (var i = 0; i < heirloom.mods.length; i++) {
-		var patternMod = pattern.mods[i];
-		var heirloomMod = heirloom.mods[i];
-		if (patternMod[0] != heirloomMod[0] || patternMod[1] > heirloomMod[1])
-			return false;
-	}
-	
-	return true;
-}
-
-var switchHeirlooms = false;
-if (switchHeirloomInterval) { clearInterval(switchHeirloomInterval); switchHeirloomInterval = null; }
-var switchHeirloomInterval = setInterval(function() { 
-	if (!switchHeirlooms) return;
-
-	var newHeirloom = shieldInMap;
-	
-	if (document.getElementById('badGuyName') && document.getElementById('badGuyName').innerText.indexOf("Improbability") > -1) {
-		newHeirloom = shieldInWorld;
-	}
-	
-	for (var i = 0; i < game.global.heirloomsCarried.length; i++) {
-		var heirloom = game.global.heirloomsCarried[i];
-		if (shouldSwitchToShield(heirloom, newHeirloom)) {
-			selectHeirloom(i, "heirloomsCarried", true);
-			equipHeirloom();
-			break;
-		}
-	}
-}, 400);
