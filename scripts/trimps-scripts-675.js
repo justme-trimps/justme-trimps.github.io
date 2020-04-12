@@ -1775,7 +1775,9 @@ if (gogogo) { // don't change it here. change line above
 	autoPerk = false;
 	abandons.push(675);
 	for (var i = 676; i < 1000; i++) noActionZones.push(i);
-	forceVoidMapsZone = 675;
+	forceVoidMapsZone = 690;
+	initialRestartZone = 690;
+	restartOnZone = 690;
 } else {
 	autoEquipNumber = 300;
 	lastZoneEquipment = 320;
