@@ -978,7 +978,7 @@ function autobuyPerks(spendEverything) {
 	
 		var elements = document.getElementById('perks-col').getElementsByClassName('row');
 		
-		for (var i = elements.length - 1; i >= 0; i--) {
+		for (var i = elements.length - 2; i >= 0; i--) {
 			if (elements[i].getAttribute('data-max') !== null) {
 				var input = elements[i].getElementsByTagName('input')[1];
 				input.value = parseInt(input.value) + 1;
