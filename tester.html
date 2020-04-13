@@ -733,7 +733,7 @@ var calculate = function() {
 	
 	totalCost = getTotalCost(tenacity, resilience, criticality, equality, carpentry, artisanistry, motivation, power, toughness, looting, prismal, greed);
 		
-	document.getElementById('total-radon-cost').innerText = totalCost.toExponential(3);
+	document.getElementById('total-radon-cost').innerText = (totalCost > 10000) ? totalCost.toExponential(3) : totalCost;
 	
 	var p5 = 7500 * Math.pow(1.03, (critDamage / 2 - 42.5));
 	var p6 = Math.pow(1.03, (prismalShield - 50)) *7500;
