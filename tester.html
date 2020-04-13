@@ -279,7 +279,7 @@ Math.baseLog = function(x, y) {
 
 var colorCheckboxRows = function() {
 	var inputElements = document.getElementsByTagName("INPUT");
-	for (var i = inputElements.length - 2; i >=0; i--) {
+	for (var i = inputElements.length - 1; i >=0; i--) {
 		var input = inputElements[i];
 		
 		if (typeof(input.getAttribute('type')) != "undefined" && input.getAttribute('type') == "checkbox") {
@@ -379,8 +379,6 @@ var loadSave = function() {
 		totalRadonEarnedWithCurrentRun = game.global.totalRadonEarned;
 		switchTotalRadon();
 
-		calculate();
-
 		
 		//var overkillLevel = (portal.Overkill && portal.Overkill.radLevel) || 0;
 		//var rangeLevel = (portal.Range && portal.Range.radLevel) || 0;
@@ -406,6 +404,9 @@ var clearClasses = function() {
 }
 
 var setMax = function(whichOne, index, gain, maxed) {
+	if (whichOne == 'use-total')
+		return;
+
 	var id = "label-" + whichOne;
 	var element = document.getElementById(id).parentElement;
 	var opacity = Math.max(1.0 - index * 0.20, 0.15);
@@ -492,6 +493,8 @@ var switchTotalRadon = function() {
 		document.getElementById('input-export').disabled = false;
 		document.getElementById('input-export').value = "";
 	}
+	
+	calculate();
 }
 
 var calculate = function() {
