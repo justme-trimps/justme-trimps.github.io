@@ -184,6 +184,10 @@ input[type=checkbox], input[type=radio] {
 			<div class="col-sm-5" id="total-radon-cost"></div>
 		</div>
 		<div class="row mt-2">
+			<div class="col-sm-1"><input type="checkbox" checked="checked" class="form-check-input" id="input-use-total" /></div>
+			<label class="col-sm-11 col-form-label" id="label-use-total" for="input-use-total">Include Radon earned in current portal</label>
+		</div>
+		<div class="row mt-2">
 			<div class="col-sm-12">
 				<button class="btn btn-success mr-3" id="clear-autobuy-button" title="Remove all perks and buy optimal perks" disabled onclick="clearAndAutobuyPerks()">Clear and autobuy</button>
 				<button class="btn btn-info mr-3" id="autobuy-button" title="Buy optimal perks but keep current perks" disabled onclick="autobuyPerks()">Autobuy</button>
@@ -373,6 +377,10 @@ var loadSave = function() {
 
 		totalRadonEarned = game.global.totalRadonEarned - game.resources.radon.owned;
 
+		if (document.getElementById('input-use-total').checked) {
+			totalRadonEarned = game.global.totalRadonEarned;
+		}
+		
 		if (totalRadonEarned > 0) {
 			document.getElementById('clear-autobuy-button').disabled = false;
 			document.getElementById('autobuy-button').disabled = false;
