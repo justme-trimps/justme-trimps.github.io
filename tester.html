@@ -375,11 +375,11 @@ var loadSave = function() {
 			+ game.portal["Pheromones"].radSpent
 			+ game.portal["Packrat"].radSpent;
 
-		calculate();
-
 		totalRadonEarnedWithoutCurrentRun = game.global.totalRadonEarned - game.resources.radon.owned;
 		totalRadonEarnedWithCurrentRun = game.global.totalRadonEarned;
 		switchTotalRadon();
+
+		calculate();
 
 		
 		//var overkillLevel = (portal.Overkill && portal.Overkill.radLevel) || 0;
