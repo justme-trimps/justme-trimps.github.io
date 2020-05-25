@@ -15,12 +15,12 @@ var tryBattle100 = false;
 var forcedPortalWorld = 115;
 var plusZeroZones = [20, 24, 75, 77, 85, 87, 89, 94, 104, 105, 106, 107, 108];
 var plusOneZones = [30, 34, 40, 44, 50, 54, 60, 61, 62, 63, 64, 70, 71, 72, 73, 74, 80, 81, 82, 83, 84];
-var plusTwoZones = [48, 79, 80, 83, ,89, 90, 91, 92, 93, 103, 109, 110, 111, 112, 113];
+var plusTwoZones = [48, 79, 80, 83, ,89, 90, 91, 92, 93, 109, 110, 111, 112, 113];
 
 if (tryNextOne) {
 	forcedPortalWorld = 116;
 	plusZeroZones = [20, 24, 75, 77, 85, 87, 89, 94, 104, 105, 106, 107, 108, 114, 115];
-	plusTwoZones = [48, 79, 80, 83, ,89, 90, 91, 92, 93, 103, 109, 110, 111, 112, 113];
+	plusTwoZones = [48, 79, 80, 83, ,89, 90, 91, 92, 93, 109, 110, 111, 112, 113];
 }
 var plusThreeZones = [55];
 var plusFourZones = [];
@@ -41,7 +41,7 @@ var minGoldenHeliumBeforeBattle = 500.0;//2.0;
 var minGoldenVoidBeforeHelium = 500.0; //0.5;
 
 var voidMapZone = 95;
-var maxVoidMapZone = 95;
+var maxVoidMapZone = 113;
 
 var abandonChallengeZone = 1000;
 var mapMode = "lsc";
@@ -740,7 +740,7 @@ var shouldFightSomeMap = function() {
 		&& !game.global.mapsActive
 		&& game.global.world == 95
 		&& typeof(game.global.mapsOwnedArray.find(function(map) { return map.level == 105; })) == "undefined"
-		&& game.resources.fragments.owned > 3280000000000000
+		&& game.resources.fragments.owned > 1330000000000000
 	) {
 		return true;
 	}
@@ -776,7 +776,7 @@ var repeatMaps = setInterval(function() {
 		recycleBelow(true);
 		cancelTooltip();
 		
-		if (game.global.world == 103 || game.global.world == 109 || game.global.world == 113) {
+		if (game.global.world == 109 || game.global.world == 113) {
 			mapMode = "p";
 		}
 		
@@ -890,11 +890,11 @@ var repeatMaps = setInterval(function() {
 			&& !game.global.mapsActive
 			&& game.global.world == 95
 			&& typeof(game.global.mapsOwnedArray.find(function(map) { return map.level == 105; })) == "undefined"
-			&& game.resources.fragments.owned > 3280000000000000
+			&& game.resources.fragments.owned > 1330000000000000
 			) {
 			document.getElementById("advExtraLevelSelect").value = "10";
 			document.getElementById("biomeAdvMapsSelect").value = "Random";
-			document.getElementById("advSpecialSelect").value = "p";
+			document.getElementById("difficultyAdvMapsRange").value = 0;
 			document.getElementById("lootAdvMapsRange").value = 0;
 			document.getElementById("advSpecialSelect").value = 0;
 			buyMap();
