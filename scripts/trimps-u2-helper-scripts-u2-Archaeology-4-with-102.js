@@ -1478,7 +1478,7 @@ var buyRelicUpgradesInterval = setInterval(function() {
 	}
 	
 	if (game.global.world > 80) {
-		wantedEnemyAttack = -14;
+		wantedEnemyAttack = -18;
 	}
 	
 	if (game.global.world >= voidMapZone) {
