@@ -220,7 +220,6 @@
 					fluffyStart = game.global.fluffyExp;
 					lastMap = 0;
 					autoFormation = true;
-					testGoldenBattle = true;
 					if (!game.global.autoStorage) {
 						toggleAutoStorage();
 					}
@@ -636,6 +635,42 @@
 				} else if (game.global.world == 690) {
 					document.getElementById("advExtraLevelSelect").value = "5";
 					document.getElementById("advSpecialSelect").value = "p";
+				} else if (game.global.world == 696) {
+					document.getElementById("advExtraLevelSelect").value = "9";
+					document.getElementById("advSpecialSelect").value = "p";
+				} else if (game.global.world == 705) {
+					document.getElementById("advExtraLevelSelect").value = "10";
+					document.getElementById("advSpecialSelect").value = "p";
+				} else if (game.global.world == 711) {
+					document.getElementById("advExtraLevelSelect").value = "10";
+					document.getElementById("advSpecialSelect").value = "p";
+				} else if (game.global.world == 716) {
+					document.getElementById("advExtraLevelSelect").value = "9";
+					document.getElementById("advSpecialSelect").value = "p";
+				} else if (game.global.world == 721) {
+					document.getElementById("advExtraLevelSelect").value = "10";
+					document.getElementById("advSpecialSelect").value = "p";
+				} else if (game.global.world == 726) {
+					document.getElementById("advExtraLevelSelect").value = "9";
+					document.getElementById("advSpecialSelect").value = "p";
+				} else if (game.global.world == 731) {
+					document.getElementById("advExtraLevelSelect").value = "10";
+					document.getElementById("advSpecialSelect").value = "p";
+				} else if (game.global.world == 735) {
+					document.getElementById("advExtraLevelSelect").value = "10";
+					document.getElementById("advSpecialSelect").value = "p";
+				} else if (game.global.world == 746) {
+					document.getElementById("advExtraLevelSelect").value = "6";
+					document.getElementById("advSpecialSelect").value = "p";
+				} else if (game.global.world == 750) {
+					document.getElementById("advExtraLevelSelect").value = "5";
+					document.getElementById("advSpecialSelect").value = "p";
+				} else if (game.global.world == 761) {
+					document.getElementById("advExtraLevelSelect").value = "10";
+					document.getElementById("advSpecialSelect").value = "p";
+				} else if (game.global.world == 765) {
+					document.getElementById("advExtraLevelSelect").value = "10";
+					document.getElementById("advSpecialSelect").value = "p";
 				} else if (game.global.world != restartOnZone && (game.global.world % 10 == 0 || game.global.world % 10 > 5 || blacksmithZones > game.global.world || lastMap >= game.global.world)) {
 					incrementMapLevel(-1);
 					incrementMapLevel(-1);
@@ -826,29 +861,33 @@
 			}
 				
 			if (findZoneNumber() > 0) {
-				if (maxFuel) {
-					if (restartOnZone - miZones <= game.global.world) {
-						if (document.getElementsByClassName("generatorStatePassive").length == 0 && document.getElementById("generatorPassiveBtn") && document.getElementById("generatorPassiveBtn").offsetParent != null) {
-							//console.log("generatorPassiveBtn.click()");
-							document.getElementById("generatorPassiveBtn").click();
-						}
-					} else if (document.getElementsByClassName("generatorStateActive").length == 0 && document.getElementById("generatorActiveBtn") && document.getElementById("generatorActiveBtn").offsetParent != null) {
-						document.getElementById("generatorActiveBtn").click();
-							//console.log("generatorActiveBtn.click()");
-					}
-				} else {
-					if (findZoneNumber() > 230 + miStartZones && findZoneNumber() <= 230 + miStartZones + fuelZones) {
-						if (document.getElementsByClassName("generatorStateActive").length == 0 && document.getElementById("generatorActiveBtn") && document.getElementById("generatorActiveBtn").offsetParent != null) {
-							document.getElementById("generatorActiveBtn").click();
-							//console.log("generatorActiveBtn.click()");
-						}
-					} else {
-						if (document.getElementsByClassName("generatorStatePassive").length == 0 && document.getElementById("generatorPassiveBtn") && document.getElementById("generatorPassiveBtn").offsetParent != null) {
-							document.getElementById("generatorPassiveBtn").click();
-							//console.log("generatorPassiveBtn.click()");
-						}
-					}
-				}
+				if (document.getElementsByClassName("generatorStateActive").length == 0 && document.getElementById("generatorActiveBtn") && document.getElementById("generatorActiveBtn").offsetParent != null) {
+					document.getElementById("generatorActiveBtn").click();
+			}
+				
+				//if (maxFuel) {
+				//	if (restartOnZone - miZones <= game.global.world) {
+				//		if (document.getElementsByClassName("generatorStatePassive").length == 0 && document.getElementById("generatorPassiveBtn") && document.getElementById("generatorPassiveBtn").offsetParent != null) {
+				//			//console.log("generatorPassiveBtn.click()");
+				//			document.getElementById("generatorPassiveBtn").click();
+				//		}
+				//	} else if (document.getElementsByClassName("generatorStateActive").length == 0 && document.getElementById("generatorActiveBtn") && document.getElementById("generatorActiveBtn").offsetParent != null) {
+				//		document.getElementById("generatorActiveBtn").click();
+				//			//console.log("generatorActiveBtn.click()");
+				//	}
+				//} else {
+				//	if (findZoneNumber() > 230 + miStartZones && findZoneNumber() <= 230 + miStartZones + fuelZones) {
+				//		if (document.getElementsByClassName("generatorStateActive").length == 0 && document.getElementById("generatorActiveBtn") && document.getElementById("generatorActiveBtn").offsetParent != null) {
+				//			document.getElementById("generatorActiveBtn").click();
+				//			//console.log("generatorActiveBtn.click()");
+				//		}
+				//	} else {
+				//		if (document.getElementsByClassName("generatorStatePassive").length == 0 && document.getElementById("generatorPassiveBtn") && document.getElementById("generatorPassiveBtn").offsetParent != null) {
+				//			document.getElementById("generatorPassiveBtn").click();
+				//			//console.log("generatorPassiveBtn.click()");
+				//		}
+				//	}
+				//}
 			}
 			
 			if (upgradeSupply) buyGeneratorUpgrade("Supply");
@@ -1112,7 +1151,7 @@
 						
 						if (autoGoldenHelium) {
 							if (testGoldenBattle) {
-								if (document.getElementById("HeliumGolden") && document.getElementById("goldenHeliumOwned").innerHTML.indexOf("31") > -1 && document.getElementById("goldenBattleOwned").innerHTML.indexOf("0") == 0)  {
+								if (document.getElementById("BattleGolden") && game.global.world == 725) {
 									document.getElementById("BattleGolden").click(); 
 									return;
 								}
@@ -1575,7 +1614,7 @@ var autoFormation = true;
 var autoAssistant = true;
 var set01 = true;
 var collectMetal = true;
-var autoEquip = true;
+var autoEquip = false;
 var fuelZones = 70;
 var miStartZones = 10;
 var maxHeliumPerHour = 0.0;
@@ -1677,7 +1716,7 @@ var autoNurseryInterval = 25000;
 var forcedPortalZone = 600;//547 + 15 + 15;
 var actionZones = 41;
 var fastFight = true;
-var lastZoneEquipment =  200;
+var lastZoneEquipment = 10;
 var autoEquipNumber = 230;
 var initialRestartZone = 540 + 15 + 15 + 15;
 var restartOnZone = 540 + 15 + 15 + 15;
@@ -1731,7 +1770,6 @@ var windFormationInterval = setInterval(function() {
 			&& document.getElementById("formation5").offsetParent != null
 			&& windFormationZones.indexOf("|" + game.global.world + "|") > -1) {
 				autoFormation = false;
-				testGoldenBattle = false;
 				if (game.global.formation != 5 && !game.global.mapsActive) {
 					previousFormation = game.global.formation;
 					setFormation('5');
@@ -1753,8 +1791,11 @@ var windFormationInterval = setInterval(function() {
 	}
 }, 100);
 
-var windFormationZones = "|661|662|663|664|665|676|677|678|679|680|691|692|693|694|695|706|707|708|709|710|721|722|723|724|725|736|737|738|739|740|751|752|753|754|755|766|767|768|769|770|781|782|783|784|785|"
+var windFormationZones = "|661|662|663|664|665|676|677|678|679|680|691|692|693|694|695|706|707|708|709|710|721|722|723|724|725|736|737|738|739|740|751|752|753|754|755|766|767|768|769|770|781|782|783|784|785|796|797|798|799|800|"
+
 var forceVoidMapsZone = -1;
+var testGoldenBattle = false;
+
 gogogo = false;
 if (gogogo) { // don't change it here. change line above
 	autoGoldenHelium = false
@@ -1778,9 +1819,6 @@ if (gogogo) { // don't change it here. change line above
 	forceVoidMapsZone = 690;
 	initialRestartZone = 690;
 	restartOnZone = 690;
-} else {
-	autoEquipNumber = 300;
-	lastZoneEquipment = 320;
 }
 
 var buyStorageOnlyWhenHalf = false;
@@ -1788,22 +1826,13 @@ autoBuyBonePortal = false;
 autoAssistant = false;
 gaSecs = 1;
 var prestigeFluggyAutomatically = false;
-//supply 122
 essenceStartZone = 1
 essenceEndZone = 1
 upgradeNature = true;
 upgradeNatureStack = false;
 covertIce = false;
-
 nurseryZones = restartOnZone - 600 + 11; // do not change
-testGoldenBattle = true;
-
-if (!gogogo) {
-	essenceStartZone = 676;
-	essenceEndZone = 680;
-}
-
-minDmgZoneForWind = 676;
+minDmgZoneForWind = 770;
 noActionZones.push(645);
 noActionZones.push(653);
 noActionZones.push(663);
@@ -1815,16 +1844,20 @@ var goForWind = false;
 if (goForWind) {
 	autoExportSave = true
 	autoPortal = false
-	restartOnZone = 690
-	forceVoidMapsZone = 799
+	restartOnZone = 800
+	forceVoidMapsZone = 750
 	abandons.push(675)
 	abandons.push(690)
+	abandons.push(699)
+	abandons.push(705)
+	abandons.push(735)
+	abandons.push(750)
+	abandons.push(765)
 	nurseryZones = - 10000
-	minDmgZoneForWind = 760
-	buyArmStartZone = buyEquipmentStartZone = 736
-	buyArmStartZone = 780
 	naturePurchase('uberEmpower', 'Wind')
-	lastZoneEquipment = 500
+	lastZoneEquipment = 10
+	testGoldenBattle = true
+	fastFightZones = 0
 }
 autoGoldenVoid = false
 // fastFightZones = 0

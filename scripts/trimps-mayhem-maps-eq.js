@@ -13,6 +13,7 @@ var autoSaveInterval = setInterval(function() {
 
 var dontMap = false;
 var minStacks = 0;
+var plus = 0;
 
 var getStacksNumber = function() {
 	if (document.getElementById('gammaStack')) {
@@ -22,7 +23,7 @@ var getStacksNumber = function() {
 }
 
 var shouldFightSomeMap = function() {
-	if (game.global.lastClearedCell < 86)
+	if (game.global.lastClearedCell < 3)
 		return false;
 
 	if (game.global.world < 60)
@@ -51,6 +52,9 @@ var repeatMaps = setInterval(function() {
 		document.getElementById("advSpecialSelect").value = "lmc";
 		document.getElementById("advExtraLevelSelect").value = "1";
 		
+		if (plus)
+			document.getElementById("advExtraLevelSelect").value = "" + plus;
+
 		buyMap();
 		
 		runMap();
@@ -62,6 +66,10 @@ var repeatMaps = setInterval(function() {
 			
 		while (document.getElementById('toggleexitTo').innerHTML.indexOf('World') == -1) {
 			toggleSetting('exitTo')
+		}
+		
+		while (document.getElementById('repeatBtn').innerHTML.indexOf('On') == -1) {
+			repeatClicked()
 		}
 	}
 }, 10000);

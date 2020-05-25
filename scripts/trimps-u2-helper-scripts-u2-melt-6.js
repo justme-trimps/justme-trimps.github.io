@@ -10,7 +10,7 @@ var autoHireFarmers = true;
 
 var forcedPortalWorld = 118;
 
-var plusZeroZones = [85, 86, 91, 92, 93, 94, 95, 97, 99, 104, 105, 106, 107, 108, 114, 115, 116, 117]
+var plusZeroZones = [85, 91, 92, 93, 94, 95, 97, 99, 104, 105, 106, 107, 108, 114, 115, 116, 117]
 var plusOneZones = [47, 77];
 var plusTwoZones = [80, 79, 100, 101, 102, 103, 109, 110, 111, 112, 113];
 var plusThreeZones = [55, 88, 98];
@@ -31,14 +31,14 @@ var minGoldenHeliumBeforeBattle = 5.0;//2.0;
 var minGoldenVoidBeforeHelium = -1.0; //0.5;
 
 var voidMapZone = 70;
-var maxVoidMapZone = 93;
+var maxVoidMapZone = 111;
 
 var abandonChallengeZone = 74;
 var mapMode = "lsc";
 
 if (gogogo) {
 	goldenMode = 'Battle'; 
-	voidMapZone = -1;
+	//voidMapZone = -1;
 	startMapsWorld = 49;
 	dontPortal = true;
 	abandonChallengeZone = -1;
@@ -100,6 +100,7 @@ var changeAutobuyingNumbersInterval = setInterval(function() {
 		if (game.global.world >= 105) { autobuyingEquipmentNumber = 28; autobuyingArmNumber = 28; }
 		if (game.global.world >= 108) { autobuyingEquipmentNumber = 14; autobuyingArmNumber = 14; }
 		if (game.global.world >= 114) { autobuyingEquipmentNumber = 16; autobuyingArmNumber = 16; }
+		if (game.global.world >= 116) { autobuyingEquipmentNumber = 20; autobuyingArmNumber = 20; }
 	}
 }, 1000 * 1);
 
@@ -1168,7 +1169,7 @@ var cookieOptimizerInterval = setInterval(function() {
 	if (game.global.lastClearedCell < 10 || game.global.mapsActive)
 		return false;
 	
-	if (game.global.world < 70)
+	if (game.global.world < 80)
 		return false;
 
 	if (debugOptimizer)
@@ -1202,3 +1203,20 @@ var cookieOptimizerInterval = setInterval(function() {
 		setSaveCookie();
 	}
 }, 300 - Math.floor(Math.random() * 100));
+
+//TMP REMOVE
+var lastEggMessage = '';
+setInterval(function() {
+	var eggCells = document.getElementsByClassName("eggCell");
+	if (eggCells.length && eggCells[0].offsetParent != null) {
+		eggCells[0].click();
+		setTimeout(function() {
+			if (document.getElementsByClassName("eggMessage").length && document.getElementsByClassName("eggMessage")[document.getElementsByClassName("eggMessage").length - 1].innerText != lastEggMessage) {
+				lastEggMessage = document.getElementsByClassName("eggMessage")[document.getElementsByClassName("eggMessage").length - 1].innerText;
+				if (lastEggMessage.indexOf("food!") === -1 && lastEggMessage.indexOf("wood!") === -1 && lastEggMessage.indexOf("metal!") === -1) {
+					console.log(getPortalTime() + " " +lastEggMessage);
+				}
+			}
+		}, 200);
+	}
+}, 1000)

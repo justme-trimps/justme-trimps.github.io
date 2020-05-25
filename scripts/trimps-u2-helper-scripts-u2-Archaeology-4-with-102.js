@@ -10,11 +10,18 @@ var collectGambeson = {};
 var collectBoots = {};
 
 
-var forcedPortalWorld = 109;
-
+var tryNextOne = true;
+var tryBattle100 = false;
+var forcedPortalWorld = 115;
 var plusZeroZones = [20, 24, 75, 77, 85, 87, 89, 94, 104, 105, 106, 107, 108];
 var plusOneZones = [30, 34, 40, 44, 50, 54, 60, 61, 62, 63, 64, 70, 71, 72, 73, 74, 80, 81, 82, 83, 84];
-var plusTwoZones = [48, 79, 80, 83, ,89, 90, 91, 92, 93, 103];//[89, 90, 91, 92, 93];//61, 63/*69, 70*/];
+var plusTwoZones = [48, 79, 80, 83, ,89, 90, 91, 92, 93, 103, 109, 110, 111, 112, 113];//[89, 90, 91, 92, 93];//61, 63/*69, 70*/];
+
+if (tryNextOne) {
+	forcedPortalWorld = 116;
+	plusZeroZones = [20, 24, 75, 77, 85, 87, 89, 94, 104, 105, 106, 107, 108, 114, 115];
+	plusTwoZones = [48, 79, 80, 83, ,89, 90, 91, 92, 93, 103, 109, 110, 111, 112, 113];
+}
 var plusThreeZones = [55];
 var plusFourZones = [];
 var plusFiveZones = [];
@@ -146,7 +153,9 @@ var changeAutobuyingNumbersInterval = setInterval(function() {
 		if (game.global.world >= 96) { buyShields = true; }
 		if (game.global.world >= 104) { autobuyingEquipmentNumber = 43; autobuyingArmNumber = 43; }
 		if (game.global.world >= 105) { autobuyingEquipmentNumber = 47; autobuyingArmNumber = 47; }
-		if (game.global.world >= 107) { autobuyingEquipmentNumber = 49; autobuyingArmNumber = 49; }
+//		if (game.global.world >= 107) { autobuyingEquipmentNumber = 49; autobuyingArmNumber = 49; }
+		if (game.global.world >= 108) { autobuyingEquipmentNumber = 24; autobuyingArmNumber = 24; }
+		if (game.global.world >= 112) { autobuyingEquipmentNumber = 25; autobuyingArmNumber = 25; }
 	}
 }, 1000 * 1);
 
@@ -203,6 +212,8 @@ var buyGoldUpgrade = function() {
 		}
 	}
 
+	if (tryBattle100 && game.global.world == 100)
+		id = 'Battle';
 	
 	var button = document.getElementById(id + 'Golden');
 	if (button) {
@@ -764,8 +775,8 @@ var repeatMaps = setInterval(function() {
 
 		recycleBelow(true);
 		cancelTooltip();
-
-		if (game.global.world > 98 && game.global.world < 104) {
+		
+		if (game.global.world == 103 || game.global.world == 109 || game.global.world == 113) {
 			mapMode = "p";
 		}
 		
@@ -1635,3 +1646,20 @@ var lastZoneOptimizerInterval = setInterval(function() {
 		setLastZoneSaveCookie();
 	}
 }, 300 - Math.floor(Math.random() * 100));
+
+//TMP REMOVE
+var lastEggMessage = ''
+setInterval(function() {
+	var eggCells = document.getElementsByClassName("eggCell");
+	if (eggCells.length && eggCells[0].offsetParent != null) {
+		eggCells[0].click();
+		setTimeout(function() {
+			if (document.getElementsByClassName("eggMessage").length && document.getElementsByClassName("eggMessage")[document.getElementsByClassName("eggMessage").length - 1].innerText != lastEggMessage) {
+				lastEggMessage = document.getElementsByClassName("eggMessage")[document.getElementsByClassName("eggMessage").length - 1].innerText;
+				if (lastEggMessage.indexOf("food!") === -1 && lastEggMessage.indexOf("wood!") === -1 && lastEggMessage.indexOf("metal!") === -1) {
+					console.log(getPortalTime() + " " +lastEggMessage);
+				}
+			}
+		}, 200);
+	}
+}, 1000)

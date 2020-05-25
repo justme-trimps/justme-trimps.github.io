@@ -13,7 +13,7 @@ var autoSaveInterval = setInterval(function() {
 
 var dontMap = false;
 var minStacks = 0;
-var plus = 1;
+var plus = 0;
 
 var getStacksNumber = function() {
 	if (document.getElementById('gammaStack')) {
@@ -23,7 +23,7 @@ var getStacksNumber = function() {
 }
 
 var shouldFightSomeMap = function() {
-	if (game.global.lastClearedCell < 90)
+	if (game.global.lastClearedCell < 20)
 		return false;
 
 	if (game.global.world < 60)
