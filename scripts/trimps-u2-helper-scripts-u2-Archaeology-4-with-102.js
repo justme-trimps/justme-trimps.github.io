@@ -10,15 +10,15 @@ var collectGambeson = {};
 var collectBoots = {};
 
 
-var tryNextOne = true;
+var tryNextOne = false;
 var tryBattle100 = false;
-var forcedPortalWorld = 115;
-var plusZeroZones = [20, 24, 75, 77, 85, 87, 89, 94, 104, 105, 106, 107, 108];
-var plusOneZones = [30, 34, 40, 44, 50, 54, 60, 61, 62, 63, 64, 70, 71, 72, 73, 74, 80, 81, 82, 83, 84];
-var plusTwoZones = [48, 79, 80, 83, ,89, 90, 91, 92, 93, 109, 110, 111, 112, 113];
+var forcedPortalWorld = 116;
+var plusZeroZones = [20, 24, 77, 85, 87, 89, 94, 104, 105, 106, 107, 108, 114, 115];
+var plusOneZones = [30, 40, 50, 60, 64, 70, 71, 72, 73, 74, 83];
+var plusTwoZones = [48, 79, 83, ,89, 90, 91, 92, 93, 109, 110, 111, 112, 113];
 
 if (tryNextOne) {
-	forcedPortalWorld = 116;
+	forcedPortalWorld = 117;
 	plusZeroZones = [20, 24, 75, 77, 85, 87, 89, 94, 104, 105, 106, 107, 108, 114, 115];
 	plusTwoZones = [48, 79, 80, 83, ,89, 90, 91, 92, 93, 109, 110, 111, 112, 113];
 }
@@ -154,8 +154,8 @@ var changeAutobuyingNumbersInterval = setInterval(function() {
 		if (game.global.world >= 104) { autobuyingEquipmentNumber = 43; autobuyingArmNumber = 43; }
 		if (game.global.world >= 105) { autobuyingEquipmentNumber = 47; autobuyingArmNumber = 47; }
 //		if (game.global.world >= 107) { autobuyingEquipmentNumber = 49; autobuyingArmNumber = 49; }
-		if (game.global.world >= 108) { autobuyingEquipmentNumber = 24; autobuyingArmNumber = 24; }
-		if (game.global.world >= 112) { autobuyingEquipmentNumber = 25; autobuyingArmNumber = 25; }
+		if (game.global.world >= 108) { autobuyingEquipmentNumber = 20; autobuyingArmNumber = 20; }
+		if (game.global.world >= 114) { autobuyingEquipmentNumber = 25; autobuyingArmNumber = 25; }
 	}
 }, 1000 * 1);
 
@@ -1579,7 +1579,24 @@ var shouldSaveLastZoneSave = function(reset, seconds, cell, debug) {
 	if (game.global.lastClearedCell < 10)
 		return false;
 	
-	if (game.global.world + 1 != forcedPortalWorld && game.global.world + 2 != forcedPortalWorld && game.global.world + 3 != forcedPortalWorld)
+	if (game.global.world + 1 != forcedPortalWorld 
+			&& game.global.world + 2 != forcedPortalWorld 
+			&& game.global.world + 3 != forcedPortalWorld
+			&& game.global.world + 4 != forcedPortalWorld
+			&& game.global.world + 5 != forcedPortalWorld
+			&& game.global.world + 6 != forcedPortalWorld
+			&& game.global.world + 7 != forcedPortalWorld
+			&& game.global.world + 8 != forcedPortalWorld
+			&& game.global.world + 9 != forcedPortalWorld
+			&& game.global.world + 10 != forcedPortalWorld
+			&& game.global.world + 11 != forcedPortalWorld
+			&& game.global.world + 12 != forcedPortalWorld
+			&& game.global.world + 13 != forcedPortalWorld
+			&& game.global.world + 14 != forcedPortalWorld
+			&& game.global.world + 15 != forcedPortalWorld
+			&& game.global.world + 16 != forcedPortalWorld
+			&& game.global.world + 17 != forcedPortalWorld
+			&& game.global.world + 18 != forcedPortalWorld)
 		return false;
 	
 	if (myPortal > reset) {
