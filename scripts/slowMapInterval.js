@@ -1,10 +1,10 @@
 var saveText = save(true);
 var fastImps = ['Squimp', 'Snimp', 'Gorillimp', 'Shrimp', 'Chickimp', 'Kittimp', 'Frimp', 'Slagimp', 'Lavimp', 'Kangarimp', 'Entimp', 'Fusimp', 'Carbimp', 'Shadimp', 'Voidsnimp', 'Prismimp', 'Sweltimp']
-var extraLevel = 9;
+var extraLevel = 7;
 var mapBiome = "Mountain"
-var mapBiome = "Random"
+//var mapBiome = "Random"
 var mapLoot = 9;
-var mapLoot = 0;
+//var mapLoot = 0;
 var mapDiff = 9;
 //var mapDiff = 0;
 
