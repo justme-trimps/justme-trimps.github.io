@@ -1858,6 +1858,7 @@ if (goForWind) {
 	lastZoneEquipment = 10
 	testGoldenBattle = true
 	fastFightZones = 0
+	minDmgZoneForWind = 1000
 }
 autoGoldenVoid = false
 // fastFightZones = 0

@@ -11,9 +11,9 @@ var collectBoots = {};
 
 
 var tryNextOne = false;
-var tryBattle100 = false;
-var forcedPortalWorld = 116;
-var plusZeroZones = [20, 24, 77, 85, 87, 89, 94, 104, 105, 106, 107, 108, 114, 115];
+var tryBattle100 = true;
+var forcedPortalWorld = 117;
+var plusZeroZones = [20, 24, 77, 85, 87, 89, 94, 104, 105, 106, 107, 108, 114, 115, 116];
 var plusOneZones = [30, 40, 50, 60, 64, 70, 71, 72, 73, 74, 83];
 var plusTwoZones = [48, 79, 83, ,89, 90, 91, 92, 93, 109, 110, 111, 112, 113];
 
@@ -1157,10 +1157,11 @@ var gatherMetalInterval = setInterval(function() {
 }, 3000);
 
 
+var goodModsNames = "|empty|MinerSpeed|fragmentsDrop|FarmerSpeed|LumberjackSpeed|DragimpSpeed|FluffyExp|";
 //var goodModsNames = "empty|MinerSpeed|ExplorerSpeed|FarmerSpeed|LumberjackSpeed|DragimpSpeed|FluffyExp|critChance|trimpAttack|critDamage|gammaBurst|prismatic|trimpHealth";
 //var goodModsNames = "empty|MinerSpeed|ExplorerSpeed|FarmerSpeed|LumberjackSpeed|DragimpSpeed|"; //FluffyExp| //"critChance|trimpAttack|critDamage|gammaBurst|prismatic|trimpHealth";
-var goodModsNames = "empty|critChance|trimpAttack|critDamage|prismatic|trimpHealth|plaguebringer"; //FluffyExp| //"critChance|trimpAttack|critDamage|gammaBurst|prismatic|trimpHealth";
-
+//var goodModsNames = "empty|critChance|trimpAttack|critDamage|prismatic|trimpHealth|plaguebringer"; //FluffyExp| //"critChance|trimpAttack|critDamage|gammaBurst|prismatic|trimpHealth";
+//
 if (collectHeirloomsInterval) { clearInterval(collectHeirloomsInterval); collectHeirloomsInterval = null; }
 var collectHeirloomsInterval = setInterval(function() {
 	if (getMaxCarriedHeirlooms() > game.global.heirloomsCarried.length) {
