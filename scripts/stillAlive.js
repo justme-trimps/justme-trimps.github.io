@@ -19,7 +19,7 @@ var stillAliveInterval = setInterval(function() {
 		var goodGuyHealthMaxString = document.getElementById('goodGuyHealthMax').innerText.replace('.', '');
 		var pauseFight = document.getElementById('pauseFight');
 		
-		var goodGuyHealth = parseInt(goodGuyHealthString.match(/[0-9]+/)[0]);
+		var goodGuyHealth = parseInt(goodGuyHealthString.match(/	[0-9]+/)[0]);
 		var goodGuyHealthMax = parseInt(goodGuyHealthMaxString.match(/[0-9]+/)[0]);
 		
 		if (goodGuyHealth == 0 && goodGuyHealthMax == 0 && pauseFight.innerText.indexOf('Off') > 0) {

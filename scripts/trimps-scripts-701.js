@@ -413,7 +413,7 @@
 					document.getElementById("mapsBtnText").click();
 				}
 
-				if (!voidMapsFinished 
+				if ((!voidMapsFinished || game.global.world == 700)
 					&& game.global.lastClearedMapCell === -1 
 					&& game.global.lastClearedCell > 0 
 					&& game.global.mapBonus < 3
@@ -450,181 +450,8 @@
 				document.getElementById("biomeAdvMapsSelect").value = "Plentiful";
 				var mapDecreased = false;
 				
-				if (game.global.world == 585) {
-					document.getElementById("advExtraLevelSelect").value = "10";
-					document.getElementById("biomeAdvMapsSelect").value = "Random";
-					document.getElementById("lootAdvMapsRange").value = 0;
-					document.getElementById("difficultyAdvMapsRange").value = 0;
-					document.getElementById("advSpecialSelect").value = 0;
-					if (game.resources.fragments.owned > 2.53e+55) {
-						document.getElementById("biomeAdvMapsSelect").value = "Plentiful";
-						document.getElementById("lootAdvMapsRange").value = 9;
-						document.getElementById("difficultyAdvMapsRange").value = 9;
-						document.getElementById("advSpecialSelect").value = "p";
-					} else if (game.resources.fragments.owned > 9.75e+53) {
-						document.getElementById("advSpecialSelect").value = "p";
-						if (game.resources.fragments.owned > 2.36e+54) {
-							document.getElementById("difficultyAdvMapsRange").value = 9;
-						}
-					} else if (game.resources.fragments.owned > 6.27e+53) {
-						document.getElementById("difficultyAdvMapsRange").value = 9;
-					} 
-				} else if (game.global.world == 600) {
-					document.getElementById("advExtraLevelSelect").value = "5";
-					document.getElementById("advSpecialSelect").value = "p";
-				} else if (game.global.world == 606) {
-					document.getElementById("advExtraLevelSelect").value = "9";
-					document.getElementById("advSpecialSelect").value = "p";
-				} else if (game.global.world == 615) {
-					document.getElementById("advExtraLevelSelect").value = "10";
-					document.getElementById("biomeAdvMapsSelect").value = "Random";
-					document.getElementById("lootAdvMapsRange").value = 0;
-					document.getElementById("difficultyAdvMapsRange").value = 0;
-					document.getElementById("advSpecialSelect").value = 0;
-					if (game.resources.fragments.owned > 3.42e+57) {
-						document.getElementById("advSpecialSelect").value = "p";
-						document.getElementById("difficultyAdvMapsRange").value = 9;
-						document.getElementById("lootAdvMapsRange").value = 9;
-					} else if (game.resources.fragments.owned > 6.4e+56) {
-						document.getElementById("advSpecialSelect").value = "p";
-						document.getElementById("difficultyAdvMapsRange").value = 9;
-					} else if (game.resources.fragments.owned > 2.65e+56) {
-						document.getElementById("advSpecialSelect").value = "p";
-					} 
-				} else if (game.global.world == 621) {
-					document.getElementById("advExtraLevelSelect").value = "10";
-					document.getElementById("biomeAdvMapsSelect").value = "Random";
-					document.getElementById("lootAdvMapsRange").value = 0;
-					document.getElementById("difficultyAdvMapsRange").value = 0;
-					document.getElementById("advSpecialSelect").value = 0;
-					if (game.resources.fragments.owned > 1.97e+57) {
-						document.getElementById("advSpecialSelect").value = "p";
-						document.getElementById("difficultyAdvMapsRange").value = 9;
-					} else if (game.resources.fragments.owned > 1.34e+57) {
-						document.getElementById("advSpecialSelect").value = "p";
-						document.getElementById("difficultyAdvMapsRange").value = 5;
-					} else if (game.resources.fragments.owned > 8.14e+56) {
-						document.getElementById("advSpecialSelect").value = "p";
-					} 
-				} else if (game.global.world == 623) {
-					document.getElementById("advExtraLevelSelect").value = "9";
-					document.getElementById("biomeAdvMapsSelect").value = "Random";
-					document.getElementById("lootAdvMapsRange").value = 0;
-					document.getElementById("difficultyAdvMapsRange").value = 0;
-					document.getElementById("advSpecialSelect").value = 0;
-					if (game.resources.fragments.owned > 4.1e+57) {
-						document.getElementById("lootAdvMapsRange").value = 9;
-						document.getElementById("advSpecialSelect").value = "p";
-						document.getElementById("difficultyAdvMapsRange").value = 9;
-					} else if (game.resources.fragments.owned > 7.61e+56) {
-						document.getElementById("advSpecialSelect").value = "p";
-						document.getElementById("difficultyAdvMapsRange").value = 9;
-					} else if (game.resources.fragments.owned > 3.16e+56) {
-						document.getElementById("advSpecialSelect").value = "p";
-					} 
-				} else if (game.global.world == 626) {
-					document.getElementById("advExtraLevelSelect").value = "9";
-					document.getElementById("biomeAdvMapsSelect").value = "Random";
-					document.getElementById("lootAdvMapsRange").value = 0;
-					document.getElementById("difficultyAdvMapsRange").value = 0;
-					document.getElementById("advSpecialSelect").value = 0;
-					if (game.resources.fragments.owned > 7.14e+57) {
-						document.getElementById("lootAdvMapsRange").value = 9;
-						document.getElementById("advSpecialSelect").value = "p";
-						document.getElementById("difficultyAdvMapsRange").value = 9;
-					} else if (game.resources.fragments.owned > 1.34e+57) {
-						document.getElementById("advSpecialSelect").value = "p";
-						document.getElementById("difficultyAdvMapsRange").value = 9;
-					} else if (game.resources.fragments.owned > 5.53e+56) {
-						document.getElementById("advSpecialSelect").value = "p";
-					} 
-				} else if (game.global.world == 631) {
-					document.getElementById("advExtraLevelSelect").value = "10";
-					document.getElementById("advSpecialSelect").value = "p";
-					document.getElementById("biomeAdvMapsSelect").value = "Random";
-					document.getElementById("lootAdvMapsRange").value = 0;
-					if (game.resources.fragments.owned > 6.9e+58) {
-						document.getElementById("lootAdvMapsRange").value = 9;
-					}
-				} else if (game.global.world == 636) {
-					document.getElementById("advExtraLevelSelect").value = "7";
-					document.getElementById("advSpecialSelect").value = "p";
-				} else if (game.global.world == 638) {
-					document.getElementById("advExtraLevelSelect").value = "7";
-					document.getElementById("advSpecialSelect").value = "p";
-				} else if (game.global.world == 641) {
-					document.getElementById("advExtraLevelSelect").value = "10";
-					document.getElementById("advSpecialSelect").value = "p";
-					document.getElementById("biomeAdvMapsSelect").value = "Random";
-					document.getElementById("lootAdvMapsRange").value = 0;
-					if (game.resources.fragments.owned > 4.5e+59) {
-						document.getElementById("lootAdvMapsRange").value = 9;
-					}
-				} else if (game.global.world == 646) {
-					document.getElementById("advExtraLevelSelect").value = "9";
-					document.getElementById("biomeAdvMapsSelect").value = "Random";
-					document.getElementById("lootAdvMapsRange").value = 0;
-					document.getElementById("difficultyAdvMapsRange").value = 0;
-					document.getElementById("advSpecialSelect").value = 0;
-					if (game.resources.fragments.owned > 9.52e+59) {
-						document.getElementById("lootAdvMapsRange").value = 9;
-						document.getElementById("difficultyAdvMapsRange").value = 9;
-						document.getElementById("advSpecialSelect").value = "p";
-					} else if (game.resources.fragments.owned > 1.79e+59) {
-						document.getElementById("difficultyAdvMapsRange").value = 9;
-						document.getElementById("advSpecialSelect").value = "p";
-					} else if (game.resources.fragments.owned > 7.39e+58) {
-						document.getElementById("advSpecialSelect").value = "p";
-					}
-				} else if (game.global.world == 651) {
-					document.getElementById("advExtraLevelSelect").value = "10";
-					document.getElementById("advSpecialSelect").value = "p";
-					document.getElementById("biomeAdvMapsSelect").value = "Random";
-					document.getElementById("lootAdvMapsRange").value = 0;
-					if (game.resources.fragments.owned > 2.95e+60) {
-						document.getElementById("lootAdvMapsRange").value = 9;
-					}
-				} else if (game.global.world == 653) {
-					document.getElementById("advExtraLevelSelect").value = "10";
-					document.getElementById("advSpecialSelect").value = "p";
-					document.getElementById("biomeAdvMapsSelect").value = "Random";
-					document.getElementById("lootAdvMapsRange").value = 0;
-					if (game.resources.fragments.owned > 4.3e+60) {
-						document.getElementById("lootAdvMapsRange").value = 9;
-					}
-				} else if (game.global.world == 656) {
-					document.getElementById("advExtraLevelSelect").value = "9";
-					document.getElementById("advSpecialSelect").value = "p";
-					document.getElementById("biomeAdvMapsSelect").value = "Random";
-					document.getElementById("lootAdvMapsRange").value = 0;
-					if (game.resources.fragments.owned > 2.1e+60) {
-						document.getElementById("lootAdvMapsRange").value = 9;
-					}
-				} else if (game.global.world == 661) {
-					document.getElementById("advExtraLevelSelect").value = "10";
-					document.getElementById("advSpecialSelect").value = "p";
-					document.getElementById("biomeAdvMapsSelect").value = "Random";
-					document.getElementById("lootAdvMapsRange").value = 0;
-					if (game.resources.fragments.owned > 19.5e+60) {
-						document.getElementById("lootAdvMapsRange").value = 9;
-					}
-				} else if (game.global.world == 666) {
-					document.getElementById("advExtraLevelSelect").value = "9";
-					document.getElementById("advSpecialSelect").value = "p";
-					document.getElementById("biomeAdvMapsSelect").value = "Random";
-					document.getElementById("lootAdvMapsRange").value = 0;
-					if (game.resources.fragments.owned > 13.4e+60) {
-						document.getElementById("lootAdvMapsRange").value = 9;
-					}
-				} else if (game.global.world == 671) {
-					document.getElementById("advExtraLevelSelect").value = "10";
-					document.getElementById("advSpecialSelect").value = "p";
-					document.getElementById("biomeAdvMapsSelect").value = "Random";
-					document.getElementById("lootAdvMapsRange").value = 0;
-					if (game.resources.fragments.owned > 129e+60) {
-						document.getElementById("lootAdvMapsRange").value = 9;
-					}
-				} else if (game.global.world == 675) {
+
+				if (game.global.world == 675) {
 					document.getElementById("advExtraLevelSelect").value = "10";
 					document.getElementById("advSpecialSelect").value = "p";
 					document.getElementById("biomeAdvMapsSelect").value = "Random";
@@ -636,39 +463,10 @@
 					document.getElementById("advExtraLevelSelect").value = "5";
 					document.getElementById("advSpecialSelect").value = "p";
 				} else if (game.global.world == 696) {
+					console.log(696);
 					document.getElementById("advExtraLevelSelect").value = "9";
 					document.getElementById("advSpecialSelect").value = "p";
-				} else if (game.global.world == 705) {
-					document.getElementById("advExtraLevelSelect").value = "10";
-					document.getElementById("advSpecialSelect").value = "p";
-				} else if (game.global.world == 711) {
-					document.getElementById("advExtraLevelSelect").value = "10";
-					document.getElementById("advSpecialSelect").value = "p";
-				} else if (game.global.world == 716) {
-					document.getElementById("advExtraLevelSelect").value = "9";
-					document.getElementById("advSpecialSelect").value = "p";
-				} else if (game.global.world == 721) {
-					document.getElementById("advExtraLevelSelect").value = "10";
-					document.getElementById("advSpecialSelect").value = "p";
-				} else if (game.global.world == 726) {
-					document.getElementById("advExtraLevelSelect").value = "9";
-					document.getElementById("advSpecialSelect").value = "p";
-				} else if (game.global.world == 731) {
-					document.getElementById("advExtraLevelSelect").value = "10";
-					document.getElementById("advSpecialSelect").value = "p";
-				} else if (game.global.world == 735) {
-					document.getElementById("advExtraLevelSelect").value = "10";
-					document.getElementById("advSpecialSelect").value = "p";
-				} else if (game.global.world == 746) {
-					document.getElementById("advExtraLevelSelect").value = "6";
-					document.getElementById("advSpecialSelect").value = "p";
-				} else if (game.global.world == 750) {
-					document.getElementById("advExtraLevelSelect").value = "5";
-					document.getElementById("advSpecialSelect").value = "p";
-				} else if (game.global.world == 761) {
-					document.getElementById("advExtraLevelSelect").value = "10";
-					document.getElementById("advSpecialSelect").value = "p";
-				} else if (game.global.world == 765) {
+				} else if (game.global.world == 700) {
 					document.getElementById("advExtraLevelSelect").value = "10";
 					document.getElementById("advSpecialSelect").value = "p";
 				} else if (game.global.world != restartOnZone && (game.global.world % 10 == 0 || game.global.world % 10 > 5 || blacksmithZones > game.global.world || lastMap >= game.global.world)) {
@@ -1718,8 +1516,8 @@ var actionZones = 41;
 var fastFight = true;
 var lastZoneEquipment = 10;
 var autoEquipNumber = 230;
-var initialRestartZone = 540 + 15 + 15 + 15;
-var restartOnZone = 540 + 15 + 15 + 15;
+var initialRestartZone = 701;
+var restartOnZone = 701;
 var nurseryZones = restartOnZone - 600 + 5; // do not change
 autoNurseryInterval = 100; 
 var minHeliumPerHourPercent = 0.5;
@@ -1738,8 +1536,8 @@ stopHiringAfterRestartZone = false;
 var autoGiga = true;
 
 forcedPortalZone = 682;
-initialRestartZone = 675;
-restartOnZone = 675;
+initialRestartZone = 701;
+restartOnZone = 701;
 actionZones = restartOnZone - 585; // - when you want to start actionZones
 var fastFightZones = restartOnZone;
 
@@ -1749,77 +1547,9 @@ var autoPerkNew = true;
 var autoPerkClicks = 100;
 var autoPerkNewMode = "Looting_II";
 
-var autoFormationTimeout = null;
-var previousFormation = null;
-var previousZone = 0;
-if (windFormationInterval) { clearInterval(windFormationInterval); windFormationInterval = null; }
-var windFormationInterval = setInterval(function() {
-	if (document.getElementById("formation5") != null && document.getElementById("formation5").offsetParent != null) {
-		essenceStartZone = 1
-		essenceEndZone = 1
-	}
-	if (game.global.formation == 5 && game.global.mapsActive && previousFormation) {
-		setFormation('' + previousFormation);
-	}
-	
-	if (autoFormationTimeout) {
-		// do nothing
-	} else {
-		if (document.getElementById("formation5") != null 
-			&& (game.empowerments.Wind.currentDebuffPower != 300 || document.getElementById('badGuyBar').getAttribute('class').indexOf('Red') != -1)
-			&& document.getElementById("formation5").offsetParent != null
-			&& windFormationZones.indexOf("|" + game.global.world + "|") > -1) {
-				autoFormation = false;
-				if (game.global.formation != 5 && !game.global.mapsActive) {
-					previousFormation = game.global.formation;
-					setFormation('5');
-				}
-		} else {
-			previousZone = game.global.world;
-			autoFormationTimeout = setTimeout(function() {
-				autoFormationTimeout = null;
-				if (
-					(game.global.world >= minDmgZoneForWind 
-					&& game.global.world == previousZone 
-					&& game.empowerments.Wind.currentDebuffPower == 300 
-					&& document.getElementById('badGuyBar').getAttribute('class').indexOf('Red') == -1)
-					|| windFormationZones.indexOf("|" + game.global.world + "|") == -1) {
-					autoFormation = true;
-				}
-			}, 600);
-		}
-	}
-}, 50);
-
-var windFormationZones = "|646|647|648|649|650|661|662|663|664|665|676|677|678|679|680|691|692|693|694|695|706|707|708|709|710|721|722|723|724|725|736|737|738|739|740|751|752|753|754|755|766|767|768|769|770|781|782|783|784|785|796|797|798|799|800|"
-
 var forceVoidMapsZone = -1;
 var testGoldenBattle = false;
 
-gogogo = false;
-if (gogogo) { // don't change it here. change line above
-	autoGoldenHelium = false
-	autoGoldenVoid = true
-	autoGoldenBattle = true
-	autoPortal = false
-	autoNursery = false
-	autoExportSave = true
-
-	restartOnZone = 900
-	actionZones = restartOnZone - 585;
-	autoFormation = false
-	buyLowLevelHouses = true
-	buyArmStartZone = 0;
-	buyEquipmentStartZone = 0;
-	autoGiga = true;
-	autoPerkNew = false;
-	autoPerk = false;
-	abandons.push(675);
-	for (var i = 676; i < 1000; i++) noActionZones.push(i);
-	forceVoidMapsZone = 690;
-	initialRestartZone = 690;
-	restartOnZone = 690;
-}
 
 var buyStorageOnlyWhenHalf = false;
 autoBuyBonePortal = false;
@@ -1840,25 +1570,100 @@ essenceEndZone = 0;
 upgradeNature = false;
 autoPerk = false;
 
-var goForWind = false;
+var goForWind = true;
 if (goForWind) {
 	autoExportSave = true
-	autoPortal = false
-	restartOnZone = 800
-	forceVoidMapsZone = 750
+	autoPortal = true
+	initialRestartOnZone = 701
+	restartOnZone = 701
+	forcedPortalZone = 701
+	forceVoidMapsZone = 690
+	initialAbandons.push(675);
+	initialAbandons.push(690);
+	initialAbandons.push(700);
 	abandons.push(675)
 	abandons.push(690)
-	abandons.push(699)
-	abandons.push(705)
-	abandons.push(735)
-	abandons.push(750)
-	abandons.push(765)
+	abandons.push(700)
 	nurseryZones = - 10000
-	naturePurchase('uberEmpower', 'Wind')
 	lastZoneEquipment = 10
 	testGoldenBattle = true
-	fastFightZones = 0
+	fastFightZones = 1000
 	minDmgZoneForWind = 1000
 }
 autoGoldenVoid = false
 // fastFightZones = 0
+
+
+
+
+var shouldFightSomeMap = function() {
+	if (game.global.world != 700)
+		return false;
+	
+	if (game.global.mapsActive)
+		return false;
+
+	if (game.global.mapBonus > 0) {
+		return false;
+	}
+	
+	return true;
+}
+
+if (repeatMaps) { clearInterval(repeatMaps); repeatMaps = null; }
+var repeatMaps = setInterval(function() {
+	if (shouldFightSomeMap()) {
+		if (!game.global.switchToMaps) {
+			mapsClicked();
+		}
+		mapsClicked();
+		
+		if (game.global.world == 700) {
+			document.getElementById("advSpecialSelect").value = 'p';
+			document.getElementById("advExtraLevelSelect").value = "5";
+		}
+		
+		buyMap();
+		
+
+		runMap();
+		fightManual();
+		
+		while (document.getElementById('togglerepeatUntil').innerHTML.indexOf('Any') == -1) {
+			toggleSetting('repeatUntil');
+		}
+			
+		while (document.getElementById('toggleexitTo').innerHTML.indexOf('World') == -1) {
+			toggleSetting('exitTo')
+		}
+	}
+}, 1200);
+
+if (clickMapsInterval) { clearInterval(clickMapsInterval); clickMapsInterval = null; }
+var clickMapsInterval = setInterval(function() {
+	if (!game.global.switchToMaps && game.global.world == 695) {
+		mapsClicked();
+	}
+}, 1200);
+
+if (fligh696Interval) { clearInterval(fligh696Interval); fligh696Interval = null; }
+var fligh696Interval = setInterval(function() {
+	if (!game.global.mapsActive && game.global.world == 696 && game.global.mapBonus < 1) {
+
+		document.getElementById("advSpecialSelect").value = 'p';
+		document.getElementById("advExtraLevelSelect").value = "5";
+		
+		buyMap();
+
+		runMap();
+		fightManual();
+		
+		while (document.getElementById('togglerepeatUntil').innerHTML.indexOf('Items') == -1) {
+			toggleSetting('repeatUntil');
+		}
+			
+		while (document.getElementById('toggleexitTo').innerHTML.indexOf('World') == -1) {
+			toggleSetting('exitTo')
+		}
+	}
+}, 1200);

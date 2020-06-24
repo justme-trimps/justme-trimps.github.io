@@ -5,10 +5,10 @@ var challengeToTry = 'Melt';
 var minMeltingZone = 106;
 var autoCancelActive = false;
 var smithiesWanted = 18;
-var tributesWanted = 1200;
+var tributesWanted = 1225;
 var autoHireFarmers = true;
 
-var forcedPortalWorld = 118;
+var forcedPortalWorld = 119;
 
 var plusZeroZones = [85, 91, 92, 93, 94, 95, 97, 99, 104, 105, 106, 107, 108, 114, 115, 116, 117]
 var plusOneZones = [47, 77];
@@ -30,7 +30,7 @@ var goldenMode = 'Void';
 var minGoldenHeliumBeforeBattle = 5.0;//2.0;
 var minGoldenVoidBeforeHelium = -1.0; //0.5;
 
-var voidMapZone = 70;
+var voidMapZone = 85;
 var maxVoidMapZone = 111;
 
 var abandonChallengeZone = 74;
@@ -101,6 +101,7 @@ var changeAutobuyingNumbersInterval = setInterval(function() {
 		if (game.global.world >= 108) { autobuyingEquipmentNumber = 14; autobuyingArmNumber = 14; }
 		if (game.global.world >= 114) { autobuyingEquipmentNumber = 16; autobuyingArmNumber = 16; }
 		if (game.global.world >= 116) { autobuyingEquipmentNumber = 20; autobuyingArmNumber = 20; }
+		if (game.global.world >= 117) { autobuyingEquipmentNumber = 20; autobuyingArmNumber = 22; }
 	}
 }, 1000 * 1);
 
@@ -584,7 +585,7 @@ var shouldFightSomeMap = function() {
 		}
 	}
 	
-	if (!game.global.mapsActive && game.global.lastClearedCell < 10 && game.buildings.Smithy.owned == smithiesWanted && game.global.world > minMeltingZone) {
+	if (!game.global.mapsActive && game.global.lastClearedCell < 8 && game.buildings.Smithy.owned == smithiesWanted && game.global.world > minMeltingZone) {
 		for (var i = game.global.mapsOwnedArray.length - 1; i > -1; i--) {
 			if (game.global.mapsOwnedArray[i].name == "Melting Point") {
 				var button = document.getElementById(game.global.mapsOwnedArray[i].id);
@@ -716,7 +717,7 @@ var repeatMaps = setInterval(function() {
 
 		var specialZoneRun = false;
 
-		if (game.buildings.Smithy.owned == smithiesWanted && game.global.lastClearedCell < 10 && game.global.world > minMeltingZone) {
+		if (game.buildings.Smithy.owned == smithiesWanted && game.global.lastClearedCell < 8 && game.global.world > minMeltingZone) {
 			for (var i = game.global.mapsOwnedArray.length - 1; i > -1; i--) {
 				if (game.global.mapsOwnedArray[i].name == "Melting Point") {
 					var button = document.getElementById(game.global.mapsOwnedArray[i].id);
@@ -1091,9 +1092,9 @@ var shouldLoadOptimizedSave = function(reset, seconds, cell, debug) {
 		//if (debug) {
 		//	console.log('shouldLoadOptimizedSave mySeconds >= seconds ' + mySeconds + " " + seconds);
 		//}
-		if ((myCell + 3) <= cell) {
+		if ((myCell + 4) <= cell) {
 			if (debug) {
-				console.log('shouldLoadOptimizedSave true: mySeconds >= seconds && ((myCell + 3) <= cell) ' + mySeconds + " " + seconds + " " + (myCell + 3) + " " + cell);
+				console.log('shouldLoadOptimizedSave true: mySeconds >= seconds && ((myCell + 4) <= cell) ' + mySeconds + " " + seconds + " " + (myCell + 4) + " " + cell);
 			}
 			return true;
 		}
@@ -1169,7 +1170,7 @@ var cookieOptimizerInterval = setInterval(function() {
 	if (game.global.lastClearedCell < 10 || game.global.mapsActive)
 		return false;
 	
-	if (game.global.world < 80)
+	if (game.global.world < 87)
 		return false;
 
 	if (debugOptimizer)
