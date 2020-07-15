@@ -5,19 +5,19 @@ var challengeToTry = 'Melt';
 var minMeltingZone = 106;
 var autoCancelActive = false;
 var smithiesWanted = 18;
-var tributesWanted = 1225;
+var tributesWanted = 1250;
 var autoHireFarmers = true;
 
 var forcedPortalWorld = 119;
 
-var plusZeroZones = [85, 91, 94, 95, 97, 99, 104, 105, 106, 107, 108, 114, 115, 116, 117]
+var plusZeroZones = [83, 84, 85, 92, 94, 95, 97, 99, 104, 105, 106, 107, 108, 114, 115, 116, 117]
 var plusOneZones = [47, 77];
-var plusTwoZones = [80, 79, 100, 101, 102, 103, 109, 110, 111, 112, 113];
-var plusThreeZones = [55, 88, 98];
+var plusTwoZones = [100, 101, 102, 103, 109, 110, 111, 112, 113];
+var plusThreeZones = [55, 98];
 var plusFourZones = [];
 var plusFiveZones = [45];
 var plusSixZones = [];
-var prestigiousZones = [78, 88, 98, 103, 109, 113];
+var prestigiousZones = [98, 103, 109, 113];
 
 var tryMore = false;
 if (tryMore) {
@@ -35,7 +35,7 @@ var goldenMode = 'Void';
 var minGoldenHeliumBeforeBattle = 5.0;//2.0;
 var minGoldenVoidBeforeHelium = -1.0; //0.5;
 
-var voidMapZone = 85;
+var voidMapZone = 91;
 var maxVoidMapZone = 111;
 
 var abandonChallengeZone = 74;
@@ -1186,7 +1186,7 @@ var cookieOptimizerInterval = setInterval(function() {
 	if (game.global.lastClearedCell < 10 || game.global.mapsActive)
 		return false;
 	
-	if (game.global.world < 87)
+	if (game.global.world < 92)
 		return false;
 
 	if (debugOptimizer)
