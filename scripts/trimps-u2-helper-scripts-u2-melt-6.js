@@ -10,14 +10,19 @@ var autoHireFarmers = true;
 
 var forcedPortalWorld = 119;
 
-var plusZeroZones = [85, 91, 92, 93, 94, 95, 97, 99, 104, 105, 106, 107, 108, 114, 115, 116, 117]
+var plusZeroZones = [85, 91, 94, 95, 97, 99, 104, 105, 106, 107, 108, 114, 115, 116, 117]
 var plusOneZones = [47, 77];
 var plusTwoZones = [80, 79, 100, 101, 102, 103, 109, 110, 111, 112, 113];
 var plusThreeZones = [55, 88, 98];
 var plusFourZones = [];
 var plusFiveZones = [45];
 var plusSixZones = [];
-var prestigiousZones = [78, 88, 98, 103, 109];
+var prestigiousZones = [78, 88, 98, 103, 109, 113];
+
+var tryMore = false;
+if (tryMore) {
+	forcedPortalWorld = 120;
+}
 
 var autobuyingEquipmentNumber = 33;
 var autobuyingArmNumber = 31;
@@ -74,6 +79,10 @@ var changeAutoBuy = true;
 var set01 = true;
 
 var fluffyStart;
+
+if (game.global.world == 1)
+	fluffyStart = Fluffy.currentExp[1];
+
 if (typeof fluffyStart === "undefined")
 	fluffyStart = 0;
 
@@ -88,20 +97,24 @@ var changeAutobuyingNumbersInterval = setInterval(function() {
 		if (game.global.world >= 65) { autobuyingEquipmentNumber = 22; autobuyingArmNumber = 8; }
 		if (game.global.world >= 66) { autobuyingEquipmentNumber = 25; autobuyingArmNumber = 17; }
 		if (game.global.world >= 69) { autobuyingEquipmentNumber = 20; autobuyingArmNumber = 10; }
-		if (game.global.world >= 75) { autobuyingEquipmentNumber = 34; autobuyingArmNumber = 34; }
-		if (game.global.world >= 76) { autobuyingEquipmentNumber = 40; autobuyingArmNumber = 40; }
-		if (game.global.world >= 80) { autobuyingEquipmentNumber = 35; autobuyingArmNumber = 35; }
-		if (game.global.world >= 85) { autobuyingEquipmentNumber = 55; autobuyingArmNumber = 40; }
-		if (game.global.world >= 89) { autobuyingEquipmentNumber = 32; autobuyingArmNumber = 32; }
-		if (game.global.world >= 94) { autobuyingEquipmentNumber = 35; autobuyingArmNumber = 35; }
+		if (game.global.world >= 75) { autobuyingEquipmentNumber = 34; autobuyingArmNumber = 20; }
+		if (game.global.world >= 76) { autobuyingEquipmentNumber = 40; autobuyingArmNumber = 20; }
+		if (game.global.world >= 80) { autobuyingEquipmentNumber = 35; autobuyingArmNumber = 20; }
+		if (game.global.world >= 85) { autobuyingEquipmentNumber = 55; autobuyingArmNumber = 20; }
+		if (game.global.world >= 89) { autobuyingEquipmentNumber = 32; autobuyingArmNumber = 20; }
+		if (game.global.world >= 94) { autobuyingEquipmentNumber = 35; autobuyingArmNumber = 20; }
 		if (game.global.world >= 98) { autobuyingEquipmentNumber = 20; autobuyingArmNumber = 20; }
 		if (game.global.world >= 100) { autobuyingEquipmentNumber = 20; autobuyingArmNumber = 20; }
-		if (game.global.world >= 104) { autobuyingEquipmentNumber = 25; autobuyingArmNumber = 25; buyShields = true; }
-		if (game.global.world >= 105) { autobuyingEquipmentNumber = 28; autobuyingArmNumber = 28; }
+		if (game.global.world >= 104) { autobuyingEquipmentNumber = 25; autobuyingArmNumber = 20; buyShields = true; }
+		if (game.global.world >= 105) { autobuyingEquipmentNumber = 28; autobuyingArmNumber = 20; }
 		if (game.global.world >= 108) { autobuyingEquipmentNumber = 14; autobuyingArmNumber = 14; }
-		if (game.global.world >= 114) { autobuyingEquipmentNumber = 16; autobuyingArmNumber = 16; }
-		if (game.global.world >= 116) { autobuyingEquipmentNumber = 20; autobuyingArmNumber = 20; }
-		if (game.global.world >= 117) { autobuyingEquipmentNumber = 20; autobuyingArmNumber = 22; }
+		if (game.global.world >= 113) { autobuyingEquipmentNumber = 16; autobuyingArmNumber = 15; }
+		if (game.global.world >= 114) { autobuyingEquipmentNumber = 20; autobuyingArmNumber = 16; }
+		if (game.global.world >= 116) { autobuyingEquipmentNumber = 22; autobuyingArmNumber = 17; }
+		if (game.global.world >= 117) { autobuyingEquipmentNumber = 24; autobuyingArmNumber = 18; }
+		if (tryMore) {
+			if (game.global.world >= 118) { autobuyingEquipmentNumber = 20; autobuyingArmNumber = 24; }
+		}
 	}
 }, 1000 * 1);
 
@@ -1115,6 +1128,9 @@ var shouldSaveOptimizedSave = function(reset, seconds, cell, debug) {
 	var myPortal = game.global.totalRadPortals;
 	var mySeconds = Math.round(((new Date() * 1) - game.global.portalTime) / 1000);
 	var myCell = (game.global.world * 100 + game.global.lastClearedCell);
+	
+	if (game.buildings.Smithy.owned == smithiesWanted)
+		return false;
 	
 	if (debug) {
 		console.log('shouldSaveOptimizedSave');
