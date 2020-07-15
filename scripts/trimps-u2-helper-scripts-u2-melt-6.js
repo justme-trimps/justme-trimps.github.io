@@ -2,7 +2,7 @@ var goForScruffy = true;
 var gogogo = true;
 var dontPortal = false;
 var challengeToTry = 'Melt'; 
-var minMeltingZone = 106;
+var minMeltingZone = 101;
 var autoCancelActive = false;
 var smithiesWanted = 18;
 var tributesWanted = 1250;
@@ -532,7 +532,7 @@ var hireEmployeesInterval = setInterval(function() {
 	setGather(goFor);
 	
 	if (goFor != 'food'
-			&& game.global.lastClearedCell < 10 
+			&& game.global.lastClearedCell < 20 
 			&& !game.global.mapsActive) {
 		fireMode();
 		setMax(1, false);
