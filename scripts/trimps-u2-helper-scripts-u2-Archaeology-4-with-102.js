@@ -72,6 +72,10 @@ var changeAutoBuy = true;
 var set01 = true;
 
 var fluffyStart;
+
+if (game.global.world == 1)
+	fluffyStart = Fluffy.currentExp[1];
+
 if (typeof fluffyStart === "undefined")
 	fluffyStart = 0;
 
