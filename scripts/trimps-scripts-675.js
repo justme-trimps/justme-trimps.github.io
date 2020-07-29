@@ -1791,7 +1791,32 @@ var windFormationInterval = setInterval(function() {
 	}
 }, 50);
 
-var windFormationZones = "|646|647|648|649|650|661|662|663|664|665|676|677|678|679|680|691|692|693|694|695|706|707|708|709|710|721|722|723|724|725|736|737|738|739|740|751|752|753|754|755|766|767|768|769|770|781|782|783|784|785|796|797|798|799|800|"
+if (pauseFightInterval) { clearInterval(pauseFightInterval); pauseFightInterval = null; }
+var pauseFightInterval = setInterval(function() {
+	if (!goForWind) {
+		clearInterval(pauseFightInterval);
+		return;
+	}
+	
+	if (windFormationZones.indexOf("|" + game.global.world + "|") == -1
+		&& windFormationZones.indexOf("|" + (game.global.world + 1) + "|") > -1
+		&& document.getElementById('pauseFight')
+		&& document.getElementById('pauseFight').innerText.indexOf("On") > -1
+		&& game.global.lastClearedCell > 90
+		) {
+		document.getElementById('pauseFight').click();
+	}
+	
+	if (windFormationZones.indexOf("|" + game.global.world + "|") > -1
+		&& document.getElementById('pauseFight')
+		&& document.getElementById('pauseFight').innerText.indexOf("Off") > -1
+		&& (game.global.formation == 5 || game.global.mapsActive)
+		) {
+		document.getElementById('pauseFight').click();
+	}
+}, 100);
+
+var windFormationZones = "|631|632|633|634|635|646|647|648|649|650|661|662|663|664|665|676|677|678|679|680|691|692|693|694|695|706|707|708|709|710|721|722|723|724|725|736|737|738|739|740|751|752|753|754|755|766|767|768|769|770|781|782|783|784|785|796|797|798|799|800|"
 
 var forceVoidMapsZone = -1;
 var testGoldenBattle = false;
@@ -1836,6 +1861,10 @@ minDmgZoneForWind = 770;
 noActionZones.push(645);
 noActionZones.push(653);
 noActionZones.push(663);
+noActionZones.push(721);
+noActionZones.push(722);
+noActionZones.push(723);
+noActionZones.push(724);
 essenceEndZone = 0;
 upgradeNature = false;
 autoPerk = false;
