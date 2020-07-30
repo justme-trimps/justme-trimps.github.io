@@ -63,6 +63,19 @@ Void Siphon: 235%
 05d21h05m BW155 - completed 3rd time (1st Mace)
 06d01h04m BW155 - completed 4th time (2nd Mace)
 06d03h46m BW155 - completed 5th time
+06d06h23m BW155 - completed 6th time
+06d08h25m BW155 - completed 7th time
+06d10h20m BW155 - completed 8th time
+06d11h50m BW155 - completed 9th time
+06d13h18m BW155 - completed 10th time
+06d14h28m BW155 - completed 11th time
+06d15h37m BW155 - completed 12th time
+06d16h33m BW155 - completed 13th time
+06d17h28m BW155 - completed 14th time
+06d23h10m start Z132
+07d01h49m start Z133
+07d06h51m start Z134
+
 
 00h25m - start Z111: VM + farm
 00h35m - start M121
