@@ -1117,6 +1117,11 @@ var isOkToPortal = function() {
 if (forcePortalInterval) { clearInterval(forcePortalInterval); forcePortalInterval = null; }
 var forcePortalInterval = setInterval(function() {
 	if (isOkToPortal()) {
+		cancelTooltip();
+		tooltip('Export', null, 'update');
+		document.getElementById('downloadLink').click();
+		cancelTooltip();
+
 		logFluffyExp();
 		portalClicked();
 		console.log('---');
