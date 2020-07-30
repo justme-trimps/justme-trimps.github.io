@@ -1161,7 +1161,11 @@ var gatherMetalInterval = setInterval(function() {
 }, 3000);
 
 
-var goodModsNames = "|empty|MinerSpeed|fragmentsDrop|FarmerSpeed|LumberjackSpeed|DragimpSpeed|FluffyExp|";
+var goodModsNames = "|empty|ScientistSpeed|MinerSpeed|fragmentsDrop|FarmerSpeed|LumberjackSpeed|FluffyExp|";
+var goodModsNames2 = "|empty|foodDrop|gemsDrop|fragmentsDrop|metalDrop|woodDrop|FluffyExp|";
+var goodModsNames3 = "|empty|critChance|trimpAttack|critDamage|prismatic|trimpHealth|plaguebringer|voidMaps|"; //FluffyExp| //"critChance|trimpAttack|critDamage|gammaBurst|prismatic|trimpHealth";
+
+
 //var goodModsNames = "empty|MinerSpeed|ExplorerSpeed|FarmerSpeed|LumberjackSpeed|DragimpSpeed|FluffyExp|critChance|trimpAttack|critDamage|gammaBurst|prismatic|trimpHealth";
 //var goodModsNames = "empty|MinerSpeed|ExplorerSpeed|FarmerSpeed|LumberjackSpeed|DragimpSpeed|"; //FluffyExp| //"critChance|trimpAttack|critDamage|gammaBurst|prismatic|trimpHealth";
 //var goodModsNames = "empty|critChance|trimpAttack|critDamage|prismatic|trimpHealth|plaguebringer"; //FluffyExp| //"critChance|trimpAttack|critDamage|gammaBurst|prismatic|trimpHealth";
@@ -1171,11 +1175,35 @@ var collectHeirloomsInterval = setInterval(function() {
 	if (getMaxCarriedHeirlooms() > game.global.heirloomsCarried.length) {
 		for (var i = 0; i < game.global.heirloomsExtra.length; i++) { 
 			var theHeirloom = game.global.heirloomsExtra[i];
-			if (theHeirloom.rarity > 8) {
+			if (theHeirloom.rarity > 9) {
 				var hMods = theHeirloom.mods;
 				var goodMods = 0;
 				for (var j = 0; j < hMods.length; j++) {
 					if (goodModsNames.indexOf(hMods[j][0]) > -1) {
+						goodMods++;
+					}
+				}
+				if (goodMods > 5) {
+					selectHeirloom(i, 'heirloomsExtra', document.getElementById('extraHeirloomsHere').getElementsByClassName('heirloomThing')[i])
+					carryHeirloom();
+					return;
+				}
+				
+				var goodMods = 0;
+				for (var j = 0; j < hMods.length; j++) {
+					if (goodModsNames2.indexOf(hMods[j][0]) > -1) {
+						goodMods++;
+					}
+				}
+				if (goodMods > 5) {
+					selectHeirloom(i, 'heirloomsExtra', document.getElementById('extraHeirloomsHere').getElementsByClassName('heirloomThing')[i])
+					carryHeirloom();
+					return;
+				}
+				
+				var goodMods = 0;
+				for (var j = 0; j < hMods.length; j++) {
+					if (goodModsNames3.indexOf(hMods[j][0]) > -1) {
 						goodMods++;
 					}
 				}
