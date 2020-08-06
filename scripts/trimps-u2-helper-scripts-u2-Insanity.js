@@ -1227,6 +1227,8 @@ var forcePortalInterval = setInterval(function() {
 			fluffyStart = Fluffy.currentExp[1];
 			jestimpTarget = "food"
 			mapMode = "lsc";
+			save(false, true);
+			window.location.reload();
 		}, 1000);
 	}
 }, 500);
