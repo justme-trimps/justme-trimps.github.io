@@ -25,9 +25,9 @@ var tryBattle100 = false;
 //var plusTwoZones = [79, 83, ,89, 90, 91, 92, 93, 109, 110, 123];
 
 
-var plusZeroZones = [20, 24, 65, 79, 96, 116, 128];
-var plusOneZones = [30, 40, 50, 64, 74, 84, 94, 104];
-var plusTwoZones = [59, 69, 79, 89, 99, 109, 110, 123];
+var plusZeroZones = [20, 24, 65, 79, 96, 115, 125];
+var plusOneZones = [30, 40, 54, 64, 74, 84, 94, 104, 120];
+var plusTwoZones = [59, 69, 79, 89, 99, 109, 110];
 
 if (tryNextOne) {
 	forcedPortalWorld = 117;
@@ -963,11 +963,11 @@ var repeatMaps = setInterval(function() {
 		}
 		
 		if (game.global.world > 45 && game.global.world < 109) {
-			mapMode = "hc";
+			mapMode = "lsc"; //hc
 		}
 
 		if (game.global.world > 115) {
-			mapMode = "hc";
+			mapMode = "lsc"; //hc
 		}
 
 		document.getElementById("advSpecialSelect").value = mapMode;
