@@ -322,6 +322,8 @@ var buyThingsInterval = setInterval(function() {
 	if (buyShields && autobuyingArmNumber > game.equipment.Shield.level) buyThing('Shield');
 	if (buyCollectors) { numTab('6'); setMax(0.1); buyBuilding('Collector'); numTab('1'); }
 	buyThing('Microchip');
+	buyThing('Antenna');
+	buyThing('Worshipper');
 }, 50);
 
 var upgradeFast = true;
@@ -1140,6 +1142,8 @@ var forcePortalInterval = setInterval(function() {
 			fluffyStart = Fluffy.currentExp[1];
 			jestimpTarget = "food"
 			mapMode = "lsc";
+			save(false, true);
+			window.location.reload();
 		}, 1000);
 	}
 }, 500);
@@ -1169,7 +1173,7 @@ var gatherMetalInterval = setInterval(function() {
 var goodModsNames = "|empty|DragimpSpeed|MinerSpeed|fragmentsDrop|FarmerSpeed|LumberjackSpeed|FluffyExp|";
 var goodModsNames2 = "|empty|foodDrop|gemsDrop|fragmentsDrop|metalDrop|woodDrop|FluffyExp|";
 var goodModsNames3 = "|empty|critChance|trimpAttack|critDamage|prismatic|trimpHealth|plaguebringer|voidMaps|"; //FluffyExp| //"critChance|trimpAttack|critDamage|gammaBurst|prismatic|trimpHealth";
-
+var goodModsNames4 = "|empty|FluffyExp|foodDrop|fragmentsDrop|gemsDrop|metalDrop|woodDrop|"; //FluffyExp| //"critChance|trimpAttack|critDamage|gammaBurst|prismatic|trimpHealth";
 
 //var goodModsNames = "empty|MinerSpeed|ExplorerSpeed|FarmerSpeed|LumberjackSpeed|DragimpSpeed|FluffyExp|critChance|trimpAttack|critDamage|gammaBurst|prismatic|trimpHealth";
 //var goodModsNames = "empty|MinerSpeed|ExplorerSpeed|FarmerSpeed|LumberjackSpeed|DragimpSpeed|"; //FluffyExp| //"critChance|trimpAttack|critDamage|gammaBurst|prismatic|trimpHealth";
@@ -1217,6 +1221,18 @@ var collectHeirloomsInterval = setInterval(function() {
 					carryHeirloom();
 					return;
 				}
+
+				var goodMods = 0;
+				for (var j = 0; j < hMods.length; j++) {
+					if (goodModsNames4.indexOf(hMods[j][0]) > -1) {
+						goodMods++;
+					}
+				}
+				if (goodMods > 5) {
+					selectHeirloom(i, "heirloomsExtra", document.getElementById("extraHeirloomsHere").getElementsByClassName("heirloomThing")[i])
+					carryHeirloom();
+					return;
+				}
 			}
 		}
 	}
@@ -1230,7 +1246,7 @@ var autoSaveInterval = setInterval(function() {
 		document.getElementById('downloadLink').click();
 		cancelTooltip();
 	}
-}, 1000 * 60 * 2);
+}, 1000 * 60 * 5);
 
 var getEnergyShieldState = function() {
 	var shield = document.getElementById('energyShield');

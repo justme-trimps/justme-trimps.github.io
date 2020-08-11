@@ -254,6 +254,128 @@
 					document.getElementById("fightBtn").click();
 				}
 			}
+			
+			var startBw = function() {
+				for (var i = game.global.mapsOwnedArray.length - 1; i > -1; i--) {
+					if (game.global.mapsOwnedArray[i].location == "Bionic") {
+						var button = document.getElementById(game.global.mapsOwnedArray[i].id);
+						if (button) {
+							button.click();
+							runMap();
+							fightManual();
+							
+							while (document.getElementById('togglerepeatUntil').innerHTML.indexOf('Items') == -1) {
+								toggleSetting('repeatUntil');
+							}
+							
+							while (document.getElementById('toggleexitTo').innerHTML.indexOf('World') == -1) {
+								toggleSetting('exitTo')
+							}
+							
+							if (game.global.world < 795) {
+								var climbButton = document.getElementById('toggleclimbBw2');
+								if (climbButton && climbButton.getAttribute("class").indexOf("settingBtn0") > -1) {
+									toggleSetting('climbBw')
+								}
+							}
+						}
+						break;
+					}
+				}
+			}
+			
+			trimpsIntervals.push(setInterval(function() {
+				if (game.global.world == 765 
+					&& document.getElementById('worldNumber')
+					&& document.getElementById('worldNumber').innerText.indexOf('800') > -1) {
+						var climbButton = document.getElementById('toggleclimbBw2');
+						if (climbButton.getAttribute("class").indexOf("settingBtn1") > -1) {
+							toggleSetting('climbBw');
+						}
+				}
+			}, 3000));
+			
+			trimpsIntervals.push(
+			setInterval(function() {
+				if (game.global.world == 795 && !game.global.mapsActive && game.global.fighting && game.global.mapBonus < 1) {
+						
+					if (!game.global.switchToMaps) {
+						mapsClicked();
+					}
+					
+					mapsClicked();
+
+					recycleBelow(true);
+					cancelTooltip();
+					
+					document.getElementById("advExtraLevelSelect").value = "10";
+					document.getElementById("advSpecialSelect").value = "p";
+					
+					buyMap();
+					runMap();
+					fightManual();
+					
+					while (document.getElementById('togglerepeatUntil').innerHTML.indexOf('Items') == -1) {
+						toggleSetting('repeatUntil');
+					}
+					
+					while (document.getElementById('toggleexitTo').innerHTML.indexOf('Maps') == -1) {
+						toggleSetting('exitTo')
+					}
+				}
+			}, 3000)
+			);
+			
+			trimpsIntervals.push(
+			setInterval(function() {
+				if (game.global.world == 795 && !game.global.mapsActive && !game.global.fighting && game.global.mapBonus > 3) {
+					startBw();
+				}
+			}, 3000)
+			);
+			
+			trimpsIntervals.push(
+			setInterval(function() {
+				if (game.global.world == 800 && !game.global.mapsActive && !game.global.fighting && game.global.mapBonus < 1) {
+					incrementMapLevel(-1);
+					incrementMapLevel(-1);
+					incrementMapLevel(-1);
+					buyMap();
+					runMap();
+					fightManual();
+					while (document.getElementById('togglerepeatUntil').innerHTML.indexOf('Any') == -1) {
+						toggleSetting('repeatUntil');
+					}
+				}
+			}, 3000)
+			);
+			
+			trimpsIntervals.push(
+			setInterval(function() {
+				if (game.global.world > 798 
+				&& game.global.world < 800 
+				&& !game.global.mapsActive 
+				&& game.global.fighting 
+				&& game.global.mapBonus < 1) {
+					if (!game.global.switchToMaps) {
+						mapsClicked();
+					}
+					mapsClicked();
+
+					incrementMapLevel(-1);
+					incrementMapLevel(-1);
+					incrementMapLevel(-1);
+					buyMap();
+					runMap();
+					fightManual();
+					while (document.getElementById('togglerepeatUntil').innerHTML.indexOf('Any') == -1) {
+						toggleSetting('repeatUntil');
+					}
+				}
+			}, 3000)
+			);
+			
+			
 
 			var findDoa = function() { 
 				var maps = document.getElementsByClassName("onMapName");
@@ -280,7 +402,7 @@
 				}
 				
 				if (document.getElementById("mapsBtnText") && document.getElementById("mapsBtnText").offsetParent !== null && document.getElementById("mapsBtnText").innerHTML.indexOf("World") > -1) {
-					document.getElementById("mapsBtnText").click();
+					startBw();
 				} else {
 					setTimeout(function() { findDoa(); }, 1000);
 				}
@@ -811,15 +933,13 @@
 
 		trimpsIntervals.push(setInterval(function() { 
 			if (canAffordBuilding('Nursery', true, false, false, false, 25)) {
-				if (findZoneNumber() > 0 && findZoneNumber() >= restartOnZone - nurseryZones) {
-					if ((game.global.world < 246) || ((game.global.world - 246) % 15 > 3)) {
-						var button = document.getElementById("Nursery");
-						if (button && button.offsetParent != null && autoNursery) {
-							numTab('3'); 
-							document.getElementById("Nursery").click();
-							//console.log("Nursery bought in zone " + game.global.world);
-							numTab('6');
-						}
+				if (game.global.world >= 798) {
+					var button = document.getElementById("Nursery");
+					if (button && button.offsetParent != null) {
+						numTab('3'); 
+						document.getElementById("Nursery").click();
+						//console.log("Nursery bought in zone " + game.global.world);
+						numTab('6');
 					}
 				}
 			}
