@@ -1166,7 +1166,7 @@ var gatherMetalInterval = setInterval(function() {
 }, 3000);
 
 
-var goodModsNames = "|empty|ScientistSpeed|MinerSpeed|fragmentsDrop|FarmerSpeed|LumberjackSpeed|FluffyExp|";
+var goodModsNames = "|empty|DragimpSpeed|MinerSpeed|fragmentsDrop|FarmerSpeed|LumberjackSpeed|FluffyExp|";
 var goodModsNames2 = "|empty|foodDrop|gemsDrop|fragmentsDrop|metalDrop|woodDrop|FluffyExp|";
 var goodModsNames3 = "|empty|critChance|trimpAttack|critDamage|prismatic|trimpHealth|plaguebringer|voidMaps|"; //FluffyExp| //"critChance|trimpAttack|critDamage|gammaBurst|prismatic|trimpHealth";
 
@@ -1178,7 +1178,7 @@ var goodModsNames3 = "|empty|critChance|trimpAttack|critDamage|prismatic|trimpHe
 if (collectHeirloomsInterval) { clearInterval(collectHeirloomsInterval); collectHeirloomsInterval = null; }
 var collectHeirloomsInterval = setInterval(function() {
 	if (getMaxCarriedHeirlooms() > game.global.heirloomsCarried.length) {
-		for (var i = 0; i < game.global.heirloomsExtra.length; i++) { 
+		for (var i = 0; i < game.global.heirloomsExtra.length; i++) {
 			var theHeirloom = game.global.heirloomsExtra[i];
 			if (theHeirloom.rarity > 9) {
 				var hMods = theHeirloom.mods;
@@ -1189,11 +1189,11 @@ var collectHeirloomsInterval = setInterval(function() {
 					}
 				}
 				if (goodMods > 5) {
-					selectHeirloom(i, 'heirloomsExtra', document.getElementById('extraHeirloomsHere').getElementsByClassName('heirloomThing')[i])
+					selectHeirloom(i, "heirloomsExtra", document.getElementById("extraHeirloomsHere").getElementsByClassName("heirloomThing")[i])
 					carryHeirloom();
 					return;
 				}
-				
+
 				var goodMods = 0;
 				for (var j = 0; j < hMods.length; j++) {
 					if (goodModsNames2.indexOf(hMods[j][0]) > -1) {
@@ -1201,11 +1201,11 @@ var collectHeirloomsInterval = setInterval(function() {
 					}
 				}
 				if (goodMods > 5) {
-					selectHeirloom(i, 'heirloomsExtra', document.getElementById('extraHeirloomsHere').getElementsByClassName('heirloomThing')[i])
+					selectHeirloom(i, "heirloomsExtra", document.getElementById("extraHeirloomsHere").getElementsByClassName("heirloomThing")[i])
 					carryHeirloom();
 					return;
 				}
-				
+
 				var goodMods = 0;
 				for (var j = 0; j < hMods.length; j++) {
 					if (goodModsNames3.indexOf(hMods[j][0]) > -1) {
@@ -1213,7 +1213,7 @@ var collectHeirloomsInterval = setInterval(function() {
 					}
 				}
 				if (goodMods > 5) {
-					selectHeirloom(i, 'heirloomsExtra', document.getElementById('extraHeirloomsHere').getElementsByClassName('heirloomThing')[i])
+					selectHeirloom(i, "heirloomsExtra", document.getElementById("extraHeirloomsHere").getElementsByClassName("heirloomThing")[i])
 					carryHeirloom();
 					return;
 				}
