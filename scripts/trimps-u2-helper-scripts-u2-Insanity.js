@@ -25,7 +25,7 @@ var tryBattle100 = false;
 //var plusTwoZones = [79, 83, ,89, 90, 91, 92, 93, 109, 110, 123];
 
 
-var plusZeroZones = [20, 24, 65, 79, 96, 115, 125];
+var plusZeroZones = [20, 24, 65, 79, 96, 115, 125, 126, 127, 128];
 var plusOneZones = [30, 40, 54, 64, 74, 84, 94, 104, 120];
 var plusTwoZones = [59, 69, 79, 89, 99, 109, 110];
 
@@ -328,6 +328,8 @@ var buyStorageInterval = setInterval(function() {
 }, 250);
 
 var isOkToBuyWorshippers = function() {
+	return game.buildings.Tribute.owned >= tributesWanted;
+	/*
 	if (game.global.world < 110 && game.global.world >= 50) {
 		if (game.buildings.Tribute.owned >= tributesWanted) {
 			return true;
@@ -346,7 +348,7 @@ var isOkToBuyWorshippers = function() {
 	//if (game.resources.metal.owned > 1e+36)
 	//	return false;
 	
-	return true;
+	return true;*/
 }
 
 var shouldFireWorshippers = function() {
