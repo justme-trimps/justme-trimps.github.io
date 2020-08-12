@@ -328,7 +328,7 @@
 			
 			trimpsIntervals.push(
 			setInterval(function() {
-				if (game.global.world == 795 && !game.global.mapsActive && !game.global.fighting && game.global.mapBonus > 3) {
+				if (game.global.world == 795 && !game.global.mapsActive && !game.global.fighting && game.global.mapBonus > 3 && game.global.mapBonus < 10) {
 					startBw();
 				}
 			}, 3000)
