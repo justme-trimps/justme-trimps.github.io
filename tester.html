@@ -344,7 +344,7 @@ var loadSave = function() {
 					tmpRow.setAttribute('class', 'row temp');
 					tmpRow.innerHTML = '<div class="col-sm-1"></div><label class="col-sm-6 col-form-label">' +
 						key + ' </label><div class="col-sm-5">' + value.radLevel + '</div>';
-					totalRadonCostDiv.parentElement.parentElement.insertBefore(tmpRow, totalRadonCostDiv);
+					totalRadonCostDiv.parentElement.parentElement.insertBefore(tmpRow.parentElement, totalRadonCostDiv);
 					
 					totalRadonSpentOnOtherPerks += value.radSpent;
 				}
