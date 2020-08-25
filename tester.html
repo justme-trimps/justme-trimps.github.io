@@ -335,12 +335,17 @@ var loadSave = function() {
 		}
 		
 		totalRadonSpentOnOtherPerks = 0.0;	
+		var totalRadonCostDiv = document.getElementById('total-radon-cost');
 		for (const [key, value] of Object.entries(game.portal)) {
 			if (value.radLocked == false) {
 				var id = 'input-' + key.toLowerCase();
 				if (document.getElementById(id) == null) {
-					document.getElementById('perks-col').innerHTML += '<div class="row temp" style="background: #666;" data-gain="0"><div class="col-sm-1"></div><label class="col-sm-6 col-form-label">' +
-						key + ' </label><div class="col-sm-5">' + value.level + '</div></div>';
+					var tmpRow = document.createElement('div');
+					tmpRow.setAttribute('class', 'row temp');
+					tmpRow.innerHTML = '<div class="col-sm-1"></div><label class="col-sm-6 col-form-label">' +
+						key + ' </label><div class="col-sm-5">' + value.radLevel + '</div>;
+					totalRadonCostDiv.parentElement.parentElement.insertBefore(tmpRow, totalRadonCostDiv);
+					
 					totalRadonSpentOnOtherPerks += value.radSpent;
 				}
 			}
