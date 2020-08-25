@@ -315,6 +315,19 @@ var loadSave = function() {
 			return;
 		}
 		
+		game.portal.Tenacity.priceBase = 50000000.0;
+		game.portal.Resilience.priceBase = 100.0;
+		game.portal.Criticality.priceBase = 100.0;
+		game.portal.Equality.priceBase = 1.0;
+		game.portal.Carpentry.priceBase = 25.0;
+		game.portal.Artisanistry.priceBase = 15.0;
+		game.portal.Motivation.priceBase = 2.0;
+		game.portal.Power.priceBase = 1.0;
+		game.portal.Toughness.priceBase = 1.0;
+		game.portal.Looting.priceBase = 1.0;
+		game.portal.Prismal.priceBase = 1.0;
+		game.portal.Greed.priceBase = 10000000000.0;
+	
 		var portal = game.portal;
 		if (portal.Tenacity && portal.Tenacity.radLevel)         { inputs["tenacity"].value = game.portal.Tenacity.radLevel; }         else { inputs["tenacity"].value = 0; }
 		if (portal.Resilience && portal.Resilience.radLevel)     { inputs["resilience"].value = game.portal.Resilience.radLevel; }     else { inputs["resilience"].value = 0; }
@@ -490,6 +503,9 @@ var setMaxes2 = function(s5, s6, s7, s8, s9, loop, index, prismalShield) {
 		setMaxes2(s5, s6, s7, s8, s9, loop + 1, index + 1, prismalShield);
 }
 
+function getPerkBuyCount() { return 0; }
+function getPerkLevel() { return 0; }
+
 function getPortalUpgradePrice(what, removing, forceAmt){
 	var toCheck = game.portal[what];
 	var tempLevel;
@@ -499,7 +515,7 @@ function getPortalUpgradePrice(what, removing, forceAmt){
 		toAmt = (forceAmt) ? forceAmt : getPerkBuyCount(what);
 		nextLevel = tempLevel + toAmt;
 	}
-	tempLevel = getPerkLevel(what, true) + toCheck.levelTemp;
+	tempLevel =  0;//getPerkLevel(what, true) + toCheck.levelTemp;
 	var amt = 0;
 	if (toCheck.additive){
 		if (removing)
