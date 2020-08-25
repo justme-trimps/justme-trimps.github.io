@@ -541,6 +541,8 @@ function getPortalUpgradePrice(what, removing, forceAmt){
 }
 
 var getTotalCost = function(tenacity, resilience, criticality, equality, carpentry, artisanistry, motivation, power, toughness, looting, prismal, greed) {
+	console.log(tenacity + ', ' + resilience + ', ' + criticality + ', ' + equality + ', ' + carpentry + ', ' + artisanistry + ', ' + motivation + ', ' + power + ', ' + toughness + ', ' + looting + ', ' + prismal + ', ' + greed + ' ' + totalRadonSpentOnOtherPerks);
+
 	return 0.0	
 		+ getPortalUpgradePrice('Tenacity', false, tenacity)
 		+ getPortalUpgradePrice('Resilience', false, resilience)
