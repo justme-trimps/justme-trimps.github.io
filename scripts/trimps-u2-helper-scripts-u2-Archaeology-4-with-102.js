@@ -12,7 +12,7 @@ var collectBoots = {};
 
 var tryNextOne = false;
 var tryBattle100 = true;
-var forcedPortalWorld = 117;
+var forcedPortalWorld = 118;
 var plusZeroZones = [20, 24, 77, 85, 87, 89, 94, 104, 105, 106, 107, 108, 114, 115, 116];
 var plusOneZones = [30, 40, 50, 60, 64, 70, 71, 72, 73, 74, 83];
 var plusTwoZones = [48, 79, 83, ,89, 90, 91, 92, 93, 109, 110, 111, 112, 113];
@@ -1143,7 +1143,7 @@ var forcePortalInterval = setInterval(function() {
 			jestimpTarget = "food"
 			mapMode = "lsc";
 			save(false, true);
-			window.location.reload();
+			//window.location.reload();
 		}, 1000);
 	}
 }, 500);
