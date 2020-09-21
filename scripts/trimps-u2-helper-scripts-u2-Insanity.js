@@ -1532,71 +1532,6 @@ importSaveFromLocalStorage = function() {
 	load(window.localStorage.getItem("trimps-save"));
 }
 
-
-if (buyRelicUpgradesInterval) { clearInterval(buyRelicUpgradesInterval); buyRelicUpgradesInterval = null; }
-var buyRelicUpgradesInterval = setInterval(function() {
-	var attack = game.challenges.Archaeology.points.attack;
-	var enemyAttack = game.challenges.Archaeology.points.enemyAttack;
-	var radon = game.challenges.Archaeology.points.radon;
-	var science = game.challenges.Archaeology.points.science;
-	var breed = game.challenges.Archaeology.points.breed;
-
-	var wantedAttack = -40;
-	var wantedEnemyAttack = -52;
-	var wantedRadon = 50;
-	var wantedScience = 50;
-	var wantedBreed = -95;
-
-	if (game.global.world > 60) {
-		wantedEnemyAttack = -32;
-		wantedAttack = -23;
-	}
-
-	if (game.global.world > 70) {
-		wantedAttack = 15;
-	}
-
-	if (game.global.world > 80) {
-		wantedEnemyAttack = -18;
-	}
-
-	if (game.global.world >= voidMapZone) {
-		wantedAttack = 52;
-	}
-
-	if (wantedRadon > radon)
-		buyUpgrade("radonRelic");
-
-	if (wantedScience > science)
-		buyUpgrade("scienceRelic");
-
-	if (wantedAttack > attack)
-		buyUpgrade("attackRelic");
-
-	if (wantedEnemyAttack > enemyAttack)
-		buyUpgrade("enemyAttackRelic");
-
-	if (wantedBreed > breed)
-		buyUpgrade("breedRelic");
-
-	game.challenges.Archaeology.pauseAuto = true;
-
-	for (var i = -1; i > Math.min(game.global.world - 90, -5); i--) {
-
-		if (wantedRadon > radon + i)
-			buyUpgrade("radonRelic");
-
-		if (wantedScience > science + i)
-			buyUpgrade("scienceRelic");
-
-	}
-
-	if (game.global.world >= voidMapZone) {
-		buyUpgrade("radonRelic");
-	}
-
-}, 1000);
-
 var lastZoneCookieName = "trimps-Insanity-lastzone";
 
 function setLastZoneSaveCookie() {
@@ -1841,8 +1776,6 @@ var optimizeVoidEndInterval;
 var shouldLoadVoidEndSave = function(save) {
 	if (game.global.world != 110 || game.global.lastClearedCell <= 80 || game.global.mapsActive)
 		return false;
-	
-	console.log('shouldLoadVoidEndSave');
 	
 	var voidMaps = game.global.mapsOwnedArray.filter(function (el) { return el.location == "Void"; }); 
 	
