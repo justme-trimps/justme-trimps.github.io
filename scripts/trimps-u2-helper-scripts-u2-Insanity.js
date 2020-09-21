@@ -1422,7 +1422,7 @@ var tryOptimize = true;
 var optimizerCookieName = "trimps-Insanity-save";
 var debugOptimizer = false;
 
-function setCookie(cname, cvalue, exdays) {
+function setCookie(cname, cvalue) {
 	window.localStorage.setItem(cname, cvalue);
 }
 
@@ -1743,6 +1743,138 @@ var lastZoneOptimizerInterval = setInterval(function() {
 	}
 }, 300 - Math.floor(Math.random() * 100));
 
+
+//----------------------------------
+
+var parseCookieValue = function(cookieName) {
+	var cookieValue = getCookie(cookieName);
+	
+	if (cookieValue && cookieValue != "")
+		return {
+			saveString: 	cookieValue.split("###")[0],
+			reset: 			parseInt(cookieValue.split("###")[1]),
+			seconds: 		parseInt(cookieValue.split("###")[2]),
+			cell: 			parseInt(cookieValue.split("###")[3]),
+			tributes: 		parseInt(cookieValue.split("###")[4]),
+			voidMaps: 		parseInt(cookieValue.split("###")[5]),
+			metalOwned: 	parseFloat(cookieValue.split("###")[6])
+		};
+		
+	return null;
+}
+
+var serializeCookieValue = function() {
+	return save(true) + 
+		"###" + game.global.totalRadPortals +
+		"###" + Math.round(((new Date() * 1) - game.global.portalTime) / 1000) +
+		"###" + (game.global.world * 100 + game.global.lastClearedCell) +
+		"###" + game.buildings.Tribute.owned +
+		"###" + game.global.totalVoidMaps + 
+		"###" + game.resources.metal.owned;
+}
+
+
+var setSomeInterval = function(intervalVar, shouldSaveFunction, shouldLoadFunction, intervalTime) {
+	if (intervalVar) { clearInterval(intervalVar); intervalVar = null; }
+	intervalVar = setInterval(function() {
+		if (!tryOptimize)
+			return;
+		
+		var save = parseCookieValue(shouldSaveFunction.name);
+
+		if (save != null) {
+			if (shouldLoadFunction(save)) {
+				if (debugOptimizer) 
+					console.log("loading save " + shouldLoadFunction.name);
+
+				load(save.saveString);
+
+			} else if (shouldSaveFunction(save)) {
+				if (debugOptimizer) 
+					console.log("saving save " + shouldSaveFunction.name);
+				setCookie(shouldSaveFunction.name, serializeCookieValue());
+			}
+		} else if (shouldSaveFunction(save)) {
+			
+			if (debugOptimizer) 
+					console.log("saving save " + shouldSaveFunction.name);
+			setCookie(shouldSaveFunction.name, serializeCookieValue());
+		}
+		
+	}, intervalTime + 100 - Math.floor(Math.random() * 100));
+	
+	return intervalVar;
+}
+
+//----------------------------------
+
+var optimizeVoidStartInterval;
+
+var shouldLoadVoidStartSave = function(save) {
+	if (game.global.world == 110 && game.global.lastClearedCell <= 80)
+		return true;
+	return false;
+};
+var shouldSaveVoidStartSave = function(save) {
+	if (game.global.world != 110 || !game.global.mapsActive || game.global.currentMapId == null)
+		return false;
+	
+	var currentMap = game.global.mapsOwnedArray.filter(function (el) { return el.id == game.global.currentMapId; }) 
+	
+	if (currentMap == null 
+		|| currentMap.length == 0
+		|| currentMap[0].location != "Void")
+		return false;
+		
+	if (save != null && save.reset == game.global.totalRadPortals)
+		return false;
+	
+	return true;
+};
+
+optimizeVoidStartInterval = setSomeInterval(optimizeVoidStartInterval, shouldSaveVoidStartSave, shouldLoadVoidStartSave, 3000);
+
+//----------------------------------
+
+var optimizeVoidEndInterval;
+
+var shouldLoadVoidEndSave = function(save) {
+	if (game.global.world != 110 || game.global.lastClearedCell <= 80 || game.global.mapsActive)
+		return false;
+	
+	console.log('shouldLoadVoidEndSave');
+	
+	var voidMaps = game.global.mapsOwnedArray.filter(function (el) { return el.location == "Void"; }); 
+	
+	if (voidMaps != null && voidMaps.length > 0)
+		return false;
+
+	if (save.metalOwned > 1.05 * game.resources.metal.owned)
+		return true;
+
+	return false;
+};
+
+var shouldSaveVoidEndSave = function(save) {
+	if (game.global.world != 110 || !game.global.mapsActive || game.global.currentMapId == null)
+		return false;
+	
+	var currentMap = game.global.mapsOwnedArray.filter(function (el) { return el.id == game.global.currentMapId; }) 
+	
+	if (currentMap == null 
+		|| currentMap.length == 0
+		|| currentMap[0].location != "Void")
+		return false;
+		
+	if (save != null && save.reset == game.global.totalRadPortals && save.metalOwned >= game.resources.metal.owned)
+		return false;
+	
+	return true;
+};
+
+optimizeVoidEndInterval = setSomeInterval(optimizeVoidEndInterval, shouldSaveVoidEndSave, shouldLoadVoidEndSave, 1000);
+
+//---------------
 
 if (equalityInterval) { clearInterval(equalityInterval); equalityInterval = null; }
 var equalityInterval = setInterval(function() {
