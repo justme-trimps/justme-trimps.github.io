@@ -26,8 +26,8 @@ var tryBattle100 = false;
 
 
 var plusZeroZones = [20, 24, 135, 136, 137, 138, 139];
-var plusOneZones = [30, 40, 54, 64, 74, 84, 94, 104, 114, 124, 134];
-var plusTwoZones = [59, 69, 79, 89, 99, 109, 119, 129, 139, 140, 141, 142, 143];
+var plusOneZones = [30, 40, 54, 64, 74, 84, 94, 104, 114, 124, 134, 140, 141, 142, 143];
+var plusTwoZones = [59, 69, 79, 89, 99, 109, 119, 129];
 
 var plusThreeZones = [];
 var plusFourZones = [];
@@ -62,7 +62,7 @@ var buyForever = false;
 var dontMap = false;
 var buySmithies = true;
 var buyTributes = true;
-var buyMeteorologists = true;
+var buyMeteorologists = false;
 
 var switchToMetalAutomatically = true;
 var lastFluffyExpLog = 0;
@@ -363,7 +363,10 @@ var buyThingsInterval = setInterval(function() {
 	if (buyMeteorologists) buyThing("Meteorologist");
 	
 	if (document.getElementById("Tribute")) if (buyTributes && game.buildings.Tribute.owned < tributesWanted) { numTab("6"); setMax(0.1); buyBuilding("Tribute"); numTab("1"); }
-	if (buyShields && autobuyingArmNumber > game.equipment.Shield.level) buyThing("Shield");
+	if (buyShields 
+		&& autobuyingArmNumber > game.equipment.Shield.level
+		&& (document.getElementById("Supershield") == null || document.getElementById("Supershield").offsetParent == null))
+			buyThing("Shield");
 	if (buyCollectors) { numTab("6"); setMax(0.1); buyBuilding("Collector"); numTab("1"); }
 	buyThing("Microchip");
 	

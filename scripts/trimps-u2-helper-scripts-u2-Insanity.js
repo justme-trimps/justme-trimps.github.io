@@ -1,13 +1,15 @@
 var challengeToTry = "Insanity";
 // make sure equality is 25
 
+game.global.autoJobsSettingU2.enabled = true;
+
 var ignorePrismaticPalace = false;
 var dontPortal = false;
 var minMeltingZone = 112;//not before 111
 var trimpleOfDoomZone = 111;//not before 110
-var smithiesWanted = 20;
+var smithiesWanted = 22;
 var insanityLevelWanted = 500;
-var forcedPortalWorld = 135;
+var forcedPortalWorld = 137;
 var tryBattle125 = true;
 var buyWorshippersZone = 123;
 
@@ -25,7 +27,7 @@ var tryBattle100 = false;
 //var plusTwoZones = [79, 83, ,89, 90, 91, 92, 93, 109, 110, 123];
 
 
-var plusZeroZones = [20, 24, 79, 96, 115, 125, 126, 127, 128, 134];
+var plusZeroZones = [20, 24, 79, 96, 115, 125, 126, 127, 128, 134, 135, 136];
 var plusOneZones = [30, 40, 54, 64, 74, 84, 94, 104, 120];
 var plusTwoZones = [59, 69, 79, 89, 99, 109, 110, 129, 130, 131, 132, 133];
 
@@ -131,7 +133,7 @@ var changeJestimpTargetToWoodInterval = setInterval(function() {
 	if (game.global.world > 110)
 		return;
 	if (game.global.world == 110) {
-		if (game.resources.wood.owned < 2e+36 && game.buildings.Smithy.owned < 20) {
+		if (game.resources.wood.owned < 1.4e+39 && game.buildings.Smithy.owned < 22) {
 			fireMode();
 			setMax(1, false);
 			numTab(6);
@@ -209,11 +211,9 @@ if (changeAutobuyingNumbersInterval) { clearInterval(changeAutobuyingNumbersInte
 var changeAutobuyingNumbersInterval = setInterval(function() {
 	if (changeAutoBuy && !game.global.mapsActive) {
 		if (game.global.world > 0) { autobuyingEquipmentNumber = 33; autobuyingArmNumber = 31; buyShields = false; }
-		if (game.global.world >= 93) { autobuyingEquipmentNumber = 55; autobuyingArmNumber = 55; }
 		if (game.global.world >= 94) { autobuyingEquipmentNumber = 35; autobuyingArmNumber = 35; }
 		if (game.global.world >= 96) { buyShields = true; }
 		if (game.global.world >= 104) { autobuyingEquipmentNumber = 50; autobuyingArmNumber = 50; }
-//		if (game.global.world >= 107) { autobuyingEquipmentNumber = 49; autobuyingArmNumber = 49; }
 		if (game.global.world >= 108) { autobuyingEquipmentNumber = 35; autobuyingArmNumber = 35; }
 		if (game.global.world >= 114) { autobuyingEquipmentNumber = 35; autobuyingArmNumber = 35; }
 		if (game.global.world >= 120) { autobuyingEquipmentNumber = 20; autobuyingArmNumber = 22; }
@@ -222,9 +222,11 @@ var changeAutobuyingNumbersInterval = setInterval(function() {
 		if (game.global.world >= 126) 
 			{ autobuyingEquipmentNumber = 25; autobuyingArmNumber = 27; }
 		if (game.global.world >= 128) 
-			{ autobuyingEquipmentNumber = 12; autobuyingArmNumber = 12; }
+			{ autobuyingEquipmentNumber = 15; autobuyingArmNumber = 15; }
 		if (game.global.world >= 134) 
-			{ autobuyingEquipmentNumber = 15; autobuyingArmNumber = 18; }
+			{ autobuyingEquipmentNumber = 18; autobuyingArmNumber = 18; }
+		if (game.global.world >= 135) 
+			{ autobuyingEquipmentNumber = 20; autobuyingArmNumber = 20; }
 	}
 }, 1000 * 1);
 
@@ -388,7 +390,10 @@ var buyThingsInterval = setInterval(function() {
 	if (buyMeteorologists) buyThing("Meteorologist");
 	
 	if (document.getElementById("Tribute")) if (buyTributes && game.buildings.Tribute.owned < tributesWanted) { numTab("6"); setMax(0.1); buyBuilding("Tribute"); numTab("1"); }
-	if (buyShields && autobuyingArmNumber > game.equipment.Shield.level) buyThing("Shield");
+	if (buyShields 
+		&& autobuyingArmNumber > game.equipment.Shield.level
+		&& (document.getElementById("Supershield") == null || document.getElementById("Supershield").offsetParent == null))
+			buyThing("Shield");
 	if (buyCollectors) { numTab("6"); setMax(0.1); buyBuilding("Collector"); numTab("1"); }
 	buyThing("Microchip");
 	
@@ -918,6 +923,7 @@ var selectNext45Map = function() {
 	}
 }
 
+//keep it. horrimps are bad
 if (horrimpMapInterval) { clearInterval(horrimpMapInterval); horrimpMapInterval = null; }
 var horrimpMapInterval = setInterval(function() {
 	if (!game.global.mapsActive || game.global.world < 108)
@@ -963,7 +969,7 @@ var repeatMaps = setInterval(function() {
 			mapMode = "lsc"; //hc
 		}
 
-		if (game.global.world == 132 || game.global.world == 134) {
+		if (game.global.world == 132 || game.global.world == 134 || game.global.world == 135) {
 			mapMode = "lmc"; //hc
 		}
 
@@ -1441,9 +1447,7 @@ var shouldLoadOptimizedSave = function(reset, tributes, voidMaps, debug) {
 	}
 
 	if (voidMaps > game.global.totalVoidMaps) {
-		if (debug) {
 			console.log("shouldLoadOptimizedSave save has more void maps " + voidMaps + " " + game.global.totalVoidMaps);
-		}
 		return true;
 	}
 
@@ -1615,7 +1619,7 @@ var shouldLoadLastZoneSave = function(reset, seconds, cell, debug) {
 	var mySeconds = Math.round(((new Date() * 1) - game.global.portalTime) / 1000);
 	var myCell = (game.global.world * 100 + game.global.lastClearedCell);
 
-	if (cell < (forcedPortalWorld - 3) * 100)
+	if (cell < (forcedPortalWorld - 10) * 100)
 		return false;
 
 	if (reset != myPortal) {
@@ -1738,3 +1742,15 @@ var lastZoneOptimizerInterval = setInterval(function() {
 		setLastZoneSaveCookie();
 	}
 }, 300 - Math.floor(Math.random() * 100));
+
+
+if (equalityInterval) { clearInterval(equalityInterval); equalityInterval = null; }
+var equalityInterval = setInterval(function() {
+	if (game.global.world < 135) {
+		game.portal.Equality.disabledStackCount = "25"
+	} else if (game.global.world < 136) {
+		game.portal.Equality.disabledStackCount = "30"
+	} else {
+		game.portal.Equality.disabledStackCount = "40"
+	}
+}, 5001);
