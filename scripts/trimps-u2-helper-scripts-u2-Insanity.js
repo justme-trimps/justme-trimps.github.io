@@ -27,9 +27,9 @@ var tryBattle100 = false;
 //var plusTwoZones = [79, 83, ,89, 90, 91, 92, 93, 109, 110, 123];
 
 
-var plusZeroZones = [20, 24, 79, 96, 115, 125, 126, 127, 128, 134, 135, 136];
-var plusOneZones = [30, 40, 54, 64, 74, 84, 94, 104, 120];
-var plusTwoZones = [59, 69, 79, 89, 99, 109, 110, 129, 130, 131, 132, 133];
+var plusZeroZones = [20, 24, 79, 96, 115, 127, 128, 134, 135, 136];
+var plusOneZones = [30, 40, 54, 64, 74, 84, 94, 104, 120, 126];
+var plusTwoZones = [59, 69, 79, 89, 99, 109, 110, 125, 129, 130, 131, 132, 133];
 
 if (tryNextOne) {
 	forcedPortalWorld = 117;
@@ -105,7 +105,7 @@ var jestimpInterval = setInterval(function() {
 	if (document.getElementById("worldName") && document.getElementById("worldName").innerText == "Melting Point")
 		return;
 
-	if (game.global.world == 110 || game.global.world > 128) {
+	if (game.global.world == 110/* || game.global.world > 128*/) {
 		var badGuyNameString = (document.getElementById("badGuyName") && document.getElementById("badGuyName").innerText) || null;
 		if (badGuyNameString && badGuyNameString.toLowerCase().indexOf("jestimp") > -1) {
 			saveString = save(true);
@@ -692,12 +692,13 @@ var hireFarmersInterval = setInterval(function() {
 			cancelTooltip();
 			buyJob("Farmer");
 			fireMode();
-			buyJob("Miner");
 
-			if (game.resources.wood.owned < 2e+36 && game.buildings.Smithy.owned < 20 && game.global.world == 110) {
+			if (game.resources.wood.owned < 1.4e+39 && game.buildings.Smithy.owned < smithiesWanted && game.global.world == 110) {
+				buyJob("Lumberjack");
 				setGather("wood");
 			}
 			else {
+				buyJob("Miner");
 				setGather("metal");
 			}
 
@@ -937,11 +938,20 @@ var horrimpMapInterval = setInterval(function() {
 
 	for (var i = array.length - 1; i >= 0; i--) {
 		if (array[i].name.indexOf("Horrimp") > -1) {
+			if (game.global.mapGridArray.length != 20) return;
+			
 			mapsClicked();
+			
 			if (document.getElementById("recycleMapBtn") == null || document.getElementById("recycleMapBtn").offsetParent == null) {
+				if (game.global.mapGridArray.length != 20) return;
+
 				mapsClicked();
 			}
+			
 			document.getElementById("recycleMapBtn").click();
+
+			if (game.global.mapGridArray.length != 20) return;
+
 			mapsClicked()
 			return;
 		}
@@ -978,6 +988,9 @@ var repeatMaps = setInterval(function() {
 			|| game.global.world == 113 
 			|| game.global.world == 123
 			|| game.global.world == 129
+			|| game.global.world == 130
+			|| game.global.world == 131
+			|| game.global.world == 132
 			|| game.global.world == 133) {
 			mapMode = "p";
 		}
@@ -1196,10 +1209,13 @@ var getPortalTime = function() {
 }
 
 var isOkToPortal = function() {
-	if (game.global.lastClearedCell < -1)
-		return false;
-
 	if (dontPortal)
+		return false;
+	
+	if (game.global.world > forcedPortalWorld)
+		return true;
+
+	if (game.global.lastClearedCell < 98)
 		return false;
 
 	if (game.global.mapsActive)
@@ -1210,6 +1226,8 @@ var isOkToPortal = function() {
 
 	return game.global.world >= forcedPortalWorld || game.stats.battlesLost.value >= forcedPortalLostBattles || ((game.global.challengeActive + "") === "" && forcedPortalWhenNoChallenge);
 }
+
+var localStorageKeys = [];
 
 if (forcePortalInterval) { clearInterval(forcePortalInterval); forcePortalInterval = null; }
 var forcePortalInterval = setInterval(function() {
@@ -1228,10 +1246,10 @@ var forcePortalInterval = setInterval(function() {
 		activatePortal();
 		wentForSmithy = false;
 		setTimeout(function() {
-			window.localStorage.setItem(optimizerCookieName, "");
-			window.localStorage.setItem(lastZoneCookieName, "");
-			window.localStorage.removeItem(optimizerCookieName);
-			window.localStorage.removeItem(lastZoneCookieName);
+			for (var i = 0; i < localStorageKeys.length; i++) {
+				window.localStorage.setItem(localStorageKeys[i], "");
+				window.localStorage.removeItem(localStorageKeys[i]);
+			}
 			pressFight();
 			fluffyStart = Fluffy.currentExp[1];
 			jestimpTarget = "food"
@@ -1418,271 +1436,12 @@ var switchHeirloomInterval = setInterval(function() {
 if (pressFightInterval) { clearInterval(pressFightInterval); pressFightInterval = null; }
 var pressFightInterval = setInterval(function() { pressFight(); }, 5000);
 
-var tryOptimize = true;
-var optimizerCookieName = "trimps-Insanity-save";
-var debugOptimizer = false;
+// --------------------------------------------------------------------------
 
-function setCookie(cname, cvalue) {
-	window.localStorage.setItem(cname, cvalue);
-}
-
-function setSaveCookie() {
-	setCookie(optimizerCookieName, game.global.totalRadPortals + "###" + game.buildings.Tribute.owned + "###"+ game.global.totalVoidMaps + "###" + save(true), 10);
-}
-
-function getCookie(cname) {
-  return window.localStorage.getItem(cname);
-}
-
-var shouldLoadOptimizedSave = function(reset, tributes, voidMaps, debug) {
-	if (debug) {
-		//console.log("shouldLoadOptimizedSave");
-	}
-
-	if (reset != game.global.totalRadPortals) {
-		if (debug) {
-			//console.log("shouldLoadOptimizedSave wrong portal " + reset + " " + game.global.totalRadPortals);
-		}
-		return false;
-	}
-
-	if (voidMaps > game.global.totalVoidMaps) {
-			console.log("shouldLoadOptimizedSave save has more void maps " + voidMaps + " " + game.global.totalVoidMaps);
-		return true;
-	}
-
-	return false;
-}
-
-var shouldSaveOptimizedSave = function(reset, tributes, voidMaps, debug) {
-
-	if (game.global.totalRadPortals < reset) {
-		if (debug) {
-			//console.log("shouldSaveOptimizedSave false: previous portal " + reset + " " + game.global.totalRadPortals);
-		}
-		return false;
-	}
-
-	if (game.global.totalRadPortals > reset) {
-		if (debug) {
-			console.log("shouldSaveOptimizedSave true: next portal " + reset + " " + game.global.totalRadPortals);
-		}
-		return true;
-	}
-
-	if (voidMaps < game.global.totalVoidMaps) {
-		if (debug) {
-			console.log("shouldSaveOptimizedSave true: more void maps than save " + voidMaps + " " + game.global.totalVoidMaps);
-		}
-		return true;
-	}
-
-	return false;
-}
-
-if (cookieOptimizerInterval) { clearInterval(cookieOptimizerInterval); cookieOptimizerInterval = null; }
-var cookieOptimizerInterval = setInterval(function() {
-	if (!tryOptimize)
-		return;
-
-	if ((game.global.challengeActive + "") !== challengeToTry
-		|| game.global.world < 92
-		|| game.global.world > 99
-		)
-	return;
-
-	//if (debugOptimizer)
-		//console.log("cookieOptimizerInterval");
-
-	var cookieValue = getCookie(optimizerCookieName);
-
-	if (cookieValue) {
-		if (debugOptimizer)
-			console.log(cookieValue.substring(0, 100));
-
-		var reset = cookieValue.split("###")[0];
-		var tributes = cookieValue.split("###")[1];
-		var voidMaps = cookieValue.split("###")[2];
-		var saveString = cookieValue.split("###")[3];
-
-		if (shouldLoadOptimizedSave(reset, tributes, voidMaps, debugOptimizer)) {
-			if (debugOptimizer)
-				console.log("loading save");
-
-			load(saveString);
-		} else if (shouldSaveOptimizedSave(reset, tributes, voidMaps, debugOptimizer)) {
-				setSaveCookie();
-		}
-
-	} else {
-		if (debugOptimizer)
-			console.log("empty cookie");
-
-		setSaveCookie();
-	}
-}, 500 - Math.floor(Math.random() * 100));
-
-
-// manually copy between tabs
-exportSaveToLocalStorage = function() {
-	window.localStorage.setItem("trimps-save", save(true));
-}
-// manually copy between tabs
-importSaveFromLocalStorage = function() {
-	load(window.localStorage.getItem("trimps-save"));
-}
-
-var lastZoneCookieName = "trimps-Insanity-lastzone";
-
-function setLastZoneSaveCookie() {
-	setCookie(lastZoneCookieName,
-		game.global.totalRadPortals +
-		"###" + Math.round(((new Date() * 1) - game.global.portalTime) / 1000) +
-		"###"+ (game.global.world * 100 + game.global.lastClearedCell) +
-		"###" + save(true), 10);
-}
-
-var shouldLoadLastZoneSave = function(reset, seconds, cell, debug) {
-	if (debug) {
-		//console.log("shouldLoadLastZoneSave");
-	}
-
-	if (game.global.lastClearedCell < 10 || game.global.mapsActive)
-		return false;
-
-	var myPortal = game.global.totalRadPortals;
-	var mySeconds = Math.round(((new Date() * 1) - game.global.portalTime) / 1000);
-	var myCell = (game.global.world * 100 + game.global.lastClearedCell);
-
-	if (cell < (forcedPortalWorld - 10) * 100)
-		return false;
-
-	if (reset != myPortal) {
-		if (debug) {
-			console.log("shouldLoadLastZoneSave wrong portal " + reset + " " + game.global.totalRadPortals);
-		}
-		return false;
-	}
-
-	if ((myCell + 3) <= cell) {
-		if (debug) {
-			console.log("shouldLoadLastZoneSave true: mySeconds >= seconds && ((myCell + 3) <= cell) " + mySeconds + " " + seconds + " " + (myCell + 3) + " " + cell);
-		}
-		return true;
-	}
-
-	return false;
-}
-
-var shouldSaveLastZoneSave = function(reset, seconds, cell, debug) {
-	var myPortal = game.global.totalRadPortals;
-	var mySeconds = Math.round(((new Date() * 1) - game.global.portalTime) / 1000);
-	var myCell = (game.global.world * 100 + game.global.lastClearedCell);
-
-	if (debug) {
-		//console.log("shouldSaveLastZoneSave");
-	}
-
-	if (myPortal < reset) {
-		if (debug) {
-			console.log("shouldSaveLastZoneSave false: previous portal " + reset + " " + myPortal);
-		}
-		return false;
-	}
-
-	if (game.global.lastClearedCell < 10)
-		return false;
-
-	if (game.global.world + 1 != forcedPortalWorld
-			&& game.global.world + 2 != forcedPortalWorld
-			&& game.global.world + 3 != forcedPortalWorld
-			&& game.global.world + 4 != forcedPortalWorld
-			&& game.global.world + 5 != forcedPortalWorld
-			&& game.global.world + 6 != forcedPortalWorld
-			&& game.global.world + 7 != forcedPortalWorld
-			&& game.global.world + 8 != forcedPortalWorld
-			&& game.global.world + 9 != forcedPortalWorld
-			&& game.global.world + 10 != forcedPortalWorld
-			&& game.global.world + 11 != forcedPortalWorld
-			&& game.global.world + 12 != forcedPortalWorld
-			&& game.global.world + 13 != forcedPortalWorld
-			&& game.global.world + 14 != forcedPortalWorld
-			&& game.global.world + 15 != forcedPortalWorld
-			&& game.global.world + 16 != forcedPortalWorld
-			&& game.global.world + 17 != forcedPortalWorld
-			&& game.global.world + 18 != forcedPortalWorld)
-		return false;
-
-	if (myPortal > reset) {
-		if (debug) {
-			console.log("shouldSaveLastZoneSave true: next portal " + reset + " " + myPortal);
-		}
-		return true;
-	}
-
-	if (myCell > cell) {
-		if (debug) {
-			console.log("shouldSaveLastZoneSave true: myCell > cell " + myCell + " " + cell);
-		}
-		return true;
-	}
-
-	if (debug) {
-		console.log("shouldSaveLastZoneSave do nothing "
-			+ reset + " " + myPortal
-			+ " " + mySeconds + " " + seconds
-			+ " " + myCell + " " + cell
-		);
-	}
-
-	return false;
-}
-
-if (lastZoneOptimizerInterval) { clearInterval(lastZoneOptimizerInterval); lastZoneOptimizerInterval = null; }
-var lastZoneOptimizerInterval = setInterval(function() {
-	if (!tryOptimize)
-		return;
-
-	if (game.global.lastClearedCell < 10 || game.global.mapsActive || game.global.world <= voidMapZone)
-		return false;
-
-	//if (debugOptimizer)
-		//console.log("lastZoneOptimizerInterval");
-
-	var cookieValue = getCookie(lastZoneCookieName);
-
-	if (cookieValue && cookieValue != "") {
-		if (debugOptimizer)
-			console.log(cookieValue.substring(0, 100));
-
-		var reset = parseInt(cookieValue.split("###")[0]);
-		var seconds = parseInt(cookieValue.split("###")[1]);
-		var cell = parseInt(cookieValue.split("###")[2]);
-		var saveString = cookieValue.split("###")[3];
-
-		if (shouldLoadLastZoneSave(reset, seconds, cell, debugOptimizer)) {
-			if (debugOptimizer)
-				console.log("loading save");
-
-			load(saveString);
-
-		} else if (shouldSaveLastZoneSave(reset, seconds, cell, debugOptimizer)) {
-				setLastZoneSaveCookie();
-		}
-
-	} else {
-		if (debugOptimizer)
-			console.log("empty cookie");
-
-		setLastZoneSaveCookie();
-	}
-}, 300 - Math.floor(Math.random() * 100));
-
-
-//----------------------------------
+var debugOptimizer = true;
 
 var parseCookieValue = function(cookieName) {
-	var cookieValue = getCookie(cookieName);
+	var cookieValue = window.localStorage.getItem(cookieName);
 	
 	if (cookieValue && cookieValue != "")
 		return {
@@ -1708,7 +1467,6 @@ var serializeCookieValue = function() {
 		"###" + game.resources.metal.owned;
 }
 
-
 var setSomeInterval = function(intervalVar, shouldSaveFunction, shouldLoadFunction, intervalTime) {
 	if (intervalVar) { clearInterval(intervalVar); intervalVar = null; }
 	intervalVar = setInterval(function() {
@@ -1718,7 +1476,7 @@ var setSomeInterval = function(intervalVar, shouldSaveFunction, shouldLoadFuncti
 		var save = parseCookieValue(shouldSaveFunction.name);
 
 		if (save != null) {
-			if (shouldLoadFunction(save)) {
+			if (save.reset == game.global.totalRadPortals && shouldLoadFunction(save)) {
 				if (debugOptimizer) 
 					console.log("loading save " + shouldLoadFunction.name);
 
@@ -1727,17 +1485,17 @@ var setSomeInterval = function(intervalVar, shouldSaveFunction, shouldLoadFuncti
 			} else if (shouldSaveFunction(save)) {
 				if (debugOptimizer) 
 					console.log("saving save " + shouldSaveFunction.name);
-				setCookie(shouldSaveFunction.name, serializeCookieValue());
+				window.localStorage.setItem(shouldSaveFunction.name, serializeCookieValue());
 			}
 		} else if (shouldSaveFunction(save)) {
 			
 			if (debugOptimizer) 
 					console.log("saving save " + shouldSaveFunction.name);
-			setCookie(shouldSaveFunction.name, serializeCookieValue());
+			window.localStorage.setItem(shouldSaveFunction.name, serializeCookieValue());
 		}
 		
 	}, intervalTime + 100 - Math.floor(Math.random() * 100));
-	
+	localStorageKeys.push(shouldSaveFunction.name);
 	return intervalVar;
 }
 
@@ -1746,7 +1504,7 @@ var setSomeInterval = function(intervalVar, shouldSaveFunction, shouldLoadFuncti
 var optimizeVoidStartInterval;
 
 var shouldLoadVoidStartSave = function(save) {
-	if (game.global.world == 110 && game.global.lastClearedCell <= 80)
+	if (game.global.world == 110 && game.global.lastClearedCell <= 80 && save.reset == game.global.totalRadPortals)
 		return true;
 	return false;
 };
@@ -1774,7 +1532,7 @@ optimizeVoidStartInterval = setSomeInterval(optimizeVoidStartInterval, shouldSav
 var optimizeVoidEndInterval;
 
 var shouldLoadVoidEndSave = function(save) {
-	if (game.global.world != 110 || game.global.lastClearedCell <= 80 || game.global.mapsActive)
+	if (game.global.world != 110 || game.global.lastClearedCell <= 80 || game.global.mapsActive || save.reset != game.global.totalRadPortals)
 		return false;
 	
 	var voidMaps = game.global.mapsOwnedArray.filter(function (el) { return el.location == "Void"; }); 
@@ -1809,13 +1567,153 @@ optimizeVoidEndInterval = setSomeInterval(optimizeVoidEndInterval, shouldSaveVoi
 
 //---------------
 
+var optimizeVoidMapsNumberInterval;
+
+var tryOptimize = true;
+var shouldLoadOptimizedVoidMapsNumberSave = function(save) {
+	if (!tryOptimize)
+		return false;
+
+	if ((game.global.challengeActive + "") !== challengeToTry
+		|| game.global.world < 92
+		|| game.global.world > 99
+		)
+	return false;
+
+	if (save.reset != game.global.totalRadPortals) {
+		return false;
+	}
+
+	if (save.voidMaps > game.global.totalVoidMaps) {
+		if (debugOptimizer)
+			console.log("shouldLoadOptimizedSave save has more void maps: " + save.voidMaps + " > " + game.global.totalVoidMaps);
+		
+		return true;
+	}
+
+	return false;
+}
+
+var shouldSaveOptimizedVoidMapsNumberSave = function(save) {
+	if (!tryOptimize)
+		return false;
+
+	if ((game.global.challengeActive + "") !== challengeToTry || game.global.world < 92 || game.global.world > 99)
+		return false;
+
+	if (save == null)
+		return true;
+	
+	if (game.global.totalRadPortals != save.reset)
+		return game.global.totalRadPortals > save.reset;
+
+	if (save.voidMaps < game.global.totalVoidMaps) {
+		if (debugOptimizer) {
+			console.log("shouldSaveOptimizedSave true: more void maps than save " + save.voidMaps + " < " + game.global.totalVoidMaps);
+		}
+		return true;
+	}
+
+	return false;
+}
+
+optimizeVoidMapsNumberInterval = setSomeInterval(optimizeVoidMapsNumberInterval, shouldSaveOptimizedVoidMapsNumberSave, shouldLoadOptimizedVoidMapsNumberSave, 400);
+
+//---------------
+
+var optimizeLastZoneInterval;
+
+var shouldLoadLastZoneSave = function(save) {
+	if (!tryOptimize)
+		return false;
+
+	if (game.global.lastClearedCell < 10 || game.global.mapsActive || game.global.world <= save.voidMapZone)
+		return false;
+
+	var myPortal = game.global.totalRadPortals;
+	var mySeconds = Math.round(((new Date() * 1) - game.global.portalTime) / 1000);
+	var myCell = (game.global.world * 100 + game.global.lastClearedCell);
+
+	if (save.cell < (maxVoidMapZone + 1) * 100)
+		return false;
+
+	if (save.reset != myPortal) {
+		if (debugOptimizer) {
+			console.log("shouldLoadLastZoneSave wrong portal " + save.reset + " " + game.global.totalRadPortals);
+		}
+		return false;
+	}
+
+	if ((myCell + 3) <= save.cell) {
+		return true;
+	}
+
+	return false;
+}
+
+var shouldSaveLastZoneSave = function(save) {
+	if (!tryOptimize)
+		return false;
+	
+	if (save == null)
+		return true;
+
+	if (game.global.lastClearedCell < 10 || game.global.mapsActive || game.global.world <= save.voidMapZone)
+		return false;
+
+	var myPortal = game.global.totalRadPortals;
+	var mySeconds = Math.round(((new Date() * 1) - game.global.portalTime) / 1000);
+	var myCell = (game.global.world * 100 + game.global.lastClearedCell);
+
+	if (myPortal < save.reset) {
+		if (debugOptimizer) {
+			console.log("shouldSaveLastZoneSave false: previous portal " + save.reset + " " + myPortal);
+		}
+		return false;
+	}
+
+	if (game.global.lastClearedCell < 10)
+		return false;
+
+	if (game.global.world >= forcedPortalWorld || game.global.world <= maxVoidMapZone)
+		return false;
+
+	if (myPortal > save.reset) {
+		if (debugOptimizer) {
+			console.log("shouldSaveLastZoneSave true: next portal " + save.reset + " " + myPortal);
+		}
+		return true;
+	}
+
+	if (myCell > save.cell) {
+		return true;
+	}
+
+	return false;
+}
+
+optimizeLastZoneInterval = setSomeInterval(optimizeLastZoneInterval, shouldSaveLastZoneSave, shouldLoadLastZoneSave, 200);
+
+
+//----------------------------------
+
 if (equalityInterval) { clearInterval(equalityInterval); equalityInterval = null; }
 var equalityInterval = setInterval(function() {
 	if (game.global.world < 135) {
-		game.portal.Equality.disabledStackCount = "25"
+		game.portal.Equality.disabledStackCount = "24"
 	} else if (game.global.world < 136) {
-		game.portal.Equality.disabledStackCount = "30"
+		game.portal.Equality.disabledStackCount = "29"
 	} else {
-		game.portal.Equality.disabledStackCount = "40"
+		game.portal.Equality.disabledStackCount = "37"
 	}
 }, 5001);
+
+
+// manually copy between tabs
+exportSaveToLocalStorage = function() {
+	window.localStorage.setItem("trimps-save", save(true));
+}
+// manually copy between tabs
+importSaveFromLocalStorage = function() {
+	load(window.localStorage.getItem("trimps-save"));
+}
