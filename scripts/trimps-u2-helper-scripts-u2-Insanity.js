@@ -163,11 +163,9 @@ if (changeAutobuyingNumbersInterval) { clearInterval(changeAutobuyingNumbersInte
 var changeAutobuyingNumbersInterval = setInterval(function() {
 	if (changeAutoBuy && !game.global.mapsActive) {
 		if (game.global.world > 0) { autobuyingEquipmentNumber = 33; autobuyingArmNumber = 31; buyShields = false; }
-		if (game.global.world >= 94) { autobuyingEquipmentNumber = 35; autobuyingArmNumber = 35; }
 		if (game.global.world >= 96) { buyShields = true; }
 		if (game.global.world >= 104) { autobuyingEquipmentNumber = 50; autobuyingArmNumber = 50; }
 		if (game.global.world >= 108) { autobuyingEquipmentNumber = 35; autobuyingArmNumber = 35; }
-		if (game.global.world >= 114) { autobuyingEquipmentNumber = 35; autobuyingArmNumber = 35; }
 		if (game.global.world >= 120) { autobuyingEquipmentNumber = 20; autobuyingArmNumber = 22; }
 		if (game.global.world >= 125) 
 			{ autobuyingEquipmentNumber = 22; autobuyingArmNumber = 27; }
