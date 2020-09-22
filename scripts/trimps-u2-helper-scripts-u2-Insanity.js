@@ -1,9 +1,7 @@
 var challengeToTry = "Insanity";
-// make sure equality is 25
 
 game.global.autoJobsSettingU2.enabled = true;
 
-var ignorePrismaticPalace = false;
 var dontPortal = false;
 var minMeltingZone = 112;//not before 111
 var trimpleOfDoomZone = 111;//not before 110
@@ -11,31 +9,10 @@ var smithiesWanted = 22;
 var insanityLevelWanted = 500;
 var forcedPortalWorld = 137;
 var tryBattle125 = true;
-var buyWorshippersZone = 123;
-
-
-var collectGambeson = {};
-
-var collectBoots = {};
-
-
-var tryNextOne = false;
-var tryBattle100 = false;
-
-//var plusZeroZones = [20, 24, 77, 85, 87, 89, 94, 101, 102, 103, 104, 105, 106, 107, 108];
-//var plusOneZones = [30, 40, 50, 60, 64, 70, 71, 72, 73, 74, 83];
-//var plusTwoZones = [79, 83, ,89, 90, 91, 92, 93, 109, 110, 123];
-
 
 var plusZeroZones = [20, 24, 79, 96, 115, 127, 128, 134, 135, 136];
-var plusOneZones = [30, 40, 54, 64, 74, 84, 94, 104, 120, 126];
+var plusOneZones = [30, 40, 54, 120, 126];
 var plusTwoZones = [59, 69, 79, 89, 99, 109, 110, 125, 129, 130, 131, 132, 133];
-
-if (tryNextOne) {
-	forcedPortalWorld = 117;
-	plusZeroZones = [20, 24, 75, 77, 85, 87, 89, 94, 104, 105, 106, 107, 108, 114, 115];
-	plusTwoZones = [48, 79, 80, 83,89, 90, 91, 92, 93, 109, 110, 111, 112, 113];
-}
 
 var plusThreeZones = [];
 var plusFourZones = [];
@@ -43,13 +20,10 @@ var plusFiveZones = [];
 var plusSixZones = [];
 var extraZones = [];
 
-
 var autobuyingEquipmentNumber = 33;
 var autobuyingArmNumber = 31;
 
-
 var gatherMetalZone = 10;
-var startMapsWorld = 50;
 
 var goldenMode = "Void";
 var minGoldenHeliumBeforeBattle = 50000.0;//2.0;
@@ -61,12 +35,6 @@ var maxVoidMapZone = 125;
 var abandonChallengeZone = 1000;
 var mapMode = "lsc";
 
-var forcedPortalLostBattles = 750000000;
-var forcedPortalWhenNoChallenge = false;
-
-var buyForever = false;
-
-
 var dontMap = false;
 var buySmithies = true;
 var buyTributes = true;
@@ -76,9 +44,6 @@ var switchToMetalAutomatically = true;
 var lastFluffyExpLog = 0;
 var autoExportSave = true;
 
-
-var jestimpTarget = "metal";
-var oldJestimpTarget;
 var jestimpMode = false;
 var saveString = null;
 var wentForSmithy = false;
@@ -95,9 +60,7 @@ if (typeof fluffyStart === "undefined")
 
 if (jestimpInterval) { clearInterval(jestimpInterval); jestimpInterval = null; }
 var jestimpInterval = setInterval(function() {
-	var tmpTarget = jestimpTarget;
-	if (tmpTarget != "science")
-		tmpTarget = game.global.playerGathering;
+	var tmpTarget = game.global.playerGathering;
 
 	if (document.getElementById("worldName") && document.getElementById("worldName").innerText == "Prismatic Palace")
 		return;
@@ -162,7 +125,6 @@ var changeJestimpTargetToWoodInterval = setInterval(function() {
 				buyJob("Miner");
 				fireMode();
 				buyJob("Lumberjack");
-				jestimpTarget = "wood";
 				numTab(1);
 				setGather("wood");
 				mapMode = "lwc";
@@ -174,7 +136,6 @@ var changeJestimpTargetToWoodInterval = setInterval(function() {
 				buyJob("Lumberjack");
 				fireMode();
 				buyJob("Miner");
-				jestimpTarget = "metal";
 				numTab(1);
 				setGather("metal");
 			}
@@ -186,7 +147,6 @@ var changeJestimpTargetToWoodInterval = setInterval(function() {
 			buyJob("Lumberjack");
 			fireMode();
 			buyJob("Miner");
-			jestimpTarget = "metal";
 			numTab(1);
 			wentForSmithy = true;
 			setGather("metal");
@@ -195,14 +155,6 @@ var changeJestimpTargetToWoodInterval = setInterval(function() {
 
 	if (wentForSmithy) {
 		mapMode = "lmc";
-	}
-
-	if (game.global.world > 88) {
-		jestimpTarget = "science";
-	}
-
-	if (game.global.world >= voidMapZone) {
-		jestimpTarget = "metal";
 	}
 }, 10000 * 1);
 
@@ -222,7 +174,7 @@ var changeAutobuyingNumbersInterval = setInterval(function() {
 		if (game.global.world >= 126) 
 			{ autobuyingEquipmentNumber = 25; autobuyingArmNumber = 27; }
 		if (game.global.world >= 128) 
-			{ autobuyingEquipmentNumber = 15; autobuyingArmNumber = 15; }
+			{ autobuyingEquipmentNumber = 16; autobuyingArmNumber = 16; }
 		if (game.global.world >= 134) 
 			{ autobuyingEquipmentNumber = 18; autobuyingArmNumber = 18; }
 		if (game.global.world >= 135) 
@@ -325,26 +277,6 @@ var buyStorageInterval = setInterval(function() {
 
 var isOkToBuyWorshippers = function() {
 	return true;
-	/*
-	if (game.global.world < 110 && game.global.world >= 50) {
-		if (game.buildings.Tribute.owned >= tributesWanted) {
-			return true;
-		}
-	}
-
-	if (game.global.world < buyWorshippersZone)
-		return false;
-	
-	if (game.global.world == buyWorshippersZone && game.global.mapBonus < 3)
-		return false;
-	
-	//if (game.global.mapsActive)
-	//	return false;
-	
-	//if (game.resources.metal.owned > 1e+36)
-	//	return false;
-	
-	return true;*/
 }
 
 var shouldFireWorshippers = function() {
@@ -702,17 +634,9 @@ var hireFarmersInterval = setInterval(function() {
 				setGather("metal");
 			}
 
-			jestimpTarget = "metal";
 			numTab(1);
 			mapMode = "lmc";
 		}
-	}
-	if (game.global.world > 88) {
-		jestimpTarget = "science";
-	}
-
-	if (game.global.world >= voidMapZone) {
-		jestimpTarget = "metal";
 	}
 }, 500)
 
@@ -1224,7 +1148,7 @@ var isOkToPortal = function() {
 	if ((game.global.challengeActive + "") !== "")
 		return false;
 
-	return game.global.world >= forcedPortalWorld || game.stats.battlesLost.value >= forcedPortalLostBattles || ((game.global.challengeActive + "") === "" && forcedPortalWhenNoChallenge);
+	return game.global.world >= forcedPortalWorld;
 }
 
 var localStorageKeys = [];
@@ -1252,7 +1176,6 @@ var forcePortalInterval = setInterval(function() {
 			}
 			pressFight();
 			fluffyStart = Fluffy.currentExp[1];
-			jestimpTarget = "food"
 			mapMode = "lsc";
 		}, 1000);
 	}
