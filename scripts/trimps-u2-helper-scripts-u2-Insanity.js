@@ -7,12 +7,12 @@ var minMeltingZone = 112;//not before 111
 var trimpleOfDoomZone = 111;//not before 110
 var smithiesWanted = 22;
 var insanityLevelWanted = 500;
-var forcedPortalWorld = 137;
+var forcedPortalWorld = 139;
 var tryBattle125 = true;
 
-var plusZeroZones = [20, 24, 79, 96, 115, 127, 128, 134, 135, 136];
-var plusOneZones = [30, 40, 54, 120, 126];
-var plusTwoZones = [59, 69, 79, 89, 99, 109, 110, 125, 129, 130, 131, 132, 133];
+var plusZeroZones = [20, 24, 79, 96, 115, 127, 134, 136];
+var plusOneZones = [30, 40, 54, 120];
+var plusTwoZones = [59, 69, 79, 89, 99, 109, 110, 129, 130, 131, 132, 133];
 
 var plusThreeZones = [];
 var plusFourZones = [];
@@ -42,9 +42,7 @@ var buyMeteorologists = true;
 
 var switchToMetalAutomatically = true;
 var lastFluffyExpLog = 0;
-var autoExportSave = true;
 
-var jestimpMode = false;
 var saveString = null;
 var wentForSmithy = false;
 var changeAutoBuy = true;
@@ -58,6 +56,7 @@ if (game.global.world == 1)
 if (typeof fluffyStart === "undefined")
 	fluffyStart = 0;
 
+var jestimpMode = false;
 if (jestimpInterval) { clearInterval(jestimpInterval); jestimpInterval = null; }
 var jestimpInterval = setInterval(function() {
 	var tmpTarget = game.global.playerGathering;
@@ -1137,7 +1136,7 @@ var isOkToPortal = function() {
 	if (game.global.world > forcedPortalWorld)
 		return true;
 
-	if (game.global.lastClearedCell < 98)
+	if (game.global.lastClearedCell < 0)
 		return false;
 
 	if (game.global.mapsActive)
@@ -1148,8 +1147,6 @@ var isOkToPortal = function() {
 
 	return game.global.world >= forcedPortalWorld;
 }
-
-var localStorageKeys = [];
 
 if (forcePortalInterval) { clearInterval(forcePortalInterval); forcePortalInterval = null; }
 var forcePortalInterval = setInterval(function() {
@@ -1180,7 +1177,7 @@ var forcePortalInterval = setInterval(function() {
 }, 500);
 
 
-var minLogZone = 110;
+var minLogZone = 120;
 if (logFluffyExpInterval) { clearInterval(logFluffyExpInterval); logFluffyExpInterval = null; }
 var logFluffyExpInterval = setInterval(function() {
 	if (game.global.world < minLogZone) {
@@ -1257,6 +1254,7 @@ var collectHeirloomsInterval = setInterval(function() {
 	}
 }, 3000);
 
+var autoExportSave = true;
 if (autoSaveInterval) { clearInterval(autoSaveInterval); autoSaveInterval = null; }
 var autoSaveInterval = setInterval(function() {
 	if (autoExportSave) {
@@ -1359,7 +1357,9 @@ var pressFightInterval = setInterval(function() { pressFight(); }, 5000);
 
 // --------------------------------------------------------------------------
 
-var debugOptimizer = true;
+var localStorageKeys = [];
+var tryOptimize = true;
+var debugOptimizer = false;
 
 var parseCookieValue = function(cookieName) {
 	var cookieValue = window.localStorage.getItem(cookieName);
@@ -1372,20 +1372,42 @@ var parseCookieValue = function(cookieName) {
 			cell: 			parseInt(cookieValue.split("###")[3]),
 			tributes: 		parseInt(cookieValue.split("###")[4]),
 			voidMaps: 		parseInt(cookieValue.split("###")[5]),
-			metalOwned: 	parseFloat(cookieValue.split("###")[6])
+			metalOwned: 	parseFloat(cookieValue.split("###")[6]),
+			frenzyLeft: 	parseInt(cookieValue.split("###")[7]),
+			improHealth:	parseFloat(cookieValue.split("###")[8]),
+			mayhemStacks:	parseInt(cookieValue.split("###")[9]),
+			mapCell:		parseInt(cookieValue.split("###")[10]),
+			mapName:		cookieValue.split("###")[11],
+			mapEnemyHealth:	parseFloat(cookieValue.split("###")[12])
 		};
 		
 	return null;
 }
 
 var serializeCookieValue = function() {
+	var currentMap = game.global.mapsOwnedArray.filter(function (el) { return el.id == game.global.currentMapId; })
+	var mapName = '';
+	if (currentMap != null && currentMap.length != 0)
+		mapName = currentMap[0].name;
+	
+	var mapEnemyHealth = 0;
+	if (game.global.lastClearedMapCell < game.global.mapGridArray.length - 1) {
+		mapEnemyHealth = game.global.mapGridArray[game.global.lastClearedMapCell + 1].health;
+	}
+	
 	return save(true) + 
 		"###" + game.global.totalRadPortals +
 		"###" + Math.round(((new Date() * 1) - game.global.portalTime) / 1000) +
 		"###" + (game.global.world * 100 + game.global.lastClearedCell) +
 		"###" + game.buildings.Tribute.owned +
 		"###" + game.global.totalVoidMaps + 
-		"###" + game.resources.metal.owned;
+		"###" + game.resources.metal.owned +
+		"###" + game.portal.Frenzy.frenzyLeft() +
+		"###" + game.global.gridArray[99].health + 
+		"###" + game.challenges.Mayhem.stacks + 
+		"###" + game.global.lastClearedMapCell + 
+		"###" + mapName +
+		"###" + mapEnemyHealth;
 }
 
 var setSomeInterval = function(intervalVar, shouldSaveFunction, shouldLoadFunction, intervalTime) {
@@ -1421,6 +1443,7 @@ var setSomeInterval = function(intervalVar, shouldSaveFunction, shouldLoadFuncti
 }
 
 //----------------------------------
+
 
 var optimizeVoidStartInterval;
 
@@ -1490,7 +1513,6 @@ optimizeVoidEndInterval = setSomeInterval(optimizeVoidEndInterval, shouldSaveVoi
 
 var optimizeVoidMapsNumberInterval;
 
-var tryOptimize = true;
 var shouldLoadOptimizedVoidMapsNumberSave = function(save) {
 	if (!tryOptimize)
 		return false;
@@ -1618,16 +1640,20 @@ optimizeLastZoneInterval = setSomeInterval(optimizeLastZoneInterval, shouldSaveL
 
 //----------------------------------
 
-if (equalityInterval) { clearInterval(equalityInterval); equalityInterval = null; }
-var equalityInterval = setInterval(function() {
-	if (game.global.world < 135) {
-		game.portal.Equality.disabledStackCount = "24"
-	} else if (game.global.world < 136) {
-		game.portal.Equality.disabledStackCount = "29"
-	} else {
-		game.portal.Equality.disabledStackCount = "37"
-	}
-}, 5001);
+	if (equalityInterval) { clearInterval(equalityInterval); equalityInterval = null; }
+	var equalityInterval = setInterval(function() {
+		if (game.global.world < 135) {
+			game.portal.Equality.disabledStackCount = "9"
+		} else if (game.global.world < 136) {
+			game.portal.Equality.disabledStackCount = "18"
+		} else if (game.global.world < 137) {
+			game.portal.Equality.disabledStackCount = "29"
+		} else if (game.global.world < 138) {
+			game.portal.Equality.disabledStackCount = "37"
+		} else {
+			game.portal.Equality.disabledStackCount = "42"
+		}
+	}, 5001);
 
 
 // manually copy between tabs

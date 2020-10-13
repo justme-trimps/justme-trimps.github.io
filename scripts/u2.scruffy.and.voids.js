@@ -1,5 +1,3 @@
-var challengeToTry = "Insanity";
-// make sure equality is 25
 
 var ignorePrismaticPalace = false;
 var dontPortal = true;
@@ -25,8 +23,8 @@ var tryBattle100 = false;
 //var plusTwoZones = [79, 83, ,89, 90, 91, 92, 93, 109, 110, 123];
 
 
-var plusZeroZones = [20, 24, 135, 136, 137, 138, 139];
-var plusOneZones = [30, 40, 54, 64, 74, 84, 94, 104, 114, 124, 134, 140, 141, 142, 143];
+var plusZeroZones = [20, 24];
+var plusOneZones = [30, 40, 54, 124, 134];
 var plusTwoZones = [59, 69, 79, 89, 99, 109, 119, 129];
 
 var plusThreeZones = [];
@@ -125,16 +123,17 @@ var changeJestimpTargetToWoodInterval = setInterval(function() {
 	if (game.global.world > 110)
 		return;
 	if (game.global.world == 110) {
-		if (game.resources.wood.owned < 2e+36 && game.buildings.Smithy.owned < 20) {
-			fireMode();
-			setMax(1, false);
-			numTab(6);
-			buyJob("Miner");
-			fireMode();
-			buyJob("Lumberjack");
-			numTab(1);
-			setGather("wood");
-		} else {
+//		if (game.resources.wood.owned < 2e+36 && game.buildings.Smithy.owned < 20) {
+//			fireMode();
+//			setMax(1, false);
+//			numTab(6);
+//			buyJob("Miner");
+//			fireMode();
+//			buyJob("Lumberjack");
+//			numTab(1);
+//			setGather("wood");
+//		} else 
+//		{
 			fireMode();
 			setMax(1, false);
 			numTab(6);
@@ -143,7 +142,7 @@ var changeJestimpTargetToWoodInterval = setInterval(function() {
 			buyJob("Miner");
 			numTab(1);
 			setGather("metal");
-		}
+//		}
 	} else if (smithiesWanted > -1 && game.global.world >= minMeltingZone && !wentForSmithy) {
 		if (smithiesWanted > game.buildings.Smithy.owned) {
 			if (game.resources.metal.owned > 10000 * (Math.pow(50, smithiesWanted - 1))) {
@@ -937,7 +936,7 @@ var repeatMaps = setInterval(function() {
 
 		if (game.global.world > 128) {
 			game.global.autoJobsSettingU2.enabled = false;
-			while (document.getElementById("togglerepeatUntil").innerHTML.indexOf("Any") == -1) {
+			while (document.getElementById("togglerepeatUntil").innerHTML.indexOf("Items") == -1) {
 				toggleSetting("repeatUntil");
 			}
 		}
@@ -1239,12 +1238,12 @@ var switchHeirloomInterval = setInterval(function() {
 			equipHeirloom();
 			break;
 		}
-		if (heirloom.name == "World" && !game.global.mapsActive && game.global.world < 100) {
+		if (heirloom.name == "World" && !game.global.mapsActive && game.buildings.Tribute.owned < tributesWanted) {
 			selectHeirloom(i, "heirloomsCarried", true);
 			equipHeirloom();
 			break;
 		}
-		if (heirloom.name == "World2" && !game.global.mapsActive && game.global.world >= 100) {
+		if (heirloom.name == "World2" && !game.global.mapsActive && game.buildings.Tribute.owned >= tributesWanted) {
 			selectHeirloom(i, "heirloomsCarried", true);
 			equipHeirloom();
 			break;

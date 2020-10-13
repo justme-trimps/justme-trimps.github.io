@@ -29,6 +29,10 @@ do voids on z110
 buy 2700 nurseries at Z121!
 set genetic assistant to 45 seconds
 
+
+2020-10-12 Erad Perks:
+N4IgMg9hAuCWB2BzA+gSVSAXAJgAwHYBmPAVl20IEYAWXADjoBoQBhAQwCcAHAU3mg4BPNBkyVy1AJzUSANmLYS1SoWYBZGLABubOBHgishWfkn5K+GWbqzcuZgAUIAdx4dDOM4TuFpdasSS5MwAKhAArogAFvA8AM5xHlLS1NjYlJSykvJ2zOxcbABGADY8WOJ54fDwCIjlJJSVHLARceXYsnnFbAmCWPgkzADyWm4A1rDFxUb2IABK8REcAMY8AGbh0ziUg6xQHAAmCLo8B1hp1MwAyrBcUfoQxRCIfZiqIACC/LDLt7ot8HKswWcUmsD4q3OcnUp1g0H++n6zAWpX4pQSsQSQLynF4/CE51szA+HDgcTYNTiAleHWBFMQZTEsw+iDB0BpswAQmw4fV8KEOOEALZcNpiQi7BxRNwQIX6eLnSjYRxsZZjDi6c64XYaOA6PSAnDUfkgJyuDjnfCzMKRGLxMUdSTMSCaJCW7AAXyAA===
+
 ERAD 141 TEST RUN
 
 Shield: 7010% Crit Damage, 32.7% Gamma Burst, 3610% Attack
@@ -53,11 +57,12 @@ Void Siphon: 235%
 00d05h31m BW140 - 1st map completed (Mace)
 00d06h47m BW140 - 2nd map completed
 00d07h43m BW140 - 3rd map completed
-00d08h24m BW140 - 4rd map completed
-00d08h57m BW155 started (18.4Sxv - 22.1Sxv DMG)
-00d14h42m BW155 - 1st cell completed
-00d15h55m BW155 - 2nd cell completed
-00d23h09m BW155 - 10th cell completed
+00d08h24m BW140 - 4th map completed
+00d08h57m BW155 started (18.4Sxv - 22.1Sxv DMG) 		(2020-10-12: 953Sx-1.14Sp)
+00d14h42m BW155 - 1st cell completed 					(2020-10-12: 3h27m)
+00d15h55m BW155 - 2nd cell completed					(2020-10-12: 3h39m)
+00d23h09m BW155 - 10th cell completed					(2020-10-12: 5h13m)
+				  20th cell completed					(2020-10-12: 6h51m)
 02d05h36m BW155 - 50th cell completed
 04d04h40m BW155 - completed 1st time (1st Dagger)
 05d16h34m BW155 - completed 2nd time (2nd Dagger)
@@ -228,6 +233,63 @@ NIGHT
 02d00h52m Z98
 02d06h31m Z99
 02d10h43m Z100
+
+MAYHEM 18
+00d02h31m Z91
+00d02h38m Z92
+00d03h15m Z94
+00d03h37m Z95 - 0 stacks & M101-105
+00d05h46m Z96
+00d05h48m Z97
+00d05h50m Z98
+00d05h55m Z99
+00d06h04m Z100
+
+MAYHEM 19
+00d01h19m Z75
+00d02h35m Z85
+00d02h51m Z86 - M91-95
+00d03h37m Z90
+00d03h49m Z91
+00d04h03m Z92
+00d05h07m Z94
+00d05h34m Z95
+00d07h37m Z96 - M101-104
+00d09h00m Z98 - M105
+00d09h48m Z99
+00d09h53m Z100
+
+MAYHEM 20
+00d00h55m Z72
+00d01h07m Z75
+00d01h11m Z76
+00d01h20m Z77
+00d01h34m Z78
+00d01h44m Z80
+00d01h51m Z81
+00d02h09m Z83
+00d02h23m Z84 M94
+00d03h32m Z87
+00d03h37m Z88
+00d03h49m Z89 M95
+00d04h25m Z90
+00d04h33m Z91
+00d12h09m Z95 - clean stacks on M96
+00d13h23m Z96
+00d23h00m Z101
+
+MAYHEM 20
+00d03h07m Z85 M91-95
+00d05h26m Z91
+00d06h29m Z93
+00d09h07m Z95
+00d10h58m Z96
+00d14h25m Z97
+00d22h44m Z98 M101-103
+01d07h08m Z99
+01d11h33m Z101
+
+
 
 
 
