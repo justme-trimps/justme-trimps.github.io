@@ -171,11 +171,15 @@ var changeAutobuyingNumbersInterval = setInterval(function() {
 		if (game.global.world >= 126) 
 			{ autobuyingEquipmentNumber = 25; autobuyingArmNumber = 27; }
 		if (game.global.world >= 128) 
-			{ autobuyingEquipmentNumber = 16; autobuyingArmNumber = 16; }
-		if (game.global.world >= 134) 
 			{ autobuyingEquipmentNumber = 18; autobuyingArmNumber = 18; }
+		if (game.global.world >= 134) 
+			{ autobuyingEquipmentNumber = 21; autobuyingArmNumber = 21; }
 		if (game.global.world >= 135) 
-			{ autobuyingEquipmentNumber = 20; autobuyingArmNumber = 20; }
+			{ autobuyingEquipmentNumber = 23; autobuyingArmNumber = 23; }
+		if (game.global.world >= 136) 
+			{ autobuyingEquipmentNumber = 25; autobuyingArmNumber = 25; }
+		if (game.global.world >= 137) 
+			{ autobuyingEquipmentNumber = 30; autobuyingArmNumber = 30; }
 	}
 }, 1000 * 1);
 
@@ -677,6 +681,9 @@ var shouldFightSomeMap = function() {
 	if (!game.global.mapsActive && voidMapZone != -1 && (game.global.world >= voidMapZone && game.global.world <= maxVoidMapZone) && game.global.lastClearedCell > 80) {
 		for (var i = game.global.mapsOwnedArray.length - 1; i > -1; i--) {
 			if (game.global.mapsOwnedArray[i].location == "Void") {
+				if (game.global.world == voidMapZone) {
+					console.log(getPortalTime() + " time for void maps ");
+				}
 				return true;
 			}
 		}
@@ -799,8 +806,10 @@ var quit45MapInterval = setInterval(function() {
 		if (maxLevel == 52 && game.resources.fragments.owned > 485e9)
 			timeToQuit = true;
 
-		if (game.challenges.Insanity.insanity >= insanityLevelWanted)
+		if (game.challenges.Insanity.insanity >= insanityLevelWanted) {
 			timeToQuit = true;
+			console.log(getPortalTime() + " reached " + insanityLevelWanted + " insanity");
+		}
 
 		if (timeToQuit) {
 			while (document.getElementById("togglerepeatUntil").innerHTML.indexOf("Items") == -1) {
@@ -1651,7 +1660,7 @@ optimizeLastZoneInterval = setSomeInterval(optimizeLastZoneInterval, shouldSaveL
 		} else if (game.global.world < 138) {
 			game.portal.Equality.disabledStackCount = "37"
 		} else {
-			game.portal.Equality.disabledStackCount = "42"
+			game.portal.Equality.disabledStackCount = "44"
 		}
 	}, 5001);
 

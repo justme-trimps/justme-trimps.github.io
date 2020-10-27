@@ -11,30 +11,24 @@ var autoSaveInterval = setInterval(function() {
 	}
 }, 1000 * 60 * autoExportSaveFrequencyInMinutes);
 
-
-var getStacksNumber = function() {
-	if (document.getElementById('balanceStack')) {
-		return parseInt(document.getElementById('balanceStack').innerText);
-	}
-	return 0;
-}
+var balanceStackActionNumber = 200;
 
 var shouldFightSomeMap = function() {
 	if (game.global.mapsActive)
 		return false;
 	
-	if (getStacksNumber() > 19) {
+	if (game.challenges.Unbalance.balanceStacks > balanceStackActionNumber) {
 		return true;
 	}
 	
-	if (game.global.lastClearedCell == 98 && getStacksNumber() > 0)
-		return true;
+//	if (game.global.lastClearedCell == 98 && game.challenges.Unbalance.balanceStacks > 0)
+//		return true;
 	
 	if (game.global.lastClearedCell == 98 && game.global.soldierHealth == 0)
 		return true;
 	
-	if (game.global.mapBonus < 10)
-		return true;
+//	if (game.global.mapBonus < 10)
+//		return true;
 		
 	return false;
 }
@@ -56,7 +50,7 @@ var repeatMaps = setInterval(function() {
 		runMap();
 		fightManual();
 		
-		while (document.getElementById('togglerepeatUntil').innerHTML.indexOf('Items') == -1) {
+		while (document.getElementById('togglerepeatUntil').innerHTML.indexOf('Any') == -1) {
 			toggleSetting('repeatUntil');
 		}
 			

@@ -46,26 +46,27 @@ Herbalist: 107%
 C∞: 215k
 Void Siphon: 235%
 
-00d00h16m start M121 on Z111
+00d00h00m on Z110																								first 115, then VM
+00d00h16m start M121 on Z111																					(M121)
 00d00h51m start M124 on Z115
-00d01h21m start M125 on Z115
+00d01h21m start M125 on Z115																								
 00d01h55m start 2nd M125 on Z115 and farm a bit after
 00d02h48m start Z120
-00d03h25m start M131 on Z121
-00d03h29m start BW140 on Z121
+00d03h25m start M131 on Z121																					00d00h29m
+00d03h29m start BW140 on Z121																					00d00h30m, buy 2700 nurseries
 00d04h30m BW140 - 50 cells completed
 00d05h31m BW140 - 1st map completed (Mace)
 00d06h47m BW140 - 2nd map completed
 00d07h43m BW140 - 3rd map completed
 00d08h24m BW140 - 4th map completed
-00d08h57m BW155 started (18.4Sxv - 22.1Sxv DMG) 		(2020-10-12: 953Sx-1.14Sp)
-00d14h42m BW155 - 1st cell completed 					(2020-10-12: 3h27m)
+00d08h57m BW155 started (18.4Sxv - 22.1Sxv DMG) 		(2020-10-12: 953Sx-1.14Sp)								00d00h57m (2.42Spv-2.90Spv)
+00d14h42m BW155 - 1st cell completed 					(2020-10-12: 3h27m)										00d01h39m 
 00d15h55m BW155 - 2nd cell completed					(2020-10-12: 3h39m)
-00d23h09m BW155 - 10th cell completed					(2020-10-12: 5h13m)
+00d23h09m BW155 - 10th cell completed					(2020-10-12: 5h13m)										00d02h22m 
 				  20th cell completed					(2020-10-12: 6h51m)
 02d05h36m BW155 - 50th cell completed
-04d04h40m BW155 - completed 1st time (1st Dagger)
-05d16h34m BW155 - completed 2nd time (2nd Dagger)
+04d04h40m BW155 - completed 1st time (1st Dagger)		(2020-10-12: 21h19m - don't fight with Robo, abandon)
+05d16h34m BW155 - completed 2nd time (2nd Dagger)		(2020-10-12: hm - don't fight with Robo, abandon)
 05d21h05m BW155 - completed 3rd time (1st Mace)
 06d01h04m BW155 - completed 4th time (2nd Mace)
 06d03h46m BW155 - completed 5th time
@@ -88,29 +89,59 @@ Void Siphon: 235%
 11d12h11m start Z138
 11d12h33m start Z139
 11d13h06m start Z140
-11d14h10m start Z141
+11d14h10m start Z141									(2020-10-12: 01d13h30m)
 
 
+ERAD 141
+He: 2.91 Dc
+Shield: 175% Crit Chance, 10800% Crit Damage, 41.1k% Gamma Burst, 4610% Attack, 125% Plaguebringer
+Poison Level: 1620
+Power II: 3.05 Qa
+Amalgamator: 9
+Mayhem: 21
+Strength Towers: 10
+RoboTrimps: 50
+Herbalist: 109%
+C∞: 260 k
+Void Siphon: 275%
 
-00h25m - start Z111: VM + farm
-00h35m - start M121
-03h52m - completed M121(once)
-04h07m - start Z114
-04h30m - start Z115
-05h10m - start Z116
-05h36m - start Z117
-05h36m - start M122
-07h09m - completed M122(once)
-	07h09m - start Z118
-	08h45m - start Z119
-08h55m - completed M123(once)
-	09h00m - start Z118
-	09h50m - start Z119
-10h44m - completed M124(once)
-19h54m - start 124
-20h11m - start 125
-20h35m - start 126 
+00d00h30m start BW140 on Z121
+00d00h57m BW155 started
+00d01h39m BW155 - 1st cell completed
+00d02h22m BW155 - 10th cell completed 
+00d02h54m BW155 - 20th cell completed 
+00d04h55m BW155 - 50th cell completed 
+00d08h36m BW155 - 99th cell completed 1st time, abandon, restart
+00d11h35m BW155 - 99th cell completed 2nd time, abandon, restart
+00d18h15m Z141
 
+@Fantast @Lonadont
+
+ERAD 141
+He: 2.91 Dc
+Shield: 175% Crit Chance, 10800% Crit Damage, 41.1k% Gamma Burst, 4610% Attack, 125% Plaguebringer
+Poison Level: 1620
+Power II: 3.05 Qa
+Amalgamator: 9
+Mayhem: 21
+Strength Towers: 10
+RoboTrimps: 50
+Herbalist: 109%
+C∞: 260 k
+Void Siphon: 275%
+
+00d00h30m start BW140 on Z121
+00d00h57m BW155 started
+00d01h39m BW155 - 1st cell completed
+00d02h22m BW155 - 10th cell completed 
+00d02h54m BW155 - 20th cell completed 
+00d04h55m BW155 - 50th cell completed 
+00d08h36m BW155 - completed 1st time
+00d11h35m BW155 - completed 2nd time
+overnight - afk
+00d18h15m Z141 in the morning
+
+@Fantast @Lonadont
 
 --------------------=============== U2 ===============--------------------
 
@@ -126,6 +157,9 @@ U2 PERKS GOGOGO
 N4Ig8gbgpgTg1gSwDZJALgMwAYA0IBKUAzsglAHYDGU6AjACwCseA4jFFACbr24gAqFAIaUEAFwCePPgGEY4hJSFJxUtLQwY8MoTAAOFMTDUMAHHgCCMMQiJDytoyfr08+ewHMa6vhY+lJdAAmPgAhIXF0U1o8fhgAVwBbPSIomJAABQALWAB7RNzyYjoQvAyROBghMToMcxAAWVybCGqEQromMtyAd1g6RnT+XPiPLKKiVPVGILwAGVzmhHIPToB2MvkiROU6LCwAXyA===
 N4Ig8gbgpgTg1gSwDZJALgMwAYA0IBKUAzsglAHYDGU6AjACwBseA4jFFACbr24gAqFAIaUEAFwCePPgGEY4hJSFJxUtLQwAOPAFEAjgFdlq9Bgx4ZQmAAcKYmGtoBWWngCCMMQiJDy3+470AOx4+L4A5jTqfG7hpJLoAEx8AEJC4nTJePwwBgC21kSZfAAKABawAPZ5leTExXglInAwQmJ09OYgALKVXhBtCLUd2iAllQDusHROidmVBuFldURF6rN4ADKVfQjk4R0hY/JEecp0WFgAvkA=
 N4Ig8gbgpgTg1gSwDZJALgMwAYA0IBKUAzsglAHYDGU6AjACwBseA4jFFACbr24gAqFAIaUEAFwCePPgGEY4hJSFJxUtLQwAOPDKEwADhTEw1tAKy08AQRhiERIeXvHT9AOx58jgOY11fK29SSXQAJj4AISFxOnC8fhgAVwBbfSJYvgAFAAtYAHtkvPJiDLxMkTgYITE6egw8AFk8uwhqhCLa7RBMvIB3WDozUPi8xO9s4qJ09SG8ABk85oRyb1qPbvkiZOU6LCwAXyA
+
+2020-10-16 gogogo
+N4IgSgpgzglgNjCA7AxhEAuAjAVgGwA0IA4gE4QQAmmALAAxEAqyAhijAC4CetDIAwqU4wULBN0xYaAdiIBRAI4BXMZx7YsWIvxakADsg6l1WPLJABBUhxhQWSW0ZN4ATETD2A5umx8Ln+DVMFz4AIRZOSRwAZiZSJQBbPSgovgAFAAsIUgB7BJykaElo8zS2AGtSFg4onCIAWRybADdqmALJVyI0nIB3bM6aJhylTwzCqBTsPCGQABkcppgkT0HuoSgEsUk6PgAJJRWBjGi+ADFyJAAvdRoXAF8gA==
 
 
 buy golden maps!
@@ -278,7 +312,7 @@ MAYHEM 20
 00d13h23m Z96
 00d23h00m Z101
 
-MAYHEM 20
+MAYHEM 21
 00d03h07m Z85 M91-95
 00d05h26m Z91
 00d06h29m Z93

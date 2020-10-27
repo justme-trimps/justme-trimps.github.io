@@ -1,7 +1,8 @@
+game.global.autoJobsSettingU2.enabled = true;
 
 var ignorePrismaticPalace = false;
 var dontPortal = true;
-var minMeltingZone = 135;//not before 111
+var minMeltingZone = 170;//not before 111
 var trimpleOfDoomZone = 150;//not before 110
 var smithiesWanted = 16;
 var insanityLevelWanted = 500;
@@ -41,11 +42,11 @@ var autobuyingArmNumber = 31;
 var gatherMetalZone = 10;
 var startMapsWorld = 50;
 
-var goldenMode = "Void";
+var goldenMode = "Battle";
 var minGoldenHeliumBeforeBattle = -1.0;//2.0;
-var minGoldenVoidBeforeHelium = 0.71; //0.5;
+var minGoldenVoidBeforeHelium = -1.0; //0.5;
 
-var voidMapZone = 139;
+var voidMapZone = 170;
 var maxVoidMapZone = 139;
 
 var abandonChallengeZone = 1000;
@@ -686,7 +687,7 @@ var hireFarmersInterval = setInterval(function() {
 
 if (fireScientistsInterval) { clearInterval(fireScientistsInterval); fireScientistsInterval = null; }
 var fireScientistsInterval = setInterval(function() {
-	if (game.global.world >= voidMapZone) {
+	if (game.global.world >= voidMapZone && game.jobs.Scientist.owned > 0) {
 		fireMode();
 		setMax(1, false);
 		numTab(6);

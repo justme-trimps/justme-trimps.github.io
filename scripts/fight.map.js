@@ -1,7 +1,7 @@
 window.localStorage.clear();
 
-var fastEq = "15";
-var slowEq = "113";
+var fastEq = "30";
+var slowEq = "96";
 
 if (mayhemSlowEqInterval) { clearInterval(mayhemSlowEqInterval); mayhemSlowEqInterval = null; }
 var mayhemSlowEqInterval = setInterval(function() { 
