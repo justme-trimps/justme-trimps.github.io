@@ -762,7 +762,7 @@ var shouldFightSomeMap = function() {
 		}
 	}
 
-	if (game.global.world == 45 && game.challenges.Insanity.insanity < insanityLevelWanted)
+	if (game.global.world == 60 && game.challenges.Insanity.insanity < insanityLevelWanted)
 		return true;
 
 	return false;
@@ -785,9 +785,9 @@ var quitMapInterval = setInterval(function() {
 }, 400);
 
 
-if (quit45MapInterval) { clearInterval(quit45MapInterval); quit45MapInterval = null; }
-var quit45MapInterval = setInterval(function() {
-	if (game.global.world == 45 && game.global.mapsActive) {
+if (quit60MapInterval) { clearInterval(quit60MapInterval); quit60MapInterval = null; }
+var quit60MapInterval = setInterval(function() {
+	if (game.global.world == 60 && game.global.mapsActive) {
 		var timeToQuit = false;
 
 		var maxLevel = -1;
@@ -797,13 +797,13 @@ var quit45MapInterval = setInterval(function() {
 				maxLevel = game.global.mapsOwnedArray[i].level;
 		}
 
-		if (maxLevel == 50 && game.resources.fragments.owned > 62e9)
+		if (maxLevel == 65 && game.resources.fragments.owned > 5.49e11)
 			timeToQuit = true;
 
-		if (maxLevel == 51 && game.resources.fragments.owned > 246e9)
+		if (maxLevel == 66 && game.resources.fragments.owned > 2.17e12)
 			timeToQuit = true;
 
-		if (maxLevel == 52 && game.resources.fragments.owned > 485e9)
+		if (maxLevel == 67 && game.resources.fragments.owned > 5.88e12)
 			timeToQuit = true;
 
 		if (game.challenges.Insanity.insanity >= insanityLevelWanted) {
@@ -820,7 +820,7 @@ var quit45MapInterval = setInterval(function() {
 }, 3000);
 
 
-var selectNext45Map = function() {
+var selectNext60Map = function() {
 	var maxLevel = -1;
 	var mapsOwned = game.global.mapsOwnedArray;
 	for (var i = 0; i < mapsOwned.length; i++) {
@@ -828,29 +828,47 @@ var selectNext45Map = function() {
 			maxLevel = game.global.mapsOwnedArray[i].level;
 	}
 
-	if (maxLevel < 50) {
+	if (maxLevel < 65) {
 		document.getElementById("difficultyAdvMapsRange").value = 0;
 		document.getElementById("advExtraLevelSelect").value = "5";
 		document.getElementById("advSpecialSelect").value = 0;
 	}
-	if (maxLevel == 50) {
+	if (maxLevel == 65 || (maxLevel < 65 && game.resources.fragments.owned > 5.49e11)) {
 		document.getElementById("advExtraLevelSelect").value = "6";
 		document.getElementById("advSpecialSelect").value = "lsc";
 		document.getElementById("difficultyAdvMapsRange").value = 0;
 	}
 
-	if (maxLevel == 51) {
+	if (maxLevel == 66 || (maxLevel < 66 && game.resources.fragments.owned > 2.17e12)) {
 		document.getElementById("advExtraLevelSelect").value = "7";
 		document.getElementById("advSpecialSelect").value = "lsc";
 		document.getElementById("difficultyAdvMapsRange").value = 0;
 	}
 
-	if (maxLevel == 52) {
+	if (maxLevel == 67 || (maxLevel < 67 && game.resources.fragments.owned > 5.88e12)) {
 		document.getElementById("advExtraLevelSelect").value = "10";
 		document.getElementById("difficultyAdvMapsRange").value = 0;
 		document.getElementById("advSpecialSelect").value = "fa";
 		document.getElementById("biomeAdvMapsSelect").value = "Random";
 		document.getElementById("lootAdvMapsRange").value = 0;
+		if (game.resources.fragments.owned > 8.81e12) {
+			document.getElementById("lootAdvMapsRange").value = 4;
+		}
+		if (game.resources.fragments.owned > 9.74e12) {
+			document.getElementById("lootAdvMapsRange").value = 5;
+		}
+		if (game.resources.fragments.owned > 10.9e12) {
+			document.getElementById("lootAdvMapsRange").value = 6;
+		}
+		if (game.resources.fragments.owned > 12.0e12) {
+			document.getElementById("lootAdvMapsRange").value = 7;
+		}
+		if (game.resources.fragments.owned > 13.3e12) {
+			document.getElementById("lootAdvMapsRange").value = 8;
+		}
+		if (game.resources.fragments.owned > 14.7e12) {
+			document.getElementById("lootAdvMapsRange").value = 9;
+		}
 	}
 }
 
@@ -901,7 +919,7 @@ var repeatMaps = setInterval(function() {
 		cancelTooltip();
 
 		
-		if (game.global.world > 45 && game.global.world < 109) {
+		if (game.global.world > 60 && game.global.world < 109) {
 			mapMode = "lsc"; //hc
 		}
 
@@ -928,11 +946,11 @@ var repeatMaps = setInterval(function() {
 		document.getElementById("advSpecialSelect").value = mapMode;
 
 
-		if (game.global.world == 45 && game.challenges.Insanity.insanity < insanityLevelWanted) {
-			selectNext45Map();
+		if (game.global.world == 60 && game.challenges.Insanity.insanity < insanityLevelWanted) {
+			selectNext60Map();
 		}
 
-		if (game.global.world != 45)
+		if (game.global.world != 60)
 			recycleBelow(true);
 
 		buyMap();
@@ -1027,7 +1045,7 @@ var repeatMaps = setInterval(function() {
 		//	}
 		//}
 
-		if (game.global.world == tributesPushMap || game.global.world == 45) {
+		if (game.global.world == tributesPushMap || game.global.world == 60) {
 			while (document.getElementById("togglerepeatUntil").innerHTML.indexOf("Forever") == -1) {
 				toggleSetting("repeatUntil");
 			}
