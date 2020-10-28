@@ -1,5 +1,5 @@
 var maxEq = "110";
-var bestEq = "30";
+var bestEq = "50";
 
 if (hitWithMaxGammaBurstInterval) { clearInterval(hitWithMaxGammaBurstInterval); hitWithMaxGammaBurstInterval = null; }
 var hitWithMaxGammaBurstInterval = setInterval(function() { 
@@ -9,7 +9,7 @@ var hitWithMaxGammaBurstInterval = setInterval(function() {
 				game.portal.Equality.disabledStackCount = bestEq;
 			}
 			else {
-				game.portal.Equality.disabledStackCount = "0";
+				game.portal.Equality.disabledStackCount = bestEq;
 			}
 		} else {
 			game.portal.Equality.disabledStackCount = maxEq;

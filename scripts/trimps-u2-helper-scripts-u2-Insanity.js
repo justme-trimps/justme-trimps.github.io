@@ -7,7 +7,7 @@ var minMeltingZone = 112;//not before 111
 var trimpleOfDoomZone = 111;//not before 110
 var smithiesWanted = 22;
 var insanityLevelWanted = 500;
-var forcedPortalWorld = 139;
+var forcedPortalWorld = 142;
 var tryBattle125 = true;
 
 var plusZeroZones = [20, 24, 79, 96, 115, 127, 134, 136];
@@ -16,7 +16,7 @@ var plusTwoZones = [59, 69, 79, 89, 99, 109, 110, 129, 130, 131, 132, 133];
 
 var plusThreeZones = [];
 var plusFourZones = [];
-var plusFiveZones = [];
+var plusFiveZones = [45];
 var plusSixZones = [];
 var extraZones = [];
 
@@ -175,11 +175,7 @@ var changeAutobuyingNumbersInterval = setInterval(function() {
 		if (game.global.world >= 134) 
 			{ autobuyingEquipmentNumber = 21; autobuyingArmNumber = 21; }
 		if (game.global.world >= 135) 
-			{ autobuyingEquipmentNumber = 23; autobuyingArmNumber = 23; }
-		if (game.global.world >= 136) 
-			{ autobuyingEquipmentNumber = 25; autobuyingArmNumber = 25; }
-		if (game.global.world >= 137) 
-			{ autobuyingEquipmentNumber = 30; autobuyingArmNumber = 30; }
+			{ autobuyingEquipmentNumber = 5; autobuyingArmNumber = 5; }
 	}
 }, 1000 * 1);
 
@@ -1163,9 +1159,6 @@ var isOkToPortal = function() {
 	if (game.global.world > forcedPortalWorld)
 		return true;
 
-	if (game.global.lastClearedCell < 0)
-		return false;
-
 	if (game.global.mapsActive)
 		return false;
 
@@ -1360,11 +1353,22 @@ var switchHeirloomInterval = setInterval(function() {
 
 	for (var i = 0; i < game.global.heirloomsCarried.length; i++) {
 		var heirloom = game.global.heirloomsCarried[i];
-		if (heirloom.name == "Map" && game.global.mapsActive) {
+		if (heirloom.name == "Map" 
+				&& game.global.mapsActive
+				&& (game.global.world != 110 || game.global.playerGathering != "metal")) {
 			selectHeirloom(i, "heirloomsCarried", true);
 			equipHeirloom();
 			break;
 		}
+		if (heirloom.name == "Metal"
+			&& game.global.mapsActive
+			&& game.global.world == 110
+			&& game.global.playerGathering == "metal") {
+			selectHeirloom(i, "heirloomsCarried", true);
+			equipHeirloom();
+			break;
+		}
+			
 		if (heirloom.name == "World" && !game.global.mapsActive && game.global.world < 100) {
 			selectHeirloom(i, "heirloomsCarried", true);
 			equipHeirloom();
@@ -1667,21 +1671,52 @@ optimizeLastZoneInterval = setSomeInterval(optimizeLastZoneInterval, shouldSaveL
 
 //----------------------------------
 
-	if (equalityInterval) { clearInterval(equalityInterval); equalityInterval = null; }
-	var equalityInterval = setInterval(function() {
-		if (game.global.world < 135) {
-			game.portal.Equality.disabledStackCount = "9"
-		} else if (game.global.world < 136) {
-			game.portal.Equality.disabledStackCount = "18"
-		} else if (game.global.world < 137) {
-			game.portal.Equality.disabledStackCount = "29"
-		} else if (game.global.world < 138) {
-			game.portal.Equality.disabledStackCount = "37"
-		} else {
-			game.portal.Equality.disabledStackCount = "44"
-		}
-	}, 5001);
+if (equalityInterval) { clearInterval(equalityInterval); equalityInterval = null; }
+var equalityInterval = setInterval(function() {
+	if (game.global.world < 135) {
+		game.portal.Equality.disabledStackCount = "9"
+	} else if (game.global.world < 136) {
+		game.portal.Equality.disabledStackCount = "18"
+	} else if (game.global.world < 137) {
+		game.portal.Equality.disabledStackCount = "29"
+	} else if (game.global.world < 138) {
+		game.portal.Equality.disabledStackCount = "37"
+	}
+}, 5001);
 
+var maxEq = "110";
+var bestEq = "35";
+var slowEq = "0";
+
+if (hitWithMaxGammaBurstInterval) { clearInterval(hitWithMaxGammaBurstInterval); hitWithMaxGammaBurstInterval = null; }
+var hitWithMaxGammaBurstInterval = setInterval(function() { 
+	if (game.global.fighting && game.global.world > 137) {
+		if (game.heirlooms.Shield.gammaBurst.stacks >= 4) {
+			if (document.getElementsByClassName('glyphicon-forward').length) {
+				game.portal.Equality.disabledStackCount = bestEq;
+			}
+			else {
+				game.portal.Equality.disabledStackCount = slowEq;
+			}
+		} else {
+			game.portal.Equality.disabledStackCount = maxEq;
+		}
+	}
+}, 100);
+
+if (updateBestEqInterval) { clearInterval(updateBestEqInterval); updateBestEqInterval = null; }
+var updateBestEqInterval = setInterval(function() { 
+	if (game.global.world < 139) {
+		bestEq = "35";
+		slowEq = "0";
+	} else if (game.global.world < 140) {
+		bestEq = "35";
+	} else if (game.global.world < 141) {
+		bestEq = "40";
+	} else if (game.global.world < 142) {
+		bestEq = "40";
+	} 
+}, 100);
 
 // manually copy between tabs
 exportSaveToLocalStorage = function() {
