@@ -1,6 +1,7 @@
 var challengeToTry = "Insanity";
 
-game.global.autoJobsSettingU2.enabled = true;
+if (!game.global.autoJobsSettingU2.enabled)
+	toggleAutoJobs();
 
 var dontPortal = false;
 var minMeltingZone = 112;//not before 111
@@ -10,7 +11,7 @@ var insanityLevelWanted = 500;
 var forcedPortalWorld = 142;
 var tryBattle125 = true;
 
-var plusZeroZones = [20, 24, 79, 96, 115, 127, 134, 136];
+var plusZeroZones = [20, 24, 79, 96, 108, 115, 127, 134, 136];
 var plusOneZones = [30, 40, 54, 120];
 var plusTwoZones = [59, 69, 79, 89, 99, 109, 110, 129, 130, 131, 132, 133];
 
@@ -273,10 +274,12 @@ var buyStorageInterval = setInterval(function() {
 }, 250);
 
 var isOkToBuyWorshippers = function() {
-	return true;
+	return game.global.world < 109 || game.global.world > 115;
 }
 
 var shouldFireWorshippers = function() {
+	return false;
+	
 	if (game.jobs.Worshipper.owned < 1) 
 		return false;
 	
@@ -316,7 +319,7 @@ var buyThingsInterval = setInterval(function() {
 		return;
 
 	if (buySmithies) buyBuilding("Smithy");
-	if (buyMeteorologists) buyThing("Meteorologist");
+	if (buyMeteorologists && game.jobs.Meteorologist.owned < 45) buyThing("Meteorologist");
 	
 	if (document.getElementById("Tribute")) if (buyTributes && game.buildings.Tribute.owned < tributesWanted) { numTab("6"); setMax(0.1); buyBuilding("Tribute"); numTab("1"); }
 	if (buyShields 
@@ -590,6 +593,24 @@ fixBoard();
 
 ////////////////////////
 
+var autoFireFarmers = true;
+if (fireFarmersInterval) { clearInterval(fireFarmersInterval); fireFarmersInterval = null; }
+var fireFarmersInterval = setInterval(function() {
+	if (autoFireFarmers && game.global.world > 108 && game.jobs.Farmer.owned > 0) {
+		fireMode();
+		setMax(1, false);
+		numTab(6);
+		cancelTooltip();
+		buyJob("Farmer");
+		fireMode();
+
+		if (game.global.autoJobsSettingU2.enabled)
+			toggleAutoJobs();
+
+		numTab(1);
+	}
+}, 1000);
+
 var autoHireFarmers = true;
 if (hireFarmersInterval) { clearInterval(hireFarmersInterval); hireFarmersInterval = null; }
 var hireFarmersInterval = setInterval(function() {
@@ -598,6 +619,29 @@ var hireFarmersInterval = setInterval(function() {
 	
 	if (!autoHireFarmers || parseFloat(document.getElementById("jobsTitleUnemployed").innerText) == 0)
 		return;
+	
+	if (game.global.world == 108) {
+		fireMode();
+		setMax(1, false);
+		numTab(6);
+		cancelTooltip();
+		buyJob("Miner");
+		fireMode();
+
+		fireMode();
+		setMax(1, false);
+		numTab(6);
+		cancelTooltip();
+		buyJob("Lumberjack");
+		fireMode();
+
+		buyJob("Farmer");
+		setGather("food");
+
+		numTab(1);
+		return;
+	}
+
 	if (game.global.world < tributesPushMap) {
 		setMax(0.25, false);
 		numTab(6);
@@ -920,7 +964,7 @@ var repeatMaps = setInterval(function() {
 		}
 
 		if (game.global.world > 115) {
-			mapMode = "lsc"; //hc
+			mapMode = "lmc"; //hc
 		}
 
 		if (game.global.world == 132 || game.global.world == 134 || game.global.world == 135) {
@@ -1097,7 +1141,7 @@ var getFluffyExperienceRate = function() {
 }
 
 var getFluffyExperienceRateText = function() {
-	return getNumberText(getFluffyExperienceRate());
+	return getNumberText(getFluffyExperienceRate() / 1000);
 }
 
 var getRadonText = function() {
@@ -1131,7 +1175,8 @@ var logFluffyExp = function() {
 		}
 		var text = getPortalTime() + " " + game.global.world + " zone, radon: " + heliumPhSpan.innerHTML + ", RN: " + getNumberText(getRadonNormalized() / 1000);
 		text = text.replace(/(\.[0-9]{2})[0-9]+e/g, "$1e");
-		console.log(text + text2 + text3);
+		var text4 = getNumberText((Fluffy.currentExp[1] - fluffyStart) / 1000);
+		console.log(text + text2 + text3 + ", scruffy exp earned: " + text4);
 	}
 }
 
@@ -1190,6 +1235,10 @@ var forcePortalInterval = setInterval(function() {
 				window.localStorage.removeItem(localStorageKeys[i]);
 			}
 			pressFight();
+			
+			if (!game.global.autoJobsSettingU2.enabled)
+				toggleAutoJobs();
+			
 			fluffyStart = Fluffy.currentExp[1];
 			mapMode = "lsc";
 		}, 1000);
@@ -1355,11 +1404,21 @@ var switchHeirloomInterval = setInterval(function() {
 		var heirloom = game.global.heirloomsCarried[i];
 		if (heirloom.name == "Map" 
 				&& game.global.mapsActive
+				&& game.global.world < 109) {
+			selectHeirloom(i, "heirloomsCarried", true);
+			equipHeirloom();
+			break;
+		}
+		
+		if (heirloom.name == "Map Old" 
+				&& game.global.mapsActive
+				&& game.global.world >= 109
 				&& (game.global.world != 110 || game.global.playerGathering != "metal")) {
 			selectHeirloom(i, "heirloomsCarried", true);
 			equipHeirloom();
 			break;
 		}
+		
 		if (heirloom.name == "Metal"
 			&& game.global.mapsActive
 			&& game.global.world == 110

@@ -998,7 +998,7 @@ var getFluffyExperienceRate = function() {
 }
 
 var getFluffyExperienceRateText = function() {
-	return getNumberText(getFluffyExperienceRate());
+	return getNumberText(getFluffyExperienceRate() / 1000);
 }
 
 var getRadonText = function() {
@@ -1020,6 +1020,7 @@ var getRadonNormalized = function() {
 }
 
 
+
 var logFluffyExp = function() {
 	var heliumPhSpan = document.getElementById("heliumPh");
 	if (heliumPhSpan) {
@@ -1032,7 +1033,8 @@ var logFluffyExp = function() {
 		}
 		var text = getPortalTime() + " " + game.global.world + " zone, radon: " + heliumPhSpan.innerHTML + ", RN: " + getNumberText(getRadonNormalized() / 1000);
 		text = text.replace(/(\.[0-9]{2})[0-9]+e/g, "$1e");
-		console.log(text + text2 + text3);
+		var text4 = getNumberText((Fluffy.currentExp[1] - fluffyStart) / 1000);
+		console.log(text + text2 + text3 + ", scruffy exp earned: " + text4);
 	}
 }
 
