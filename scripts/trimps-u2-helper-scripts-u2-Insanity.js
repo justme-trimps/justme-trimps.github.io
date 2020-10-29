@@ -11,9 +11,9 @@ var insanityLevelWanted = 500;
 var forcedPortalWorld = 142;
 var tryBattle125 = true;
 
-var plusZeroZones = [20, 24, 79, 96, 108, 115, 127, 134, 136];
-var plusOneZones = [30, 40, 54, 120];
-var plusTwoZones = [59, 69, 79, 89, 99, 109, 110, 129, 130, 131, 132, 133];
+var plusZeroZones = [20, 24, 79, 96, 108];
+var plusOneZones = [30, 40, 54];
+var plusTwoZones = [59, 69, 79, 89, 99, 109, 110];
 
 var plusThreeZones = [];
 var plusFourZones = [];
