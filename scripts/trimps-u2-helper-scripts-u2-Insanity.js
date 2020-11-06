@@ -176,7 +176,7 @@ var changeAutobuyingNumbersInterval = setInterval(function() {
 		if (game.global.world >= 134) 
 			{ autobuyingEquipmentNumber = 21; autobuyingArmNumber = 21; }
 		if (game.global.world >= 135) 
-			{ autobuyingEquipmentNumber = 5; autobuyingArmNumber = 5; }
+			{ autobuyingEquipmentNumber = 7; autobuyingArmNumber = 7; }
 	}
 }, 1000 * 1);
 
