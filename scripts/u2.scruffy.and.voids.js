@@ -1,9 +1,10 @@
-game.global.autoJobsSettingU2.enabled = true;
+if (!game.global.autoJobsSettingU2.enabled)
+	toggleAutoJobs();
 
 var ignorePrismaticPalace = false;
 var dontPortal = true;
 var minMeltingZone = 170;//not before 111
-var trimpleOfDoomZone = 150;//not before 110
+var trimpleOfDoomZone = 190;//not before 110
 var smithiesWanted = 16;
 var insanityLevelWanted = 500;
 var forcedPortalWorld = 190;
@@ -936,7 +937,8 @@ var repeatMaps = setInterval(function() {
 		}
 
 		if (game.global.world > 128) {
-			game.global.autoJobsSettingU2.enabled = false;
+			if (game.global.autoJobsSettingU2.enabled)
+				toggleAutoJobs();
 			while (document.getElementById("togglerepeatUntil").innerHTML.indexOf("Items") == -1) {
 				toggleSetting("repeatUntil");
 			}

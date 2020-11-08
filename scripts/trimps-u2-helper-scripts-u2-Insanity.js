@@ -913,39 +913,39 @@ var selectNext60Map = function() {
 }
 
 //keep it. horrimps are bad
-if (horrimpMapInterval) { clearInterval(horrimpMapInterval); horrimpMapInterval = null; }
-var horrimpMapInterval = setInterval(function() {
-	if (!game.global.mapsActive || game.global.world < 108)
-		return;
-
-	var array = game.global.mapGridArray;
-
-	if (array.length < 20) {
-		return;
-	}
-
-	for (var i = array.length - 1; i >= 0; i--) {
-		if (array[i].name.indexOf("Horrimp") > -1) {
-			if (game.global.mapGridArray.length != 20) return;
-			
-			mapsClicked();
-			
-			if (document.getElementById("recycleMapBtn") == null || document.getElementById("recycleMapBtn").offsetParent == null) {
-				if (game.global.mapGridArray.length != 20) return;
-
-				mapsClicked();
-			}
-			
-			document.getElementById("recycleMapBtn").click();
-
-			if (game.global.mapGridArray.length != 20) return;
-
-			mapsClicked()
-			return;
-		}
-	}
-
-}, 600);
+//if (horrimpMapInterval) { clearInterval(horrimpMapInterval); horrimpMapInterval = null; }
+//var horrimpMapInterval = setInterval(function() {
+//	if (!game.global.mapsActive || game.global.world < 108)
+//		return;
+//
+//	var array = game.global.mapGridArray;
+//
+//	if (array.length < 20) {
+//		return;
+//	}
+//
+//	for (var i = array.length - 1; i >= 0; i--) {
+//		if (array[i].name.indexOf("Horrimp") > -1) {
+//			if (game.global.mapGridArray.length != 20) return;
+//			
+//			mapsClicked();
+//			
+//			if (document.getElementById("recycleMapBtn") == null || document.getElementById("recycleMapBtn").offsetParent == null) {
+//				if (game.global.mapGridArray.length != 20) return;
+//
+//				mapsClicked();
+//			}
+//			
+//			document.getElementById("recycleMapBtn").click();
+//
+//			if (game.global.mapGridArray.length != 20) return;
+//
+//			mapsClicked()
+//			return;
+//		}
+//	}
+//
+//}, 600);
 
 
 if (repeatMaps) { clearInterval(repeatMaps); repeatMaps = null; }
@@ -1677,7 +1677,7 @@ var shouldLoadLastZoneSave = function(save) {
 		return false;
 	}
 
-	if ((myCell + 3) <= save.cell) {
+	if ((myCell + 1) < save.cell) {
 		return true;
 	}
 
@@ -1732,7 +1732,9 @@ optimizeLastZoneInterval = setSomeInterval(optimizeLastZoneInterval, shouldSaveL
 
 if (equalityInterval) { clearInterval(equalityInterval); equalityInterval = null; }
 var equalityInterval = setInterval(function() {
-	if (game.global.world < 135) {
+	if (game.global.world < 111) {
+		game.portal.Equality.disabledStackCount = "35"
+	} else if (game.global.world < 135) {
 		game.portal.Equality.disabledStackCount = "9"
 	} else if (game.global.world < 136) {
 		game.portal.Equality.disabledStackCount = "18"
