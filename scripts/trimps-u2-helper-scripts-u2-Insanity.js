@@ -6,7 +6,7 @@ if (!game.global.autoJobsSettingU2.enabled)
 var dontPortal = false;
 var minMeltingZone = 112;//not before 111
 var trimpleOfDoomZone = 111;//not before 110
-var smithiesWanted = 22;
+var smithiesWanted = 23;
 var insanityLevelWanted = 500;
 var forcedPortalWorld = 142;
 var tryBattle125 = true;
@@ -31,7 +31,7 @@ var minGoldenHeliumBeforeBattle = 50000.0;//2.0;
 var minGoldenVoidBeforeHelium = 0.71; //0.5;
 
 var voidMapZone = 110;
-var maxVoidMapZone = 125;
+var maxVoidMapZone = 133;
 
 var abandonChallengeZone = 1000;
 var mapMode = "lsc";
@@ -117,7 +117,7 @@ var changeJestimpTargetToWoodInterval = setInterval(function() {
 		}
 	} else if (smithiesWanted > -1 && game.global.world >= minMeltingZone && !wentForSmithy) {
 		if (smithiesWanted > game.buildings.Smithy.owned) {
-			if (game.resources.metal.owned > 10000 * (Math.pow(50, smithiesWanted - 1))) {
+			if (game.resources.metal.owned > 10000 * (Math.pow(40, smithiesWanted - 1))) {
 				fireMode();
 				setMax(1, false);
 				numTab(6);
@@ -175,8 +175,8 @@ var changeAutobuyingNumbersInterval = setInterval(function() {
 			{ autobuyingEquipmentNumber = 18; autobuyingArmNumber = 18; }
 		if (game.global.world >= 134) 
 			{ autobuyingEquipmentNumber = 21; autobuyingArmNumber = 21; }
-		if (game.global.world >= 135) 
-			{ autobuyingEquipmentNumber = 7; autobuyingArmNumber = 7; }
+		if (game.global.world >= 136) 
+			{ autobuyingEquipmentNumber = 7; autobuyingArmNumber = 9; }
 	}
 }, 1000 * 1);
 
@@ -1334,40 +1334,6 @@ var autoSaveInterval = setInterval(function() {
 	}
 }, 1000 * 60 * 2);
 
-var shieldBeforeVoidMap = {
-	mods: [
-		["critChance", 170],
-		["critDamage", 9725],
-		["prismatic", 300],
-		["trimpAttack", 4000],
-		["trimpHealth", 4000],
-		["voidMaps", 25]
-	]
-};
-var shieldAfterVoidMap = {
-	mods: [
-		["critChance", 174],
-		["critDamage", 9400],
-		["plaguebringer", 0.9],
-		["prismatic", 300],
-		["trimpAttack", 4000],
-		["trimpHealth", 4000]
-	]
-};
-
-var shouldSwitchToShield = function(heirloom, pattern) {
-	if (heirloom.mods.length != pattern.mods.length)
-		return false;
-
-	for (var i = 0; i < heirloom.mods.length; i++) {
-		var patternMod = pattern.mods[i];
-		var heirloomMod = heirloom.mods[i];
-		if (patternMod[0] != heirloomMod[0] || patternMod[1] > heirloomMod[1])
-			return false;
-	}
-
-	return true;
-}
 
 var switchHeirloomZone = 122;
 var isItTimeForMorePowerfulHeirloom = function() {
@@ -1385,15 +1351,14 @@ var isItTimeForMorePowerfulHeirloom = function() {
 
 if (switchHeirloomInterval) { clearInterval(switchHeirloomInterval); switchHeirloomInterval = null; }
 var switchHeirloomInterval = setInterval(function() {
-	var newHeirloom = shieldBeforeVoidMap;
-
-	if (isItTimeForMorePowerfulHeirloom()) {
-		newHeirloom = shieldAfterVoidMap;
-	}
-
 	for (var i = 0; i < game.global.heirloomsCarried.length; i++) {
 		var heirloom = game.global.heirloomsCarried[i];
-		if (shouldSwitchToShield(heirloom, newHeirloom)) {
+		if (heirloom.name == "VM" && !isItTimeForMorePowerfulHeirloom()) {
+			selectHeirloom(i, "heirloomsCarried", true);
+			equipHeirloom();
+			break;
+		}
+		if (heirloom.name == "U2" && isItTimeForMorePowerfulHeirloom()) {
 			selectHeirloom(i, "heirloomsCarried", true);
 			equipHeirloom();
 			break;
@@ -1660,8 +1625,8 @@ var shouldLoadLastZoneSave = function(save) {
 	if (!tryOptimize)
 		return false;
 
-	if (game.global.lastClearedCell < 10 || game.global.mapsActive || game.global.world <= save.voidMapZone)
-		return false;
+//	if (game.global.lastClearedCell < 10 || game.global.mapsActive || game.global.world <= save.voidMapZone)
+//		return false;
 
 	var myPortal = game.global.totalRadPortals;
 	var mySeconds = Math.round(((new Date() * 1) - game.global.portalTime) / 1000);
@@ -1677,7 +1642,8 @@ var shouldLoadLastZoneSave = function(save) {
 		return false;
 	}
 
-	if ((myCell + 1) < save.cell) {
+	if ((myCell + 1) < save.cell 
+		|| (myCell < save.cell && save.cell == ((forcedPortalWorld - 1) * 100) + 99)) {
 		return true;
 	}
 
@@ -1691,7 +1657,7 @@ var shouldSaveLastZoneSave = function(save) {
 	if (save == null)
 		return true;
 
-	if (game.global.lastClearedCell < 10 || game.global.mapsActive || game.global.world <= save.voidMapZone)
+	if (game.global.mapsActive)
 		return false;
 
 	var myPortal = game.global.totalRadPortals;
@@ -1705,10 +1671,10 @@ var shouldSaveLastZoneSave = function(save) {
 		return false;
 	}
 
-	if (game.global.lastClearedCell < 10)
-		return false;
+//	if (game.global.lastClearedCell < 10)
+//		return false;
 
-	if (game.global.world >= forcedPortalWorld || game.global.world <= maxVoidMapZone)
+	if (/*game.global.world >= forcedPortalWorld || */game.global.world <= maxVoidMapZone)
 		return false;
 
 	if (myPortal > save.reset) {
@@ -1739,9 +1705,9 @@ var equalityInterval = setInterval(function() {
 	} else if (game.global.world < 136) {
 		game.portal.Equality.disabledStackCount = "18"
 	} else if (game.global.world < 137) {
-		game.portal.Equality.disabledStackCount = "29"
+		game.portal.Equality.disabledStackCount = "26"
 	} else if (game.global.world < 138) {
-		game.portal.Equality.disabledStackCount = "37"
+		game.portal.Equality.disabledStackCount = "35"
 	}
 }, 5001);
 

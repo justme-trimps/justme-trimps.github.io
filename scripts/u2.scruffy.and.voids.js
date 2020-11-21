@@ -43,9 +43,12 @@ var autobuyingArmNumber = 31;
 var gatherMetalZone = 10;
 var startMapsWorld = 50;
 
-var goldenMode = "Battle";
+var goldenMode = "Void";
 var minGoldenHeliumBeforeBattle = -1.0;//2.0;
 var minGoldenVoidBeforeHelium = -1.0; //0.5;
+if (game.global.challengeActive == "Daily") {
+	minGoldenVoidBeforeHelium = 0.71;
+}
 
 var voidMapZone = 170;
 var maxVoidMapZone = 139;
@@ -1165,41 +1168,6 @@ var autoSaveInterval = setInterval(function() {
 	}
 }, 1000 * 60 * 2);
 
-var shieldBeforeVoidMap = {
-	mods: [
-		["critChance", 170],
-		["critDamage", 9725],
-		["prismatic", 300],
-		["trimpAttack", 4000],
-		["trimpHealth", 4000],
-		["voidMaps", 25]
-	]
-};
-var shieldAfterVoidMap = {
-	mods: [
-		["critChance", 174],
-		["critDamage", 9400],
-		["plaguebringer", 0.9],
-		["prismatic", 300],
-		["trimpAttack", 4000],
-		["trimpHealth", 4000]
-	]
-};
-
-var shouldSwitchToShield = function(heirloom, pattern) {
-	if (heirloom.mods.length != pattern.mods.length)
-		return false;
-
-	for (var i = 0; i < heirloom.mods.length; i++) {
-		var patternMod = pattern.mods[i];
-		var heirloomMod = heirloom.mods[i];
-		if (patternMod[0] != heirloomMod[0] || patternMod[1] > heirloomMod[1])
-			return false;
-	}
-
-	return true;
-}
-
 var switchHeirloomZone = 132;
 var isItTimeForMorePowerfulHeirloom = function() {
 	if (game.global.world >= forcedPortalWorld)
@@ -1216,15 +1184,14 @@ var isItTimeForMorePowerfulHeirloom = function() {
 
 if (switchHeirloomInterval) { clearInterval(switchHeirloomInterval); switchHeirloomInterval = null; }
 var switchHeirloomInterval = setInterval(function() {
-	var newHeirloom = shieldBeforeVoidMap;
-
-	if (isItTimeForMorePowerfulHeirloom()) {
-		newHeirloom = shieldAfterVoidMap;
-	}
-
 	for (var i = 0; i < game.global.heirloomsCarried.length; i++) {
 		var heirloom = game.global.heirloomsCarried[i];
-		if (shouldSwitchToShield(heirloom, newHeirloom)) {
+		if (heirloom.name == "VM" && !isItTimeForMorePowerfulHeirloom()) {
+			selectHeirloom(i, "heirloomsCarried", true);
+			equipHeirloom();
+			break;
+		}
+		if (heirloom.name == "U2" && isItTimeForMorePowerfulHeirloom()) {
 			selectHeirloom(i, "heirloomsCarried", true);
 			equipHeirloom();
 			break;

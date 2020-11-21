@@ -1,3 +1,32 @@
+2020-10-12 Erad Perks:
+N4IgMg9hAuCWB2BzA+gSVSAXAJgAwHYBmPAVl20IEYAWXADjoBoQBhAQwCcAHAU3mg4BPNBkyVy1AJzUSANmLYS1SoWYBZGLABubOBHgishWfkn5K+GWbqzcuZgAUIAdx4dDOM4TuFpdasSS5MwAKhAArogAFvA8AM5xHlLS1NjYlJSykvJ2zOxcbABGADY8WOJ54fDwCIjlJJSVHLARceXYsnnFbAmCWPgkzADyWm4A1rDFxUb2IABK8REcAMY8AGbh0ziUg6xQHAAmCLo8B1hp1MwAyrBcUfoQxRCIfZiqIACC/LDLt7ot8HKswWcUmsD4q3OcnUp1g0H++n6zAWpX4pQSsQSQLynF4/CE51szA+HDgcTYNTiAleHWBFMQZTEsw+iDB0BpswAQmw4fV8KEOOEALZcNpiQi7BxRNwQIX6eLnSjYRxsZZjDi6c64XYaOA6PSAnDUfkgJyuDjnfCzMKRGLxMUdSTMSCaJCW7AAXyAA===
+
+
+ERAD 141
+He: 2.91 Dc
+Shield: 175% Crit Chance, 10800% Crit Damage, 41.1k% Gamma Burst, 4610% Attack, 125% Plaguebringer
+Poison Level: 1620
+Power II: 3.05 Qa
+Amalgamator: 9
+Mayhem: 21
+Strength Towers: 10
+RoboTrimps: 50
+Herbalist: 109%
+C∞: 260 k
+Void Siphon: 275%
+
+00d00h30m start BW140 on Z121
+00d00h57m BW155 started
+00d01h39m BW155 - 1st cell completed
+00d02h22m BW155 - 10th cell completed 
+00d02h54m BW155 - 20th cell completed 
+00d04h55m BW155 - 50th cell completed 
+00d08h36m BW155 - completed 1st time
+00d11h35m BW155 - completed 2nd time
+overnight - afk
+00d18h15m Z141 in the morning
+
+
 The Noob's guide to Eradicated: getting around on the scariest dimension
 
 Part 0: What the hell?

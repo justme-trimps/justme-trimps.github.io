@@ -1,0 +1,63 @@
+POISON + SHARP + 3xBONES
+Use this spec:
+N4IgMg9hAuCWB2BzA+gSVSAXAVgCzYE4A2AdgCYSiAOA4ogGhAGEBDAJwAcBTeaNgTzQYcJAMwkxpEniJFcjALIxYANxZwI8IVkoBGEruIFd2AAy4ipxgAUIAdy5ttmcaNMlcu0RSq+iuxgAVCABXRAALeC4AZ2jnAjJRXCpKXFNdDNMyRlYOFgAjABsuLF0rZhD4eAREUuwAirZYUOjSsgZmQpZY/h1sRgB5FUcAa1hCwqw3RgAlGNC2AGMuADMQycxDcqYoNgATBHUuPawyMgaAZVgOcM0IQohEXpdGAEFeWEXr9Wb4UvK5tFxrAeMtTrhRIpjrBoD9NDpZlxirxirEorF/jl2NxeAJTtgOq82HBoixqtE+M8yGZZmTECVNuVXohgdAqeUAEIsGF1Eg2cKOCAAW00MVOumyIGsLEWIzY6lOpn6ICUcDUGj+mDIuHkUvsjnx5WCYUiMVaWsSjEgyiQ+IIAF8gA=
+then on 289 in VMs use
+N4IgMg9hAuCWB2BzA+gSVSAXARgAwGYA2Q3AJgFZttyB2XAFnoBoQBhAQwCcAHAU3micAnmgw4y9AJz1yhfKQr1s+FgFkYsAG7s4EeKKxEakmthoyTADhK4WABQgB3XpwOZS+XCc+TyU/JakNKQsACoQAK6IABbwvADO8W7YkhS45KSBBOlK5Cwc3OwARgA2vFh4+RHw8AiIFZRVnLCR8RWkhPkl7IlCWDR5IADymi4A1rAlJYa2IABKCZGcAMa8AGYR0+7U+VCcACYIOrz7WArMIADKsNzRehAlEIh9mCogAIICsMs3Oi3wFVmC3ik1g/FWZ0Ig1UJ1g0D+en6LAWZQEZUScUSgPyXD4AmEkNm704cHi7Fq8UELw6QPJiHK4hY70QoOg1NmACF2HCGjQwpwIgBbbhtHD4QZ2aIuCCCvQJM7YEIgOzsZZjTg6M7pNQabS6AHueh85VOFxnOhhSIxTGijqSFiQDRIc2kAC+QA
+
+press "map" before 200 to run map on spire 2. 205 should be enough
+don't farm before 289. run voids. farm at that level only (+10). use trimple of doom
+use equip off. buy only 0%
+buy nurseries
+
+Quia:
+	Mine was 6 days, and yeah. 1Dc He and M19
+	 1Dc M19 5.8B total Nu, 318k²
+		200 coords is cozy to get to 269 and pick up 9 gators without waiting on the zone, and a full tank of fuel
+		20h farm on 269 and 285
+			So 269 can afford 3 of 455 daggers, and needs another 20 hours to get the 4th, 285 has enough for both 470 daggers. Really awkward split, there.  Farming  way less on the 285 tab would have been better, but... sleep's nice.
+			(might not be better, those gear levels are NICE)
+		13 hours for clear 1 of BW455 @ 285
+		   
+		5 hours for spire clear with 470 daggers only, andrew says 2.5h = 1.5 days for 411-415, so, 3 days for that for me (future me says: not that far off)
+		Gator 10 on spire 3 completion
+		5 days 21 hr to reach 420, dagger tab wins, though barely.  
+		   
+		13 hours wasted in various places (6h and 7h, ow)
+		Oblit 421, five days 22 hours (-13 hours of fuckup)
+		
+Me: 3.1DC M22 32.6 total Nu 320k²
+	58Uqa Metal. 
+	2h40 for start of BW455
+	43minues for beating first 15 cells of BW455
+	
+
+
+
+MaZ on one of 239/255/269/285
+You need to be 2+ prestiges behind for moving up to the next zone to be reasonable.
+Perky spec: 'Prestige limited'
+WTF is 'Prestige Limited' Spec?
+Perky calculates the metal prestiges cost, and how much attack they give vs attack perks, so if we lie to perky, and say that our income is lower than it is, it will try to optimize attack and income.
+In Perky's manual settings, change 'loot mod' to 0 and 'production mod' to 
+prod mod / 20^(prestiges to raiding)
+1e-100 works in a pinch if you hate math.
+
+Respec to combat, 7-50:1, health can be a limiting factor
+BW raid up to your target, using nurseries, breed timers, and health shield to survive
+
+Go to World, finish your run!
+Use Repeat 10's to cut down the time on your last ice band
+Use Nurseries, angelic, and breeding, to get through poison (and hopefully not the previous wind)
+
+For Long Runs
+Another gator can be possible in the 300's with 2 respecs
+Set a MaZ for the second last wind band to farm metal
+Build all your nurseries on the last ice zone, set a breed timer equal to up to 2x your estimated clear time for the zone.
+Send your trimps out to conquer the last 5 poison zones.
+
+
+Runs
+
+5.4
+BW     Zone   Raid zone He     Time   M    Nu
+470    421    285       1Dc    6d     19   5.8B   1 470 clear

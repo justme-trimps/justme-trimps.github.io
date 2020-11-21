@@ -1,17 +1,5 @@
 window.localStorage.clear();
 
-var fastEq = "30";
-var slowEq = "96";
-
-if (mayhemSlowEqInterval) { clearInterval(mayhemSlowEqInterval); mayhemSlowEqInterval = null; }
-var mayhemSlowEqInterval = setInterval(function() { 
-	if (document.getElementsByClassName('glyphicon-forward').length) {
-		game.portal.Equality.disabledStackCount = slowEq;
-	} else {
-		game.portal.Equality.disabledStackCount = fastEq;
-	}
-}, 3000);
-
 var autoExportSave = true;
 if (autoSaveInterval) { clearInterval(autoSaveInterval); autoSaveInterval = null; }
 var autoSaveInterval = setInterval(function() {
@@ -126,15 +114,12 @@ var shouldLoadFightMapSave = function(save) {
 	if (save.mapCell < game.global.lastClearedMapCell || save.mapName != mapName)
 		return false;
 	
-	if (game.portal.Frenzy.frenzyLeft() > 0)
-		return false;
-
 	var mapEnemyHealth = 0;
 	if (game.global.lastClearedMapCell < game.global.mapGridArray.length - 1) {
 		mapEnemyHealth = game.global.mapGridArray[game.global.lastClearedMapCell + 1].health;
 	}
 
-	if (save.mapEnemyHealth < mapEnemyHealth && save.mapCell == game.global.lastClearedMapCell)
+	if (save.mapEnemyHealth < mapEnemyHealth && save.mapCell == game.global.lastClearedMapCell && save.frenzyLeft > game.portal.Frenzy.frenzyLeft() + 1)
 		return true;
 	
 	if (save.mapCell > game.global.lastClearedMapCell)

@@ -77,7 +77,7 @@ var repeatMaps = setInterval(function() {
 
 if (restartMapInterval) { clearInterval(restartMapInterval); restartMapInterval = null; }
 var restartMapInterval = setInterval(function() { 
-	if (getStacksNumber() > minStacks) {
+	if (game.challenges.Mayhem.stacks > minStacks) {
 		return;
 	}
 	while (document.getElementById('togglerepeatUntil').innerHTML.indexOf('Items') == -1) {
