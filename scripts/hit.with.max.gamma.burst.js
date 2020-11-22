@@ -20,7 +20,7 @@ var hitWithMaxGammaBurstInterval = setInterval(function() {
 
 
 var maxEq = "110";
-var bestEq = "45";
+var bestEq = "70";
 var slowEq = "0";
 var hitWithMaxDisabled = false;
 
