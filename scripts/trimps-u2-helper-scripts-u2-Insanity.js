@@ -1745,7 +1745,7 @@ var updateBestEqInterval = setInterval(function() {
 		bestEq = "35";
 		slowEq = "0";
 	} else if (game.global.world < 140) {
-		bestEq = "35";
+		bestEq = "40";
 	} else if (game.global.world < 141) {
 		bestEq = "40";
 	} else if (game.global.world < 142) {
