@@ -116,41 +116,16 @@ var changeJestimpTargetToWoodInterval = setInterval(function() {
 			setGather("metal");
 		}
 	} else if (smithiesWanted > -1 && game.global.world >= minMeltingZone && !wentForSmithy) {
-		//if (smithiesWanted > game.buildings.Smithy.owned) {
-		//	if (game.resources.metal.owned > 10000 * (Math.pow(40, smithiesWanted - 1))) {
-		//		fireMode();
-		//		setMax(1, false);
-		//		numTab(6);
-		//		cancelTooltip();
-		//		buyJob("Miner");
-		//		fireMode();
-		//		buyJob("Lumberjack");
-		//		numTab(1);
-		//		setGather("wood");
-		//		mapMode = "lwc";
-		//	} else {
-		//		fireMode();
-		//		setMax(1, false);
-		//		numTab(6);
-		//		cancelTooltip();
-		//		buyJob("Lumberjack");
-		//		fireMode();
-		//		buyJob("Miner");
-		//		numTab(1);
-		//		setGather("metal");
-		//	}
-		//} else {
-			fireMode();
-			setMax(1, false);
-			numTab(6);
-			cancelTooltip();
-			buyJob("Lumberjack");
-			fireMode();
-			buyJob("Miner");
-			numTab(1);
-			wentForSmithy = true;
-			setGather("metal");
-		//}
+		fireMode();
+		setMax(1, false);
+		numTab(6);
+		cancelTooltip();
+		buyJob("Lumberjack");
+		fireMode();
+		buyJob("Miner");
+		numTab(1);
+		wentForSmithy = true;
+		setGather("metal");
 	}
 
 	if (wentForSmithy) {
@@ -1715,7 +1690,7 @@ var equalityInterval = setInterval(function() {
 	} else if (game.global.world < 137) {
 		game.portal.Equality.disabledStackCount = "15"
 	} else if (game.global.world < 138) {
-		game.portal.Equality.disabledStackCount = "35"
+		game.portal.Equality.disabledStackCount = "25"
 	}
 }, 5001);
 
