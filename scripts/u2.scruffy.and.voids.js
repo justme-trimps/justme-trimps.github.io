@@ -97,6 +97,9 @@ var jestimpInterval = setInterval(function() {
 	if (document.getElementById("worldName") && document.getElementById("worldName").innerText == "Prismatic Palace")
 		return;
 
+	if (document.getElementById("worldName") && document.getElementById("worldName").innerText == "Atlantrimp")
+		return;
+
 	if (document.getElementById("worldName") && document.getElementById("worldName").innerText == "Melting Point")
 		return;
 
@@ -1244,3 +1247,17 @@ function getCookie(cname) {
   return window.localStorage.getItem(cname);
 }
 
+function now(what) {
+	fireMode();
+	setMax(1, false);
+	numTab(6);
+	if (what != "wood") buyJob("Lumberjack");
+	if (what != "food") buyJob("Farmer");
+	if (what != "metal") buyJob("Miner");
+	fireMode();
+	if (what == "wood") buyJob("Lumberjack");
+	if (what == "food") buyJob("Farmer");
+	if (what == "metal") buyJob("Miner");
+	numTab(1);
+	setGather(what);
+}
