@@ -1,6 +1,8 @@
 if (!game.global.autoJobsSettingU2.enabled)
 	toggleAutoJobs();
 
+game.portal.Equality.disabledStackCount = "25"
+
 var ignorePrismaticPalace = false;
 var dontPortal = true;
 var minMeltingZone = 170;//not before 111

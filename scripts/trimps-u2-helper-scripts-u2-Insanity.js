@@ -8,7 +8,7 @@ var minMeltingZone = 112;//not before 111
 var trimpleOfDoomZone = 111;//not before 110
 var smithiesWanted = 23;
 var insanityLevelWanted = 500;
-var forcedPortalWorld = 143;
+var forcedPortalWorld = 144;
 var tryBattle125 = true;
 
 var plusZeroZones = [20, 24, 79, 96, 108];
@@ -662,7 +662,7 @@ var hireFarmersInterval = setInterval(function() {
 
 if (fireScientistsInterval) { clearInterval(fireScientistsInterval); fireScientistsInterval = null; }
 var fireScientistsInterval = setInterval(function() {
-	if (game.global.world >= voidMapZone) {
+	if (game.global.world >= voidMapZone && game.jobs.Scientist.owned > 0) {
 		fireMode();
 		setMax(1, false);
 		numTab(6);
@@ -1151,7 +1151,7 @@ var logFluffyExp = function() {
 		var text3 = "";
 		if (fluffyStart > 0) {
 			text2 = ", fluffy exp rate: " + getFluffyExperienceRateText() + " exp / s";
-			text3 = ", fluffy upgrade: " + (new Date(new Date() * 1 + (Fluffy.currentExp[2] - Fluffy.currentExp[1]) / getFluffyExperienceRate() * 1000));
+			text3 = ", fluffy upgrade: " + (new Date(new Date() * 1 + (Fluffy.currentExp[2] - Fluffy.currentExp[1]) / getFluffyExperienceRate() * 1000)).toISOString();
 		}
 		var text = getPortalTime() + " " + game.global.world + " zone, radon: " + heliumPhSpan.innerHTML + ", RN: " + getNumberText(getRadonNormalized() / 1000);
 		text = text.replace(/(\.[0-9]{2})[0-9]+e/g, "$1e");
