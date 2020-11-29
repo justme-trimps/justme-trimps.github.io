@@ -29,11 +29,11 @@ var tryBattle100 = false;
 
 var plusZeroZones = [20, 24];
 var plusOneZones = [30, 40, 54, 124, 134];
-var plusTwoZones = [59, 69, 79, 89, 99, 109, 119, 129];
+var plusTwoZones = [69, 79, 89, 99, 109, 119, 129];
 
 var plusThreeZones = [];
 var plusFourZones = [];
-var plusFiveZones = [];
+var plusFiveZones = [60];
 var plusSixZones = [];
 var extraZones = [];
 

@@ -591,11 +591,16 @@ var fireFarmersInterval = setInterval(function() {
 var autoHireFarmers = true;
 if (hireFarmersInterval) { clearInterval(hireFarmersInterval); hireFarmersInterval = null; }
 var hireFarmersInterval = setInterval(function() {
-	if (game.global.world > 110)
-		return;
-	
 	if (!autoHireFarmers || parseFloat(document.getElementById("jobsTitleUnemployed").innerText) == 0)
 		return;
+	
+	if (game.global.world > 110) {
+		setMax(1, false);
+		numTab(6);
+		cancelTooltip();
+		buyJob("Miner");
+		return;
+	}
 	
 	if (game.global.world == 108) {
 		fireMode();
@@ -697,7 +702,7 @@ var shouldFightSomeMap = function() {
 		&& (game.global.challengeActive + "") === "")
 		return false;
 
-	if (!game.global.mapsActive && voidMapZone != -1 && (game.global.world >= voidMapZone && game.global.world <= maxVoidMapZone) && game.global.lastClearedCell > 80) {
+	if (!game.global.mapsActive && voidMapZone != -1 && (game.global.world == voidMapZone || game.global.world == maxVoidMapZone) && game.global.lastClearedCell > 80) {
 		for (var i = game.global.mapsOwnedArray.length - 1; i > -1; i--) {
 			if (game.global.mapsOwnedArray[i].location == "Void") {
 				if (game.global.world == voidMapZone) {
@@ -959,6 +964,7 @@ var repeatMaps = setInterval(function() {
 			|| game.global.world == 131
 			|| game.global.world == 132
 			|| game.global.world == 133
+			|| game.global.world == 138
 			|| game.global.world == 139) {
 			mapMode = "p";
 		}
@@ -1315,7 +1321,7 @@ var autoSaveInterval = setInterval(function() {
 }, 1000 * 60 * 2);
 
 
-var switchHeirloomZone = 122;
+var switchHeirloomZone = 133;
 var isItTimeForMorePowerfulHeirloom = function() {
 	if (game.global.world >= forcedPortalWorld)
 		return false;
@@ -1603,6 +1609,9 @@ var optimizeLastZoneInterval;
 
 var shouldLoadLastZoneSave = function(save) {
 	if (!tryOptimize)
+		return false;
+	
+	if (game.global.world == 138 && game.global.lastClearedCell < 20)
 		return false;
 	
 	if (game.global.world == 139 && game.global.lastClearedCell < 20)
