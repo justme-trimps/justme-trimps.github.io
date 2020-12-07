@@ -31,7 +31,7 @@ var minGoldenHeliumBeforeBattle = 50000.0;//2.0;
 var minGoldenVoidBeforeHelium = 0.71; //0.5;
 
 var voidMapZone = 110;
-var maxVoidMapZone = 133;
+var maxVoidMapZone = 135;
 
 var abandonChallengeZone = 1000;
 var mapMode = "lsc";
@@ -68,7 +68,7 @@ var jestimpInterval = setInterval(function() {
 	if (document.getElementById("worldName") && document.getElementById("worldName").innerText == "Melting Point")
 		return;
 
-	if (game.global.world == 110/* || game.global.world > 128*/) {
+	if (game.global.world == 110 || game.global.world == maxVoidMapZone) {
 		var badGuyNameString = (document.getElementById("badGuyName") && document.getElementById("badGuyName").innerText) || null;
 		if (badGuyNameString && badGuyNameString.toLowerCase().indexOf("jestimp") > -1) {
 			saveString = save(true);
@@ -151,9 +151,11 @@ var changeAutobuyingNumbersInterval = setInterval(function() {
 		if (game.global.world >= 134) 
 			{ autobuyingEquipmentNumber = 19; autobuyingArmNumber = 19; }
 		if (game.global.world >= 136) 
-			{ autobuyingEquipmentNumber = 4; autobuyingArmNumber = 5; }
+			{ autobuyingEquipmentNumber = 6; autobuyingArmNumber = 6; }
 		if (game.global.world >= 142) 
 			{ autobuyingEquipmentNumber = 6; autobuyingArmNumber = 6; }
+		if (game.global.world >= 142) 
+			{ autobuyingEquipmentNumber = 8; autobuyingArmNumber = 8; }
 	}
 }, 1000 * 1);
 
@@ -169,7 +171,7 @@ var buyGoldUpgrade = function() {
 		id = "Battle";
 	}
 
-	if (tryBattle125 && game.global.world == 125)
+	if (tryBattle125 && game.global.world >= 125)
 		id = "Battle";
 
 	var button = document.getElementById(id + "Golden");
@@ -1321,7 +1323,7 @@ var autoSaveInterval = setInterval(function() {
 }, 1000 * 60 * 2);
 
 
-var switchHeirloomZone = 133;
+var switchHeirloomZone = maxVoidMapZone;
 var isItTimeForMorePowerfulHeirloom = function() {
 	if (game.global.world >= forcedPortalWorld)
 		return false;
@@ -1549,6 +1551,45 @@ var shouldSaveVoidEndSave = function(save) {
 };
 
 optimizeVoidEndInterval = setSomeInterval(optimizeVoidEndInterval, shouldSaveVoidEndSave, shouldLoadVoidEndSave, 1000);
+
+//---------------
+//----------------------------------
+
+var optimizeVoidEnd2Interval;
+
+var shouldLoadVoidEnd2Save = function(save) {
+	if (game.global.world != maxVoidMapZone || game.global.lastClearedCell <= 80 || game.global.mapsActive || save.reset != game.global.totalRadPortals)
+		return false;
+	
+	var voidMaps = game.global.mapsOwnedArray.filter(function (el) { return el.location == "Void"; }); 
+	
+	if (voidMaps != null && voidMaps.length > 0)
+		return false;
+
+	if (save.metalOwned > 1.05 * game.resources.metal.owned)
+		return true;
+
+	return false;
+};
+
+var shouldSaveVoidEnd2Save = function(save) {
+	if (game.global.world != maxVoidMapZone || !game.global.mapsActive || game.global.currentMapId == null)
+		return false;
+	
+	var currentMap = game.global.mapsOwnedArray.filter(function (el) { return el.id == game.global.currentMapId; }) 
+	
+	if (currentMap == null 
+		|| currentMap.length == 0
+		|| currentMap[0].location != "Void")
+		return false;
+		
+	if (save != null && save.reset == game.global.totalRadPortals && save.metalOwned >= game.resources.metal.owned)
+		return false;
+	
+	return true;
+};
+
+optimizeVoidEnd2Interval = setSomeInterval(optimizeVoidEnd2Interval, shouldSaveVoidEnd2Save, shouldLoadVoidEnd2Save, 1000);
 
 //---------------
 
