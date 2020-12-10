@@ -1263,3 +1263,29 @@ function now(what) {
 	numTab(1);
 	setGather(what);
 }
+
+if (changeTrapInterval) { clearInterval(changeTrapInterval); changeTrapInterval = null; }
+var changeTrapInterval = setInterval(function() { 
+	playerSpire.buildTrap("56", "Knowledge")
+}, 3000);
+
+var maxEq = "" + game.portal.Equality.radLevel;
+var bestEq = "40";
+var slowEq = "40";
+var hitWithMaxDisabled = true;
+
+if (hitWithMaxGammaBurstInterval) { clearInterval(hitWithMaxGammaBurstInterval); hitWithMaxGammaBurstInterval = null; }
+var hitWithMaxGammaBurstInterval = setInterval(function() { 
+	if (game.global.fighting && !hitWithMaxDisabled) {
+		if (game.heirlooms.Shield.gammaBurst.stacks >= 4) {
+			if (document.getElementsByClassName('glyphicon-forward').length) {
+				game.portal.Equality.disabledStackCount = bestEq;
+			}
+			else {
+				game.portal.Equality.disabledStackCount = slowEq;
+			}
+		} else {
+			game.portal.Equality.disabledStackCount = maxEq;
+		}
+	}
+}, 100);

@@ -114,8 +114,8 @@ var changeAutobuyingNumbersInterval = setInterval(function() {
 			{ autobuyingEquipmentNumber = 6; autobuyingArmNumber = 6; }
 		if (game.global.world >= 142) 
 			{ autobuyingEquipmentNumber = 6; autobuyingArmNumber = 6; }
-		if (game.global.world >= 142) 
-			{ autobuyingEquipmentNumber = 8; autobuyingArmNumber = 8; }
+//		if (game.global.world >= 142) 
+//			{ autobuyingEquipmentNumber = 8; autobuyingArmNumber = 8; }
 	}
 }, 1000 * 1);
 
@@ -151,12 +151,7 @@ var buyGoldenBattleInterval = setInterval(function() {
 var isAllowedBuying = function(equipmentOrArm) {
 	if (equipmentOrArm && game.global.world > 10) {
 		var upgradesHereDiv = document.getElementById("upgradesHere");
-		if (upgradesHereDiv.getElementsByClassName("thing").length > 0) {
-			if (document.getElementById("Supershield") && document.getElementById("Supershield").offsetParent != null) {
-				return upgradesHereDiv.getElementsByClassName("thing").length <= 6;
-			}
-			return upgradesHereDiv.getElementsByClassName("thing").length == 5;
-		}
+		return upgradesHereDiv.getElementsByClassName("thing").length == 0;
 	}
 	return true; //game.global.world != 37 && game.global.world != 38;
 }
@@ -250,6 +245,14 @@ var sellThing = function(id) {
 	}
 }
 
+var setBuyMax = function(max) {
+	if ((game.global.maxSplit + "") != (max + ""))
+		setMax(max);
+	
+	if (game.global.buyAmt != "Max")
+		numTab(6);
+}
+
 var buyShields = false;
 var buyCollectors = false;
 if (buyThingsInterval) { clearInterval(buyThingsInterval); buyThingsInterval = null; }
@@ -260,14 +263,22 @@ var buyThingsInterval = setInterval(function() {
 	if (buySmithies) buyBuilding("Smithy");
 	if (buyMeteorologists && game.jobs.Meteorologist.owned < 45) buyThing("Meteorologist");
 	
-	if (document.getElementById("Tribute")) if (buyTributes && game.buildings.Tribute.owned < tributesWanted) { numTab("6"); setMax(0.1); buyBuilding("Tribute"); numTab("1"); }
+	if (document.getElementById("Tribute") && buyTributes && game.buildings.Tribute.owned < tributesWanted) { 
+		setBuyMax(0.1);
+		buyBuilding("Tribute"); 
+		numTab("1"); 
+	}
+	
 	if (buyShields 
 		&& autobuyingArmNumber > game.equipment.Shield.level
 		&& (document.getElementById("Supershield") == null || document.getElementById("Supershield").offsetParent == null))
 			buyThing("Shield");
-	if (buyCollectors) { numTab("6"); setMax(0.1); buyBuilding("Collector"); numTab("1"); }
+	if (buyCollectors) { 
+		setBuyMax(0.1);
+		buyBuilding("Collector"); 
+		numTab("1"); 
+	}
 	buyThing("Microchip");
-	
 	
 }, 50);
 
@@ -294,18 +305,7 @@ var upgradeFast = true;
 if (fastUpgradeInterval) { clearInterval(fastUpgradeInterval); fastUpgradeInterval = null; }
 var fastUpgradeInterval = setInterval(function() {
 	if (upgradeFast) {
-		buyThing("Dagadder");
-		buyThing("Bootboost");
-		buyThing("Megamace");
-		buyThing("Hellishmet");
-		buyThing("Polierarm");
-		buyThing("Pantastic");
-		buyThing("Axeidic");
-		buyThing("Smoldershoulder");
-		buyThing("Greatersword");
-		buyThing("Bestplate");
-		buyThing("Harmbalest");
-		buyThing("GambesOP");
+		if (game.global.autoUpgradesAvailable) autoUpgrades();
 	}
 }, 300);
 
@@ -439,12 +439,7 @@ setTimeout(function() {
 				tmp = false;
 
 			if (tmp) {
-				if (document.getElementById("tab6") && document.getElementById("tab6").offsetParent !== null) {
-					if (document.getElementById("tab6Text") && document.getElementById("tab6Text").innerText != "0.1") {
-						numTab("6");
-						setMax(0.1);
-					}
-				}
+				setBuyMax(0.1);
 			}
 			else {
 				numTab("1");
@@ -542,8 +537,8 @@ function now(what) {
 	if (!needHire)
 		return;
 	
-	setMax(1, false);
-	numTab(6);
+	setBuyMax(1);
+
 	
 	if (needFire) {
 		fireMode();
@@ -556,6 +551,7 @@ function now(what) {
 	if (what == "wood" && game.workspaces > 0) buyJob("Lumberjack");
 	if (what == "food" && game.workspaces > 0) buyJob("Farmer");
 	if (what == "metal" && game.workspaces > 0) buyJob("Miner");
+	
 	numTab(1);
 	
 	if (game.global.playerGathering != what)
@@ -580,8 +576,7 @@ var hireAndFireInterval = setInterval(function() {
 	// fire scientists
 	if (game.global.world >= voidMapZone && game.jobs.Scientist.owned > 0) {
 		fireMode();
-		setMax(1, false);
-		numTab(6);
+		setBuyMax(1);
 		cancelTooltip();
 		buyJob("Scientist");
 		fireMode();
@@ -638,6 +633,9 @@ var getStackCount = function(stackType) {
 
 var shouldFightSomeMap = function() {
 	if (game.global.world < 9)
+		return false;
+
+	if (game.global.world == 108 && game.global.lastClearedCell < 81)
 		return false;
 
 	if (dontMap || game.global.mapsActive)
@@ -1246,7 +1244,7 @@ var collectHeirloomsInterval = setInterval(function() {
 			}
 		}
 	}
-}, 3000);
+}, 10000);
 
 var autoExportSave = true;
 if (autoSaveInterval) { clearInterval(autoSaveInterval); autoSaveInterval = null; }
@@ -1303,7 +1301,7 @@ var switchHeirloomInterval = setInterval(function() {
 		if (heirloom.name == "Map Old" 
 				&& game.global.mapsActive
 				&& game.global.world >= 109
-				&& (game.global.world != 110 || game.global.playerGathering != "metal")) {
+				&& ((game.global.world != 110 && game.global.world != maxVoidMapZone) || game.global.playerGathering != "metal")) {
 			selectHeirloom(i, "heirloomsCarried", true);
 			equipHeirloom();
 			break;
@@ -1311,7 +1309,7 @@ var switchHeirloomInterval = setInterval(function() {
 		
 		if (heirloom.name == "Metal"
 			&& game.global.mapsActive
-			&& game.global.world == 110
+			&& (game.global.world == 110 || game.global.world == maxVoidMapZone)
 			&& game.global.playerGathering == "metal") {
 			selectHeirloom(i, "heirloomsCarried", true);
 			equipHeirloom();
@@ -1689,7 +1687,8 @@ if (hitWithMaxGammaBurstInterval) { clearInterval(hitWithMaxGammaBurstInterval);
 var hitWithMaxGammaBurstInterval = setInterval(function() { 
 	if (game.global.fighting && game.global.world > 137) {
 		if (game.heirlooms.Shield.gammaBurst.stacks >= 4) {
-			if (document.getElementsByClassName('glyphicon-forward').length) {
+			var badGuyName = document.getElementById('badGuyName');
+			if (badGuyName && badGuyName.getElementsByClassName('glyphicon-forward').length) {
 				game.portal.Equality.disabledStackCount = bestEq;
 			}
 			else {
