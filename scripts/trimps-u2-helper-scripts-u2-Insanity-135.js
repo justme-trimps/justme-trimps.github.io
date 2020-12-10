@@ -4,7 +4,7 @@ if (!game.global.autoJobsSettingU2.enabled)
 	toggleAutoJobs();
 
 var dontPortal = false;
-var maxVoidMapZone = 136;
+var maxVoidMapZone = 137;
 var minMeltingZone = maxVoidMapZone + 1;//not before 111
 var trimpleOfDoomZone = maxVoidMapZone + 1;//not before 110
 var smithiesWanted = 24;
@@ -57,35 +57,30 @@ if (game.global.world == 1)
 if (typeof fluffyStart === "undefined")
 	fluffyStart = 0;
 
-var jestimpMode = false;
+var isJestimp = function() {
+	if (!game.global.mapsActive)
+		return false;
+	
+	return game.global.mapGridArray[game.global.lastClearedMapCell + 1].name.toLowerCase().indexOf("jestimp") > -1;
+}
+
+var jestimpMode = -1;
 if (jestimpInterval) { clearInterval(jestimpInterval); jestimpInterval = null; }
 var jestimpInterval = setInterval(function() {
 	var tmpTarget = game.global.playerGathering;
 
-	var currentMap = game.global.mapsOwnedArray.filter(function (el) { return el.id == game.global.currentMapId; }) 
-	
-	if (currentMap != null 
-		&& currentMap.length > 0
-		&& currentMap[0].name == "Melting Point")
-		return;
-	
-	if (currentMap != null 
-		&& currentMap.length > 0
-		&& currentMap[0].name == "Prismatic Palace")
-		return;
-
-	if (game.global.world == maxVoidMapZone) {
-		var badGuyNameString = (document.getElementById("badGuyName") && document.getElementById("badGuyName").innerText) || null;
-		if (badGuyNameString && badGuyNameString.toLowerCase().indexOf("jestimp") > -1) {
+	if (game.global.world == maxVoidMapZone || game.global.world == 110) {
+		if (isJestimp()) {
 			saveString = save(true);
-			jestimpMode = true;
+			jestimpMode = game.global.lastClearedMapCell + 1;
 		}
-		if (jestimpMode && badGuyNameString && badGuyNameString.toLowerCase().indexOf("jestimp") == -1) {
-			var logMessages = [ ...(document.getElementById("log").getElementsByClassName("message"))]
+		
+		if (jestimpMode != -1 && (game.global.lastClearedMapCell + 1 != jestimpMode)) {
+			var logMessages = [ ...(document.getElementById("log").getElementsByClassName("LootMessage"))]
 				.filter(function (el) { return el.innerText.toLowerCase().indexOf("jestimp") > -1; })
 			if (logMessages.length) {
 				if (logMessages[logMessages.length - 1].innerText.toLowerCase().indexOf(tmpTarget) > -1) {
-					jestimpMode = false;
+					jestimpMode = -1;
 					saveString = null;
 				} else {
 					if (saveString) {
@@ -538,18 +533,33 @@ fixBoard();
 ////////////////////////
 
 function now(what) {
-	fireMode();
+	var needFire = (what != "wood" && game.jobs.Lumberjack.owned > 0)
+		|| (what != "food" && game.jobs.Farmer.owned > 0)
+		|| (what != "metal" && game.jobs.Miner.owned > 0);
+		
+	var needHire = needFire || game.workspaces > 0;
+	
+	if (!needHire)
+		return;
+	
 	setMax(1, false);
 	numTab(6);
-	if (what != "wood") buyJob("Lumberjack");
-	if (what != "food") buyJob("Farmer");
-	if (what != "metal") buyJob("Miner");
-	fireMode();
-	if (what == "wood") buyJob("Lumberjack");
-	if (what == "food") buyJob("Farmer");
-	if (what == "metal") buyJob("Miner");
+	
+	if (needFire) {
+		fireMode();
+		if (what != "wood" && game.jobs.Lumberjack.owned > 0) buyJob("Lumberjack");
+		if (what != "food" && game.jobs.Farmer.owned > 0) buyJob("Farmer");
+		if (what != "metal" && game.jobs.Miner.owned > 0) buyJob("Miner");
+		fireMode();
+	}
+
+	if (what == "wood" && game.workspaces > 0) buyJob("Lumberjack");
+	if (what == "food" && game.workspaces > 0) buyJob("Farmer");
+	if (what == "metal" && game.workspaces > 0) buyJob("Miner");
 	numTab(1);
-	setGather(what);
+	
+	if (game.global.playerGathering != what)
+		setGather(what);
 }
 
 var autoHireAndFire = true;
