@@ -1705,11 +1705,9 @@ var updateBestEqInterval = setInterval(function() {
 	if (game.global.world < 139) {
 		bestEq = "35";
 		slowEq = "0";
-	} else if (game.global.world < 140) {
-		bestEq = "40";
-	} else if (game.global.world < 141) {
-		bestEq = "40";
-	} else if (game.global.world < 142) {
+	} else if (game.global.world < 145) {
+		bestEq = "38";
+	} else { 
 		bestEq = "40";
 	} 
 }, 100);

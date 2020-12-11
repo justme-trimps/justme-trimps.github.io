@@ -1,4 +1,4 @@
-var maxEq = "110";
+var maxEq = "" + game.portal.Equality.radLevel;
 var bestEq = "78";
 
 if (hitWithMaxGammaBurstInterval) { clearInterval(hitWithMaxGammaBurstInterval); hitWithMaxGammaBurstInterval = null; }
@@ -19,8 +19,8 @@ var hitWithMaxGammaBurstInterval = setInterval(function() {
 
 
 
-var maxEq = "110";
-var bestEq = "70";
+var maxEq = "" + game.portal.Equality.radLevel;
+var bestEq = "40";
 var slowEq = "0";
 var hitWithMaxDisabled = false;
 
