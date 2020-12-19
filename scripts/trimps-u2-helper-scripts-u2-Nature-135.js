@@ -14,7 +14,7 @@ var lastFarmersZone = 124;
 var tryBattle150 = true;
 
 var plusZeroZones = [20, 24, 79, 96, lastFarmersZone, 128, 134];
-var plusOneZones = [30, 40, 54];
+var plusOneZones = [40, 30, 31, 54];
 var plusTwoZones = [59, 69, 79, 89, 99, 109, 119, 129, 139];
 
 var plusThreeZones = [];
@@ -571,7 +571,7 @@ if (hireAndFireInterval) { clearInterval(hireAndFireInterval); hireAndFireInterv
 var hireAndFireInterval = setInterval(function() {
 	if (!autoHireAndFire) return;
 
-	if (game.global.world >= gatherMetalZone && game.global.world <= tributesPushMap)
+	if (game.global.world >= gatherMetalZone && game.global.world <= tributesPushMap && game.global.world != 30)
 		setGather("food");
 	
 	// on 124 we want only farmers
@@ -582,6 +582,11 @@ var hireAndFireInterval = setInterval(function() {
 	
 	if (game.global.world == 128) {
 		now("wood");
+		return;
+	}
+	
+	if (game.global.world == 30) {
+		now("metal");
 		return;
 	}
 
@@ -1534,7 +1539,7 @@ var slowEq = "0";
 
 if (hitWithMaxGammaBurstInterval) { clearInterval(hitWithMaxGammaBurstInterval); hitWithMaxGammaBurstInterval = null; }
 var hitWithMaxGammaBurstInterval = setInterval(function() { 
-	if (game.global.fighting && game.global.world > 146) {
+	if (game.global.fighting && game.global.world > 145) {
 		if (game.heirlooms.Shield.gammaBurst.stacks >= 4) {
 			var badGuyName = document.getElementById('badGuyName');
 			if (badGuyName && badGuyName.getElementsByClassName('glyphicon-forward').length) {
