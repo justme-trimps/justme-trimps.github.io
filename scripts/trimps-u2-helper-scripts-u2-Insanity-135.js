@@ -1426,12 +1426,12 @@ var setSomeInterval = function(intervalVar, shouldSaveFunction, shouldLoadFuncti
 var optimizeVoidStartInterval;
 
 var shouldLoadVoidStartSave = function(save) {
-	if (game.global.world == 110 && game.global.lastClearedCell <= 80 && save.reset == game.global.totalRadPortals)
+	if (game.global.world == voidMapZone && game.global.lastClearedCell <= 80 && save.reset == game.global.totalRadPortals)
 		return true;
 	return false;
 };
 var shouldSaveVoidStartSave = function(save) {
-	if (game.global.world != 110 || !game.global.mapsActive || game.global.currentMapId == null)
+	if (game.global.world != voidMapZone || !game.global.mapsActive || game.global.currentMapId == null)
 		return false;
 	
 	var currentMap = game.global.mapsOwnedArray.filter(function (el) { return el.id == game.global.currentMapId; }) 

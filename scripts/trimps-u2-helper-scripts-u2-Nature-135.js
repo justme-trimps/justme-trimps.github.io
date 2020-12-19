@@ -4,22 +4,22 @@ if (!game.global.autoJobsSettingU2.enabled)
 	toggleAutoJobs();
 
 var dontPortal = false;
-var maxVoidMapZone = 143;
-var minMeltingZone = maxVoidMapZone + 1;//not before 111
-var trimpleOfDoomZone = maxVoidMapZone + 1;//not before 110
+var maxVoidMapZone = 144;
+var switchHeirloomZone = maxVoidMapZone + 1;
+var minMeltingZone = maxVoidMapZone + 1;
+var trimpleOfDoomZone = maxVoidMapZone + 1;
 var smithiesWanted = 25;
-var insanityLevelWanted = 500;
-var forcedPortalWorld = 152;
+var forcedPortalWorld = 156;
 var lastFarmersZone = 124;
-var tryBattle125 = true;
+var tryBattle150 = true;
 
-var plusZeroZones = [20, 24, 79, 96, lastFarmersZone];
+var plusZeroZones = [20, 24, 79, 96, lastFarmersZone, 128, 134];
 var plusOneZones = [30, 40, 54];
 var plusTwoZones = [59, 69, 79, 89, 99, 109, 119, 129, 139];
 
 var plusThreeZones = [];
 var plusFourZones = [];
-var plusFiveZones = [45, 60, 146, 147];
+var plusFiveZones = [45, 60, 146, 147, 148, 149, 150];
 var plusSixZones = [];
 var extraZones = [];
 
@@ -113,13 +113,14 @@ var changeAutobuyingNumbersInterval = setInterval(function() {
 			{ autobuyingEquipmentNumber = 19; autobuyingArmNumber = 19; }
 		if (game.global.world >= 136) 
 			{ autobuyingEquipmentNumber = 6; autobuyingArmNumber = 6; }
-		if (game.global.world >= 142) 
+		if (game.global.world > maxVoidMapZone + 1) 
 			{ autobuyingEquipmentNumber = 17; autobuyingArmNumber = 17; }
-		if (game.global.world >= 145) 
+		if (game.global.world >= 146) 
 			{ autobuyingEquipmentNumber = 6; autobuyingArmNumber = 6; }
+		if (game.global.world >= 151) 
+			{ autobuyingEquipmentNumber = 10; autobuyingArmNumber = 10; }
 	}
 }, 1000 * 1);
-
 
 
 
@@ -132,7 +133,7 @@ var buyGoldUpgrade = function() {
 		id = "Battle";
 	}
 
-	if (tryBattle125 && game.global.world >= 125)
+	if (tryBattle150 && game.global.world >= 150)
 		id = "Battle";
 
 	var button = document.getElementById(id + "Golden");
@@ -578,6 +579,11 @@ var hireAndFireInterval = setInterval(function() {
 		now("food");
 		return;
 	}
+	
+	if (game.global.world == 128) {
+		now("wood");
+		return;
+	}
 
 	// fire scientists
 	if (game.global.world >= voidMapZone && game.jobs.Scientist.owned > 0) {
@@ -590,8 +596,8 @@ var hireAndFireInterval = setInterval(function() {
 	
 	// hire lumberjacks to get smithies on 110
 	if (game.global.world == voidMapZone) {
-		if (game.resources.wood.owned < 1 * 5000 * (Math.pow(40, smithiesWanted - 1)) 
-			&& game.buildings.Smithy.owned < smithiesWanted - 1) {
+		if (game.resources.wood.owned < 1 * 5000 * (Math.pow(40, smithiesWanted)) 
+			&& game.buildings.Smithy.owned < smithiesWanted) {
 			now("wood");
 		} else {
 			now("metal");
@@ -601,7 +607,7 @@ var hireAndFireInterval = setInterval(function() {
 	
 	// hire lumberjacks to get smithies on maxVoidMapZone
 	if (game.global.world == maxVoidMapZone) {
-		if (game.resources.wood.owned < 0.6 * 5000 * (Math.pow(40, smithiesWanted - 1)) 
+		if (game.resources.wood.owned < 0.6 * 5000 * (Math.pow(40, smithiesWanted)) 
 			&& game.buildings.Smithy.owned < smithiesWanted) {
 			now("wood");
 		} else {
@@ -620,7 +626,7 @@ var hireAndFireInterval = setInterval(function() {
 		now("metal");
 	}
 
-}, 500);
+}, 300);
 
 
 
@@ -749,18 +755,32 @@ var repeatMaps = setInterval(function() {
 
 		cancelTooltip();
 
+		if (game.global.playerGathering == "food")
+			mapMode = "lsc";
 		
-		if (game.global.world > 60 && game.global.world <= lastFarmersZone) {
-			mapMode = "lsc"; //hc
-		}
-
-		if (game.global.world > lastFarmersZone) {
-			mapMode = "lmc"; //hc
-		}
-
-		if (game.global.world == 132 || game.global.world == 134 || game.global.world == 135) {
-			mapMode = "lmc"; //hc
-		}
+		if (game.global.playerGathering == "wood")
+			mapMode = "lwc";
+		
+		if (game.global.playerGathering == "metal")
+			mapMode = "lmc";
+		
+//		if (game.global.world > 60 && game.global.world <= tributesPushMap) {
+//			mapMode = "lsc"; //hc
+//		}
+//		
+//		if (game.global.world == lastFarmersZone || game.global.world == 109) {
+//			mapMode = "lsc";
+//		}
+//
+//		if (mapMode == "") {
+//			if (game.global.world > lastFarmersZone) {
+//				mapMode = "lmc"; //hc
+//			}
+//
+//			if (game.global.world == 132 || game.global.world == 134 || game.global.world == 135) {
+//				mapMode = "lmc"; //hc
+//			}
+//		}
 
 		if (game.global.world == 109 
 			|| game.global.world == 110 
@@ -774,7 +794,10 @@ var repeatMaps = setInterval(function() {
 			|| game.global.world == 138
 			|| game.global.world == 139
 			|| game.global.world == 146
-			|| game.global.world == 147) {
+			|| game.global.world == 147
+			|| game.global.world == 148
+			|| game.global.world == 149
+			|| game.global.world == 150) {
 			mapMode = "p";
 		}
 
@@ -880,7 +903,7 @@ var repeatMaps = setInterval(function() {
 			toggleSetting("exitTo")
 		}
 	}
-}, 400);
+}, 601);
 
 var getNumberText = function(number) {
 	if (number && number < 1000) {
@@ -1114,7 +1137,6 @@ var autoSaveInterval = setInterval(function() {
 }, 1000 * 60 * 2);
 
 
-var switchHeirloomZone = maxVoidMapZone + 1;
 var isItTimeForMorePowerfulHeirloom = function() {
 	if (game.global.world >= forcedPortalWorld)
 		return false;
@@ -1495,15 +1517,15 @@ optimizeLastZoneInterval = setSomeInterval(optimizeLastZoneInterval, shouldSaveL
 
 if (equalityInterval) { clearInterval(equalityInterval); equalityInterval = null; }
 var equalityInterval = setInterval(function() {
-	if (game.global.world < 136) {
-		game.portal.Equality.disabledStackCount = "30"
-	} else if (game.global.world < 136) {
+	if (game.global.world < 129) {
 		game.portal.Equality.disabledStackCount = "15"
+	} else if (game.global.world == 129) {
+		game.portal.Equality.disabledStackCount = "38"
+	} else if (game.global.world < 136) {
+		game.portal.Equality.disabledStackCount = "20"
 	} else if (game.global.world < 137) {
 		game.portal.Equality.disabledStackCount = "15"
-	} else if (game.global.world < 138) {
-		game.portal.Equality.disabledStackCount = "25"
-	}
+	} 
 }, 5001);
 
 var maxEq = "110";
@@ -1512,7 +1534,7 @@ var slowEq = "0";
 
 if (hitWithMaxGammaBurstInterval) { clearInterval(hitWithMaxGammaBurstInterval); hitWithMaxGammaBurstInterval = null; }
 var hitWithMaxGammaBurstInterval = setInterval(function() { 
-	if (game.global.fighting && game.global.world > 145) {
+	if (game.global.fighting && game.global.world > 146) {
 		if (game.heirlooms.Shield.gammaBurst.stacks >= 4) {
 			var badGuyName = document.getElementById('badGuyName');
 			if (badGuyName && badGuyName.getElementsByClassName('glyphicon-forward').length) {
@@ -1534,11 +1556,42 @@ var updateBestEqInterval = setInterval(function() {
 		slowEq = "0";
 	} else if (game.global.world < 145) {
 		bestEq = "38";
-	} else { 
+	} else if (game.global.world < 155) {
 		bestEq = "40";
+	} else { 
+		bestEq = "47";
 	} 
 }, 100);
 
+//--
+
+var optimizeVoidStartInterval;
+
+var shouldLoadVoidStartSave = function(save) {
+	if (game.global.world == voidMapZone && game.global.lastClearedCell <= 80 && save.reset == game.global.totalRadPortals)
+		return true;
+	return false;
+};
+var shouldSaveVoidStartSave = function(save) {
+	if (game.global.world != voidMapZone || !game.global.mapsActive || game.global.currentMapId == null)
+		return false;
+	
+	var currentMap = game.global.mapsOwnedArray.filter(function (el) { return el.id == game.global.currentMapId; }) 
+	
+	if (currentMap == null 
+		|| currentMap.length == 0
+		|| currentMap[0].location != "Void")
+		return false;
+		
+	if (save != null && save.reset == game.global.totalRadPortals)
+		return false;
+	
+	return true;
+};
+
+optimizeVoidStartInterval = setSomeInterval(optimizeVoidStartInterval, shouldSaveVoidStartSave, shouldLoadVoidStartSave, 3000);
+
+//--
 
 if (changeTrapInterval) { clearInterval(changeTrapInterval); changeTrapInterval = null; }
 var changeTrapInterval = setInterval(function() { 
