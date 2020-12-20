@@ -68,6 +68,8 @@ var isJestimp = function() {
 var jestimpMode = -1;
 if (jestimpInterval) { clearInterval(jestimpInterval); jestimpInterval = null; }
 var jestimpInterval = setInterval(function() {
+	if (document.getElementById("worldName") && document.getElementById("worldName").innerText == "Atlantrimp")
+		return;
 	var tmpTarget = game.global.playerGathering;
 
 	if (game.global.world == maxVoidMapZone || game.global.world == voidMapZone || game.global.world > 145) {
