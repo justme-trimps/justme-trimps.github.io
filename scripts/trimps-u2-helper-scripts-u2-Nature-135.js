@@ -4,10 +4,10 @@ if (!game.global.autoJobsSettingU2.enabled)
 	toggleAutoJobs();
 
 var dontPortal = false;
-var maxVoidMapZone = 145;
+var maxVoidMapZone = 146;
 var switchHeirloomZone = maxVoidMapZone + 1;
-var minMeltingZone = maxVoidMapZone + 1;
-var trimpleOfDoomZone = maxVoidMapZone + 1;
+var minMeltingZone = maxVoidMapZone;
+var trimpleOfDoomZone = maxVoidMapZone;
 var smithiesWanted = 26;
 var forcedPortalWorld = 157;
 var lastFarmersZone = 124;
@@ -70,6 +70,10 @@ if (jestimpInterval) { clearInterval(jestimpInterval); jestimpInterval = null; }
 var jestimpInterval = setInterval(function() {
 	if (document.getElementById("worldName") && document.getElementById("worldName").innerText == "Atlantrimp")
 		return;
+
+	if (document.getElementById("worldName") && document.getElementById("worldName").innerText == "Melting Point")
+		return;
+
 	var tmpTarget = game.global.playerGathering;
 
 	if (game.global.world == maxVoidMapZone || game.global.world == voidMapZone || game.global.world > 145) {
@@ -675,7 +679,7 @@ var shouldFightSomeMap = function() {
 		}
 	}
 
-	if (!game.global.mapsActive && game.global.lastClearedCell < 10 && game.buildings.Smithy.owned == smithiesWanted && game.global.world >= minMeltingZone) {
+	if (!game.global.mapsActive && game.global.lastClearedCell > 80 && game.buildings.Smithy.owned == smithiesWanted && game.global.world >= minMeltingZone) {
 		for (var i = game.global.mapsOwnedArray.length - 1; i > -1; i--) {
 			if (game.global.mapsOwnedArray[i].name == "Melting Point") {
 				var button = document.getElementById(game.global.mapsOwnedArray[i].id);
@@ -686,7 +690,7 @@ var shouldFightSomeMap = function() {
 		}
 	}
 
-	if (!game.global.mapsActive && game.global.world == trimpleOfDoomZone) {
+	if (!game.global.mapsActive && game.global.world == trimpleOfDoomZone && game.global.lastClearedCell > 80) {
 		for (var i = game.global.mapsOwnedArray.length - 1; i > -1; i--) {
 			if (game.global.mapsOwnedArray[i].name == "Atlantrimp") {
 				var button = document.getElementById(game.global.mapsOwnedArray[i].id);
@@ -834,20 +838,23 @@ var repeatMaps = setInterval(function() {
 
 		var specialZoneRun = false;
 
-		if (game.buildings.Smithy.owned == smithiesWanted && game.global.lastClearedCell < 10 && game.global.world >= minMeltingZone) {
-			for (var i = game.global.mapsOwnedArray.length - 1; i > -1; i--) {
-				if (game.global.mapsOwnedArray[i].name == "Melting Point") {
-					var button = document.getElementById(game.global.mapsOwnedArray[i].id);
-					if (button && button.getAttribute("class").indexOf("noRecycleDone") == -1) {
-						console.log(getPortalTime() + " " + game.global.world + " zone - Melting Point");
-						button.click();
-						specialZoneRun = true;
+
+		if (game.global.world == voidMapZone || game.global.world == maxVoidMapZone) {
+			if (!specialZoneRun && (game.global.lastClearedCell > 80)) {
+				for (var i = game.global.mapsOwnedArray.length - 1; i > -1; i--) {
+					if (game.global.mapsOwnedArray[i].location == "Void") {
+						toggleVoidMaps();
+						var button = document.getElementById(game.global.mapsOwnedArray[i].id);
+						if (button) {
+							button.click();
+							specialZoneRun = true;
+						}
 					}
 				}
 			}
 		}
 
-		if (game.global.world == trimpleOfDoomZone) {
+		if (game.global.world == trimpleOfDoomZone && game.global.lastClearedCell > 80) {
 			if (!specialZoneRun) {
 				for (var i = game.global.mapsOwnedArray.length - 1; i > -1; i--) {
 					if (game.global.mapsOwnedArray[i].name == "Atlantrimp") {
@@ -861,15 +868,14 @@ var repeatMaps = setInterval(function() {
 			}
 		}
 
-		if (game.global.world == voidMapZone || game.global.world == maxVoidMapZone) {
-			if (!specialZoneRun && (game.global.lastClearedCell > 80)) {
-				for (var i = game.global.mapsOwnedArray.length - 1; i > -1; i--) {
-					if (game.global.mapsOwnedArray[i].location == "Void") {
-						toggleVoidMaps();
-						var button = document.getElementById(game.global.mapsOwnedArray[i].id);
-						if (button) {
-							button.click();
-						}
+		if (game.buildings.Smithy.owned == smithiesWanted && game.global.lastClearedCell > 80 && game.global.world >= minMeltingZone) {
+			for (var i = game.global.mapsOwnedArray.length - 1; i > -1; i--) {
+				if (game.global.mapsOwnedArray[i].name == "Melting Point") {
+					var button = document.getElementById(game.global.mapsOwnedArray[i].id);
+					if (button && button.getAttribute("class").indexOf("noRecycleDone") == -1) {
+						console.log(getPortalTime() + " " + game.global.world + " zone - Melting Point");
+						button.click();
+						specialZoneRun = true;
 					}
 				}
 			}
@@ -1500,10 +1506,19 @@ optimizeLastZoneInterval = setSomeInterval(optimizeLastZoneInterval, shouldSaveL
 
 if (equalityInterval) { clearInterval(equalityInterval); equalityInterval = null; }
 var equalityInterval = setInterval(function() {
+	if (game.global.world >= 145 && game.global.world <= 150) {
+		game.portal.Equality.disabledStackCount = "30";
+		return;
+	}
+	if (game.global.world >= 151 && game.global.world <= 154) {
+		game.portal.Equality.disabledStackCount = "20";
+		return;
+	}
+	
 	if (game.global.world < 129) {
 		game.portal.Equality.disabledStackCount = "15"
 	} else if (game.global.world == 129) {
-		game.portal.Equality.disabledStackCount = "34"
+		game.portal.Equality.disabledStackCount = "20"
 	} else if (game.global.world < 135) {
 		game.portal.Equality.disabledStackCount = "15"
 	} else if (game.global.world < 136) {
@@ -1519,8 +1534,8 @@ var slowEq = "0";
 
 if (hitWithMaxGammaBurstInterval) { clearInterval(hitWithMaxGammaBurstInterval); hitWithMaxGammaBurstInterval = null; }
 var hitWithMaxGammaBurstInterval = setInterval(function() { 
-	if (game.global.fighting && game.global.world > 145) {
-		if (game.heirlooms.Shield.gammaBurst.stacks >= 4) {
+	if (game.global.world >= 155) {
+		if (game.global.fighting && game.heirlooms.Shield.gammaBurst.stacks >= 4) {
 			var badGuyName = document.getElementById('badGuyName');
 			if (badGuyName && badGuyName.getElementsByClassName('glyphicon-forward').length) {
 				game.portal.Equality.disabledStackCount = bestEq;
@@ -1536,12 +1551,7 @@ var hitWithMaxGammaBurstInterval = setInterval(function() {
 
 if (updateBestEqInterval) { clearInterval(updateBestEqInterval); updateBestEqInterval = null; }
 var updateBestEqInterval = setInterval(function() { 
-	if (game.global.world < 139) {
-		bestEq = "35";
-		slowEq = "0";
-	} else if (game.global.world < 145) {
-		bestEq = "38";
-	} else if (game.global.world < 155) {
+	if (game.global.world < 155) {
 		bestEq = "40";
 	} else { 
 		bestEq = "43";
