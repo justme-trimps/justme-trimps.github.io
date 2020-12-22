@@ -1515,14 +1515,10 @@ var equalityInterval = setInterval(function() {
 		return;
 	}
 	
-	if (game.global.world < 129) {
-		game.portal.Equality.disabledStackCount = "15"
-	} else if (game.global.world == 129) {
-		game.portal.Equality.disabledStackCount = "20"
-	} else if (game.global.world < 135) {
+	if (game.global.world < 135) {
 		game.portal.Equality.disabledStackCount = "15"
 	} else if (game.global.world < 136) {
-		game.portal.Equality.disabledStackCount = "22"
+		game.portal.Equality.disabledStackCount = "20"
 	} else if (game.global.world < 137) {
 		game.portal.Equality.disabledStackCount = "15"
 	} 
@@ -1588,16 +1584,16 @@ optimizeVoidStartInterval = setSomeInterval(optimizeVoidStartInterval, shouldSav
 
 //--
 
-if (changeTrapInterval) { clearInterval(changeTrapInterval); changeTrapInterval = null; }
-var changeTrapInterval = setInterval(function() { 
-	if (game.global.world <= voidMapZone && playerSpire.layout[56].trap.name != "Condenser") {
-		playerSpire.buildTrap("56", "Condenser")
-
-	}
-	if (game.global.world > voidMapZone && playerSpire.layout[56].trap.name != "Knowledge") {
-		playerSpire.buildTrap("56", "Knowledge")
-	} 
-}, 3000);
+//if (changeTrapInterval) { clearInterval(changeTrapInterval); changeTrapInterval = null; }
+//var changeTrapInterval = setInterval(function() { 
+//	if (game.global.world <= voidMapZone && playerSpire.layout[56].trap.name != "Condenser") {
+//		playerSpire.buildTrap("56", "Condenser")
+//
+//	}
+//	if (game.global.world > voidMapZone && playerSpire.layout[56].trap.name != "Knowledge") {
+//		playerSpire.buildTrap("56", "Knowledge")
+//	} 
+//}, 3000);
 
 // manually copy between tabs
 exportSaveToLocalStorage = function() {

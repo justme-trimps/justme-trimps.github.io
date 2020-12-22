@@ -1191,21 +1191,34 @@ if (switchHeirloomInterval) { clearInterval(switchHeirloomInterval); switchHeirl
 var switchHeirloomInterval = setInterval(function() {
 	for (var i = 0; i < game.global.heirloomsCarried.length; i++) {
 		var heirloom = game.global.heirloomsCarried[i];
-		if (heirloom.name == "VM" && !isItTimeForMorePowerfulHeirloom()) {
-			selectHeirloom(i, "heirloomsCarried", true);
-			equipHeirloom();
-			break;
-		}
-		if (heirloom.name == "U2" && isItTimeForMorePowerfulHeirloom()) {
-			selectHeirloom(i, "heirloomsCarried", true);
-			equipHeirloom();
-			break;
+		if (game.global.challengeActive == "Mayhem")  {
+			if (heirloom.name == "Mayhem") {
+				selectHeirloom(i, "heirloomsCarried", true);
+				equipHeirloom();
+				break;
+			}
+		} else {
+			if (heirloom.name == "VM" && !isItTimeForMorePowerfulHeirloom()) {
+				selectHeirloom(i, "heirloomsCarried", true);
+				equipHeirloom();
+				break;
+			}
+			if (heirloom.name == "U2" && isItTimeForMorePowerfulHeirloom()) {
+				selectHeirloom(i, "heirloomsCarried", true);
+				equipHeirloom();
+				break;
+			}
 		}
 	}
 
 	for (var i = 0; i < game.global.heirloomsCarried.length; i++) {
 		var heirloom = game.global.heirloomsCarried[i];
-		if (heirloom.name == "Map" && game.global.mapsActive && game.global.world <= 120) {
+		if (heirloom.name == "Metal" && game.global.mapsActive && game.global.world <= 120 && game.global.playerGathering == "metal") {
+			selectHeirloom(i, "heirloomsCarried", true);
+			equipHeirloom();
+			break;
+		}
+		if (heirloom.name == "Map" && game.global.mapsActive && game.global.world <= 120 && game.global.playerGathering != "metal") {
 			selectHeirloom(i, "heirloomsCarried", true);
 			equipHeirloom();
 			break;
@@ -1264,10 +1277,10 @@ function now(what) {
 	setGather(what);
 }
 
-if (changeTrapInterval) { clearInterval(changeTrapInterval); changeTrapInterval = null; }
-var changeTrapInterval = setInterval(function() { 
-	playerSpire.buildTrap("56", "Knowledge")
-}, 3000);
+//if (changeTrapInterval) { clearInterval(changeTrapInterval); changeTrapInterval = null; }
+//var changeTrapInterval = setInterval(function() { 
+//	playerSpire.buildTrap("56", "Knowledge")
+//}, 3000);
 
 var maxEq = "" + game.portal.Equality.radLevel;
 var bestEq = "40";
