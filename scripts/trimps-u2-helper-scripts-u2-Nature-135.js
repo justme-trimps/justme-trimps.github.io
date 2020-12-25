@@ -9,7 +9,7 @@ var switchHeirloomZone = maxVoidMapZone + 1;
 var minMeltingZone = maxVoidMapZone;
 var trimpleOfDoomZone = maxVoidMapZone;
 var smithiesWanted = 26;
-var forcedPortalWorld = 158;
+var forcedPortalWorld = 159;
 var lastFarmersZone = 124;
 var tryBattle150 = true;
 
