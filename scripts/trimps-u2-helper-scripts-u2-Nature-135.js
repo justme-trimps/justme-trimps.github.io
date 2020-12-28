@@ -9,7 +9,7 @@ var switchHeirloomZone = maxVoidMapZone + 1;
 var minMeltingZone = maxVoidMapZone;
 var trimpleOfDoomZone = maxVoidMapZone;
 var smithiesWanted = 26;
-var forcedPortalWorld = 159;
+var forcedPortalWorld = 160;
 var lastFarmersZone = 124;
 var tryBattle150 = true;
 
@@ -122,9 +122,9 @@ var changeAutobuyingNumbersInterval = setInterval(function() {
 		if (game.global.world > maxVoidMapZone + 1) 
 			{ autobuyingEquipmentNumber = 17; autobuyingArmNumber = 17; }
 		if (game.global.world >= 146) 
-			{ autobuyingEquipmentNumber = 8; autobuyingArmNumber = 8; }
+			{ autobuyingEquipmentNumber = 9; autobuyingArmNumber = 9; }
 		if (game.global.world >= 151) 
-			{ autobuyingEquipmentNumber = 10; autobuyingArmNumber = 10; }
+			{ autobuyingEquipmentNumber = 12; autobuyingArmNumber = 12; }
 	}
 }, 1000 * 1);
 
@@ -1510,7 +1510,7 @@ var equalityInterval = setInterval(function() {
 		game.portal.Equality.disabledStackCount = "30";
 		return;
 	}
-	if (game.global.world >= 151 && game.global.world <= 154) {
+	if (game.global.world >= 151 && game.global.world < hitWithMaxStartingZone) {
 		game.portal.Equality.disabledStackCount = "20";
 		return;
 	}
@@ -1527,10 +1527,11 @@ var equalityInterval = setInterval(function() {
 var maxEq = "" + game.portal.Equality.radLevel;
 var bestEq = "35";
 var slowEq = "0";
+var hitWithMaxStartingZone = 157;
 
 if (hitWithMaxGammaBurstInterval) { clearInterval(hitWithMaxGammaBurstInterval); hitWithMaxGammaBurstInterval = null; }
 var hitWithMaxGammaBurstInterval = setInterval(function() { 
-	if (game.global.world >= 155) {
+	if (game.global.world >= hitWithMaxStartingZone) {
 		if (game.global.fighting && game.heirlooms.Shield.gammaBurst.stacks >= 4) {
 			var badGuyName = document.getElementById('badGuyName');
 			if (badGuyName && badGuyName.getElementsByClassName('glyphicon-forward').length) {
@@ -1547,7 +1548,7 @@ var hitWithMaxGammaBurstInterval = setInterval(function() {
 
 if (updateBestEqInterval) { clearInterval(updateBestEqInterval); updateBestEqInterval = null; }
 var updateBestEqInterval = setInterval(function() { 
-	if (game.global.world < 155) {
+	if (game.global.world < hitWithMaxStartingZone) {
 		bestEq = "40";
 	} else { 
 		bestEq = "43";
