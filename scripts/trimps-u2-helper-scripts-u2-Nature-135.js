@@ -4,12 +4,12 @@ if (!game.global.autoJobsSettingU2.enabled)
 	toggleAutoJobs();
 
 var dontPortal = false;
-var maxVoidMapZone = 146;
+var maxVoidMapZone = 149;
 var switchHeirloomZone = maxVoidMapZone + 1;
-var minMeltingZone = maxVoidMapZone;
-var trimpleOfDoomZone = maxVoidMapZone;
+var minMeltingZone = maxVoidMapZone + 1;
+var trimpleOfDoomZone = maxVoidMapZone + 1;
 var smithiesWanted = 26;
-var forcedPortalWorld = 160;
+var forcedPortalWorld = 162;
 var lastFarmersZone = 124;
 var tryBattle150 = true;
 
@@ -18,8 +18,8 @@ var plusOneZones = [40, 30, 31, 54];
 var plusTwoZones = [59, 69, 79, 89, 99, 109, 119, 129, 139];
 
 var plusThreeZones = [];
-var plusFourZones = [147, 148];
-var plusFiveZones = [45, 60, 149, 150];
+var plusFourZones = [];
+var plusFiveZones = [45, 60, 150];
 var plusSixZones = [];
 var extraZones = [];
 
@@ -119,12 +119,18 @@ var changeAutobuyingNumbersInterval = setInterval(function() {
 			{ autobuyingEquipmentNumber = 19; autobuyingArmNumber = 19; }
 		if (game.global.world >= 136) 
 			{ autobuyingEquipmentNumber = 6; autobuyingArmNumber = 6; }
-		if (game.global.world > maxVoidMapZone + 1) 
-			{ autobuyingEquipmentNumber = 17; autobuyingArmNumber = 17; }
 		if (game.global.world >= 146) 
-			{ autobuyingEquipmentNumber = 9; autobuyingArmNumber = 9; }
+			{ autobuyingEquipmentNumber = 4; autobuyingArmNumber = 4; }
 		if (game.global.world >= 151) 
 			{ autobuyingEquipmentNumber = 12; autobuyingArmNumber = 12; }
+		if (game.global.world >= 152) 
+			{ autobuyingEquipmentNumber = 16; autobuyingArmNumber = 16; }
+		if (game.global.world >= 153) 
+			{ autobuyingEquipmentNumber = 20; autobuyingArmNumber = 20; }
+		if (game.global.world >= 154) 
+			{ autobuyingEquipmentNumber = 25; autobuyingArmNumber = 25; }
+		if (game.global.world >= 155) 
+			{ autobuyingEquipmentNumber = 30; autobuyingArmNumber = 30; }
 	}
 }, 1000 * 1);
 
@@ -661,6 +667,9 @@ var shouldFightSomeMap = function() {
 	if (game.global.world == lastFarmersZone && game.global.lastClearedCell < 81)
 		return false;
 
+	if (game.global.world == 150 && game.global.lastClearedCell < 71)
+		return false;
+
 	if (dontMap || game.global.mapsActive)
 		return false;
 
@@ -679,7 +688,7 @@ var shouldFightSomeMap = function() {
 		}
 	}
 
-	if (!game.global.mapsActive && game.global.lastClearedCell > 80 && game.buildings.Smithy.owned == smithiesWanted && game.global.world >= minMeltingZone) {
+	if (!game.global.mapsActive && game.global.lastClearedCell > 88 && game.buildings.Smithy.owned == smithiesWanted && game.global.world >= minMeltingZone) {
 		for (var i = game.global.mapsOwnedArray.length - 1; i > -1; i--) {
 			if (game.global.mapsOwnedArray[i].name == "Melting Point") {
 				var button = document.getElementById(game.global.mapsOwnedArray[i].id);
@@ -690,7 +699,7 @@ var shouldFightSomeMap = function() {
 		}
 	}
 
-	if (!game.global.mapsActive && game.global.world == trimpleOfDoomZone && game.global.lastClearedCell > 80) {
+	if (!game.global.mapsActive && game.global.world == trimpleOfDoomZone && game.global.lastClearedCell > 88) {
 		for (var i = game.global.mapsOwnedArray.length - 1; i > -1; i--) {
 			if (game.global.mapsOwnedArray[i].name == "Atlantrimp") {
 				var button = document.getElementById(game.global.mapsOwnedArray[i].id);
@@ -854,7 +863,7 @@ var repeatMaps = setInterval(function() {
 			}
 		}
 
-		if (game.global.world == trimpleOfDoomZone && game.global.lastClearedCell > 80) {
+		if (game.global.world == trimpleOfDoomZone && game.global.lastClearedCell > 88) {
 			if (!specialZoneRun) {
 				for (var i = game.global.mapsOwnedArray.length - 1; i > -1; i--) {
 					if (game.global.mapsOwnedArray[i].name == "Atlantrimp") {
@@ -868,7 +877,7 @@ var repeatMaps = setInterval(function() {
 			}
 		}
 
-		if (game.buildings.Smithy.owned == smithiesWanted && game.global.lastClearedCell > 80 && game.global.world >= minMeltingZone) {
+		if (game.buildings.Smithy.owned == smithiesWanted && game.global.lastClearedCell > 88 && game.global.world >= minMeltingZone) {
 			for (var i = game.global.mapsOwnedArray.length - 1; i > -1; i--) {
 				if (game.global.mapsOwnedArray[i].name == "Melting Point") {
 					var button = document.getElementById(game.global.mapsOwnedArray[i].id);
@@ -1527,7 +1536,7 @@ var equalityInterval = setInterval(function() {
 var maxEq = "" + game.portal.Equality.radLevel;
 var bestEq = "35";
 var slowEq = "0";
-var hitWithMaxStartingZone = 157;
+var hitWithMaxStartingZone = 158;
 
 if (hitWithMaxGammaBurstInterval) { clearInterval(hitWithMaxGammaBurstInterval); hitWithMaxGammaBurstInterval = null; }
 var hitWithMaxGammaBurstInterval = setInterval(function() { 
@@ -1550,9 +1559,9 @@ if (updateBestEqInterval) { clearInterval(updateBestEqInterval); updateBestEqInt
 var updateBestEqInterval = setInterval(function() { 
 	if (game.global.world < hitWithMaxStartingZone) {
 		bestEq = "40";
-	} else { 
+	} else if (game.global.world < 161){ 
 		bestEq = "43";
-	} 
+	}
 }, 100);
 
 //--

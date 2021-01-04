@@ -5,7 +5,7 @@ game.portal.Equality.disabledStackCount = "25"
 
 var ignorePrismaticPalace = false;
 var dontPortal = true;
-var minMeltingZone = 170;//not before 111
+var minMeltingZone = 190;//not before 111
 var trimpleOfDoomZone = 190;//not before 110
 var smithiesWanted = 16;
 var insanityLevelWanted = 500;
