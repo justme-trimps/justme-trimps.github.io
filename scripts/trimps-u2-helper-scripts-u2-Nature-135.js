@@ -8,8 +8,8 @@ var maxVoidMapZone = 149;
 var switchHeirloomZone = maxVoidMapZone + 1;
 var minMeltingZone = maxVoidMapZone + 1;
 var trimpleOfDoomZone = maxVoidMapZone + 1;
-var smithiesWanted = 26;
-var forcedPortalWorld = 162;
+var smithiesWanted = 27;
+var forcedPortalWorld = 164;
 var lastFarmersZone = 124;
 var tryBattle150 = true;
 
@@ -17,7 +17,7 @@ var plusZeroZones = [20, 24, 79, 96, lastFarmersZone, 128, 134];
 var plusOneZones = [40, 30, 31, 54];
 var plusTwoZones = [59, 69, 79, 89, 99, 109, 119, 129, 139];
 
-var plusThreeZones = [];
+var plusThreeZones = [158, 159];
 var plusFourZones = [];
 var plusFiveZones = [45, 60, 150];
 var plusSixZones = [];
@@ -105,7 +105,6 @@ if (changeAutobuyingNumbersInterval) { clearInterval(changeAutobuyingNumbersInte
 var changeAutobuyingNumbersInterval = setInterval(function() {
 	if (changeAutoBuy && !game.global.mapsActive) {
 		if (game.global.world > 0) { autobuyingEquipmentNumber = 33; autobuyingArmNumber = 31; buyShields = false; }
-		if (game.global.world >= 96) { buyShields = true; }
 		if (game.global.world >= 104) { autobuyingEquipmentNumber = 50; autobuyingArmNumber = 50; }
 		if (game.global.world >= 108) { autobuyingEquipmentNumber = 35; autobuyingArmNumber = 35; }
 		if (game.global.world >= 120) { autobuyingEquipmentNumber = 20; autobuyingArmNumber = 22; }
@@ -122,15 +121,14 @@ var changeAutobuyingNumbersInterval = setInterval(function() {
 		if (game.global.world >= 146) 
 			{ autobuyingEquipmentNumber = 4; autobuyingArmNumber = 4; }
 		if (game.global.world >= 151) 
-			{ autobuyingEquipmentNumber = 12; autobuyingArmNumber = 12; }
-		if (game.global.world >= 152) 
-			{ autobuyingEquipmentNumber = 16; autobuyingArmNumber = 16; }
-		if (game.global.world >= 153) 
 			{ autobuyingEquipmentNumber = 20; autobuyingArmNumber = 20; }
-		if (game.global.world >= 154) 
-			{ autobuyingEquipmentNumber = 25; autobuyingArmNumber = 25; }
-		if (game.global.world >= 155) 
-			{ autobuyingEquipmentNumber = 30; autobuyingArmNumber = 30; }
+		if (game.global.world >= 151) { buyShields = true; }
+		if (game.global.world >= 152) 
+			{ autobuyingEquipmentNumber = 4; autobuyingArmNumber = 4; }
+		if (game.global.world >= 160) 
+			{ autobuyingEquipmentNumber = 10; autobuyingArmNumber = 10; }
+		if (game.global.world >= 161) 
+			{ autobuyingEquipmentNumber = 14; autobuyingArmNumber = 14; }
 	}
 }, 1000 * 1);
 
@@ -613,7 +611,7 @@ var hireAndFireInterval = setInterval(function() {
 	
 	// hire lumberjacks to get smithies on 110
 	if (game.global.world == voidMapZone) {
-		if (game.resources.wood.owned < 0.65 * 5000 * (Math.pow(40, smithiesWanted - 1)) 
+		if (game.resources.wood.owned < 0.75 * 5000 * (Math.pow(40, smithiesWanted - 1)) 
 			&& game.buildings.Smithy.owned < smithiesWanted) {
 			now("wood");
 		} else {
@@ -624,7 +622,7 @@ var hireAndFireInterval = setInterval(function() {
 	
 	// hire lumberjacks to get smithies on maxVoidMapZone
 	if (game.global.world == maxVoidMapZone) {
-		if (game.resources.wood.owned < 0.6 * 5000 * (Math.pow(40, smithiesWanted - 1)) 
+		if (game.resources.wood.owned < 0.75 * 5000 * (Math.pow(40, smithiesWanted - 1)) 
 			&& game.buildings.Smithy.owned <= smithiesWanted) {
 			now("wood");
 		} else {
@@ -799,7 +797,9 @@ var repeatMaps = setInterval(function() {
 			|| game.global.world == 147
 			|| game.global.world == 148
 			|| game.global.world == 149
-			|| game.global.world == 150) {
+			|| game.global.world == 150
+			|| game.global.world == 158
+			|| game.global.world == 159) {
 			mapMode = "p";
 		}
 
@@ -1374,6 +1374,49 @@ var shouldSaveVoidEnd2Save = function(save) {
 optimizeVoidEnd2Interval = setSomeInterval(optimizeVoidEnd2Interval, shouldSaveVoidEnd2Save, shouldLoadVoidEnd2Save, 1000);
 
 //---------------
+//----------------------------------
+
+var optimizeMeltingPointEndInterval;
+
+var shouldLoadMeltingPointEndSave = function(save) {
+	if (game.global.world != minMeltingZone || game.global.mapsActive || save.reset != game.global.totalRadPortals)
+		return false;
+	
+	for (var i = game.global.mapsOwnedArray.length - 1; i > -1; i--) {
+		if (game.global.mapsOwnedArray[i].name == "Melting Point") {
+			var button = document.getElementById(game.global.mapsOwnedArray[i].id);
+			if (button && button.getAttribute("class").indexOf("noRecycleDone") == -1) {
+				return false;
+			}
+		}
+	}
+
+	if (save.metalOwned > 1.05 * game.resources.metal.owned)
+		return true;
+
+	return false;
+};
+
+var shouldSaveMeltingPointEndSave = function(save) {
+	if (game.global.world != minMeltingZone || !game.global.mapsActive || game.global.currentMapId == null)
+		return false;
+	
+	var currentMap = game.global.mapsOwnedArray.filter(function (el) { return el.id == game.global.currentMapId; }) 
+	
+	if (currentMap == null 
+		|| currentMap.length == 0
+		|| currentMap[0].name != "Melting Point")
+		return false;
+		
+	if (save != null && save.reset == game.global.totalRadPortals && save.metalOwned >= game.resources.metal.owned)
+		return false;
+	
+	return true;
+};
+
+optimizeMeltingPointEndInterval = setSomeInterval(optimizeMeltingPointEndInterval, shouldSaveMeltingPointEndSave, shouldLoadMeltingPointEndSave, 1000);
+
+//---------------
 
 var optimizeVoidMapsNumberInterval;
 var optimizeVoidMapsNumberMinZone = 120;
@@ -1557,9 +1600,11 @@ var hitWithMaxGammaBurstInterval = setInterval(function() {
 
 if (updateBestEqInterval) { clearInterval(updateBestEqInterval); updateBestEqInterval = null; }
 var updateBestEqInterval = setInterval(function() { 
-	if (game.global.world < hitWithMaxStartingZone) {
+	if (game.global.world < 161) { 
+		bestEq = "35";
+	} else if (game.global.world < 162) { 
 		bestEq = "40";
-	} else if (game.global.world < 161){ 
+	} else { 
 		bestEq = "43";
 	}
 }, 100);
