@@ -1600,12 +1600,14 @@ var hitWithMaxGammaBurstInterval = setInterval(function() {
 
 if (updateBestEqInterval) { clearInterval(updateBestEqInterval); updateBestEqInterval = null; }
 var updateBestEqInterval = setInterval(function() { 
-	if (game.global.world < 161) { 
+	if (game.global.world < 136) { 
+		bestEq = "30";
+	} else if (game.global.world < 161) { 
 		bestEq = "35";
 	} else if (game.global.world < 162) { 
 		bestEq = "40";
 	} else { 
-		bestEq = "43";
+		bestEq = "47";
 	}
 }, 100);
 

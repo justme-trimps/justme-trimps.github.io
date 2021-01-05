@@ -1173,7 +1173,7 @@ var autoSaveInterval = setInterval(function() {
 	}
 }, 1000 * 60 * 2);
 
-var switchHeirloomZone = 132;
+var switchHeirloomZone = 152;
 var isItTimeForMorePowerfulHeirloom = function() {
 	if (game.global.world >= forcedPortalWorld)
 		return false;
