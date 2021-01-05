@@ -14,13 +14,14 @@ var lastFarmersZone = 124;
 var tryBattle150 = true;
 
 var plusZeroZones = [20, 24, 79, 96, lastFarmersZone, 128, 134];
-var plusOneZones = [40, 30, 31, 54];
+var plusOneZones = [40, 30, 31];
 var plusTwoZones = [59, 69, 79, 89, 99, 109, 119, 129, 139];
 
-var plusThreeZones = [158, 159];
+var plusThreeZones = [158, 159, 160];
 var plusFourZones = [];
-var plusFiveZones = [45, 60, 150];
+var plusFiveZones = [45, 54];
 var plusSixZones = [];
+var plusSevenZones = [60, 150];
 var extraZones = [];
 
 var autobuyingEquipmentNumber = 33;
@@ -125,9 +126,9 @@ var changeAutobuyingNumbersInterval = setInterval(function() {
 		if (game.global.world >= 151) { buyShields = true; }
 		if (game.global.world >= 152) 
 			{ autobuyingEquipmentNumber = 4; autobuyingArmNumber = 4; }
-		if (game.global.world >= 160) 
-			{ autobuyingEquipmentNumber = 10; autobuyingArmNumber = 10; }
 		if (game.global.world >= 161) 
+			{ autobuyingEquipmentNumber = 10; autobuyingArmNumber = 10; }
+		if (game.global.world >= 162) 
 			{ autobuyingEquipmentNumber = 14; autobuyingArmNumber = 14; }
 	}
 }, 1000 * 1);
@@ -715,49 +716,19 @@ var shouldFightSomeMap = function() {
 		) {
 			return true;
 		}
-
-		if (plusZeroZones.indexOf(game.global.world) > -1
-			&& !game.global.mapsActive
-			&& game.global.mapBonus < 1
-		) {
-			return true;
-		}
-
-		if (plusOneZones.indexOf(game.global.world) > -1
-			&& !game.global.mapsActive
-			&& game.global.mapBonus < 1
-		) {
-			return true;
-		}
-
-		if (plusTwoZones.indexOf(game.global.world) > -1
-			&& !game.global.mapsActive
-			&& game.global.mapBonus < 1
-		) {
-			return true;
-		}
-
-		if (plusThreeZones.indexOf(game.global.world) > -1
-			&& !game.global.mapsActive
-			&& game.global.mapBonus < 1
-		) {
-			return true;
-		}
-
-		if (plusFourZones.indexOf(game.global.world) > -1
-			&& !game.global.mapsActive
-			&& game.global.mapBonus < 1
-		) {
-			return true;
-		}
-
-		if (plusFiveZones.indexOf(game.global.world) > -1
-			&& !game.global.mapsActive
-			&& game.global.mapBonus < 1
-		) {
-			return true;
-		}
 	}
+
+	if ((plusZeroZones.indexOf(game.global.world) > -1 ||
+		plusOneZones.indexOf(game.global.world) > -1 ||
+		plusTwoZones.indexOf(game.global.world) > -1 ||
+		plusThreeZones.indexOf(game.global.world) > -1 ||
+		plusFourZones.indexOf(game.global.world) > -1 ||
+		plusFiveZones.indexOf(game.global.world) > -1 || 
+		plusSixZones.indexOf(game.global.world) > -1 || 
+		plusSevenZones.indexOf(game.global.world) > -1) 
+		&& (!game.global.mapsActive && game.global.mapBonus < 1))
+		return true;
+	
 
 	return false;
 }
@@ -799,7 +770,8 @@ var repeatMaps = setInterval(function() {
 			|| game.global.world == 149
 			|| game.global.world == 150
 			|| game.global.world == 158
-			|| game.global.world == 159) {
+			|| game.global.world == 159
+			|| game.global.world == 160) {
 			mapMode = "p";
 		}
 
@@ -809,41 +781,35 @@ var repeatMaps = setInterval(function() {
 		if (game.global.world != 60)
 			recycleBelow(true);
 
-		buyMap();
-
-		if (plusZeroZones.indexOf(game.global.world) > -1) {
-			buyMap();
-		}
-
 		if (plusOneZones.indexOf(game.global.world) > -1) {
 			document.getElementById("advExtraLevelSelect").value = "1";
-			buyMap();
 		}
 
 		if (plusTwoZones.indexOf(game.global.world) > -1) {
 			document.getElementById("advExtraLevelSelect").value = "2";
-			buyMap();
 		}
 
 		if (plusThreeZones.indexOf(game.global.world) > -1) {
 			document.getElementById("advExtraLevelSelect").value = "3";
-			buyMap();
 		}
 
 		if (plusFourZones.indexOf(game.global.world) > -1) {
 			document.getElementById("advExtraLevelSelect").value = "4";
-			buyMap();
 		}
 
 		if (plusFiveZones.indexOf(game.global.world) > -1) {
 			document.getElementById("advExtraLevelSelect").value = "5";
-			buyMap();
 		}
 
 		if (plusSixZones.indexOf(game.global.world) > -1) {
 			document.getElementById("advExtraLevelSelect").value = "6";
-			buyMap();
 		}
+
+		if (plusSevenZones.indexOf(game.global.world) > -1) {
+			document.getElementById("advExtraLevelSelect").value = "7";
+		}
+
+		buyMap();
 
 		var specialZoneRun = false;
 
@@ -1558,7 +1524,11 @@ optimizeLastZoneInterval = setSomeInterval(optimizeLastZoneInterval, shouldSaveL
 
 if (equalityInterval) { clearInterval(equalityInterval); equalityInterval = null; }
 var equalityInterval = setInterval(function() {
-	if (game.global.world >= 145 && game.global.world <= 150) {
+	if (game.global.world == 150) {
+		game.portal.Equality.disabledStackCount = "38";
+		return;
+	}
+	if (game.global.world >= 145 && game.global.world < 150) {
 		game.portal.Equality.disabledStackCount = "30";
 		return;
 	}
