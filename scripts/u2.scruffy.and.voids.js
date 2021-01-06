@@ -27,15 +27,15 @@ var tryBattle100 = false;
 //var plusTwoZones = [79, 83, ,89, 90, 91, 92, 93, 109, 110, 123];
 
 
-var plusZeroZones = [20, 24];
-var plusOneZones = [30, 40, 54, 124, 134];
-var plusTwoZones = [69, 79, 89, 99, 109, 119, 129];
+var plusZeroZones  = [20, 24];
+var plusOneZones   = [30, 40, 54, 124, 134];
+var plusTwoZones   = [69, 79, 89, 99, 109, 119, 129];
 
 var plusThreeZones = [];
-var plusFourZones = [];
-var plusFiveZones = [60];
-var plusSixZones = [];
-var extraZones = [];
+var plusFourZones  = [];
+var plusFiveZones  = [60];
+var plusSixZones   = [];
+var extraZones     = [];
 
 
 var autobuyingEquipmentNumber = 33;
