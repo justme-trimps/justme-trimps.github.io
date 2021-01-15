@@ -9,7 +9,7 @@ var switchHeirloomZone = maxVoidMapZone + 1;
 var minMeltingZone = maxVoidMapZone + 1;
 var trimpleOfDoomZone = maxVoidMapZone + 1;
 var smithiesWanted = 27;
-var forcedPortalWorld = 164;
+var forcedPortalWorld = 165;
 var lastFarmersZone = 124;
 var tryBattle150 = true;
 
@@ -19,7 +19,7 @@ var plusTwoZones = [59, 69, 79, 89, 99, 109, 119, 129, 139];
 
 var plusThreeZones = [158, 159, 160];
 var plusFourZones = [];
-var plusFiveZones = [45, 54];
+var plusFiveZones = [45, 54, 55];
 var plusSixZones = [];
 var plusSevenZones = [60, 150];
 var extraZones = [];
@@ -582,7 +582,7 @@ if (hireAndFireInterval) { clearInterval(hireAndFireInterval); hireAndFireInterv
 var hireAndFireInterval = setInterval(function() {
 	if (!autoHireAndFire) return;
 
-	if (game.global.world >= gatherMetalZone && game.global.world <= tributesPushMap && game.global.world != 30)
+	if (game.global.world >= gatherMetalZone && game.global.world <= tributesPushMap && game.global.world != 30 && game.global.world != 55)
 		setGather("food");
 	
 	// on 124 we want only farmers
@@ -596,7 +596,7 @@ var hireAndFireInterval = setInterval(function() {
 		return;
 	}
 	
-	if (game.global.world == 30) {
+	if (game.global.world == 30 || game.global.world == 55) {
 		now("metal");
 		return;
 	}
@@ -624,7 +624,7 @@ var hireAndFireInterval = setInterval(function() {
 	// hire lumberjacks to get smithies on maxVoidMapZone
 	if (game.global.world == maxVoidMapZone) {
 		if (game.resources.wood.owned < 0.75 * 5000 * (Math.pow(40, smithiesWanted - 1)) 
-			&& game.buildings.Smithy.owned <= smithiesWanted) {
+			&& game.buildings.Smithy.owned < smithiesWanted) {
 			now("wood");
 		} else {
 			now("metal");
@@ -844,13 +844,15 @@ var repeatMaps = setInterval(function() {
 		}
 
 		if (game.buildings.Smithy.owned == smithiesWanted && game.global.lastClearedCell > 88 && game.global.world >= minMeltingZone) {
-			for (var i = game.global.mapsOwnedArray.length - 1; i > -1; i--) {
-				if (game.global.mapsOwnedArray[i].name == "Melting Point") {
-					var button = document.getElementById(game.global.mapsOwnedArray[i].id);
-					if (button && button.getAttribute("class").indexOf("noRecycleDone") == -1) {
-						console.log(getPortalTime() + " " + game.global.world + " zone - Melting Point");
-						button.click();
-						specialZoneRun = true;
+			if (!specialZoneRun) {
+				for (var i = game.global.mapsOwnedArray.length - 1; i > -1; i--) {
+					if (game.global.mapsOwnedArray[i].name == "Melting Point") {
+						var button = document.getElementById(game.global.mapsOwnedArray[i].id);
+						if (button && button.getAttribute("class").indexOf("noRecycleDone") == -1) {
+							console.log(getPortalTime() + " " + game.global.world + " zone - Melting Point");
+							button.click();
+							specialZoneRun = true;
+						}
 					}
 				}
 			}
@@ -1018,7 +1020,7 @@ var forcePortalInterval = setInterval(function() {
 }, 500);
 
 
-var minLogZone = 120;
+var minLogZone = 150;
 if (logFluffyExpInterval) { clearInterval(logFluffyExpInterval); logFluffyExpInterval = null; }
 var logFluffyExpInterval = setInterval(function() {
 	if (game.global.world < minLogZone) {
