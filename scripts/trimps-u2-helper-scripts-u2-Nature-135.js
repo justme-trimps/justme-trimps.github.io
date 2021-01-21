@@ -9,7 +9,7 @@ var switchHeirloomZone = maxVoidMapZone + 1;
 var minMeltingZone = maxVoidMapZone + 1;
 var trimpleOfDoomZone = maxVoidMapZone + 1;
 var smithiesWanted = 27;
-var forcedPortalWorld = 165;
+var forcedPortalWorld = 166;
 var lastFarmersZone = 124;
 var tryBattle150 = true;
 
@@ -17,7 +17,7 @@ var plusZeroZones = [20, 24, 79, 96, lastFarmersZone, 128, 134];
 var plusOneZones = [40, 30, 31];
 var plusTwoZones = [59, 69, 79, 89, 99, 109, 119, 129, 139];
 
-var plusThreeZones = [158, 159, 160];
+var plusThreeZones = [158, 159, 160, 161, 162];
 var plusFourZones = [];
 var plusFiveZones = [45, 54, 55];
 var plusSixZones = [];
@@ -126,9 +126,9 @@ var changeAutobuyingNumbersInterval = setInterval(function() {
 		if (game.global.world >= 151) { buyShields = true; }
 		if (game.global.world >= 152) 
 			{ autobuyingEquipmentNumber = 4; autobuyingArmNumber = 4; }
-		if (game.global.world >= 161) 
+		if (game.global.world >= 163) 
 			{ autobuyingEquipmentNumber = 10; autobuyingArmNumber = 10; }
-		if (game.global.world >= 162) 
+		if (game.global.world >= 164) 
 			{ autobuyingEquipmentNumber = 14; autobuyingArmNumber = 14; }
 	}
 }, 1000 * 1);
@@ -771,7 +771,9 @@ var repeatMaps = setInterval(function() {
 			|| game.global.world == 150
 			|| game.global.world == 158
 			|| game.global.world == 159
-			|| game.global.world == 160) {
+			|| game.global.world == 160
+			|| game.global.world == 161
+			|| game.global.world == 162) {
 			mapMode = "p";
 		}
 
@@ -806,13 +808,19 @@ var repeatMaps = setInterval(function() {
 		}
 
 		if (plusSevenZones.indexOf(game.global.world) > -1) {
-			document.getElementById("advExtraLevelSelect").value = "7";
+			document.getElementById("advExtraLevelSelect").value = "9";
+			if (buyMap() != 1) {
+				document.getElementById("advExtraLevelSelect").value = "8";
+				if (buyMap() != 1) {
+					document.getElementById("advExtraLevelSelect").value = "7";
+					buyMap()
+				}
+			}
+		} else {
+			buyMap();
 		}
 
-		buyMap();
-
 		var specialZoneRun = false;
-
 
 		if (game.global.world == voidMapZone || game.global.world == maxVoidMapZone) {
 			if (!specialZoneRun && (game.global.lastClearedCell > 80)) {
@@ -867,6 +875,12 @@ var repeatMaps = setInterval(function() {
 
 		while (document.getElementById("toggleexitTo").innerHTML.indexOf("World") == -1) {
 			toggleSetting("exitTo")
+		}
+		
+		if (game.global.world == 150) {
+			while (document.getElementById("togglerepeatUntil").innerHTML.indexOf("Any") == -1) {
+				toggleSetting("repeatUntil");
+			}
 		}
 	}
 }, 601);
