@@ -9,7 +9,7 @@ var switchHeirloomZone = maxVoidMapZone + 1;
 var minMeltingZone = maxVoidMapZone + 1;
 var trimpleOfDoomZone = maxVoidMapZone + 1;
 var smithiesWanted = 27;
-var forcedPortalWorld = 166;
+var forcedPortalWorld = 167;
 var lastFarmersZone = 124;
 var tryBattle150 = true;
 
@@ -125,10 +125,12 @@ var changeAutobuyingNumbersInterval = setInterval(function() {
 			{ autobuyingEquipmentNumber = 20; autobuyingArmNumber = 20; }
 		if (game.global.world >= 151) { buyShields = true; }
 		if (game.global.world >= 152) 
-			{ autobuyingEquipmentNumber = 4; autobuyingArmNumber = 4; }
+			{ autobuyingEquipmentNumber = 5; autobuyingArmNumber = 5; }
 		if (game.global.world >= 163) 
-			{ autobuyingEquipmentNumber = 10; autobuyingArmNumber = 10; }
+			{ autobuyingEquipmentNumber = 7; autobuyingArmNumber = 7; }
 		if (game.global.world >= 164) 
+			{ autobuyingEquipmentNumber = 9; autobuyingArmNumber = 9; }
+		if (game.global.world >= 165) 
 			{ autobuyingEquipmentNumber = 14; autobuyingArmNumber = 14; }
 	}
 }, 1000 * 1);
@@ -729,6 +731,8 @@ var shouldFightSomeMap = function() {
 		&& (!game.global.mapsActive && game.global.mapBonus < 1))
 		return true;
 	
+	if (game.global.mapBonus < 9 && game.global.world == 150)
+		return true;
 
 	return false;
 }
@@ -775,6 +779,10 @@ var repeatMaps = setInterval(function() {
 			|| game.global.world == 161
 			|| game.global.world == 162) {
 			mapMode = "p";
+		}
+		
+		if (game.global.world == 150 && game.global.mapBonus > 1) {
+			mapMode = "lmc";
 		}
 
 		document.getElementById("advSpecialSelect").value = mapMode;
@@ -877,7 +885,7 @@ var repeatMaps = setInterval(function() {
 			toggleSetting("exitTo")
 		}
 		
-		if (game.global.world == 150) {
+		if (game.global.world == 150 && game.global.mapBonus > 1) {
 			while (document.getElementById("togglerepeatUntil").innerHTML.indexOf("Any") == -1) {
 				toggleSetting("repeatUntil");
 			}
@@ -1565,7 +1573,7 @@ var equalityInterval = setInterval(function() {
 var maxEq = "" + game.portal.Equality.radLevel;
 var bestEq = "35";
 var slowEq = "0";
-var hitWithMaxStartingZone = 158;
+var hitWithMaxStartingZone = 161;
 
 if (hitWithMaxGammaBurstInterval) { clearInterval(hitWithMaxGammaBurstInterval); hitWithMaxGammaBurstInterval = null; }
 var hitWithMaxGammaBurstInterval = setInterval(function() { 
@@ -1587,13 +1595,13 @@ var hitWithMaxGammaBurstInterval = setInterval(function() {
 if (updateBestEqInterval) { clearInterval(updateBestEqInterval); updateBestEqInterval = null; }
 var updateBestEqInterval = setInterval(function() { 
 	if (game.global.world < 136) { 
-		bestEq = "30";
+		bestEq = "28";
 	} else if (game.global.world < 161) { 
-		bestEq = "35";
+		bestEq = "30";
 	} else if (game.global.world < 162) { 
-		bestEq = "40";
+		bestEq = "30";
 	} else { 
-		bestEq = "47";
+		bestEq = "35";
 	}
 }, 100);
 
