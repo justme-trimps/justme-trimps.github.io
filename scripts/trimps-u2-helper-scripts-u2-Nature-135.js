@@ -9,7 +9,7 @@ var switchHeirloomZone = maxVoidMapZone + 1;
 var minMeltingZone = maxVoidMapZone + 1;
 var trimpleOfDoomZone = maxVoidMapZone + 1;
 var smithiesWanted = 27;
-var forcedPortalWorld = 167;
+var forcedPortalWorld = 168;
 var lastFarmersZone = 124;
 var tryBattle150 = true;
 
@@ -77,7 +77,7 @@ var jestimpInterval = setInterval(function() {
 
 	var tmpTarget = game.global.playerGathering;
 
-	if (game.global.world == maxVoidMapZone || game.global.world == voidMapZone || game.global.world > 145) {
+	if (game.global.world == maxVoidMapZone || game.global.world > 145) {
 		if (isJestimp()) {
 			saveString = save(true);
 			jestimpMode = game.global.lastClearedMapCell + 1;
@@ -1031,6 +1031,7 @@ var forcePortalInterval = setInterval(function() {
 				window.localStorage.removeItem(localStorageKeys[i]);
 			}
 			pressFight();
+			perksSet = false;
 			
 			if (!game.global.autoJobsSettingU2.enabled)
 				toggleAutoJobs();
@@ -1600,8 +1601,10 @@ var updateBestEqInterval = setInterval(function() {
 		bestEq = "30";
 	} else if (game.global.world < 162) { 
 		bestEq = "30";
+	} else if (game.global.world < 167) { 
+		bestEq = "34";
 	} else { 
-		bestEq = "35";
+		bestEq = "38";
 	}
 }, 100);
 
@@ -1655,4 +1658,35 @@ importSaveFromLocalStorage = function() {
 	load(window.localStorage.getItem("trimps-save"));
 }
 
+var perksSet = false;
+var autoPerk = true;
+
+var upgradePerk = function() {
+	var buttonId = "Carpentry";
+	
+	var clicked = false;
+	
+	var button = document.getElementById(buttonId);
+	if (button && button.getAttribute("class").indexOf("perkColorOn") > -1) {
+		button.click();
+		clicked = true;
+	} 
+	
+	if (clicked && document.getElementById("activatePortalBtn").offsetParent != null) {
+		activateClicked();
+	} else {
+		cancelTooltip(); cancelPortal()
+	}
+}
+
+var startPerkUpgrades = function() {
+	if (!perksSet && autoPerk && game.global.world > 10) {
+		perksSet = true;
+		viewPortalUpgrades();
+		setTimeout(upgradePerk, 300);
+	}
+}
+
+if (startPerkUpgradesInterval) { clearInterval(startPerkUpgradesInterval); startPerkUpgradesInterval = null; }
+var startPerkUpgradesInterval = setInterval(startPerkUpgrades, 15*1000);
 
