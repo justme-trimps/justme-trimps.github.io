@@ -14,10 +14,10 @@ var lastFarmersZone = 124;
 var tryBattle150 = true;
 
 var plusZeroZones = [20, 24, 79, 96, lastFarmersZone, 128, 134];
-var plusOneZones = [40, 30, 31];
+var plusOneZones = [40, 30, 31, 160, 161, 162, 163, 164];
 var plusTwoZones = [59, 69, 79, 89, 99, 109, 119, 129, 139];
 
-var plusThreeZones = [158, 159, 160, 161, 162];
+var plusThreeZones = [];
 var plusFourZones = [];
 var plusFiveZones = [45, 54, 55];
 var plusSixZones = [];
@@ -126,11 +126,11 @@ var changeAutobuyingNumbersInterval = setInterval(function() {
 		if (game.global.world >= 151) { buyShields = true; }
 		if (game.global.world >= 152) 
 			{ autobuyingEquipmentNumber = 5; autobuyingArmNumber = 5; }
-		if (game.global.world >= 163) 
-			{ autobuyingEquipmentNumber = 7; autobuyingArmNumber = 7; }
-		if (game.global.world >= 164) 
-			{ autobuyingEquipmentNumber = 9; autobuyingArmNumber = 9; }
 		if (game.global.world >= 165) 
+			{ autobuyingEquipmentNumber = 7; autobuyingArmNumber = 7; }
+		if (game.global.world >= 166) 
+			{ autobuyingEquipmentNumber = 9; autobuyingArmNumber = 9; }
+		if (game.global.world >= 167) 
 			{ autobuyingEquipmentNumber = 14; autobuyingArmNumber = 14; }
 	}
 }, 1000 * 1);
@@ -773,11 +773,8 @@ var repeatMaps = setInterval(function() {
 			|| game.global.world == 148
 			|| game.global.world == 149
 			|| game.global.world == 150
-			|| game.global.world == 158
-			|| game.global.world == 159
-			|| game.global.world == 160
-			|| game.global.world == 161
-			|| game.global.world == 162) {
+			|| game.global.world >= 158
+			|| game.global.world <= 165) {
 			mapMode = "p";
 		}
 		
@@ -1574,7 +1571,7 @@ var equalityInterval = setInterval(function() {
 var maxEq = "" + game.portal.Equality.radLevel;
 var bestEq = "35";
 var slowEq = "0";
-var hitWithMaxStartingZone = 161;
+var hitWithMaxStartingZone = 165;
 
 if (hitWithMaxGammaBurstInterval) { clearInterval(hitWithMaxGammaBurstInterval); hitWithMaxGammaBurstInterval = null; }
 var hitWithMaxGammaBurstInterval = setInterval(function() { 
