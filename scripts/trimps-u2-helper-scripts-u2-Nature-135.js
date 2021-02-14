@@ -1575,7 +1575,7 @@ var hitWithMaxStartingZone = 165;
 
 if (hitWithMaxGammaBurstInterval) { clearInterval(hitWithMaxGammaBurstInterval); hitWithMaxGammaBurstInterval = null; }
 var hitWithMaxGammaBurstInterval = setInterval(function() { 
-	if (game.global.world >= hitWithMaxStartingZone) {
+	if (game.global.world > hitWithMaxStartingZone || (game.global.world == hitWithMaxStartingZone && game.global.lastClearedCell > 60)) {
 		if (game.global.fighting && game.heirlooms.Shield.gammaBurst.stacks >= 4) {
 			var badGuyName = document.getElementById('badGuyName');
 			if (badGuyName && badGuyName.getElementsByClassName('glyphicon-forward').length) {
