@@ -21,7 +21,7 @@ var switchHeirloomInterval = setInterval(function() {
 }, 300);
 
 var maxEq = "" + game.portal.Equality.radLevel;
-var bestEq = "120";
+var bestEq = "89";
 var slowEq = "0";
 var hitWithMaxDisabled = false;
 
@@ -76,7 +76,8 @@ var parseCookieValue = function(cookieName) {
 			mayhemStacks:	parseInt(cookieValue.split("###")[9]),
 			mapCell:		parseInt(cookieValue.split("###")[10]),
 			mapName:		cookieValue.split("###")[11],
-			mapEnemyHealth:	parseFloat(cookieValue.split("###")[12])
+			mapEnemyHealth:	parseFloat(cookieValue.split("###")[12]),
+			mapBonus:	parseInt(cookieValue.split("###")[13])
 		};
 		
 	return null;
@@ -105,7 +106,8 @@ var serializeCookieValue = function() {
 		"###" + game.challenges.Mayhem.stacks + 
 		"###" + game.global.lastClearedMapCell + 
 		"###" + mapName +
-		"###" + mapEnemyHealth;
+		"###" + mapEnemyHealth +
+		"###" + game.global.mapBonus;
 }
 
 var setSomeInterval = function(intervalVar, shouldSaveFunction, shouldLoadFunction, intervalTime) {
@@ -143,35 +145,42 @@ var setSomeInterval = function(intervalVar, shouldSaveFunction, shouldLoadFuncti
 //----------------------------------
 
 
-var fightWorld2Interval;
+var fight10MapsInterval;
 
-var shouldLoadfightWorld2Save = function(save) {
-	if (game.global.mapsActive || !game.global.fighting)
+var shouldLoadfight10MapsSave = function(save) {
+	if (!game.global.mapsActive || !game.global.fighting)
 		return false;
 	
 	if (save.frenzyLeft <= game.portal.Frenzy.frenzyLeft())
 		return false;
 	
-	if (save.cell < (game.global.world * 100 + game.global.lastClearedCell))
+	if (save.mapBonus < game.global.mapBonus)
 		return false;
 	
-	if (save.cell == (game.global.world * 100 + game.global.lastClearedCell) && save.enemyHealth > 0.95 * game.global.gridArray[game.global.lastClearedCell + 1].health)
+	if (save.mapBonus > game.global.mapBonus)
+		return true;
+
+	if (save.mapCell < game.global.lastClearedMapCell)
+		return false;
+	
+	
+	if (save.mapCell == game.global.lastClearedMapCell && save.mapEnemyHealth > 0.98 * game.global.mapGridArray[game.global.lastClearedMapCell + 1].health)
 		return false;
 	
 	return true;
 };
 
-var shouldSavefightWorld2Save = function(save) {
-	if (game.global.mapsActive || !game.global.fighting)
+var shouldSavefight10MapsSave = function(save) {
+	if (!game.global.mapsActive || !game.global.fighting)
 		return false;
 
-	if (save == null || save.cell < (game.global.world * 100 + game.global.lastClearedCell) || save.enemyHealth > 1.05 * game.global.gridArray[game.global.lastClearedCell + 1].health)
+	if (save == null || save.mapCell < game.global.lastClearedMapCell || save.mapEnemyHealth > 1.02 * game.global.mapGridArray[game.global.lastClearedMapCell + 1].health || save.mapBonus < game.global.mapBonus)
 		return true;
 
 	return false;
 };
 
-fightWorld2Interval = setSomeInterval(fightWorld2Interval, shouldSavefightWorld2Save, shouldLoadfightWorld2Save, 1000);
+fight10MapsInterval = setSomeInterval(fight10MapsInterval, shouldSavefight10MapsSave, shouldLoadfight10MapsSave, 1000);
 
 //----------------------------------
 

@@ -29,7 +29,7 @@ var parseCookieValue = function(cookieName) {
 			voidMaps: 		parseInt(cookieValue.split("###")[5]),
 			metalOwned: 	parseFloat(cookieValue.split("###")[6]),
 			frenzyLeft: 	parseInt(cookieValue.split("###")[7]),
-			improHealth:	parseFloat(cookieValue.split("###")[8]),
+			enemyHealth:	parseFloat(cookieValue.split("###")[8]),
 			mayhemStacks:	parseInt(cookieValue.split("###")[9]),
 			mapCell:		parseInt(cookieValue.split("###")[10]),
 			mapName:		cookieValue.split("###")[11],
@@ -58,7 +58,7 @@ var serializeCookieValue = function() {
 		"###" + game.global.totalVoidMaps + 
 		"###" + game.resources.metal.owned +
 		"###" + game.portal.Frenzy.frenzyLeft() +
-		"###" + game.global.gridArray[99].health + 
+		"###" + game.global.gridArray[game.global.lastClearedCell + 1].health + 
 		"###" + game.challenges.Mayhem.stacks + 
 		"###" + game.global.lastClearedMapCell + 
 		"###" + mapName +
@@ -111,7 +111,7 @@ var shouldLoadFightImproSave = function(save) {
 	if (game.portal.Frenzy.frenzyLeft() > 0)
 		return false;
 
-	if (game.global.gridArray[99].health > save.improHealth)
+	if (game.global.gridArray[99].health > save.enemyHealth)
 		return true;
 
 	return false;
@@ -126,7 +126,7 @@ var shouldSaveFightImproSave = function(save) {
 	if (game.portal.Frenzy.frenzyLeft() <= 0)
 		return false;
 
-	if (game.global.gridArray[99].health >= save.improHealth)
+	if (game.global.gridArray[99].health >= save.enemyHealth)
 		return false;
 
 	return true;
