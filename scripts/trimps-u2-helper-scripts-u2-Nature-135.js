@@ -4,7 +4,6 @@ if (!game.global.autoJobsSettingU2.enabled)
 	toggleAutoJobs();
 
 var dontPortal = false;
-var maxVoidMapZone = 149;
 var lastVoidMapZone = 162;
 var minMeltingZone = 164;
 var trimpleOfDoomZone = 164;
@@ -78,7 +77,7 @@ var jestimpInterval = setInterval(function() {
 
 	var tmpTarget = game.global.playerGathering;
 
-	if (game.global.world == maxVoidMapZone || game.global.world > 145) {
+	if (game.global.world > 145) {
 		if (isJestimp()) {
 			saveString = save(true);
 			jestimpMode = game.global.lastClearedMapCell + 1;
@@ -679,7 +678,7 @@ var shouldFightSomeMap = function() {
 		&& (game.global.challengeActive + "") === "")
 		return false;
 
-	if (!game.global.mapsActive && voidMapZone != -1 && (game.global.world == voidMapZone || game.global.world == maxVoidMapZone || game.global.world == lastVoidMapZone) && game.global.lastClearedCell > 80) {
+	if (!game.global.mapsActive && voidMapZone != -1 && (game.global.world == voidMapZone || game.global.world == lastVoidMapZone) && game.global.lastClearedCell > 80) {
 		for (var i = game.global.mapsOwnedArray.length - 1; i > -1; i--) {
 			if (game.global.mapsOwnedArray[i].location == "Void") {
 				if (game.global.world == voidMapZone) {
@@ -828,7 +827,7 @@ var repeatMaps = setInterval(function() {
 
 		var specialZoneRun = false;
 
-		if (game.global.world == voidMapZone || game.global.world == maxVoidMapZone || game.global.world == lastVoidMapZone) {
+		if (game.global.world == voidMapZone || game.global.world == lastVoidMapZone) {
 			if (!specialZoneRun && (game.global.lastClearedCell > 80)) {
 				for (var i = game.global.mapsOwnedArray.length - 1; i > -1; i--) {
 					if (game.global.mapsOwnedArray[i].location == "Void") {
@@ -1166,7 +1165,7 @@ var switchHeirloomInterval = setInterval(function() {
 		if (heirloom.name == "Map Old" 
 				&& game.global.mapsActive
 				&& game.global.world >= 109
-				&& ((game.global.world != voidMapZone && game.global.world != maxVoidMapZone && game.global.world != lastVoidMapZone) || game.global.playerGathering != "metal")) {
+				&& ((game.global.world != voidMapZone && game.global.world != lastVoidMapZone) || game.global.playerGathering != "metal")) {
 			selectHeirloom(i, "heirloomsCarried", true);
 			equipHeirloom();
 			break;
@@ -1174,7 +1173,7 @@ var switchHeirloomInterval = setInterval(function() {
 		
 		if (heirloom.name == "Metal"
 			&& game.global.mapsActive
-			&& (game.global.world == voidMapZone || game.global.world == maxVoidMapZone || game.global.world == lastVoidMapZone)
+			&& (game.global.world == voidMapZone || game.global.world == lastVoidMapZone)
 			&& game.global.playerGathering == "metal") {
 			selectHeirloom(i, "heirloomsCarried", true);
 			equipHeirloom();
@@ -1325,44 +1324,6 @@ optimizeVoidEndInterval = setSomeInterval(optimizeVoidEndInterval, shouldSaveVoi
 
 //---------------
 //----------------------------------
-
-var optimizeVoidEnd2Interval;
-
-var shouldLoadVoidEnd2Save = function(save) {
-	if (game.global.world != maxVoidMapZone || game.global.lastClearedCell <= 80 || game.global.mapsActive || save.reset != game.global.totalRadPortals)
-		return false;
-	
-	var voidMaps = game.global.mapsOwnedArray.filter(function (el) { return el.location == "Void"; }); 
-	
-	if (voidMaps != null && voidMaps.length > 0)
-		return false;
-
-	if (save.metalOwned > 1.05 * game.resources.metal.owned)
-		return true;
-
-	return false;
-};
-
-var shouldSaveVoidEnd2Save = function(save) {
-	if (game.global.world != maxVoidMapZone || !game.global.mapsActive || game.global.currentMapId == null)
-		return false;
-	
-	var currentMap = game.global.mapsOwnedArray.filter(function (el) { return el.id == game.global.currentMapId; }) 
-	
-	if (currentMap == null 
-		|| currentMap.length == 0
-		|| currentMap[0].location != "Void")
-		return false;
-		
-	if (save != null && save.reset == game.global.totalRadPortals && save.metalOwned >= game.resources.metal.owned)
-		return false;
-	
-	return true;
-};
-
-optimizeVoidEnd2Interval = setSomeInterval(optimizeVoidEnd2Interval, shouldSaveVoidEnd2Save, shouldLoadVoidEnd2Save, 1000);
-
-//---------------
 
 var optimizeVoidEnd3Interval;
 
@@ -1519,7 +1480,7 @@ var shouldLoadLastZoneSave = function(save) {
 	var mySeconds = Math.round(((new Date() * 1) - game.global.portalTime) / 1000);
 	var myCell = (game.global.world * 100 + game.global.lastClearedCell);
 
-	if (save.cell < (maxVoidMapZone + 1) * 100 || save.cell < (minMeltingZone + 1) * 100)
+	if (save.cell < 150 * 100 || save.cell < (minMeltingZone + 1) * 100)
 		return false;
 
 	if (isTimeToFarmForSmithy())
@@ -1564,7 +1525,7 @@ var shouldSaveLastZoneSave = function(save) {
 //	if (game.global.lastClearedCell < 10)
 //		return false;
 
-	if (game.global.world <= maxVoidMapZone + 1 || game.global.world <= minMeltingZone + 1 || isTimeToFarmForSmithy())
+	if (game.global.world <= minMeltingZone + 1 || isTimeToFarmForSmithy())
 		return false;
 
 	if (myPortal > save.reset) {
