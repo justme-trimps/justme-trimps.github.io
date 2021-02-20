@@ -580,7 +580,10 @@ function now(what) {
 }
 
 var isTimeToFarmForSmithy = function() {
-	return game.global.world >= 160 && game.global.world <= 164;
+	return game.global.world == 160 
+	 || game.global.world == 161
+	 || game.global.world == 162
+	 || game.global.world == 164;
 }
 
 var shouldFarmWoodForSmithy = function() {
