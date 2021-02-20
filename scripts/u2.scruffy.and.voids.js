@@ -574,23 +574,27 @@ setTimeout(function() {
 
 
 	var buyEquipment = function(arbalestNumber, onlyWhenOne) {
-		checkAndBuy("Arbalest", "ArbalestOwned", arbalestNumber, onlyWhenOne);
-		checkAndBuy("Arbalest", "ArbalestOwned", arbalestNumber, onlyWhenOne);
-		checkAndBuy("Greatsword", "GreatswordOwned", arbalestNumber - 2, onlyWhenOne);
-		checkAndBuy("Battleaxe", "BattleaxeOwned", arbalestNumber - 1, onlyWhenOne);
-		checkAndBuy("Polearm", "PolearmOwned", arbalestNumber - 1, onlyWhenOne);
-		checkAndBuy("Mace", "MaceOwned", arbalestNumber, onlyWhenOne);
-		checkAndBuy("Dagger", "DaggerOwned", arbalestNumber + 2, onlyWhenOne);
+		if (arbalestNumber > -1) {
+			checkAndBuy("Arbalest", "ArbalestOwned", arbalestNumber, onlyWhenOne);
+			checkAndBuy("Arbalest", "ArbalestOwned", arbalestNumber, onlyWhenOne);
+			checkAndBuy("Greatsword", "GreatswordOwned", arbalestNumber - 2, onlyWhenOne);
+			checkAndBuy("Battleaxe", "BattleaxeOwned", arbalestNumber - 1, onlyWhenOne);
+			checkAndBuy("Polearm", "PolearmOwned", arbalestNumber - 1, onlyWhenOne);
+			checkAndBuy("Mace", "MaceOwned", arbalestNumber, onlyWhenOne);
+			checkAndBuy("Dagger", "DaggerOwned", arbalestNumber + 2, onlyWhenOne);
+		}
 	}
 
 	var buyArm = function(gambesonNumber, onlyWhenOne) {
-		checkAndBuy("Gambeson", "GambesonOwned", gambesonNumber, onlyWhenOne);
-		checkAndBuy("Gambeson", "GambesonOwned", gambesonNumber, onlyWhenOne);
-		checkAndBuy("Breastplate", "BreastplateOwned", gambesonNumber - 2, onlyWhenOne);
-		checkAndBuy("Shoulderguards", "ShoulderguardsOwned", gambesonNumber - 2, onlyWhenOne);
-		checkAndBuy("Pants", "PantsOwned", gambesonNumber - 2, onlyWhenOne);
-		checkAndBuy("Helmet", "HelmetOwned", gambesonNumber - 1, onlyWhenOne);
-		checkAndBuy("Boots", "BootsOwned", gambesonNumber - 1, onlyWhenOne);
+		if (gambesonNumber > -1) {
+			checkAndBuy("Gambeson", "GambesonOwned", gambesonNumber, onlyWhenOne);
+			checkAndBuy("Gambeson", "GambesonOwned", gambesonNumber, onlyWhenOne);
+			checkAndBuy("Breastplate", "BreastplateOwned", gambesonNumber - 2, onlyWhenOne);
+			checkAndBuy("Shoulderguards", "ShoulderguardsOwned", gambesonNumber - 2, onlyWhenOne);
+			checkAndBuy("Pants", "PantsOwned", gambesonNumber - 2, onlyWhenOne);
+			checkAndBuy("Helmet", "HelmetOwned", gambesonNumber - 1, onlyWhenOne);
+			checkAndBuy("Boots", "BootsOwned", gambesonNumber - 1, onlyWhenOne);
+		}
 	}
 
 
