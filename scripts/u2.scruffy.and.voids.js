@@ -574,7 +574,7 @@ setTimeout(function() {
 
 
 	var buyEquipment = function(arbalestNumber, onlyWhenOne) {
-		if (arbalestNumber > -1) {
+		if (arbalestNumber > 0) {
 			checkAndBuy("Arbalest", "ArbalestOwned", arbalestNumber, onlyWhenOne);
 			checkAndBuy("Arbalest", "ArbalestOwned", arbalestNumber, onlyWhenOne);
 			checkAndBuy("Greatsword", "GreatswordOwned", arbalestNumber - 2, onlyWhenOne);
@@ -586,7 +586,7 @@ setTimeout(function() {
 	}
 
 	var buyArm = function(gambesonNumber, onlyWhenOne) {
-		if (gambesonNumber > -1) {
+		if (gambesonNumber > 0) {
 			checkAndBuy("Gambeson", "GambesonOwned", gambesonNumber, onlyWhenOne);
 			checkAndBuy("Gambeson", "GambesonOwned", gambesonNumber, onlyWhenOne);
 			checkAndBuy("Breastplate", "BreastplateOwned", gambesonNumber - 2, onlyWhenOne);
