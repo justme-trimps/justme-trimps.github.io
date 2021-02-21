@@ -93,7 +93,7 @@ if (typeof fluffyStart === "undefined")
 if (jestimpInterval) { clearInterval(jestimpInterval); jestimpInterval = null; }
 var jestimpInterval = setInterval(function() {
 	var tmpTarget = jestimpTarget;
-	if (tmpTarget != "science")
+	if (tmpTarget != "science" && tmpTarget != "gems")
 		tmpTarget = game.global.playerGathering;
 
 	if (document.getElementById("worldName") && document.getElementById("worldName").innerText == "Prismatic Palace")
