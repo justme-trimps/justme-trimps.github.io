@@ -661,6 +661,110 @@ var getStackCount = function(stackType) {
 	return 0;
 }
 
+var chooseMapMode = function() {
+	var mapMode = "lmc";
+	
+	if (game.global.playerGathering == "food")
+		mapMode = "lsc";
+	
+	if (game.global.playerGathering == "wood")
+		mapMode = "lwc";
+	
+	if (game.global.playerGathering == "metal")
+		mapMode = "lmc";
+	
+	if (game.global.world == 109 
+		|| game.global.world == 110 
+		|| game.global.world == 113 
+		|| game.global.world == 123
+		|| game.global.world == 129
+		|| game.global.world == 130
+		|| game.global.world == 131
+		|| game.global.world == 132
+		|| game.global.world == 133
+		|| game.global.world == 138
+		|| game.global.world == 139
+		|| game.global.world == 146
+		|| game.global.world == 147
+		|| game.global.world == 148
+		|| game.global.world == 149
+		|| game.global.world == 150
+		|| game.global.world >= 158
+		|| game.global.world <= 165) {
+		mapMode = "p";
+	}
+	
+	if (game.global.world == 150 && game.global.mapBonus > 1) {
+		mapMode = "lmc";
+	}
+
+	return mapMode;
+}
+
+var chooseExtraLevelAndBuyMap = function() {
+	if (plusOneZones.indexOf(game.global.world) > -1) {
+		document.getElementById("advExtraLevelSelect").value = "1";
+	}
+
+	if (plusTwoZones.indexOf(game.global.world) > -1) {
+		document.getElementById("advExtraLevelSelect").value = "2";
+	}
+
+	if (plusThreeZones.indexOf(game.global.world) > -1) {
+		document.getElementById("advExtraLevelSelect").value = "3";
+	}
+
+	if (plusFourZones.indexOf(game.global.world) > -1) {
+		document.getElementById("advExtraLevelSelect").value = "4";
+	}
+
+	if (plusFiveZones.indexOf(game.global.world) > -1) {
+		document.getElementById("advExtraLevelSelect").value = "5";
+	}
+
+	if (plusSixZones.indexOf(game.global.world) > -1) {
+		document.getElementById("advExtraLevelSelect").value = "6";
+	}
+
+	if (plusSevenZones.indexOf(game.global.world) > -1) {
+		document.getElementById("advExtraLevelSelect").value = "9";
+		if (buyMap() != 1) {
+			document.getElementById("advExtraLevelSelect").value = "8";
+			if (buyMap() != 1) {
+				document.getElementById("advExtraLevelSelect").value = "7";
+				buyMap()
+			}
+		}
+	} else {
+		buyMap();
+	}
+}
+
+var shouldRunVoidMap = function(specialZoneRun, autoStart) {
+	if (specialZoneRun 
+		|| game.global.mapsActive 
+		|| game.global.world < 10
+		|| (game.global.world != voidMapZone && game.global.world != lastVoidMapZone)
+		|| game.global.lastClearedCell <= 80)
+		return false;
+	
+	for (var i = game.global.mapsOwnedArray.length - 1; i > -1; i--) {
+		if (game.global.mapsOwnedArray[i].location == "Void") {
+			if (autoStart) {
+				toggleVoidMaps();
+				var button = document.getElementById(game.global.mapsOwnedArray[i].id);
+				if (button) {
+					button.click();
+				}
+			}
+			
+			return true;
+		}
+	}
+	
+	return false;
+}
+
 var shouldFightSomeMap = function() {
 	if (game.global.world < 9)
 		return false;
@@ -678,16 +782,8 @@ var shouldFightSomeMap = function() {
 		&& (game.global.challengeActive + "") === "")
 		return false;
 
-	if (!game.global.mapsActive && voidMapZone != -1 && (game.global.world == voidMapZone || game.global.world == lastVoidMapZone) && game.global.lastClearedCell > 80) {
-		for (var i = game.global.mapsOwnedArray.length - 1; i > -1; i--) {
-			if (game.global.mapsOwnedArray[i].location == "Void") {
-				if (game.global.world == voidMapZone) {
-					console.log(getPortalTime() + " time for void maps ");
-				}
-				return true;
-			}
-		}
-	}
+	if (shouldRunVoidMap(false, false))
+		return true;
 
 	if (!game.global.mapsActive && game.global.lastClearedCell > 88 && game.buildings.Smithy.owned == smithiesWanted && game.global.world >= minMeltingZone) {
 		for (var i = game.global.mapsOwnedArray.length - 1; i > -1; i--) {
@@ -737,7 +833,6 @@ var shouldFightSomeMap = function() {
 	return false;
 }
 
-
 if (repeatMaps) { clearInterval(repeatMaps); repeatMaps = null; }
 var repeatMaps = setInterval(function() {
 	if (shouldFightSomeMap()) {
@@ -748,99 +843,15 @@ var repeatMaps = setInterval(function() {
 
 		cancelTooltip();
 
-		if (game.global.playerGathering == "food")
-			mapMode = "lsc";
-		
-		if (game.global.playerGathering == "wood")
-			mapMode = "lwc";
-		
-		if (game.global.playerGathering == "metal")
-			mapMode = "lmc";
-		
-		if (game.global.world == 109 
-			|| game.global.world == 110 
-			|| game.global.world == 113 
-			|| game.global.world == 123
-			|| game.global.world == 129
-			|| game.global.world == 130
-			|| game.global.world == 131
-			|| game.global.world == 132
-			|| game.global.world == 133
-			|| game.global.world == 138
-			|| game.global.world == 139
-			|| game.global.world == 146
-			|| game.global.world == 147
-			|| game.global.world == 148
-			|| game.global.world == 149
-			|| game.global.world == 150
-			|| game.global.world >= 158
-			|| game.global.world <= 165) {
-			mapMode = "p";
-		}
-		
-		if (game.global.world == 150 && game.global.mapBonus > 1) {
-			mapMode = "lmc";
-		}
-
-		document.getElementById("advSpecialSelect").value = mapMode;
-
+		document.getElementById("advSpecialSelect").value = chooseMapMode();
 
 		if (game.global.world != 60)
 			recycleBelow(true);
 
-		if (plusOneZones.indexOf(game.global.world) > -1) {
-			document.getElementById("advExtraLevelSelect").value = "1";
-		}
-
-		if (plusTwoZones.indexOf(game.global.world) > -1) {
-			document.getElementById("advExtraLevelSelect").value = "2";
-		}
-
-		if (plusThreeZones.indexOf(game.global.world) > -1) {
-			document.getElementById("advExtraLevelSelect").value = "3";
-		}
-
-		if (plusFourZones.indexOf(game.global.world) > -1) {
-			document.getElementById("advExtraLevelSelect").value = "4";
-		}
-
-		if (plusFiveZones.indexOf(game.global.world) > -1) {
-			document.getElementById("advExtraLevelSelect").value = "5";
-		}
-
-		if (plusSixZones.indexOf(game.global.world) > -1) {
-			document.getElementById("advExtraLevelSelect").value = "6";
-		}
-
-		if (plusSevenZones.indexOf(game.global.world) > -1) {
-			document.getElementById("advExtraLevelSelect").value = "9";
-			if (buyMap() != 1) {
-				document.getElementById("advExtraLevelSelect").value = "8";
-				if (buyMap() != 1) {
-					document.getElementById("advExtraLevelSelect").value = "7";
-					buyMap()
-				}
-			}
-		} else {
-			buyMap();
-		}
-
 		var specialZoneRun = false;
-
-		if (game.global.world == voidMapZone || game.global.world == lastVoidMapZone) {
-			if (!specialZoneRun && (game.global.lastClearedCell > 80)) {
-				for (var i = game.global.mapsOwnedArray.length - 1; i > -1; i--) {
-					if (game.global.mapsOwnedArray[i].location == "Void") {
-						toggleVoidMaps();
-						var button = document.getElementById(game.global.mapsOwnedArray[i].id);
-						if (button) {
-							button.click();
-							specialZoneRun = true;
-						}
-					}
-				}
-			}
-		}
+		
+		if (shouldRunVoidMap(specialZoneRun, true))
+			specialZoneRun = true;
 
 		if (game.global.world == trimpleOfDoomZone && game.global.lastClearedCell > 88) {
 			if (!specialZoneRun) {
@@ -870,6 +881,9 @@ var repeatMaps = setInterval(function() {
 				}
 			}
 		}
+		
+		if (!specialZoneRun)
+			chooseExtraLevelAndBuyMap();
 
 		runMap();
 		fightManual();
