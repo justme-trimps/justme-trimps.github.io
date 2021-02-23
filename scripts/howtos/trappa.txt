@@ -19,3 +19,16 @@ on 128 got 190M Coord
 128 3h03m : maxEq = "117"; bestEq = "94"; Impro  maxEq = "117"; bestEq = "105"
 on 128 got 238M Coord
 129 3h38m : maxEq = "117"; bestEq = "94"; 
+
+trappa 2021.02.23
+buy bait
+use trappa.js!
+on zone 60 farm a lot
+on zone 75 stop coord (at 39.9M)
+disable switch staffs
+
+on z129: hit With Max Disabled = false; bestEq = "30"; slowEq = "0"
+on Z128 stop trapping in world - gathe metal and wood and make sure you don't die
+
+
+
