@@ -345,7 +345,7 @@ var buyThing = function(id) {
 
 	var button = document.getElementById(id);
 	if (button && button.getAttribute("class").indexOf("thingColorCanAfford") > -1) {
-		if (isAllowedBuying()) {
+		if (isAllowedBuying() || id == "Worshipper") {
 			button.click();
 		}
 	}
