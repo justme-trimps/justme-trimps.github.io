@@ -30,5 +30,11 @@ disable switch staffs
 on z129: hit With Max Disabled = false; bestEq = "30"; slowEq = "0"
 on Z128 stop trapping in world - gathe metal and wood and make sure you don't die
 
+on Z136 farm a LOT! 11 Gambes, 172 Res and 122 Eq to beat Z149
 
+atlantrimp
+smithy
+melting point
+one extra coord while fighting
+trapping
 
