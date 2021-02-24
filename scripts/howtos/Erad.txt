@@ -27,6 +27,29 @@ overnight - afk
 00d18h15m Z141 in the morning
 
 
+
+Erad 156 from Quia (use poison)
+2.9Dc He   15B total Nu   402k cinf   653 poison   Mayhem 25   Scruffy 14
+23 days 17 hours
+
+20 days total to clear all BWs up to BW185, from z121
+2 days for z150 (last ice zone)
+100 hour breed timer with a breed speed shield(3790%) with 450 nurseries
+
+Overtaking my 2 week long oblit 391 run as my longest run ever. Maxing herbalism to a reasonable value, and farming metal for gear levels before undertaking BW185 is well worth it. Farming metal between clears for the daggers on BW185 cut off maybe a day, overall. Not killing the robotrimp on those two maps probably saved more time.
+
+Erad 171 estimates
+450 days for first clear of BW215 at current stats
+1.15x possible from c3's this patch
+1.5 from gator 11
+Remaining power required: 2000x, to reduce initial clear down to 7 days.  That's uh, a lot of helium. Gator 12 possibly in reach.
+
+
+
+
+
+
+
 The Noob's guide to Eradicated: getting around on the scariest dimension
 
 Part 0: What the hell?
@@ -70,3 +93,8 @@ Unlocking Geneticists will slightly alter the meta - Now you won't want to raid 
 Footnote 2: z100+, the New Era
 
 Erad only actually gives 2 coords per zone on the first 100 zones, so for these final few runs the perceived enemy scaling is actually gonna get far harsher. With that, many of the things i said stop applying after z100 and progression data gets more sparse - However, both for z111 and z126(good luck lol), the best options so far seem to be raiding +10 once for the dagger on both 101(ice) and 111(wind), and the rest remains the same.
+
+
+
+
+
