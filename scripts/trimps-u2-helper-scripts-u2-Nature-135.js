@@ -579,6 +579,12 @@ function now(what) {
 }
 
 var isTimeToFarmForSmithy = function() {
+	// on 135 I want smithiesWanted - 1
+	if (game.global.world == voidMapZone 
+		&& game.resources.wood.owned < 5000 * (Math.pow(40, smithiesWanted - 2))
+		&& game.buildings.Smithy.owned < smithiesWanted -1)
+		return true;
+	
 	return game.global.world == 160 
 	 || game.global.world == 161
 	 || game.global.world == 162
@@ -586,6 +592,12 @@ var isTimeToFarmForSmithy = function() {
 }
 
 var shouldFarmWoodForSmithy = function() {
+	// on 135 I want smithiesWanted - 1
+	if (game.global.world == voidMapZone 
+		&& game.resources.wood.owned < 5000 * (Math.pow(40, smithiesWanted - 2))
+		&& game.buildings.Smithy.owned < smithiesWanted -1)
+		return true;
+	
 	return game.resources.wood.owned < 0.65 * 5000 * (Math.pow(40, smithiesWanted - 1)) 
 			&& game.buildings.Smithy.owned < smithiesWanted;
 }
@@ -1207,11 +1219,12 @@ var parseCookieValue = function(cookieName) {
 			voidMaps: 		parseInt(cookieValue.split("###")[5]),
 			metalOwned: 	parseFloat(cookieValue.split("###")[6]),
 			frenzyLeft: 	parseInt(cookieValue.split("###")[7]),
-			improHealth:	parseFloat(cookieValue.split("###")[8]),
+			enemyHealth:	parseFloat(cookieValue.split("###")[8]),
 			mayhemStacks:	parseInt(cookieValue.split("###")[9]),
 			mapCell:		parseInt(cookieValue.split("###")[10]),
 			mapName:		cookieValue.split("###")[11],
-			mapEnemyHealth:	parseFloat(cookieValue.split("###")[12])
+			mapEnemyHealth:	parseFloat(cookieValue.split("###")[12]),
+			smithiesOwned:	parseInt(cookieValue.split("###")[13])
 		};
 		
 	return null;
@@ -1236,11 +1249,12 @@ var serializeCookieValue = function() {
 		"###" + game.global.totalVoidMaps + 
 		"###" + game.resources.metal.owned +
 		"###" + game.portal.Frenzy.frenzyLeft() +
-		"###" + game.global.gridArray[99].health + 
+		"###" + game.global.gridArray[game.global.lastClearedCell + 1].health + 
 		"###" + game.challenges.Mayhem.stacks + 
 		"###" + game.global.lastClearedMapCell + 
 		"###" + mapName +
-		"###" + mapEnemyHealth;
+		"###" + mapEnemyHealth + 
+		"###" + game.buildings.Smithy.owned;
 }
 
 var setSomeInterval = function(intervalVar, shouldSaveFunction, shouldLoadFunction, intervalTime) {
@@ -1287,6 +1301,9 @@ var shouldLoadVoidEndSave = function(save) {
 	
 	if (voidMaps != null && voidMaps.length > 0)
 		return false;
+	
+	if (save.smithiesOwned < game.buildings.Smithy.owned)
+		return false;
 
 	if (save.metalOwned > 1.05 * game.resources.metal.owned)
 		return true;
@@ -1304,7 +1321,10 @@ var shouldSaveVoidEndSave = function(save) {
 		|| currentMap.length == 0
 		|| currentMap[0].location != "Void")
 		return false;
-		
+
+	if (save != null && save.reset == game.global.totalRadPortals && save.smithiesOwned > game.buildings.Smithy.owned)
+		return false;
+
 	if (save != null && save.reset == game.global.totalRadPortals && save.metalOwned >= game.resources.metal.owned)
 		return false;
 	
