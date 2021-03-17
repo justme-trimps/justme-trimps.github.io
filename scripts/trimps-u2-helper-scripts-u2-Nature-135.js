@@ -127,11 +127,11 @@ var changeAutobuyingNumbersInterval = setInterval(function() {
 		if (game.global.world >= 152) 
 			{ autobuyingEquipmentNumber = 5; autobuyingArmNumber = 5; }
 		if (game.global.world >= 165) 
-			{ autobuyingEquipmentNumber = 12; autobuyingArmNumber = 12; }
+			{ autobuyingEquipmentNumber = 15; autobuyingArmNumber = 15; }
 		if (game.global.world >= 166) 
-			{ autobuyingEquipmentNumber = 14; autobuyingArmNumber = 14; }
+			{ autobuyingEquipmentNumber = 17; autobuyingArmNumber = 17; }
 		if (game.global.world >= 167) 
-			{ autobuyingEquipmentNumber = 18; autobuyingArmNumber = 18; }
+			{ autobuyingEquipmentNumber = 19; autobuyingArmNumber = 19; }
 	}
 }, 1000 * 1);
 
