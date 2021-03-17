@@ -10,15 +10,15 @@ var trimpleOfDoomZone = 164;
 var switchHeirloomZone = lastVoidMapZone + 1;
 var smithiesWanted = 28;
 var forcedPortalWorld = 169;
-var lastFarmersZone = 124;
+var lastFarmersZone = 134;
 var tryBattle150 = true;
 
-var plusZeroZones = [20, 24, 79, 96, lastFarmersZone, 128, 134];
-var plusOneZones = [40, 30, 31, 160, 161, 164];
+var plusZeroZones = [20, 24, 79, 96, 128];
+var plusOneZones = [40, 30, 31, 161, 164];
 var plusTwoZones = [59, 69, 79, 89, 99, 109, 119, 129, 139, 162];
 
 var plusThreeZones = [];
-var plusFourZones = [];
+var plusFourZones = [lastFarmersZone];
 var plusFiveZones = [45, 54, 55];
 var plusSixZones = [];
 var plusSevenZones = [60, 150];
@@ -77,7 +77,7 @@ var jestimpInterval = setInterval(function() {
 
 	var tmpTarget = game.global.playerGathering;
 
-	if (game.global.world > 145) {
+	if (game.global.world == 134 || game.global.world > 145) {
 		if (isJestimp()) {
 			saveString = save(true);
 			jestimpMode = game.global.lastClearedMapCell + 1;
@@ -701,8 +701,8 @@ var chooseMapMode = function() {
 		|| game.global.world == 148
 		|| game.global.world == 149
 		|| game.global.world == 150
-		|| game.global.world >= 158
-		|| game.global.world <= 165) {
+		|| (game.global.world >= 158 && game.global.world <= 165)
+		) {
 		mapMode = "p";
 	}
 	
@@ -842,9 +842,6 @@ var shouldFightSomeMap = function() {
 		&& game.global.mapBonus < 1)
 		return true;
 	
-	if (game.global.mapBonus < 9 && game.global.world == 150)
-		return true;
-
 	return false;
 }
 
@@ -885,11 +882,6 @@ var repeatMaps = setInterval(function() {
 
 		while (document.getElementById("toggleexitTo").innerHTML.indexOf("World") == -1)
 			toggleSetting("exitTo")
-		
-		if (game.global.world == 150 && game.global.mapBonus > 1) {
-			while (document.getElementById("togglerepeatUntil").innerHTML.indexOf("Any") == -1)
-				toggleSetting("repeatUntil");
-		}
 	}
 }, 601);
 
@@ -1407,7 +1399,7 @@ var shouldSaveMeltingPointEndSave = function(save) {
 		|| currentMap[0].name != "Melting Point")
 		return false;
 		
-	if (save != null && save.reset == game.global.totalRadPortals && save.metalOwned >= game.resources.metal.owned)
+	if (save != null && save.reset == game.global.totalRadPortals && save.metalOwned > game.resources.metal.owned)
 		return false;
 	
 	return true;
@@ -1561,29 +1553,36 @@ optimizeLastZoneInterval = setSomeInterval(optimizeLastZoneInterval, shouldSaveL
 if (equalityInterval) { clearInterval(equalityInterval); equalityInterval = null; }
 var equalityInterval = setInterval(function() {
 	if (game.global.world == 150) {
-		game.portal.Equality.disabledStackCount = "38";
+		game.portal.Equality.disabledStackCount = "35";
 		return;
 	}
 	if (game.global.world >= 145 && game.global.world < 150) {
 		game.portal.Equality.disabledStackCount = "30";
 		return;
 	}
-	if (game.global.world >= 151 && game.global.world < hitWithMaxStartingZone) {
+	if (game.global.world >= 151 && game.global.world < 161) {
+		game.portal.Equality.disabledStackCount = "3";
+		return;
+	}
+	if (game.global.world >= 161 && game.global.world < hitWithMaxStartingZone) {
 		game.portal.Equality.disabledStackCount = "20";
 		if (game.global.world >= 164) {
+			game.portal.Equality.disabledStackCount = "27";
+		}
+		if (game.global.world >= 166) {
 			game.portal.Equality.disabledStackCount = "30";
 		}
 		return;
 	}
 	
 	if (game.global.world < 135) {
-		game.portal.Equality.disabledStackCount = "15"
+		game.portal.Equality.disabledStackCount = "5"
 	} else if (game.global.world < 136) {
 		game.portal.Equality.disabledStackCount = "20"
 	} else if (game.global.world < 137) {
 		game.portal.Equality.disabledStackCount = "15"
 	} 
-}, 5001);
+}, 3001);
 
 var maxEq = "" + game.portal.Equality.radLevel;
 var bestEq = "35";
@@ -1609,13 +1608,7 @@ var hitWithMaxGammaBurstInterval = setInterval(function() {
 
 if (updateBestEqInterval) { clearInterval(updateBestEqInterval); updateBestEqInterval = null; }
 var updateBestEqInterval = setInterval(function() { 
-	if (game.global.world < 136) { 
-		bestEq = "28";
-	} else if (game.global.world < 161) { 
-		bestEq = "30";
-	} else if (game.global.world < 162) { 
-		bestEq = "30";
-	} else if (game.global.world < 167) { 
+	if (game.global.world < 167) { 
 		bestEq = "34";
 	} else if (game.global.world < 167) { 
 		bestEq = "38";
