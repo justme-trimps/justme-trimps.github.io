@@ -1891,9 +1891,11 @@ var previousFormation = null;
 var previousZone = 0;
 if (windFormationInterval) { clearInterval(windFormationInterval); windFormationInterval = null; }
 var windFormationInterval = setInterval(function() {
-	if (game.global.world == 800 && game.global.lastClearedCell > 70)
+	if (game.global.world == 800 && game.global.lastClearedCell > 70) {
 		clearInterval(windFormationInterval);
-	
+		setFormation('2');
+	}
+
 	if (document.getElementById("formation5") != null && document.getElementById("formation5").offsetParent != null) {
 		essenceStartZone = 1
 		essenceEndZone = 1
