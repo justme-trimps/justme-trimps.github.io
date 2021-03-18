@@ -845,6 +845,17 @@ var shouldFightSomeMap = function() {
 	return false;
 }
 
+var setRepeat = function() {
+	var targetRepeat = 'Items';
+	
+	if (game.global.world == '134')
+		targetRepeat = 'Forever';
+	
+	while (document.getElementById('togglerepeatUntil').innerHTML.indexOf(targetRepeat) == -1) {
+		toggleSetting('repeatUntil');
+	}
+}
+
 if (repeatMaps) { clearInterval(repeatMaps); repeatMaps = null; }
 var repeatMaps = setInterval(function() {
 	if (shouldFightSomeMap()) {
@@ -877,13 +888,29 @@ var repeatMaps = setInterval(function() {
 		runMap();
 		fightManual();
 
-		while (document.getElementById("togglerepeatUntil").innerHTML.indexOf("Items") == -1)
-			toggleSetting("repeatUntil");
+		setRepeat();
 
 		while (document.getElementById("toggleexitTo").innerHTML.indexOf("World") == -1)
 			toggleSetting("exitTo")
 	}
 }, 601);
+
+var shouldBreakForeverLoop = function() {
+	if (game.global.world == 134 && game.jobs.Meteorologist.owned > 56)
+		return true;
+	
+	return false;
+}
+
+if (breakForeverLoopInterval) { clearInterval(breakForeverLoopInterval); breakForeverLoopInterval = null; }
+var breakForeverLoopInterval = setInterval(function() {
+	if (shouldBreakForeverLoop()) {
+		while (document.getElementById('togglerepeatUntil').innerHTML.indexOf('Items') == -1) {
+			toggleSetting('repeatUntil');
+	}
+	}
+		
+}, 4001);
 
 var getNumberText = function(number) {
 	if (number && number < 1000) {
@@ -1151,7 +1178,7 @@ var switchHeirloomInterval = setInterval(function() {
 		var heirloom = game.global.heirloomsCarried[i];
 		if (heirloom.name == "Map" 
 				&& game.global.mapsActive
-				&& game.global.world < 109) {
+				&& (game.global.world < 109 || game.global.world == 134)) {
 			selectHeirloom(i, "heirloomsCarried", true);
 			equipHeirloom();
 			break;
@@ -1159,7 +1186,7 @@ var switchHeirloomInterval = setInterval(function() {
 		
 		if (heirloom.name == "Map Old" 
 				&& game.global.mapsActive
-				&& game.global.world >= 109
+				&& (game.global.world >= 109 && game.global.world != 134)
 				&& ((game.global.world != voidMapZone && game.global.world != lastVoidMapZone) || game.global.playerGathering != "metal")) {
 			selectHeirloom(i, "heirloomsCarried", true);
 			equipHeirloom();
