@@ -19,9 +19,9 @@ var plusTwoZones = [59, 69, 79, 89, 99, 109, 119, 129, 139, 162];
 
 var plusThreeZones = [];
 var plusFourZones = [lastFarmersZone];
-var plusFiveZones = [45, 54, 55];
+var plusFiveZones = [45, 54, 55, 150];
 var plusSixZones = [];
-var plusSevenZones = [60, 150];
+var plusSevenZones = [60];
 var extraZones = [];
 
 var autobuyingEquipmentNumber = 33;
@@ -124,7 +124,7 @@ var changeAutobuyingNumbersInterval = setInterval(function() {
 		if (game.global.world >= 151) 
 			{ autobuyingEquipmentNumber = 20; autobuyingArmNumber = 20; }
 		if (game.global.world >= 151) { buyShields = true; }
-		if (game.global.world >= 152) 
+		if (game.global.world >= 156) 
 			{ autobuyingEquipmentNumber = 5; autobuyingArmNumber = 5; }
 		if (game.global.world >= 165) 
 			{ autobuyingEquipmentNumber = 15; autobuyingArmNumber = 15; }
@@ -1597,7 +1597,7 @@ var equalityInterval = setInterval(function() {
 			game.portal.Equality.disabledStackCount = "27";
 		}
 		if (game.global.world >= 166) {
-			game.portal.Equality.disabledStackCount = "30";
+			game.portal.Equality.disabledStackCount = "28";
 		}
 		return;
 	}
