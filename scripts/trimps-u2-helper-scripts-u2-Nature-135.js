@@ -18,8 +18,8 @@ var plusOneZones = [40, 30, 31, 161, 164];
 var plusTwoZones = [59, 69, 79, 89, 99, 109, 119, 129, 139, 162];
 
 var plusThreeZones = [];
-var plusFourZones = [lastFarmersZone];
-var plusFiveZones = [45, 54, 55, 150];
+var plusFourZones = [lastFarmersZone, 151];
+var plusFiveZones = [45, 54, 55];
 var plusSixZones = [];
 var plusSevenZones = [60];
 var extraZones = [];
