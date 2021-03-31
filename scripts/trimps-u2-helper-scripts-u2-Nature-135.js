@@ -19,7 +19,7 @@ var plusTwoZones = [59, 69, 79, 89, 99, 109, 119, 129, 139, 162];
 
 var plusThreeZones = [];
 var plusFourZones = [lastFarmersZone, 151];
-var plusFiveZones = [45, 54, 55, 61];
+var plusFiveZones = [45, 54, 55, 61, 62];
 var plusSixZones = [];
 var plusSevenZones = [60];
 var extraZones = [];
@@ -608,11 +608,12 @@ if (hireAndFireInterval) { clearInterval(hireAndFireInterval); hireAndFireInterv
 var hireAndFireInterval = setInterval(function() {
 	if (!autoHireAndFire) return;
 
-	if (game.global.world >= gatherMetalZone && game.global.world <= tributesPushMap && game.global.world != 30 && game.global.world != 55 && game.global.world != 61)
+	if (game.global.world >= gatherMetalZone && game.global.world <= tributesPushMap 
+		&& game.global.world != 30 && game.global.world != 55 && game.global.world != 61 && game.global.world != 62)
 		setGather("food");
 	
 	// on 124 we want only farmers
-	if (game.global.world == lastFarmersZone || game.global.world == 62 || game.global.world == 109) {
+	if (game.global.world == lastFarmersZone || game.global.world == 63 || game.global.world == 109) {
 		now("food");
 		return;
 	}
@@ -622,7 +623,7 @@ var hireAndFireInterval = setInterval(function() {
 		return;
 	}
 	
-	if (game.global.world == 30 || game.global.world == 55) {
+	if (game.global.world == 30 || game.global.world == 55 || game.global.world == 62) {
 		now("metal");
 		return;
 	}
@@ -1729,7 +1730,7 @@ var startPerkUpgradesInterval = setInterval(startPerkUpgrades, 15*1000);
 if (changeAutostructureInterval) { clearInterval(changeAutostructureInterval); changeAutostructureInterval = null; }
 var changeAutostructureInterval = setInterval(function() { 
 	var setting = "1";
-	if (game.global.world < 80) { 
+	if (game.global.world < 120) { 
 		setting = "10";
 	}
 	game.global.autoStructureSettingU2.Hut.value = setting;
