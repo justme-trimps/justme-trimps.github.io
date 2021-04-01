@@ -12,6 +12,7 @@ var smithiesWanted = 28;
 var forcedPortalWorld = 169;
 var lastFarmersZone = 134;
 var tryBattle150 = true;
+var tributesPushMap = 83;
 
 var plusZeroZones = [20, 24, 79, 96, 128, tributesPushMap + 1];
 var plusOneZones = [40, 30, 31, 161, 164];
@@ -273,7 +274,6 @@ var setBuyMax = function(max) {
 var buyShields = false;
 var buyCollectors = false;
 var tributesWanted = 1250;
-var tributesPushMap = 83;
 
 if (buyThingsInterval) { clearInterval(buyThingsInterval); buyThingsInterval = null; }
 var buyThingsInterval = setInterval(function() {
