@@ -13,7 +13,7 @@ var forcedPortalWorld = 169;
 var lastFarmersZone = 134;
 var tryBattle150 = true;
 
-var plusZeroZones = [20, 24, 79, 96, 128];
+var plusZeroZones = [20, 24, 79, 96, 128, tributesPushMap + 1];
 var plusOneZones = [40, 30, 31, 161, 164];
 var plusTwoZones = [59, 69, 79, 89, 99, 109, 119, 129, 139, 162];
 
@@ -609,7 +609,7 @@ var hireAndFireInterval = setInterval(function() {
 	if (!autoHireAndFire) return;
 
 	if (game.global.world >= gatherMetalZone && game.global.world <= tributesPushMap 
-		&& game.global.world != 30 && game.global.world != 55 && game.global.world != 61 && game.global.world != 62)
+		&& game.global.world != 30 && game.global.world != 55 && game.global.world != 61 && game.global.world != 62 && game.global.world != tributesPushMap + 1)
 		setGather("food");
 	
 	// on 124 we want only farmers
@@ -618,7 +618,7 @@ var hireAndFireInterval = setInterval(function() {
 		return;
 	}
 	
-	if (game.global.world == 128 || game.global.world == 61) {
+	if (game.global.world == 128 || game.global.world == 61 || game.global.world == tributesPushMap + 1) {
 		now("wood");
 		return;
 	}
@@ -1427,7 +1427,7 @@ var shouldSaveMeltingPointEndSave = function(save) {
 		|| currentMap[0].name != "Melting Point")
 		return false;
 		
-	if (save != null && save.reset == game.global.totalRadPortals && save.metalOwned > game.resources.metal.owned)
+	if (save != null && save.reset == game.global.totalRadPortals && save.metalOwned > 0.99 * game.resources.metal.owned)
 		return false;
 	
 	return true;
