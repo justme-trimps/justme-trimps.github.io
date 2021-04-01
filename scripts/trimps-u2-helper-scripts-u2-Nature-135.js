@@ -19,8 +19,8 @@ var plusOneZones = [40, 30, 31, 161, 164];
 var plusTwoZones = [59, 69, 79, 89, 99, 109, 119, 129, 139, 162];
 
 var plusThreeZones = [];
-var plusFourZones = [lastFarmersZone, 151];
-var plusFiveZones = [45, 54, 55, 61, 62];
+var plusFourZones = [lastFarmersZone];
+var plusFiveZones = [45, 54, 55, 61, 62, 154];
 var plusSixZones = [];
 var plusSevenZones = [60];
 var extraZones = [];
@@ -123,16 +123,24 @@ var changeAutobuyingNumbersInterval = setInterval(function() {
 		if (game.global.world >= 146) 
 			{ autobuyingEquipmentNumber = 4; autobuyingArmNumber = 4; }
 		if (game.global.world >= 151) 
-			{ autobuyingEquipmentNumber = 20; autobuyingArmNumber = 20; }
-		if (game.global.world >= 151) { buyShields = true; }
-		if (game.global.world >= 156) 
-			{ autobuyingEquipmentNumber = 5; autobuyingArmNumber = 5; }
-		if (game.global.world >= 165) 
 			{ autobuyingEquipmentNumber = 15; autobuyingArmNumber = 15; }
-		if (game.global.world >= 166) 
+		if (game.global.world >= 154) 
+			{ autobuyingEquipmentNumber = 20; autobuyingArmNumber = 20; }
+		if (game.global.world >= 156) 
+			{ autobuyingEquipmentNumber = 6; autobuyingArmNumber = 6; }
+		if (game.global.world >= 157) { buyShields = true; }
+		if (game.global.world >= 165 && game.global.lastClearedCell > -1) 
+			{ autobuyingEquipmentNumber = 15; autobuyingArmNumber = 15; }
+		if (game.global.world >= 165 && game.global.lastClearedCell > 10) 
+			{ autobuyingEquipmentNumber = 16; autobuyingArmNumber = 16; }
+		if (game.global.world >= 165 && game.global.lastClearedCell > 20) 
 			{ autobuyingEquipmentNumber = 17; autobuyingArmNumber = 17; }
-		if (game.global.world >= 167) 
+		if (game.global.world >= 165 && game.global.lastClearedCell > 30) 
+			{ autobuyingEquipmentNumber = 18; autobuyingArmNumber = 18; }
+		if (game.global.world >= 165 && game.global.lastClearedCell > 40) 
 			{ autobuyingEquipmentNumber = 19; autobuyingArmNumber = 19; }
+		if (game.global.world >= 165 && game.global.lastClearedCell > 40) 
+			{ autobuyingEquipmentNumber = 20; autobuyingArmNumber = 20; }
 	}
 }, 1000 * 1);
 
@@ -818,7 +826,7 @@ var shouldFightSomeMap = function() {
 	if (game.global.world == lastFarmersZone && game.global.lastClearedCell < 81)
 		return false;
 
-	if (game.global.world == 150 && game.global.lastClearedCell < 71)
+	if (game.global.world == 154 && game.global.lastClearedCell < 71)
 		return false;
 
 	if (dontMap || game.global.mapsActive)
@@ -1417,7 +1425,7 @@ var shouldLoadMeltingPointEndSave = function(save) {
 };
 
 var shouldSaveMeltingPointEndSave = function(save) {
-	if (game.global.world != minMeltingZone || !game.global.mapsActive || game.global.currentMapId == null)
+	if (game.global.world != minMeltingZone || !game.global.mapsActive || game.global.currentMapId == null || game.global.lastClearedMapCell < 10)
 		return false;
 	
 	var currentMap = game.global.mapsOwnedArray.filter(function (el) { return el.id == game.global.currentMapId; }) 
@@ -1427,9 +1435,9 @@ var shouldSaveMeltingPointEndSave = function(save) {
 		|| currentMap[0].name != "Melting Point")
 		return false;
 		
-	if (save != null && save.reset == game.global.totalRadPortals && save.metalOwned > 0.99 * game.resources.metal.owned)
+	if (save != null && save.reset == game.global.totalRadPortals && save.metalOwned > game.resources.metal.owned)
 		return false;
-	
+
 	return true;
 };
 
@@ -1588,8 +1596,12 @@ var equalityInterval = setInterval(function() {
 		game.portal.Equality.disabledStackCount = "30";
 		return;
 	}
-	if (game.global.world >= 151 && game.global.world < 161) {
+	if (game.global.world >= 151 && game.global.world < 160) {
 		game.portal.Equality.disabledStackCount = "3";
+		return;
+	}
+	if (game.global.world == 160) {
+		game.portal.Equality.disabledStackCount = "8";
 		return;
 	}
 	if (game.global.world >= 161 && game.global.world < hitWithMaxStartingZone) {
@@ -1597,8 +1609,14 @@ var equalityInterval = setInterval(function() {
 		if (game.global.world >= 164) {
 			game.portal.Equality.disabledStackCount = "27";
 		}
+		if (game.global.world >= 165) {
+			game.portal.Equality.disabledStackCount = "24";
+		}
 		if (game.global.world >= 166) {
-			game.portal.Equality.disabledStackCount = "28";
+			game.portal.Equality.disabledStackCount = "18";
+		}
+		if (game.global.world >= 167) {
+			game.portal.Equality.disabledStackCount = "27";
 		}
 		return;
 	}
@@ -1615,11 +1633,11 @@ var equalityInterval = setInterval(function() {
 var maxEq = "" + game.portal.Equality.radLevel;
 var bestEq = "35";
 var slowEq = "0";
-var hitWithMaxStartingZone = 166;
+var hitWithMaxStartingZone = 167;
 
 if (hitWithMaxGammaBurstInterval) { clearInterval(hitWithMaxGammaBurstInterval); hitWithMaxGammaBurstInterval = null; }
 var hitWithMaxGammaBurstInterval = setInterval(function() { 
-	if (game.global.world > hitWithMaxStartingZone || (game.global.world == hitWithMaxStartingZone && game.global.lastClearedCell > 60)) {
+	if (game.global.world > hitWithMaxStartingZone || (game.global.world == hitWithMaxStartingZone && game.global.lastClearedCell > 5)) {
 		if (game.global.fighting && game.heirlooms.Shield.gammaBurst.stacks >= 4) {
 			var badGuyName = document.getElementById('badGuyName');
 			if (badGuyName && badGuyName.getElementsByClassName('glyphicon-forward').length) {
