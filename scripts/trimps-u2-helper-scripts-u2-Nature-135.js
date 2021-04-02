@@ -9,7 +9,7 @@ var minMeltingZone = 164;
 var trimpleOfDoomZone = 164;
 var switchHeirloomZone = lastVoidMapZone + 1;
 var smithiesWanted = 28;
-var forcedPortalWorld = 169;
+var forcedPortalWorld = 170;
 var lastFarmersZone = 134;
 var tryBattle150 = true;
 var tributesPushMap = 83;
@@ -51,14 +51,6 @@ var saveString = null;
 var wentForSmithy = false;
 var changeAutoBuy = true;
 var set01 = true;
-
-var fluffyStart;
-
-if (game.global.world == 1)
-	fluffyStart = Fluffy.currentExp[1];
-
-if (typeof fluffyStart === "undefined")
-	fluffyStart = 0;
 
 var isJestimp = function() {
 	if (!game.global.mapsActive)
@@ -956,10 +948,11 @@ var getNumberFromText = function(text) {
 
 
 var getFluffyExperienceRate = function() {
-	if (fluffyStart == 0) {
+	var expEarned = Fluffy.getBestExpStat().value;
+
+	if (expEarned == 0) {
 		return 0;
 	}
-	var expEarned = Fluffy.currentExp[1] - fluffyStart;
 
 	return Math.round(10 * expEarned / (((new Date() * 1) - game.global.portalTime) / 1000)) / 10;
 }
@@ -993,13 +986,11 @@ var logFluffyExp = function() {
 		lastFluffyExpLog = game.global.world;
 		var text2 = "";
 		var text3 = "";
-		if (fluffyStart > 0) {
-			text2 = ", fluffy exp rate: " + getFluffyExperienceRateText() + " exp / s";
-			text3 = ", fluffy upgrade: " + (new Date(new Date() * 1 + (Fluffy.currentExp[2] - Fluffy.currentExp[1]) / getFluffyExperienceRate() * 1000)).toISOString();
-		}
+		text2 = ", fluffy exp rate: " + getFluffyExperienceRateText() + " exp / s";
+		text3 = ", fluffy upgrade: " + (new Date(new Date() * 1 + (Fluffy.currentExp[2] - Fluffy.currentExp[1]) / getFluffyExperienceRate() * 1000)).toISOString();
 		var text = getPortalTime() + " " + game.global.world + " zone, radon: " + heliumPhSpan.innerHTML + ", RN: " + getNumberText(getRadonNormalized() / 1000);
 		text = text.replace(/(\.[0-9]{2})[0-9]+e/g, "$1e");
-		var text4 = getNumberText((Fluffy.currentExp[1] - fluffyStart) / 1000);
+		var text4 = getNumberText(Fluffy.getBestExpStat().value / 1000);
 		console.log(text + text2 + text3 + ", scruffy exp earned: " + text4);
 	}
 }
@@ -1064,7 +1055,6 @@ var forcePortalInterval = setInterval(function() {
 			if (!game.global.autoJobsSettingU2.enabled)
 				toggleAutoJobs();
 			
-			fluffyStart = Fluffy.currentExp[1];
 			mapMode = "lsc";
 		}, 1000);
 	}
@@ -1618,6 +1608,9 @@ var equalityInterval = setInterval(function() {
 		if (game.global.world >= 167) {
 			game.portal.Equality.disabledStackCount = "27";
 		}
+		if (game.global.world >= 169) {
+			game.portal.Equality.disabledStackCount = "30";
+		}
 		return;
 	}
 	
@@ -1634,6 +1627,7 @@ var maxEq = "" + game.portal.Equality.radLevel;
 var bestEq = "35";
 var slowEq = "0";
 var hitWithMaxStartingZone = 167;
+var allowSlowWithoutGammaMaxZone = 169;
 
 if (hitWithMaxGammaBurstInterval) { clearInterval(hitWithMaxGammaBurstInterval); hitWithMaxGammaBurstInterval = null; }
 var hitWithMaxGammaBurstInterval = setInterval(function() { 
@@ -1647,7 +1641,11 @@ var hitWithMaxGammaBurstInterval = setInterval(function() {
 				game.portal.Equality.disabledStackCount = slowEq;
 			}
 		} else {
-			game.portal.Equality.disabledStackCount = maxEq;
+			if (game.global.world > allowSlowWithoutGammaMaxZone || game.portal.Frenzy.frenzyLeft() == 0 || (document.getElementById('badGuyName') && document.getElementById('badGuyName').getElementsByClassName('glyphicon-forward').length)) {
+				game.portal.Equality.disabledStackCount = maxEq;
+			} else {
+				game.portal.Equality.disabledStackCount = slowEq;
+			}
 		}
 	}
 }, 100);
