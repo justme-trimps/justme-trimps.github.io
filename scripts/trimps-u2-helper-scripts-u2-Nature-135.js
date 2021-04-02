@@ -1141,7 +1141,7 @@ var autoSaveInterval = setInterval(function() {
 		document.getElementById("downloadLink").click();
 		cancelTooltip();
 	}
-}, 1000 * 60 * 5);
+}, 1000 * 60 * 5 - Math.floor(Math.random() * 3000));
 
 
 var isItTimeForMorePowerfulHeirloom = function() {
