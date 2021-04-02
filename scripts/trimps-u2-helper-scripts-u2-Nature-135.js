@@ -14,9 +14,9 @@ var lastFarmersZone = 134;
 var tryBattle150 = true;
 var tributesPushMap = 83;
 
-var plusZeroZones = [20, 24, 79, 96, 128, tributesPushMap + 1];
-var plusOneZones = [40, 30, 31, 161, 164];
-var plusTwoZones = [59, 69, 79, 89, 99, 109, 119, 129, 139, 162];
+var plusZeroZones = [20, 79, 96, 128, tributesPushMap + 1];
+var plusOneZones = [30, 31, 161, 164];
+var plusTwoZones = [59, 69, 79, 89, 99, 109, 119, 129, 162];
 
 var plusThreeZones = [];
 var plusFourZones = [lastFarmersZone];
