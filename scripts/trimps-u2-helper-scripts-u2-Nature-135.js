@@ -1759,3 +1759,20 @@ var changeAutostructureInterval = setInterval(function() {
 	game.global.autoStructureSettingU2.Resort.value = setting;
 	
 }, 10000);
+
+var lastEggMessage = "";
+if (eggsInterval) { clearInterval(eggsInterval); eggsInterval = null; }
+var eggsInterval = setInterval(function() { 
+var eggCells = document.getElementsByClassName("eggCell");
+	if (eggCells.length && eggCells[0].offsetParent != null) {
+		eggCells[0].click();
+		setTimeout(function() {
+			if (document.getElementsByClassName("eggMessage").length && document.getElementsByClassName("eggMessage")[document.getElementsByClassName("eggMessage").length - 1].innerText != lastEggMessage) {
+				lastEggMessage = document.getElementsByClassName("eggMessage")[document.getElementsByClassName("eggMessage").length - 1].innerText.toLowerCase();
+				if (lastEggMessage.indexOf("food") === -1 && lastEggMessage.indexOf("wood") === -1 && lastEggMessage.indexOf("metal") === -1) {
+					console.log(getPortalTime() + " " +lastEggMessage);
+				}
+			}
+		}, 200);
+	}
+}, 3000);
