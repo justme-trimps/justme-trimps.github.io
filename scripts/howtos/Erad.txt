@@ -32,6 +32,7 @@ perky 7 7 0
 N4IgMg9hAuCWB2BzA+gSVSAXARmwVgCZsBmPAFmIA4AGCygdgBoQBhAQwCcAHAU3mg4BPNBkzF6xAJz0AbAWr1KxMrWrMAsjFgA3NnAjwRWAjMmTKBAnhll6sgpWYAFCAHceHI5nkyZebPQm2NSUctTEzAAqEACuiAAW8DwAzslePn4BQSEy2JJqrGxcbABGADY8WMHMLDHw8AiIWAW1HLCxyc01ZWypgl0gAPLaHgDWsGVlWMQFAEopsRwAxjwAZjFT3gRMrFAcACYIejz7xsQEzADKsFzxBhBlEIj9YswAgvywSzd67fBVcxSE1gfBWxl8GhOsGgvwMWB28wq/AqqSSqQBNU4vH4QmM9AKbw4cGSbAayQELysjhAs1JiEqOAJiGB0EpBQAQmxoQNIhwYgBbLidHBmZzxDwQfkGFLgvDONhLUYcPTGbYaLS6fT/bzWZxuDx47BRWIJNHC7ZG8BQOBIcHYAC+QA=
 
 all bone upgrades
+poison
 export saves
 jestimp
 VM at 110 with 115 equipment
@@ -42,6 +43,39 @@ disable ga, use 3265 Geneticists, 3462 nurseries
 00d08h30m BW155 2nd time
 00d09h47m BW 170 start
 01d07h25m BW 185 start
+
+
+
+me with 7.37 DC He: 
+perky 7 7 0
+N4IgMg9hAuCWB2BzA+gSVSAXARmwVgCZsBmPAFmIA4AGCygdgBoQBhAQwCcAHAU3mg4BPNBkzF6xAJz0AbAWr1KxMrWrMAsjFgA3NnAjwRWAjMmTKBAnhll6sgpWYAFCAHceHI5jLZqJGfSWxPg2NswAKhAArogAFvA8AM6JXvIyMnjYgTK+lDmSaqxsXGwARgA2PFi+zADy2h4A1rDl5VjEhQBKSdEcAMY8AGZRbZiWTKxQHAAmCHo808bEBMwAyrBcsQYQ5RCIgu3MAIL8sH0berAG1V1JLbB8A8bpGguw0JfXmBPdlfyVyQSyRuzHY3D4AgOY3ohSOHDgiTY8FgiUhxjwjhAnSRiCqOFhiHu0Ch8giHCiAFsuIlqmZnLEPBAKQYks88M42H1Ghw9MYCBNNHBdPp4OiZM43B5jPRsBFonEgTTobLwFA4EhntgAL5AA
+
+max heirloom before u1
+all bone upgrades
+poison
+export saves
+jestimp
+VM at 110 with 115 equipment
+map+10 at 111,113,115
+farm a bit on 115
+map+10 at 121
+
+Try to respec to get 10th Amalgamator - 218 coord is enough
+
+disable ga, use 3170 Geneticists, 3300 nurseries
+00d00h27m BW121 started
+00d00h40m BW155 - 1st started
+00d03h54m BW155 - 2nd started
+00d05h10m BW155 - 3rd started
+00d06h03m BW170 - 1st started
+00d06h32m BW170 - 1st: 1st cell
+00d12h41m BW170 - 2nd started
+00d15h20m BW170 - 3rd started
+00d17h05m BW170 - 4th started
+00d18h25m BW170 - 5th started
+
+
+I haven't done the math myself but Sere thinks ~6 days for first BW185 clear translates to under 2 weeks total for erad 156
 
 Erad 156 from Quia (use poison)
 2.9Dc He   15B total Nu   402k cinf   653 poison   Mayhem 25   Scruffy 14
@@ -60,4 +94,82 @@ Erad 171 estimates
 Remaining power required: 2000x, to reduce initial clear down to 7 days.  That's uh, a lot of helium. Gator 12 possibly in reach.
 
 
+if (autoSaveInterval) { clearInterval(autoSaveInterval); autoSaveInterval = null; }
+var autoSaveInterval = setInterval(function() {
+	cancelTooltip();
+	tooltip("Export", null, "update");
+	document.getElementById("downloadLink").click();
+	cancelTooltip();
+}, 1000 * 60 * 2);
 
+var jestimpMode = false;
+var jestimpTarget = '';
+if (jestimpInterval) { clearInterval(jestimpInterval); jestimpInterval = null; }
+var jestimpInterval = setInterval(function() {
+	var tmpTarget = jestimpTarget;
+	if (tmpTarget != "science" && tmpTarget != "gems")
+		tmpTarget = game.global.playerGathering;
+
+	if (document.getElementById("worldName") && document.getElementById("worldName").innerText == "Prismatic Palace")
+		return;
+
+	if (document.getElementById("worldName") && document.getElementById("worldName").innerText == "Atlantrimp")
+		return;
+
+	if (document.getElementById("worldName") && document.getElementById("worldName").innerText == "Melting Point")
+		return;
+
+	if (game.global.world > 10) {
+		var badGuyNameString = (document.getElementById("badGuyName") && document.getElementById("badGuyName").innerText) || null;
+		if (badGuyNameString && badGuyNameString.toLowerCase().indexOf("jestimp") > -1) {
+			saveString = save(true);
+			jestimpMode = true;
+		}
+		if (jestimpMode && badGuyNameString && badGuyNameString.toLowerCase().indexOf("jestimp") == -1) {
+			var logMessages = [ ...(document.getElementById("log").getElementsByClassName("message"))]
+				.filter(function (el) { return el.innerText.toLowerCase().indexOf("jestimp") > -1; })
+			if (logMessages.length) {
+				if (logMessages[logMessages.length - 1].innerText.toLowerCase().indexOf(tmpTarget) > -1) {
+					jestimpMode = false;
+					saveString = null;
+				} else {
+					if (saveString) {
+						load(saveString);
+					}
+				}
+			}
+		}
+	}
+}, 100);
+
+
+var tmpInterval;
+var lastClearedBwCell = -1;
+
+if (typeof(tmpInterval) !== "undefined" && tmpInterval != null) { clearInterval(tmpInterval); tmpInterval = null; }
+tmpInterval = setInterval(function() {
+	var name = game.global.mapsOwnedArray.filter(function(map) { return map.id == game.global.currentMapId;})[0].name;
+	if (name && name.indexOf("Bionic") > -1) {
+		if (game.global.lastClearedMapCell != lastClearedBwCell) {
+			lastClearedBwCell = game.global.lastClearedMapCell;
+			
+			console.log(name + ", cell " + (lastClearedBwCell +2) + ": " + document.getElementById('portalTime').innerText);
+		}
+	}
+}, 1000);
+
+
+function now(what) {
+	fireMode();
+	setMax(1, false);
+	numTab(6);
+	if (what != "wood") buyJob("Lumberjack");
+	if (what != "food") buyJob("Farmer");
+	if (what != "metal") buyJob("Miner");
+	fireMode();
+	if (what == "wood") buyJob("Lumberjack");
+	if (what == "food") buyJob("Farmer");
+	if (what == "metal") buyJob("Miner");
+	numTab(1);
+	setGather(what);
+}
