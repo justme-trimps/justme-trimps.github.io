@@ -1327,8 +1327,8 @@
 					eggCells[0].click();
 					setTimeout(function() {
 						if (document.getElementsByClassName("eggMessage").length && document.getElementsByClassName("eggMessage")[document.getElementsByClassName("eggMessage").length - 1].innerText != lastEggMessage) {
-							lastEggMessage = document.getElementsByClassName("eggMessage")[document.getElementsByClassName("eggMessage").length - 1].innerText;
-							if (lastEggMessage.indexOf("food!") === -1 && lastEggMessage.indexOf("wood!") === -1 && lastEggMessage.indexOf("metal!") === -1) {
+							lastEggMessage = document.getElementsByClassName("eggMessage")[document.getElementsByClassName("eggMessage").length - 1].innerText.toLowerCase();
+							if (lastEggMessage.indexOf("food") === -1 && lastEggMessage.indexOf("wood") === -1 && lastEggMessage.indexOf("metal") === -1) {
 								console.log(getPortalTime() + " " +lastEggMessage);
 							}
 						}
